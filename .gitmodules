@@ -1,3 +1,0 @@
-[submodule "ext/open-zwave"]
-	path = ext/open-zwave
-	url = https://github.com/OpenZWave/open-zwave.git
