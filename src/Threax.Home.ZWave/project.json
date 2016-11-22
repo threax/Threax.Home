@@ -1,10 +1,5 @@
 {
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "version": "1.0.1",
-      "type": "platform"
-    },
-    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.1",
     "Microsoft.AspNetCore.Routing": "1.0.1",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
@@ -16,6 +11,7 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
+    "Threax.AspNetCore.Swashbuckle.Convention": "1.7.0",
     "ZWave4Net": "1.0.0.128"
   },
 
@@ -24,12 +20,7 @@
   },
 
   "frameworks": {
-    "netcoreapp1.0": {
-      "imports": [
-        "dotnet5.6",
-        "portable-net45+win8"
-      ]
-    }
+    "net461": {}
   },
 
   "buildOptions": {

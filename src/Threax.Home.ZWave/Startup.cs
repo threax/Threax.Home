@@ -7,26 +7,36 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.Swagger.Model;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Converters;
+using ZWave;
 
 namespace Threax.Home.ZWave
 {
     public class Startup
     {
+        private bool isDev; private Info apiInfo = new Info()
+        {
+            Version = "v1",
+            Title = "Hybrid Web App Starter Api",
+            Description = "A starter api that needs to be described.",
+            TermsOfService = "None"
+        };
+        private AppConfig appConfig = new AppConfig();
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            .SetBasePath(env.ContentRootPath)
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
-            if (env.IsEnvironment("Development"))
-            {
-                // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
-                builder.AddApplicationInsightsSettings(developerMode: true);
-            }
+            isDev = env.IsEnvironment("Development");
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+            ConfigurationBinder.Bind(Configuration.GetSection("AppConfig"), appConfig);
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -34,10 +44,25 @@ namespace Threax.Home.ZWave
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddApplicationInsightsTelemetry(Configuration);
+            services.AddSingleton<ZWaveController>(s =>
+            {
+                var controller = new ZWaveController(appConfig.ComPort);
+                controller.Open();
+                return controller;
+                //Close is not called, but even following proper patterns it wasn't called, figure this out later.
+            });
 
-            services.AddMvc();
+            services.AddMvc(o =>
+            {
+                o.UseExceptionErrorFilters(isDev);
+            })
+            .AddJsonOptions(o =>
+            {
+                o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                o.SerializerSettings.Converters.Add(new StringEnumConverter());
+            });
+
+            services.AddConventionalSwagger(apiInfo);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -46,9 +71,7 @@ namespace Threax.Home.ZWave
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseApplicationInsightsRequestTelemetry();
-
-            app.UseApplicationInsightsExceptionTelemetry();
+            app.UseConventionalSwagger(apiInfo);
 
             app.UseMvc();
         }
