@@ -4,16 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ZWave;
+using ZWave.Channel;
 using ZWave.CommandClasses;
 
 namespace Threax.Home.ZWave.Controllers
 {
     [Route("[controller]/[action]")]
-    public class ZController : Controller
+    public class NodeController : Controller
     {
         private ZWaveController zwave;
 
-        public ZController(ZWaveController zwave)
+        public NodeController(ZWaveController zwave)
         {
             this.zwave = zwave;
         }
@@ -25,21 +26,16 @@ namespace Threax.Home.ZWave.Controllers
         }
 
         [HttpGet]
-        public async Task<List<byte>> Nodes()
+        public async Task<IEnumerable<byte>> List()
         {
-            var list = new List<byte>();
-            foreach(var node in await zwave.GetNodes())
-            {
-                list.Add(node.NodeID);
-            }
-            return list;
+            return (await zwave.GetNodes()).Select(n => n.NodeID);
         }
 
         [HttpGet]
-        public async Task<IEnumerable<VersionCommandClassReport>> SupportedCommandClasses([FromQuery]byte nodeId)
+        public async Task<IEnumerable<CommandClass>> SupportedCommandClasses([FromQuery]byte nodeId)
         {
             var node = await GetNode(nodeId);
-            return await node.GetSupportedCommandClasses();
+            return (await node.GetSupportedCommandClasses()).Select(n => n.Class);
         }
 
         [HttpGet]
