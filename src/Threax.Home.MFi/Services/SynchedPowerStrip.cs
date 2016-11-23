@@ -18,10 +18,9 @@ namespace Threax.Home.MFi.Services
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="powerStrip">The power strip to use.</param>
-        public SynchedPowerStrip(PowerStrip powerStrip)
+        public SynchedPowerStrip()
         {
-            this.powerStrip = powerStrip;
+            
         }
 
         /// <summary>
@@ -41,6 +40,7 @@ namespace Threax.Home.MFi.Services
         {
             await locker.Run(async () =>
             {
+                EnsurePowerStrip();
                 //Run on background thread, hold locker until done
                 await Task.Run(() =>
                 {
@@ -58,6 +58,7 @@ namespace Threax.Home.MFi.Services
         {
             return await locker.Run(async () =>
             {
+                EnsurePowerStrip();
                 IEnumerable<RelaySetting> settings = null;
                 //Run on background thread, hold locker until done
                 await Task.Run(() =>
@@ -68,6 +69,14 @@ namespace Threax.Home.MFi.Services
                 });
                 return settings;
             });
+        }
+
+        private void EnsurePowerStrip()
+        {
+            if(powerStrip == null)
+            {
+                this.powerStrip = new PowerStrip(Host, User, Pass, RelayCount);
+            }
         }
 
         /// <summary>
