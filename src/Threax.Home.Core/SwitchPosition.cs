@@ -8,7 +8,7 @@ namespace Threax.Home.Core
     /// <summary>
     /// A position of a switch, since positions are named, you can have unlimited positions per switch.
     /// </summary>
-    public class SwitchPosition
+    public class SwitchPosition<T>
     {
         /// <summary>
         /// Constructor
@@ -20,7 +20,7 @@ namespace Threax.Home.Core
         /// <summary>
         /// The id of the switch to set.
         /// </summary>
-        public String Id { get; set; }
+        public T Id { get; set; }
 
         /// <summary>
         /// The value to set the switch position to.

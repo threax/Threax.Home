@@ -85,10 +85,10 @@ namespace Threax.Home.Hue.Controllers
         /// <param name="bridge">The bridge to lookup.</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IEnumerable<SwitchInfo>> List(String bridge)
+        public async Task<IEnumerable<SwitchInfo<String>>> List(String bridge)
         {
             var lights = await clientManager.GetClient(bridge).GetLightsAsync();
-            return lights.Select(i => new SwitchInfo()
+            return lights.Select(i => new SwitchInfo<String>()
             {
                 Id = i.Id,
                 DisplayName = i.Name,

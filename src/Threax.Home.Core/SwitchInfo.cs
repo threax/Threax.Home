@@ -8,12 +8,12 @@ namespace Threax.Home.Core
     /// <summary>
     /// Information about a switch.
     /// </summary>
-    public class SwitchInfo
+    public class SwitchInfo<T>
     {
         /// <summary>
         /// The id of the switch.
         /// </summary>
-        public String Id { get; set; }
+        public T Id { get; set; }
 
         /// <summary>
         /// The display name for the switch. This will never be used for any logic.

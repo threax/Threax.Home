@@ -9,7 +9,7 @@ namespace Threax.Home.Hue.Models
     /// <summary>
     /// The switch position for a hue bulb
     /// </summary>
-    public class HueSwitchPosition : SwitchPosition, IHexColor, IBrightness
+    public class HueSwitchPosition : SwitchPosition<String>, IHexColor, IBrightness
     {
         /// <summary>
         /// The features this switch supports.

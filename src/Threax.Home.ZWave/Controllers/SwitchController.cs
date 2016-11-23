@@ -15,7 +15,7 @@ namespace Threax.Home.ZWave.Controllers
     /// Manage switches.
     /// </summary>
     [Route("[controller]/[action]")]
-    public class SwitchController : Controller, ISwitchController<SwitchPosition, String>
+    public class SwitchController : Controller, ISwitchController<SwitchPosition<String>, String>
     {
         private ZWaveController zwave;
 
@@ -34,9 +34,9 @@ namespace Threax.Home.ZWave.Controllers
         /// <param name="ids">The ids of the switches to lookup.</param>
         /// <returns>The position of the switch.</returns>
         [HttpGet]
-        public async Task<IEnumerable<SwitchPosition>> GetPosition([FromQuery] IEnumerable<String> ids)
+        public async Task<IEnumerable<SwitchPosition<String>>> GetPosition([FromQuery] IEnumerable<String> ids)
         {
-            var positions = new List<SwitchPosition>();
+            var positions = new List<SwitchPosition<String>>();
             foreach(var id in ids)
             {
                 //Hardcoded, for now
@@ -68,7 +68,7 @@ namespace Threax.Home.ZWave.Controllers
                 {
                     value = "high";
                 }
-                positions.Add(new SwitchPosition()
+                positions.Add(new SwitchPosition<String>()
                 {
                     Id = id,
                     Value = value
@@ -82,7 +82,7 @@ namespace Threax.Home.ZWave.Controllers
         /// </summary>
         /// <param name="positions">The position of the switch.</param>
         [HttpPut]
-        public async Task SetPosition([FromBody] IEnumerable<SwitchPosition> positions)
+        public async Task SetPosition([FromBody] IEnumerable<SwitchPosition<String>> positions)
         {
             foreach (var position in positions)
             {
@@ -122,15 +122,15 @@ namespace Threax.Home.ZWave.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IEnumerable<SwitchInfo>> List()
+        public async Task<IEnumerable<SwitchInfo<String>>> List()
         {
             return await Task.FromResult(GetSwitches());
         }
 
-        private IEnumerable<SwitchInfo> GetSwitches()
+        private IEnumerable<SwitchInfo<String>> GetSwitches()
         {
             //Hardcoded
-            yield return new SwitchInfo()
+            yield return new SwitchInfo<String>()
             {
                 Id = "BedroomFan",
                 DisplayName = "Bedroom Fan",

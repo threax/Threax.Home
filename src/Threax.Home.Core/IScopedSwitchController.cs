@@ -13,7 +13,7 @@ namespace Threax.Home.Core
     /// <typeparam name="Tid">The type of the switch id</typeparam>
     /// <typeparam name="TScope">The type of the scope argument.</typeparam>
     public interface ISwitchController<TPosition, Tid, TScope>
-        where TPosition : SwitchPosition
+        where TPosition : SwitchPosition<Tid>
     {
         /// <summary>
         /// Set the switch position for the given color switch on the given bridge.
@@ -36,6 +36,6 @@ namespace Threax.Home.Core
         /// </summary>
         /// <param name="scope">The scope for the switch.</param>
         /// <returns>A list of all switches in the scope.</returns>
-        Task<IEnumerable<SwitchInfo>> List(TScope scope);
+        Task<IEnumerable<SwitchInfo<Tid>>> List(TScope scope);
     }
 }

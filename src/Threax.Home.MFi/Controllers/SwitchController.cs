@@ -15,7 +15,7 @@ namespace Threax.Home.ZWave.Controllers
     /// Manage switches.
     /// </summary>
     [Route("{strip}/[controller]/[action]")]
-    public class SwitchController : Controller, ISwitchController<SwitchPosition, int, String>
+    public class SwitchController : Controller, ISwitchController<SwitchPosition<int>, int, String>
     {
         private PowerStripManager manager;
 
@@ -35,13 +35,13 @@ namespace Threax.Home.ZWave.Controllers
         /// <param name="strip">The name of the power strip to use.</param>
         /// <returns>The position of the switch.</returns>
         [HttpGet]
-        public async Task<IEnumerable<SwitchPosition>> GetPosition(String strip, [FromQuery] IEnumerable<int> ids)
+        public async Task<IEnumerable<SwitchPosition<int>>> GetPosition(String strip, [FromQuery] IEnumerable<int> ids)
         {
             var settings = await manager.GetClient(strip).GetSettings();
             return settings.Where(i => ids.Contains(i.Index)).Select(i =>
-                new SwitchPosition()
+                new SwitchPosition<int>()
                 {
-                    Id = i.Index.ToString(),
+                    Id = i.Index,
                     Value = i.On ? "on" : "off"
                 });
         }
@@ -52,11 +52,11 @@ namespace Threax.Home.ZWave.Controllers
         /// <param name="positions">The position of the switch.</param>
         /// <param name="strip">The name of the power strip to use.</param>
         [HttpPut]
-        public async Task SetPosition(String strip, [FromBody] IEnumerable<SwitchPosition> positions)
+        public async Task SetPosition(String strip, [FromBody] IEnumerable<SwitchPosition<int>> positions)
         {
             await manager.GetClient(strip).ApplySettings(positions.Select(i =>
             {
-                var name = int.Parse(i.Id);
+                var name = i.Id;
                 return new RelaySetting(name, i.Value == "on");
             }));
         }
@@ -67,12 +67,12 @@ namespace Threax.Home.ZWave.Controllers
         /// <param name="strip">The name of the power strip to use.</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IEnumerable<SwitchInfo>> List(String strip)
+        public async Task<IEnumerable<SwitchInfo<int>>> List(String strip)
         {
             var settings = await manager.GetClient(strip).GetSettings();
-            return settings.Select(i => new SwitchInfo()
+            return settings.Select(i => new SwitchInfo<int>()
             {
-                Id = i.Index.ToString(),
+                Id = i.Index,
                 Positions = new List<String>() { "on", "off" },
                 DisplayName = $"{strip} Relay {i.Index}"
             });
