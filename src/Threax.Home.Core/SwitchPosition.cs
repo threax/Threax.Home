@@ -18,9 +18,9 @@ namespace Threax.Home.Core
         }
 
         /// <summary>
-        /// The name of the switch to set.
+        /// The id of the switch to set.
         /// </summary>
-        public String Name { get; set; }
+        public String Id { get; set; }
 
         /// <summary>
         /// The value to set the switch position to.

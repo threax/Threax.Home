@@ -16,7 +16,7 @@ namespace Threax.Home.Hue.Controllers
     /// Color switch controller for hue lights.
     /// </summary>
     [Route("{bridge}/[controller]/[action]")]
-    public class SwitchController : Controller
+    public class SwitchController : Controller, ISwitchController<HueSwitchPosition, String, String>
     {
         private HueClientManager clientManager;
 
@@ -33,43 +33,50 @@ namespace Threax.Home.Hue.Controllers
         /// Set the switch position for the given color switch on the given bridge.
         /// </summary>
         /// <param name="bridge">The bridge to use.</param>
-        /// <param name="name">The name of the light to set.</param>
         /// <param name="settings">The position to apply.</param>
         /// <returns>void</returns>
         [HttpPut]
-        public async Task SetPosition(String bridge, [FromQuery] String name, [FromBody] HueSwitchPosition settings)
+        public async Task SetPosition(String bridge, [FromBody] IEnumerable<HueSwitchPosition> settings)
         {
-            LightCommand command = new LightCommand()
+            foreach(var setting in settings)
             {
-                Brightness = settings.Brightness,
-                On = settings.Value == "on"
-            };
-            if (settings.HexColor != null)
-            {
-                command.SetColor(new RGBColor(settings.HexColor));
+                LightCommand command = new LightCommand()
+                {
+                    Brightness = setting.Brightness,
+                    On = setting.Value == "on"
+                };
+                if (setting.HexColor != null)
+                {
+                    command.SetColor(new RGBColor(setting.HexColor));
+                }
+                await clientManager.GetClient(bridge).SendCommandAsync(command, new String[] { setting.Id });
             }
-            await clientManager.GetClient(bridge).SendCommandAsync(command);
         }
 
         /// <summary>
         /// Get the position of the switch.
         /// </summary>
         /// <param name="bridge">The bridge.</param>
-        /// <param name="name">The name of the switch.</param>
+        /// <param name="ids">The ids of the switches to get.</param>
         /// <returns>The switch position status.</returns>
         [HttpGet]
-        public async Task<HueSwitchPosition> GetPosition(String bridge, [FromQuery] String name)
+        public async Task<IEnumerable<HueSwitchPosition>> GetPosition(String bridge, [FromQuery] IEnumerable<String> ids)
         {
-            var light = await clientManager.GetClient(bridge).GetLightAsync(name);
-            var position = new HueSwitchPosition()
-            {
-                Brightness = light.State.Brightness,
-                Value = light.State.On ? "on" : "off",
-                HexColor = light.State.ToHex(),
-                Name = light.Id
-            };
-
-            return position;
+            return await Task.WhenAll<HueSwitchPosition>(
+                ids.Select(id => clientManager.GetClient(bridge).GetLightAsync(id)
+                .ContinueWith(ante =>
+                {
+                    var light = ante.Result;
+                    var position = new HueSwitchPosition()
+                    {
+                        Brightness = light.State.Brightness,
+                        Value = light.State.On ? "on" : "off",
+                        HexColor = light.State.ToHex(),
+                        Id = light.Id
+                    };
+                    return position;
+                }))
+            );
         }
 
         /// <summary>
@@ -83,7 +90,7 @@ namespace Threax.Home.Hue.Controllers
             var lights = await clientManager.GetClient(bridge).GetLightsAsync();
             return lights.Select(i => new SwitchInfo()
             {
-                Name = i.Id,
+                Id = i.Id,
                 DisplayName = i.Name,
                 Positions = new List<string>() { "on", "off" },
                 SwitchFeatures = HueSwitchPosition.Features

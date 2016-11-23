@@ -15,7 +15,7 @@ namespace Threax.Home.ZWave.Controllers
     /// Manage switches.
     /// </summary>
     [Route("{strip}/[controller]/[action]")]
-    public class SwitchController : Controller
+    public class SwitchController : Controller, ISwitchController<SwitchPosition, int, String>
     {
         private PowerStripManager manager;
 
@@ -31,17 +31,17 @@ namespace Threax.Home.ZWave.Controllers
         /// <summary>
         /// Get the position of a named switch.
         /// </summary>
-        /// <param name="names">The name of the switch to lookup.</param>
+        /// <param name="ids">The ids of the switches to lookup.</param>
         /// <param name="strip">The name of the power strip to use.</param>
         /// <returns>The position of the switch.</returns>
         [HttpGet]
-        public async Task<IEnumerable<SwitchPosition>> GetPositions(String strip, [FromQuery] IEnumerable<int> names)
+        public async Task<IEnumerable<SwitchPosition>> GetPosition(String strip, [FromQuery] IEnumerable<int> ids)
         {
             var settings = await manager.GetClient(strip).GetSettings();
-            return settings.Where(i => names.Contains(i.Index)).Select(i =>
+            return settings.Where(i => ids.Contains(i.Index)).Select(i =>
                 new SwitchPosition()
                 {
-                    Name = i.Index.ToString(),
+                    Id = i.Index.ToString(),
                     Value = i.On ? "on" : "off"
                 });
         }
@@ -56,7 +56,7 @@ namespace Threax.Home.ZWave.Controllers
         {
             await manager.GetClient(strip).ApplySettings(positions.Select(i =>
             {
-                var name = int.Parse(i.Name);
+                var name = int.Parse(i.Id);
                 return new RelaySetting(name, i.Value == "on");
             }));
         }
@@ -72,7 +72,7 @@ namespace Threax.Home.ZWave.Controllers
             var settings = await manager.GetClient(strip).GetSettings();
             return settings.Select(i => new SwitchInfo()
             {
-                Name = i.Index.ToString(),
+                Id = i.Index.ToString(),
                 Positions = new List<String>() { "on", "off" },
                 DisplayName = $"{strip} Relay {i.Index}"
             });
