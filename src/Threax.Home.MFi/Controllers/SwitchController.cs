@@ -31,34 +31,34 @@ namespace Threax.Home.ZWave.Controllers
         /// <summary>
         /// Get the position of a named switch.
         /// </summary>
-        /// <param name="name">The name of the switch to lookup.</param>
+        /// <param name="names">The name of the switch to lookup.</param>
         /// <param name="strip">The name of the power strip to use.</param>
         /// <returns>The position of the switch.</returns>
         [HttpGet]
-        public async Task<SwitchPosition> GetPosition(String strip, [FromQuery] int name)
+        public async Task<IEnumerable<SwitchPosition>> GetPositions(String strip, [FromQuery] IEnumerable<int> names)
         {
             var settings = await manager.GetClient(strip).GetSettings();
-            var setting = settings.First(i => i.Index == name);
-            return new SwitchPosition()
-            {
-                Name = name.ToString(),
-                Value = setting.On ? "on" : "off"
-            };
+            return settings.Where(i => names.Contains(i.Index)).Select(i =>
+                new SwitchPosition()
+                {
+                    Name = i.Index.ToString(),
+                    Value = i.On ? "on" : "off"
+                });
         }
 
         /// <summary>
         /// Set the position of a named switch.
         /// </summary>
-        /// <param name="position">The position of the switch.</param>
+        /// <param name="positions">The position of the switch.</param>
         /// <param name="strip">The name of the power strip to use.</param>
         [HttpPut]
-        public async Task SetPosition(String strip, [FromBody] SwitchPosition position)
+        public async Task SetPosition(String strip, [FromBody] IEnumerable<SwitchPosition> positions)
         {
-            int index = int.Parse(position.Name);
-            bool on = position.Value == "on";
-
-            RelaySetting relaySetting = new RelaySetting(index, on);
-            await manager.GetClient(strip).ApplySettings(new RelaySetting[] { relaySetting });
+            await manager.GetClient(strip).ApplySettings(positions.Select(i =>
+            {
+                var name = int.Parse(i.Name);
+                return new RelaySetting(name, i.Value == "on");
+            }));
         }
 
         /// <summary>
