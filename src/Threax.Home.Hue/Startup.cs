@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using Swashbuckle.Swagger.Model;
+using Threax.Home.Hue.Services;
 
 namespace Threax.Home.Hue
 {
@@ -34,6 +35,8 @@ namespace Threax.Home.Hue
 
             isDev = env.IsEnvironment("Development");
 
+            builder.AddUserSecrets();
+
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
             ConfigurationBinder.Bind(Configuration.GetSection("AppConfig"), appConfig);
@@ -44,6 +47,13 @@ namespace Threax.Home.Hue
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(s =>
+            {
+                var clients = new Dictionary<String, SyncedHueClient>();
+                ConfigurationBinder.Bind(Configuration.GetSection("HueClients"), clients);
+                return new HueClientManager(clients);
+            });
+
             services.AddMvc(o =>
             {
                 o.UseExceptionErrorFilters(isDev);

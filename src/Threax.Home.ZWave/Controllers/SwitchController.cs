@@ -112,6 +112,7 @@ namespace Threax.Home.ZWave.Controllers
             yield return new SwitchInfo()
             {
                 Name = "BedroomFan",
+                DisplayName = "Bedroom Fan",
                 Positions = new List<String>() { "off", "low", "med", "high" }
             };
         }

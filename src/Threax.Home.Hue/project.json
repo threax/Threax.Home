@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.1",
@@ -17,7 +17,9 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Threax.AspNetCore.Swashbuckle.Convention": "1.7.0",
     "Threax.Home.Core": "1.0.0-*",
-    "Q42.HueApi": "3.2.6"
+    "Q42.HueApi": "3.2.6",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0",
+    "Q42.HueApi.ColorConverters": "3.0.0"
   },
 
   "tools": {
@@ -55,5 +57,6 @@
 
   "scripts": {
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
-  }
+  },
+  "userSecretsId": "aspnet-Threax.Home.Hue-20161123091908"
 }

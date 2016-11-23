@@ -5,10 +5,7 @@ using System.Threading.Tasks;
 
 namespace Threax.Home.Core
 {
-    /// <summary>
-    /// Information about a switch.
-    /// </summary>
-    public class SwitchInfo
+    public class ColorSwitchInfo
     {
         /// <summary>
         /// The name of the switch.
@@ -19,10 +16,5 @@ namespace Threax.Home.Core
         /// The display name for the switch. This will never be used for any logic.
         /// </summary>
         public String DisplayName { get; set; }
-
-        /// <summary>
-        /// The positions the switch can be in.
-        /// </summary>
-        public List<String> Positions { get; set; }
     }
 }
