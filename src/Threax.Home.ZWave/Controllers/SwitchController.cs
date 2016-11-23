@@ -49,15 +49,15 @@ namespace Threax.Home.ZWave.Controllers
             {
                 value = "off";
             }
-            if (b < 10)
+            else if (b < 10)
             {
                 value = "low";
             }
-            if (b < 60)
+            else if (b < 60)
             {
                 value = "med";
             }
-            if (b < 100)
+            else if (b < 100)
             {
                 value = "high";
             }
