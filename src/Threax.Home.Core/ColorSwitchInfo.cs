@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Threax.Home.Core
 {
+    /// <summary>
+    /// This class contains configuration info for a color switch.
+    /// </summary>
     public class ColorSwitchInfo
     {
         /// <summary>

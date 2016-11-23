@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Threax.Home.Hue
 {
+    /// <summary>
+    /// Configuration for the Hue Api.
+    /// </summary>
     public class AppConfig
     {
     }

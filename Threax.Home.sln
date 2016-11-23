@@ -16,6 +16,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Threax.Home.Core", "src\Thr
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Threax.Home.Hue", "src\Threax.Home.Hue\Threax.Home.Hue.xproj", "{3FF20E20-0CE3-4A64-BEC4-8315129E40AF}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Threax.Home.MFi", "src\Threax.Home.MFi\Threax.Home.MFi.xproj", "{84392E55-CCA7-4EDA-BDA8-6C7335F33325}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{3FF20E20-0CE3-4A64-BEC4-8315129E40AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FF20E20-0CE3-4A64-BEC4-8315129E40AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FF20E20-0CE3-4A64-BEC4-8315129E40AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84392E55-CCA7-4EDA-BDA8-6C7335F33325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84392E55-CCA7-4EDA-BDA8-6C7335F33325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84392E55-CCA7-4EDA-BDA8-6C7335F33325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84392E55-CCA7-4EDA-BDA8-6C7335F33325}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,5 +48,6 @@ Global
 		{1C35F13D-7480-42A4-81B2-C335CC782712} = {D6C47EF9-F0B9-4870-A2B9-165DC361C700}
 		{7D722573-97FA-43B4-94D4-8EA636C0315B} = {D6C47EF9-F0B9-4870-A2B9-165DC361C700}
 		{3FF20E20-0CE3-4A64-BEC4-8315129E40AF} = {D6C47EF9-F0B9-4870-A2B9-165DC361C700}
+		{84392E55-CCA7-4EDA-BDA8-6C7335F33325} = {D6C47EF9-F0B9-4870-A2B9-165DC361C700}
 	EndGlobalSection
 EndGlobal

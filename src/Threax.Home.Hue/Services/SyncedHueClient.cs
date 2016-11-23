@@ -8,21 +8,34 @@ using Threax.Home.Core;
 
 namespace Threax.Home.Hue.Services
 {
+    /// <summary>
+    /// This class wraps the hue client and throttles access to the actual hue bridge.
+    /// </summary>
     public class SyncedHueClient : IDisposable
     {
         private SemaphoreSlimLock locker = new SemaphoreSlimLock();
         private LocalHueClient client;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public SyncedHueClient()
         {
             
         }
 
+        /// <summary>
+        /// Clean up the lock.
+        /// </summary>
         public void Dispose()
         {
             locker.Dispose();
         }
 
+        /// <summary>
+        /// Get the lights.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Light>> GetLightsAsync()
         {
             return await locker.Run(async () =>
@@ -32,6 +45,11 @@ namespace Threax.Home.Hue.Services
             });
         }
 
+        /// <summary>
+        /// Get a single light.
+        /// </summary>
+        /// <param name="id">The id of the light to get.</param>
+        /// <returns></returns>
         public async Task<Light> GetLightAsync(String id)
         {
             return await locker.Run(async () =>
@@ -41,6 +59,12 @@ namespace Threax.Home.Hue.Services
             });
         }
 
+        /// <summary>
+        /// Send a LightCommand.
+        /// </summary>
+        /// <param name="command">The command to send.</param>
+        /// <param name="lightList">The list of lights to send the command to.</param>
+        /// <returns>void</returns>
         public async Task SendCommandAsync(LightCommand command, IEnumerable<string> lightList = null)
         {
             await locker.Run(async () =>
@@ -59,8 +83,14 @@ namespace Threax.Home.Hue.Services
             }
         }
 
+        /// <summary>
+        /// The host ip address.
+        /// </summary>
         public String HostIp { get; set; }
 
+        /// <summary>
+        /// The app key to access the api.
+        /// </summary>
         public String AppKey { get; set; }
     }
 }

@@ -14,7 +14,7 @@ using Threax.Home.Hue.Services;
 
 namespace Threax.Home.Hue
 {
-    public class Startup
+    class Startup
     {
         private bool isDev;
         private Info apiInfo = new Info()

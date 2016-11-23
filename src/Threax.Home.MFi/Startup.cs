@@ -8,11 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.Swagger.Model;
+using Threax.Home.MFi.Services;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
-using ZWave;
 
-namespace Threax.Home.ZWave
+namespace Threax.Home.MFi
 {
     class Startup
     {
@@ -20,8 +20,8 @@ namespace Threax.Home.ZWave
         private Info apiInfo = new Info()
         {
             Version = "v1",
-            Title = "ZWave Device Api",
-            Description = "ZWave to Threax.Home api.",
+            Title = "Hue Api",
+            Description = "Phillips Hue to Threax.Home api.",
             TermsOfService = "None"
         };
         private AppConfig appConfig = new AppConfig();
@@ -35,6 +35,8 @@ namespace Threax.Home.ZWave
 
             isDev = env.IsEnvironment("Development");
 
+            builder.AddUserSecrets();
+
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
             ConfigurationBinder.Bind(Configuration.GetSection("AppConfig"), appConfig);
@@ -45,12 +47,11 @@ namespace Threax.Home.ZWave
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ZWaveController>(s =>
+            services.AddSingleton(s =>
             {
-                var controller = new ZWaveController(appConfig.ComPort);
-                controller.Open();
-                return controller;
-                //Close is not called, but even following proper patterns it wasn't called, figure this out later.
+                var clients = new Dictionary<String, SynchedPowerStrip>();
+                ConfigurationBinder.Bind(Configuration.GetSection("PowerStrips"), clients);
+                return new PowerStripManager(clients);
             });
 
             services.AddMvc(o =>

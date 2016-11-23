@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Builder;
 
-namespace Threax.Home.ZWave
+namespace Threax.Home.MFi
 {
     class Program
     {

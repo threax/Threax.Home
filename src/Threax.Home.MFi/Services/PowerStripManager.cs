@@ -1,33 +1,33 @@
-﻿using Newtonsoft.Json;
+﻿using MfiSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Threax.Home.Hue.Services
+namespace Threax.Home.MFi.Services
 {
     /// <summary>
-    /// This class manages multiple named hue clients.
+    /// This class manages multiple power strip clients.
     /// </summary>
-    public class HueClientManager : IDisposable
+    public class PowerStripManager
     {
-        private Dictionary<String, SyncedHueClient> clients;
+        private Dictionary<String, SynchedPowerStrip> clients;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="clients">The clients to manage.</param>
-        public HueClientManager(Dictionary<String, SyncedHueClient> clients)
+        public PowerStripManager(Dictionary<String, SynchedPowerStrip> clients)
         {
             this.clients = clients;
         }
 
         /// <summary>
-        /// Clean up clients.
+        /// Clean up the clients.
         /// </summary>
         public void Dispose()
         {
-            foreach(var client in clients.Values)
+            foreach (var client in clients.Values)
             {
                 client.Dispose();
             }
@@ -36,9 +36,9 @@ namespace Threax.Home.Hue.Services
         /// <summary>
         /// Get a specific client.
         /// </summary>
-        /// <param name="name">The name of the client.</param>
-        /// <returns>The client</returns>
-        public SyncedHueClient GetClient(String name)
+        /// <param name="name">The name of the client to get.</param>
+        /// <returns>The client.</returns>
+        public SynchedPowerStrip GetClient(String name)
         {
             return this.clients[name];
         }

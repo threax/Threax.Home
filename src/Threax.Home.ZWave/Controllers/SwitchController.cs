@@ -19,6 +19,10 @@ namespace Threax.Home.ZWave.Controllers
     {
         private ZWaveController zwave;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="zwave">The ZWaveController to use.</param>
         public SwitchController(ZWaveController zwave)
         {
             this.zwave = zwave;
@@ -105,6 +109,10 @@ namespace Threax.Home.ZWave.Controllers
             }
         }
 
+        /// <summary>
+        /// List all the switches.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<SwitchInfo> List()
         {

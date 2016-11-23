@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Threax.Home.ZWave
 {
+    /// <summary>
+    /// Configuration for zwave api.
+    /// </summary>
     public class AppConfig
     {
         /// <summary>
