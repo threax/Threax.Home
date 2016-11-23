@@ -97,6 +97,4 @@ namespace Threax.Home.Hue.Controllers
             });
         }
     }
-
-
 }
