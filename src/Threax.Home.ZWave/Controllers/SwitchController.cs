@@ -15,7 +15,7 @@ namespace Threax.Home.ZWave.Controllers
     /// Manage switches.
     /// </summary>
     [Route("[controller]/[action]")]
-    public class SwitchController : Controller, ISwitchController<SwitchPosition<String>, String>
+    public class SwitchController : Controller, ISwitchController<SwitchPosition<int>, int>
     {
         private ZWaveController zwave;
 
@@ -34,16 +34,16 @@ namespace Threax.Home.ZWave.Controllers
         /// <param name="ids">The ids of the switches to lookup.</param>
         /// <returns>The position of the switch.</returns>
         [HttpGet]
-        public async Task<IEnumerable<SwitchPosition<String>>> GetPosition([FromQuery] IEnumerable<String> ids)
+        public async Task<IEnumerable<SwitchPosition<int>>> GetPosition([FromQuery] IEnumerable<int> ids)
         {
-            var positions = new List<SwitchPosition<String>>();
+            var positions = new List<SwitchPosition<int>>();
             foreach(var id in ids)
             {
                 //Hardcoded, for now
                 Basic com;
-                switch (id.ToLowerInvariant())
+                switch (id)
                 {
-                    case "bedroomfan":
+                    case 2:
                         com = await GetBasicCommand(2);
                         break;
                     default:
@@ -68,7 +68,7 @@ namespace Threax.Home.ZWave.Controllers
                 {
                     value = "high";
                 }
-                positions.Add(new SwitchPosition<String>()
+                positions.Add(new SwitchPosition<int>()
                 {
                     Id = id,
                     Value = value
@@ -82,15 +82,15 @@ namespace Threax.Home.ZWave.Controllers
         /// </summary>
         /// <param name="positions">The position of the switch.</param>
         [HttpPut]
-        public async Task SetPosition([FromBody] IEnumerable<SwitchPosition<String>> positions)
+        public async Task SetPosition([FromBody] IEnumerable<SwitchPosition<int>> positions)
         {
             foreach (var position in positions)
             {
                 //Hardcoded, for now
                 Basic com;
-                switch (position.Id.ToLowerInvariant())
+                switch (position.Id)
                 {
-                    case "bedroomfan":
+                    case 2:
                         com = await GetBasicCommand(2);
                         break;
                     default:
@@ -122,17 +122,17 @@ namespace Threax.Home.ZWave.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IEnumerable<SwitchInfo<String>>> List()
+        public async Task<IEnumerable<SwitchInfo<int>>> List()
         {
             return await Task.FromResult(GetSwitches());
         }
 
-        private IEnumerable<SwitchInfo<String>> GetSwitches()
+        private IEnumerable<SwitchInfo<int>> GetSwitches()
         {
             //Hardcoded
-            yield return new SwitchInfo<String>()
+            yield return new SwitchInfo<int>()
             {
-                Id = "BedroomFan",
+                Id = 2,
                 DisplayName = "Bedroom Fan",
                 Positions = new List<String>() { "off", "low", "med", "high" }
             };
