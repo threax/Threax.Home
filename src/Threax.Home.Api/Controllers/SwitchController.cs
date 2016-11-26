@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Threax.Home.Core;
 
+//This is just an example implementation, disable async warnings
+#pragma warning disable CS1998
+
 namespace Threax.Home.Api.Controllers
 {
     /// <summary>
