@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Swashbuckle.Swagger.Model;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
+using Threax.Home.SwitchGroups.Database;
 
 namespace Threax.Home.SwitchGroups
 {
@@ -44,6 +45,8 @@ namespace Threax.Home.SwitchGroups
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
+            services.UseAppDatabase(appConfig.ConnectionString);
+
             services.AddMvc(o =>
             {
                 o.UseExceptionErrorFilters(isDev);

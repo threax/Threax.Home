@@ -1,6 +1,7 @@
 ﻿namespace Threax.Home.SwitchGroups
 {
-    internal class AppConfig
+    class AppConfig
     {
+        public string ConnectionString { get; internal set; }
     }
 }
