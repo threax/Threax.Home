@@ -14,8 +14,8 @@ namespace Threax.Home.Hue.ViewModels
     /// View model for switch position.
     /// </summary>
     [HalModel]
-    //[HalSelfActionLink(SwitchController.Rels.List, typeof(SwitchController))]
-    //[HalActionLink(SwitchController.Rels.Set, typeof(SwitchController))]
+    [HalSelfActionLink(SwitchController.Rels.GetSwitch, typeof(SwitchController))]
+    [HalActionLink(SwitchController.Rels.SetSwitch, typeof(SwitchController))]
     public class HueSwitchPositionView : HueSwitchPosition
     {
         /// <summary>
