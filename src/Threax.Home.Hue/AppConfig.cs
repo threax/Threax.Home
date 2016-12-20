@@ -10,5 +10,6 @@ namespace Threax.Home.Hue
     /// </summary>
     public class AppConfig
     {
+        public string BaseUrl { get; set; } = "{{authority}}";
     }
 }

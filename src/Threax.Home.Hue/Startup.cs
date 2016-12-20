@@ -11,6 +11,8 @@ using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using Swashbuckle.Swagger.Model;
 using Threax.Home.Hue.Services;
+using Threax.AspNetCore.Halcyon.Ext;
+using Threax.Home.Hue.Controllers;
 
 namespace Threax.Home.Hue
 {
@@ -47,6 +49,12 @@ namespace Threax.Home.Hue
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddConventionalHalcyon(new HalcyonConventionOptions()
+            {
+                BaseUrl = appConfig.BaseUrl,
+                HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController))
+            });
+
             services.AddSingleton(s =>
             {
                 var clients = new Dictionary<String, SyncedHueClient>();
@@ -57,6 +65,7 @@ namespace Threax.Home.Hue
             services.AddMvc(o =>
             {
                 o.UseExceptionErrorFilters(isDev);
+                o.UseConventionalHalcyon();
             })
             .AddJsonOptions(o =>
             {
