@@ -12,9 +12,6 @@ namespace Threax.Home.Hue.Models
     /// <summary>
     /// The switch position for a hue bulb
     /// </summary>
-    [HalModel]
-    //[HalSelfActionLink(SwitchController.Rels.List, typeof(SwitchController))]
-    [HalActionLink(SwitchController.Rels.Set, typeof(SwitchController))]
     public class HueSwitchPosition : SwitchPosition<String>, IHexColor, IBrightness
     {
         /// <summary>
@@ -31,10 +28,5 @@ namespace Threax.Home.Hue.Models
         /// The color to set.
         /// </summary>
         public string HexColor { get; set; }
-
-        /// <summary>
-        /// The name of the light.
-        /// </summary>
-        public String Name { get; set; }
     }
 }

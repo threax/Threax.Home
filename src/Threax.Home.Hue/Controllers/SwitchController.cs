@@ -17,13 +17,13 @@ namespace Threax.Home.Hue.Controllers
     /// <summary>
     /// Color switch controller for hue lights.
     /// </summary>
-    [Route("{bridge}/[controller]")]
+    [Route("[controller]/{Bridge}")]
     public class SwitchController : Controller//, ISwitchController<HueSwitchPosition, String, String>
     {
         public static class Rels
         {
             public const String List = "listSwitches";
-            public const String Set = "setSwitch";
+            public const String SetSwitches = "setSwitches";
         }
 
         private HueClientManager clientManager;
@@ -44,7 +44,7 @@ namespace Threax.Home.Hue.Controllers
         /// <param name="settings">The position to apply.</param>
         /// <returns>void</returns>
         [HttpPut]
-        [HalRel(Rels.Set)]
+        [HalRel(Rels.SetSwitches)]
         public async Task Set(String bridge, [FromBody] IEnumerable<HueSwitchPosition> settings)
         {
             foreach (var setting in settings)
@@ -69,28 +69,29 @@ namespace Threax.Home.Hue.Controllers
         /// <returns>The switch position status.</returns>
         [HttpGet]
         [HalRel(Rels.List)]
-        public async Task<HueSwitchPositions> List(String bridge)
+        public async Task<HueSwitchCollection> List(String bridge)
         {
             var lightInfos = await clientManager.GetClient(bridge).GetLightsAsync();
 
-            var switches = await Task.WhenAll<HueSwitchPosition>(
+            var switches = await Task.WhenAll<HueSwitchPositionView>(
                 lightInfos.Select(lightInfo => clientManager.GetClient(bridge).GetLightAsync(lightInfo.Id)
                 .ContinueWith(ante =>
                 {
                     var light = ante.Result;
-                    var position = new HueSwitchPosition()
+                    var position = new HueSwitchPositionView()
                     {
                         Brightness = light.State.Brightness,
                         Value = light.State.On ? "on" : "off",
                         HexColor = light.State.ToHex(),
                         Id = light.Id,
                         Name = light.Name,
+                        Bridge = bridge
                     };
                     return position;
                 }))
             );
 
-            return new HueSwitchPositions(switches.ToList(), bridge);
+            return new HueSwitchCollection(switches.ToList(), bridge);
         }
     }
 }
