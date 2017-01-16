@@ -72,12 +72,14 @@ namespace Threax.Home.Hue.Controllers
             }
 
             //Finally return the schema
-            return JsonSchema4.FromType(type, new NJsonSchema.Generation.JsonSchemaGeneratorSettings()
+            var t = JsonSchema4.FromTypeAsync(type, new NJsonSchema.Generation.JsonSchemaGeneratorSettings()
             {
                 DefaultEnumHandling = EnumHandling.String,
                 DefaultPropertyNameHandling = PropertyNameHandling.CamelCase,
                 FlattenInheritanceHierarchy = true
             });
+            t.Wait();
+            return t.Result;
         }
     }
 }
