@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.ExceptionToJson;
+using Threax.AspNetCore.Halcyon.Ext;
 using Threax.Home.Core;
+using Threax.Home.ZWave.Models;
 using ZWave;
 using ZWave.CommandClasses;
 
@@ -14,9 +16,17 @@ namespace Threax.Home.ZWave.Controllers
     /// <summary>
     /// Manage switches.
     /// </summary>
-    [Route("[controller]/[action]")]
-    public class SwitchController : Controller, ISwitchController<SwitchPosition<int>, int>
+    [Route("[controller]")]
+    public class SwitchController : Controller
     {
+        public static class Rels
+        {
+            public const String List = "listSwitches";
+            public const String SetSwitches = "setSwitches";
+            public const String SetSwitch = "set";
+            public const String GetSwitch = "get";
+        }
+
         private ZWaveController zwave;
 
         /// <summary>
@@ -34,108 +44,139 @@ namespace Threax.Home.ZWave.Controllers
         /// <param name="ids">The ids of the switches to lookup.</param>
         /// <returns>The position of the switch.</returns>
         [HttpGet]
-        public async Task<IEnumerable<SwitchPosition<int>>> GetPosition([FromQuery] IEnumerable<int> ids)
+        [HalRel(Rels.List)]
+        public async Task<ZWaveSwitchPositionCollectionView> Get([FromQuery] List<int> ids)
         {
-            var positions = new List<SwitchPosition<int>>();
-            foreach(var id in ids)
+            if(ids.Count == 0)
             {
-                //Hardcoded, for now
-                Basic com;
-                switch (id)
-                {
-                    case 2:
-                        com = await GetBasicCommand(2);
-                        break;
-                    default:
-                        throw new FileNotFoundException();
-                }
-
-                var b = (await com.Get()).Value;
-                String value = null;
-                if (b == 0)
-                {
-                    value = "off";
-                }
-                else if (b < 10)
-                {
-                    value = "low";
-                }
-                else if (b < 60)
-                {
-                    value = "med";
-                }
-                else if (b < 100)
-                {
-                    value = "high";
-                }
-                positions.Add(new SwitchPosition<int>()
-                {
-                    Id = id,
-                    Value = value
-                });
+                ids.AddRange(GetSwitches());
             }
-            return positions;
+
+            var positions = new List<ZWaveSwitchPosition>();
+            foreach (var id in ids)
+            {
+                positions.Add(await Get(id));
+            }
+            return new ZWaveSwitchPositionCollectionView(positions);
         }
 
         /// <summary>
-        /// Set the position of a named switch.
+        /// Set multiple switch positions.
         /// </summary>
-        /// <param name="positions">The position of the switch.</param>
+        /// <param name="bridge">The bridge to use.</param>
+        /// <param name="settings">The position to apply.</param>
+        /// <returns>void</returns>
         [HttpPut]
-        public async Task SetPosition([FromBody] IEnumerable<SwitchPosition<int>> positions)
+        [HalRel(Rels.SetSwitches)]
+        public async Task Set([FromBody] IEnumerable<ZWaveSwitchPosition> positions)
         {
             foreach (var position in positions)
             {
-                //Hardcoded, for now
-                Basic com;
-                switch (position.Id)
-                {
-                    case 2:
-                        com = await GetBasicCommand(2);
-                        break;
-                    default:
-                        throw new FileNotFoundException();
-                }
-
-                switch (position.Value.ToLowerInvariant())
-                {
-                    case "off":
-                        await com.Set(0);
-                        break;
-                    case "low":
-                        await com.Set(1);
-                        break;
-                    case "med":
-                        await com.Set(50);
-                        break;
-                    case "high":
-                        await com.Set(99);
-                        break;
-                    default:
-                        throw new ErrorResultException($"{position.Value} is not a valid position for {position.Id}");
-                }
+                await Set(position.Id, position);
             }
         }
 
         /// <summary>
-        /// List all the switches.
+        /// Get the position of a named switch.
         /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<IEnumerable<SwitchInfo<int>>> List()
+        /// <param name="ids">The ids of the switches to lookup.</param>
+        /// <returns>The position of the switch.</returns>
+        [HttpGet("{Id}")]
+        [HalRel(Rels.GetSwitch)]
+        public async Task<ZWaveSwitchPosition> Get(int id)
         {
-            return await Task.FromResult(GetSwitches());
+            //Hardcoded, for now
+            Basic com;
+            switch (id)
+            {
+                case 2:
+                    com = await GetBasicCommand(2);
+                    break;
+                default:
+                    throw new FileNotFoundException();
+            }
+
+            var b = (await com.Get()).Value;
+            Switch3SwitchPosition value = Switch3SwitchPosition.Off;
+            if (b == 0)
+            {
+                value = Switch3SwitchPosition.Off;
+            }
+            else if (b < 10)
+            {
+                value = Switch3SwitchPosition.Low;
+            }
+            else if (b < 60)
+            {
+                value = Switch3SwitchPosition.Medium;
+            }
+            else if (b < 100)
+            {
+                value = Switch3SwitchPosition.High;
+            }
+            return new ZWaveSwitchPosition()
+            {
+                Id = id,
+                Value = value
+            };
         }
 
-        private IEnumerable<SwitchInfo<int>> GetSwitches()
+        /// <summary>
+        /// Set multiple switch positions.
+        /// </summary>
+        /// <param name="bridge">The bridge to use.</param>
+        /// <param name="settings">The position to apply.</param>
+        /// <returns>void</returns>
+        [HttpPut("{Id}")]
+        [HalRel(Rels.SetSwitch)]
+        public async Task Set(int id, [FromBody] ZWaveSwitchPosition position)
+        {
+            position.Id = id;
+            //Hardcoded, for now
+            Basic com;
+            switch (position.Id)
+            {
+                case 2:
+                    com = await GetBasicCommand(2);
+                    break;
+                default:
+                    throw new FileNotFoundException();
+            }
+
+            switch (position.Value)
+            {
+                case Switch3SwitchPosition.Off:
+                    await com.Set(0);
+                    break;
+                case Switch3SwitchPosition.Low:
+                    await com.Set(1);
+                    break;
+                case Switch3SwitchPosition.Medium:
+                    await com.Set(50);
+                    break;
+                case Switch3SwitchPosition.High:
+                    await com.Set(99);
+                    break;
+                default:
+                    throw new ErrorResultException($"{position.Value} is not a valid position for {position.Id}");
+            }
+        }
+
+        ///// <summary>
+        ///// List all the switches.
+        ///// </summary>
+        ///// <returns></returns>
+        //[HttpGet]
+        //[HalRel(Rels.List)]
+        //public async Task<IEnumerable<SwitchInfo<int>>> List()
+        //{
+        //    return await Task.FromResult(GetSwitches());
+        //}
+
+        private IEnumerable<int> GetSwitches()
         {
             //Hardcoded
-            yield return new SwitchInfo<int>()
-            {
-                Id = 2,
-                DisplayName = "Bedroom Fan",
-                Positions = new List<String>() { "off", "low", "med", "high" }
-            };
+            yield return 2;
         }
 
         private async Task<Basic> GetBasicCommand(byte nodeId)
