@@ -11,6 +11,8 @@ using Swashbuckle.Swagger.Model;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using ZWave;
+using Threax.AspNetCore.Halcyon.Ext;
+using Threax.Home.ZWave.Controllers;
 
 namespace Threax.Home.ZWave
 {
@@ -45,6 +47,12 @@ namespace Threax.Home.ZWave
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddConventionalHalcyon(new HalcyonConventionOptions()
+            {
+                BaseUrl = appConfig.BaseUrl,
+                HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController))
+            });
+
             services.AddSingleton<ZWaveController>(s =>
             {
                 var controller = new ZWaveController(appConfig.ComPort);
@@ -56,6 +64,7 @@ namespace Threax.Home.ZWave
             services.AddMvc(o =>
             {
                 o.UseExceptionErrorFilters(isDev);
+                o.UseConventionalHalcyon();
             })
             .AddJsonOptions(o =>
             {

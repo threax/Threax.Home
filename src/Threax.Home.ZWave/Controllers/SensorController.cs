@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Threax.AspNetCore.Halcyon.Ext;
 using Threax.Home.Core.ViewModels;
+using Threax.Home.ZWave.Models;
 using ZWave;
 using ZWave.Channel;
 using ZWave.CommandClasses;
@@ -18,6 +20,15 @@ namespace Threax.Home.ZWave.Controllers
         private const byte SensorHumidity = 5;
         private const byte SensorUv = 27;
 
+        public static class Rels
+        {
+            public const String ListSensors = "ListSensors";
+            public const String GetTemperature = "GetTemperature";
+            public const String GetLight = "GetLight";
+            public const String GetHumidity = "GetHumidity";
+            public const String GetUv = "GetUv";
+        }
+
         private ZWaveController zwave;
 
         /// <summary>
@@ -29,7 +40,21 @@ namespace Threax.Home.ZWave.Controllers
             this.zwave = zwave;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
+        [HalRel(Rels.ListSensors)]
+        public async Task<SensorInfoCollectionView> List()
+        {
+            return new SensorInfoCollectionView(new SensorInfoView[]
+            {
+                new SensorInfoView()
+                {
+                    Id = 3
+                }
+            });
+        }
+
+        [HttpGet("{Id}")]
+        [HalRel(Rels.GetTemperature)]
         public async Task<SensorDataView> Temperature(byte id)
         {
             var report = await GetSensorData(id, SensorFarenheight);
@@ -40,7 +65,8 @@ namespace Threax.Home.ZWave.Controllers
             };
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{Id}")]
+        [HalRel(Rels.GetLight)]
         public async Task<SensorDataView> Light(byte id)
         {
             var report = await GetSensorData(id, SensorLight);
@@ -51,7 +77,8 @@ namespace Threax.Home.ZWave.Controllers
             };
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{Id}")]
+        [HalRel(Rels.GetHumidity)]
         public async Task<SensorDataView> Humidity(byte id)
         {
             var report = await GetSensorData(id, SensorHumidity);
@@ -62,7 +89,8 @@ namespace Threax.Home.ZWave.Controllers
             };
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{Id}")]
+        [HalRel(Rels.GetUv)]
         public async Task<SensorDataView> Uv(byte id)
         {
             var report = await GetSensorData(id, SensorUv);
