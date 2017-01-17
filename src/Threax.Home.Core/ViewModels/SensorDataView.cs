@@ -8,7 +8,6 @@ using Threax.AspNetCore.Halcyon.Ext;
 namespace Threax.Home.Core.ViewModels
 {
     [HalModel]
-    [HalSelfLink]
     public class SensorDataView
     {
         public float Value { get; set; }

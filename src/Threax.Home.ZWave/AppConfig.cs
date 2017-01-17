@@ -10,7 +10,7 @@ namespace Threax.Home.ZWave
     /// </summary>
     public class AppConfig
     {
-        public string BaseUrl { get; set; } = "{{authority}}";
+        public string BaseUrl { get; set; } = "{{host}}";
 
         /// <summary>
         /// The com port of your z-wave device.

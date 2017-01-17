@@ -11,6 +11,7 @@ using ZWave.CommandClasses;
 namespace Threax.Home.ZWave.Controllers
 {
     [Route("[controller]/[action]")]
+    [ResponseCache(NoStore = true)]
     public class ZWaveConfigController : Controller
     {
         private ZWaveController zwave;

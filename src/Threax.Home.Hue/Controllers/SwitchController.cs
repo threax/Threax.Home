@@ -18,6 +18,7 @@ namespace Threax.Home.Hue.Controllers
     /// Color switch controller for hue lights.
     /// </summary>
     [Route("[controller]/{Bridge}")]
+    [ResponseCache(NoStore=true)]
     public class SwitchController : Controller
     {
         public static class Rels

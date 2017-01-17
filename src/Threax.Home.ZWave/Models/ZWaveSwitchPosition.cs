@@ -18,7 +18,7 @@ namespace Threax.Home.ZWave.Models
     }
 
     [HalModel]
-    [HalSelfLink]
+    [HalSelfActionLink(SwitchController.Rels.GetSwitch, typeof(SwitchController))]
     [HalActionLink(SwitchController.Rels.GetSwitch, typeof(SwitchController))]
     [HalActionLink(SwitchController.Rels.SetSwitch, typeof(SwitchController))]
     public class ZWaveSwitchPosition

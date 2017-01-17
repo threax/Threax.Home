@@ -9,7 +9,7 @@ using Threax.Home.ZWave.Controllers;
 namespace Threax.Home.ZWave.Models
 {
     [HalModel]
-    [HalSelfLink]
+    [HalSelfActionLink(SensorController.Rels.ListSensors, typeof(SensorController))]
     [HalActionLink(SensorController.Rels.ListSensors, typeof(SensorController))]
     public class SensorInfoCollectionView : CollectionView<SensorInfoView>
     {

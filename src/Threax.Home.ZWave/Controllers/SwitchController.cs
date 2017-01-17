@@ -17,6 +17,7 @@ namespace Threax.Home.ZWave.Controllers
     /// Manage switches.
     /// </summary>
     [Route("[controller]")]
+    [ResponseCache(NoStore = true)]
     public class SwitchController : Controller
     {
         public static class Rels
