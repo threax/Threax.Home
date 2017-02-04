@@ -9,12 +9,11 @@ using Threax.Home.ZWave.Controllers;
 namespace Threax.Home.ZWave.Models
 {
     [HalModel]
-    [HalSelfActionLink(SwitchController.Rels.List, typeof(SwitchController))]
+    [HalSelfActionLink(EntryPointController.Rels.Get, typeof(EntryPointController))]
+    [HalActionLink(EntryPointController.Rels.Get, typeof(EntryPointController))]
+    [HalActionLink(SensorController.Rels.ListSensors, typeof(SensorController))]
     [HalActionLink(SwitchController.Rels.List, typeof(SwitchController))]
-    public class ZWaveSwitchPositionCollectionView : CollectionView<ZWaveSwitchPosition>
+    public class EntryPointView
     {
-        public ZWaveSwitchPositionCollectionView(IEnumerable<ZWaveSwitchPosition> items = null, string name = "values") : base(items, name)
-        {
-        }
     }
 }
