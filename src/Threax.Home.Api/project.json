@@ -4,7 +4,7 @@
       "version": "1.1.0",
       "type": "platform"
     },
-    "Microsoft.AspNetCore.Mvc": "1.1.0",
+    "Microsoft.AspNetCore.Mvc": "1.1.1",
     "Microsoft.AspNetCore.Routing": "1.1.0",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
@@ -15,7 +15,6 @@
     "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-    "Threax.AspNetCore.Swashbuckle.Convention": "1.10.2",
     "Microsoft.Extensions.Configuration.UserSecrets": "1.1.0",
     "Threax.Home.Core": "1.0.0-*"
   },

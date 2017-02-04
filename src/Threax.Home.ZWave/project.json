@@ -10,9 +10,9 @@
     "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-    "Threax.AspNetCore.Swashbuckle.Convention": "1.10.2",
     "Threax.Home.Core": "1.0.0-*",
-    "ZWave4Net": "1.0.0.128"
+    "ZWave4Net": "1.0.0.128",
+    "Threax.AspNetCore.ExceptionFilter": "1.0.2"
   },
 
   "tools": {

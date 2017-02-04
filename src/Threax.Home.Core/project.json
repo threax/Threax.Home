@@ -2,7 +2,8 @@
   "version": "1.0.0-*",
   "dependencies": {
     "NETStandard.Library": "1.6.1",
-    "Threax.AspNetCore.Halcyon.Ext": "1.4.0"
+    "Threax.AspNetCore.Halcyon.Ext": "1.7.3",
+    "Threax.AspNetCore.ExceptionFilter": "1.0.2"
   },
   "frameworks": {
     "netstandard1.6": {

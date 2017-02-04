@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
-using Swashbuckle.Swagger.Model;
 using Threax.Home.Hue.Services;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.Home.Hue.Controllers;
@@ -19,13 +18,6 @@ namespace Threax.Home.Hue
     class Startup
     {
         private bool isDev;
-        private Info apiInfo = new Info()
-        {
-            Version = "v1",
-            Title = "Hue Api",
-            Description = "Phillips Hue to Threax.Home api.",
-            TermsOfService = "None"
-        };
         private AppConfig appConfig = new AppConfig();
 
         public Startup(IHostingEnvironment env)
@@ -72,17 +64,24 @@ namespace Threax.Home.Hue
                 o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 o.SerializerSettings.Converters.Add(new StringEnumConverter());
             });
-
-            services.AddConventionalSwagger(apiInfo);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            if (isDev)
+            {
+                app.UseCors(c =>
+                {
+                    c.AllowAnyHeader()
+                     .AllowAnyMethod()
+                     .AllowAnyOrigin()
+                     .AllowCredentials();
+                });
+            }
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-            app.UseConventionalSwagger(apiInfo);
 
             app.UseMvc();
         }

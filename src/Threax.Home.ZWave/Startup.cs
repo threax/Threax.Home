@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Swashbuckle.Swagger.Model;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using ZWave;
@@ -19,13 +18,6 @@ namespace Threax.Home.ZWave
     class Startup
     {
         private bool isDev;
-        private Info apiInfo = new Info()
-        {
-            Version = "v1",
-            Title = "ZWave Device Api",
-            Description = "ZWave to Threax.Home api.",
-            TermsOfService = "None"
-        };
         private AppConfig appConfig = new AppConfig();
 
         public Startup(IHostingEnvironment env)
@@ -71,8 +63,6 @@ namespace Threax.Home.ZWave
                 o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 o.SerializerSettings.Converters.Add(new StringEnumConverter());
             });
-
-            services.AddConventionalSwagger(apiInfo);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -80,8 +70,6 @@ namespace Threax.Home.ZWave
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-            app.UseConventionalSwagger(apiInfo);
 
             app.UseMvc();
         }

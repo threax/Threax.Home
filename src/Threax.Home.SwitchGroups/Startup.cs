@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Swashbuckle.Swagger.Model;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 using Threax.Home.SwitchGroups.Database;
@@ -17,13 +16,6 @@ namespace Threax.Home.SwitchGroups
     class Startup
     {
         private bool isDev;
-        private Info apiInfo = new Info()
-        {
-            Version = "v1",
-            Title = "Threax Home Switch Group Api",
-            Description = "This api allows switches to be grouped up.",
-            TermsOfService = "None"
-        };
         private AppConfig appConfig = new AppConfig();
 
         public Startup(IHostingEnvironment env)
@@ -56,8 +48,6 @@ namespace Threax.Home.SwitchGroups
                 o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 o.SerializerSettings.Converters.Add(new StringEnumConverter());
             });
-
-            services.AddConventionalSwagger(apiInfo);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -65,8 +55,6 @@ namespace Threax.Home.SwitchGroups
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-            app.UseConventionalSwagger(apiInfo);
 
             app.UseMvc();
         }

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Swashbuckle.Swagger.Model;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Converters;
 
@@ -16,13 +15,6 @@ namespace Threax.Home.Api
     public class Startup
     {
         private bool isDev;
-        private Info apiInfo = new Info()
-        {
-            Version = "v1",
-            Title = "Threax Home Api",
-            Description = "An api to generate swagger documents with, uses string keys, but these should be universal.",
-            TermsOfService = "None"
-        };
         private AppConfig appConfig = new AppConfig();
 
         public Startup(IHostingEnvironment env)
@@ -53,8 +45,6 @@ namespace Threax.Home.Api
                 o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 o.SerializerSettings.Converters.Add(new StringEnumConverter());
             });
-
-            services.AddConventionalSwagger(apiInfo);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -62,8 +52,6 @@ namespace Threax.Home.Api
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-            app.UseConventionalSwagger(apiInfo);
 
             app.UseMvc();
         }

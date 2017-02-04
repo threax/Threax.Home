@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Threax.AspNetCore.ExceptionToJson;
+using Threax.AspNetCore.ExceptionFilter;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.Home.Core;
 using Threax.Home.ZWave.Models;

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Threax.AspNetCore.ExceptionToJson;
 using Threax.Home.Core;
 using Threax.Home.MFi.Services;
 
