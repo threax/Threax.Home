@@ -16,11 +16,6 @@ namespace Threax.Home.Hue.Models
     public class HueSwitchPosition : SwitchPosition<String>, IHexColor, IBrightness
     {
         /// <summary>
-        /// The features this switch supports.
-        /// </summary>
-        public const SwitchFeatures Features = SwitchFeatures.Brightness | SwitchFeatures.Color;
-
-        /// <summary>
         /// The brightness to set.
         /// </summary>
         public byte? Brightness { get; set; }
