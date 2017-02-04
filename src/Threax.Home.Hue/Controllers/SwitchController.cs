@@ -40,30 +40,30 @@ namespace Threax.Home.Hue.Controllers
             this.clientManager = clientManager;
         }
 
-        /// <summary>
-        /// Set multiple switch positions.
-        /// </summary>
-        /// <param name="bridge">The bridge to use.</param>
-        /// <param name="settings">The position to apply.</param>
-        /// <returns>void</returns>
-        [HttpPut]
-        [HalRel(Rels.SetSwitches)]
-        public async Task Set(String bridge, [FromBody] IEnumerable<HueSwitchPosition> settings)
-        {
-            foreach (var setting in settings)
-            {
-                LightCommand command = new LightCommand()
-                {
-                    Brightness = setting.Brightness,
-                    On = setting.Value == "on"
-                };
-                if (setting.HexColor != null)
-                {
-                    command.SetColor(new RGBColor(setting.HexColor));
-                }
-                await clientManager.GetClient(bridge).SendCommandAsync(command, new String[] { setting.Id });
-            }
-        }
+        ///// <summary>
+        ///// Set multiple switch positions.
+        ///// </summary>
+        ///// <param name="bridge">The bridge to use.</param>
+        ///// <param name="settings">The position to apply.</param>
+        ///// <returns>void</returns>
+        //[HttpPut]
+        //[HalRel(Rels.SetSwitches)]
+        //public async Task Set(String bridge, [FromBody] IEnumerable<HueSwitchPosition> settings)
+        //{
+        //    foreach (var setting in settings)
+        //    {
+        //        LightCommand command = new LightCommand()
+        //        {
+        //            Brightness = setting.Brightness,
+        //            On = setting.Value == "on"
+        //        };
+        //        if (setting.HexColor != null)
+        //        {
+        //            command.SetColor(new RGBColor(setting.HexColor));
+        //        }
+        //        await clientManager.GetClient(bridge).SendCommandAsync(command, new String[] { setting.Id });
+        //    }
+        //}
 
         /// <summary>
         /// Get the positions of all the switches.
