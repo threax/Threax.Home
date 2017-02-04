@@ -8,7 +8,7 @@ using Threax.Home.ZWave.Models;
 
 namespace Threax.Home.ZWave.Controllers
 {
-    [Route("/")]
+    [Route("")]
     public class EntryPointController : Controller
     {
         public class Rels

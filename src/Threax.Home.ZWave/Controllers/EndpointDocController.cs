@@ -4,7 +4,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 
 namespace Threax.Home.ZWave.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ResponseCache(NoStore = true)]
     public class EndpointDocController : Controller
     {

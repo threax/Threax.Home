@@ -10,7 +10,6 @@ namespace Threax.Home.ZWave.Models
 {
     [HalModel]
     [HalSelfActionLink(EntryPointController.Rels.Get, typeof(EntryPointController))]
-    [HalActionLink(EntryPointController.Rels.Get, typeof(EntryPointController))]
     [HalActionLink(SensorController.Rels.ListSensors, typeof(SensorController))]
     [HalActionLink(SwitchController.Rels.List, typeof(SwitchController))]
     public class EntryPointView
