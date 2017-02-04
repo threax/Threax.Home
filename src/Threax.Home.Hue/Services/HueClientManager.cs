@@ -42,5 +42,10 @@ namespace Threax.Home.Hue.Services
         {
             return this.clients[name];
         }
+
+        public IEnumerable<String> GetClientNames()
+        {
+            return this.clients.Keys;
+        }
     }
 }

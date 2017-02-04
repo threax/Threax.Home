@@ -23,10 +23,10 @@ namespace Threax.Home.Hue.Controllers
     {
         public static class Rels
         {
-            public const String List = "listSwitches";
-            public const String SetSwitches = "setSwitches";
-            public const String SetSwitch = "set";
-            public const String GetSwitch = "get";
+            public const String ListSwitches = "ListSwitches";
+            public const String SetSwitches = "SetSwitches";
+            public const String SetSwitch = "SetSwitch";
+            public const String GetSwitch = "GetSwitch";
         }
 
         private HueClientManager clientManager;
@@ -71,7 +71,7 @@ namespace Threax.Home.Hue.Controllers
         /// <param name="bridge">The bridge.</param>
         /// <returns>The switch position status.</returns>
         [HttpGet]
-        [HalRel(Rels.List)]
+        [HalRel(Rels.ListSwitches)]
         public async Task<HueSwitchCollection> List(String bridge)
         {
             var lightInfos = await clientManager.GetClient(bridge).GetLightsAsync();

@@ -12,6 +12,7 @@ namespace Threax.Home.Hue.Models
     /// <summary>
     /// The switch position for a hue bulb
     /// </summary>
+    [HalModel]
     public class HueSwitchPosition : SwitchPosition<String>, IHexColor, IBrightness
     {
         /// <summary>

@@ -9,9 +9,10 @@ using Threax.Home.Hue.Controllers;
 namespace Threax.Home.Hue.ViewModels
 {
     [HalModel]
-    [HalSelfActionLink(EntryPointController.Rels.Get, typeof(EntryPointController))]
-    [HalActionLink(BridgeController.Rels.ListBridges, typeof(BridgeController))]
-    public class EntryPointView
+    [HalSelfActionLink(BridgeController.Rels.ListBridges, typeof(BridgeController))]
+    [HalActionLink(SwitchController.Rels.ListSwitches, typeof(SwitchController))]
+    public class BridgeView
     {
+        public String Bridge { get; set; }
     }
 }
