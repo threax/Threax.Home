@@ -39,11 +39,13 @@ namespace Threax.Home.ZWave
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddConventionalHalcyon(new HalcyonConventionOptions()
+            var halOptions = new HalcyonConventionOptions()
             {
                 BaseUrl = appConfig.BaseUrl,
                 HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController))
-            });
+            };
+
+            services.AddConventionalHalcyon(halOptions);
 
             services.AddSingleton<ZWaveController>(s =>
             {
@@ -56,7 +58,7 @@ namespace Threax.Home.ZWave
             services.AddMvc(o =>
             {
                 o.UseExceptionErrorFilters(isDev);
-                o.UseConventionalHalcyon();
+                o.UseConventionalHalcyon(halOptions);
             })
             .AddJsonOptions(o =>
             {

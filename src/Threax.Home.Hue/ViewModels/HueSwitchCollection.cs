@@ -16,8 +16,8 @@ namespace Threax.Home.Hue.ViewModels
     public class HueSwitchCollection : CollectionView<HueSwitchPositionView>
     {
         public HueSwitchCollection(IEnumerable<HueSwitchPositionView> items, String bridge)
+            :base(items)
         {
-            this.Items = items;
             Bridge = bridge;
         }
 

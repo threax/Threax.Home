@@ -1,28 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D6C47EF9-F0B9-4870-A2B9-165DC361C700}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F80B8D55-4FC8-4CDE-8083-CB668A2EC779}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Threax.Home.ZWave", "src\Threax.Home.ZWave\Threax.Home.ZWave.xproj", "{1C35F13D-7480-42A4-81B2-C335CC782712}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.ZWave", "src\Threax.Home.ZWave\Threax.Home.ZWave.csproj", "{1C35F13D-7480-42A4-81B2-C335CC782712}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Threax.Home.Core", "src\Threax.Home.Core\Threax.Home.Core.xproj", "{7D722573-97FA-43B4-94D4-8EA636C0315B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.Core", "src\Threax.Home.Core\Threax.Home.Core.csproj", "{7D722573-97FA-43B4-94D4-8EA636C0315B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Threax.Home.Hue", "src\Threax.Home.Hue\Threax.Home.Hue.xproj", "{3FF20E20-0CE3-4A64-BEC4-8315129E40AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.Hue", "src\Threax.Home.Hue\Threax.Home.Hue.csproj", "{3FF20E20-0CE3-4A64-BEC4-8315129E40AF}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Threax.Home.MFi", "src\Threax.Home.MFi\Threax.Home.MFi.xproj", "{84392E55-CCA7-4EDA-BDA8-6C7335F33325}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.MFi", "src\Threax.Home.MFi\Threax.Home.MFi.csproj", "{84392E55-CCA7-4EDA-BDA8-6C7335F33325}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Threax.Home.Api", "src\Threax.Home.Api\Threax.Home.Api.xproj", "{B65884BF-850F-4C10-8E7A-682571A37251}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.Api", "src\Threax.Home.Api\Threax.Home.Api.csproj", "{B65884BF-850F-4C10-8E7A-682571A37251}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Threax.Home.SwitchGroups", "src\Threax.Home.SwitchGroups\Threax.Home.SwitchGroups.xproj", "{B4F2BE77-CC05-45EB-B778-EFE585613585}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.SwitchGroups", "src\Threax.Home.SwitchGroups\Threax.Home.SwitchGroups.csproj", "{B4F2BE77-CC05-45EB-B778-EFE585613585}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Threax.Home.ComputerControl", "src\Threax.Home.ComputerControl\Threax.Home.ComputerControl.xproj", "{1F3C1C73-DC6C-486B-9A78-96DE0EC03A63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.ComputerControl", "src\Threax.Home.ComputerControl\Threax.Home.ComputerControl.csproj", "{1F3C1C73-DC6C-486B-9A78-96DE0EC03A63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

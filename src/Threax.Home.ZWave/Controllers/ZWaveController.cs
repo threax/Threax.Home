@@ -142,13 +142,13 @@ namespace Threax.Home.ZWave.Controllers
             return await node.GetCommandClass<SensorBinary>().Get();
         }
 
-        [HttpGet("{Id}")]
-        public async Task<SensorMultiLevelReport> SensorMultiLevel(byte id)
-        {
-            var nodes = await zwave.GetNodes();
-            var node = nodes[id];
-            return await node.GetCommandClass<SensorMultiLevel>().Get();
-        }
+        //[HttpGet("{Id}")]
+        //public async Task<SensorMultiLevelReport> SensorMultiLevel(byte id)
+        //{
+        //    var nodes = await zwave.GetNodes();
+        //    var node = nodes[id];
+        //    return await node.GetCommandClass<SensorMultiLevel>().Get();
+        //}
 
         [HttpGet("{Id}")]
         public async Task<SwitchBinaryReport> SwitchBinary(byte id)

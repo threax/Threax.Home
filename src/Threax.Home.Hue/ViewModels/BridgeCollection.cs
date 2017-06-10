@@ -10,8 +10,7 @@ namespace Threax.Home.Hue.ViewModels
     [HalModel]
     public class BridgeCollection : CollectionView<BridgeView>
     {
-        public BridgeCollection(IEnumerable<BridgeView> items = null, string name = "values")
-            :base(items, name)
+        public BridgeCollection(IEnumerable<BridgeView> items) : base(items)
         {
         }
     }

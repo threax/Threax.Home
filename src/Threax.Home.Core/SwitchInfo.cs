@@ -24,10 +24,5 @@ namespace Threax.Home.Core
         /// The positions the switch can be in.
         /// </summary>
         public List<String> Positions { get; set; }
-
-        /// <summary>
-        /// A list of extra features a switch provides.
-        /// </summary>
-        public SwitchFeatures SwitchFeatures { get; set; }
     }
 }

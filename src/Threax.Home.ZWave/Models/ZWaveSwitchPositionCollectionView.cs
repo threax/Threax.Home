@@ -13,7 +13,7 @@ namespace Threax.Home.ZWave.Models
     [HalActionLink(SwitchController.Rels.List, typeof(SwitchController))]
     public class ZWaveSwitchPositionCollectionView : CollectionView<ZWaveSwitchPosition>
     {
-        public ZWaveSwitchPositionCollectionView(IEnumerable<ZWaveSwitchPosition> items = null, string name = "values") : base(items, name)
+        public ZWaveSwitchPositionCollectionView(IEnumerable<ZWaveSwitchPosition> items = null) : base(items)
         {
         }
     }

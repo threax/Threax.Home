@@ -14,7 +14,7 @@ namespace Threax.Home.ZWave.Models
     public class SensorInfoCollectionView : CollectionView<SensorInfoView>
     {
         public SensorInfoCollectionView(IEnumerable<SensorInfoView> items = null)
-            :base(items, "values")
+            :base(items)
         {
         }
     }
