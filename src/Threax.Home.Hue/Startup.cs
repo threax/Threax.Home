@@ -19,11 +19,15 @@ namespace Threax.Home.Hue
     {
         private bool isDev;
         private AppConfig appConfig = new AppConfig();
+        private ExceptionFilterOptions exceptionOptions = new ExceptionFilterOptions();
+        new Dictionary<String, SyncedHueClient> bridges = new Dictionary<String, SyncedHueClient>();
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
             ConfigurationBinder.Bind(Configuration.GetSection("AppConfig"), appConfig);
+            ConfigurationBinder.Bind(Configuration.GetSection("Exception"), exceptionOptions);
+            ConfigurationBinder.Bind(Configuration.GetSection("Bridges"), bridges);
         }
 
         public IConfiguration Configuration { get; }
@@ -41,12 +45,10 @@ namespace Threax.Home.Hue
 
             services.AddSingleton(s =>
             {
-                var clients = new Dictionary<String, SyncedHueClient>();
-                ConfigurationBinder.Bind(Configuration.GetSection("HueClients"), clients);
-                return new HueClientManager(clients);
+                return new HueClientManager(bridges);
             });
 
-            services.AddExceptionErrorFilters(appConfig.ExceptionOptions);
+            services.AddExceptionErrorFilters(exceptionOptions);
 
             services.AddMvc(o =>
             {

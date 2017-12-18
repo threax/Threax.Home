@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Threax.Home.Hue.Services;
 
 namespace Threax.Home.Hue
 {
@@ -12,7 +13,5 @@ namespace Threax.Home.Hue
     public class AppConfig
     {
         public string BaseUrl { get; set; } = "{{host}}";
-
-        public ExceptionFilterOptions ExceptionOptions { get; set; } = new ExceptionFilterOptions();
     }
 }
