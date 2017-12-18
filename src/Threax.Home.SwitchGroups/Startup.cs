@@ -41,7 +41,7 @@ namespace Threax.Home.SwitchGroups
 
             services.AddMvc(o =>
             {
-                o.UseExceptionErrorFilters(isDev);
+                o.UseExceptionErrorFilters();
             })
             .AddJsonOptions(o =>
             {

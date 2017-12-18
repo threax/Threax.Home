@@ -8,8 +8,6 @@
     <OutputType>Exe</OutputType>
     <PackageId>Threax.Home.MFi</PackageId>
     <UserSecretsId>aspnet-Threax.Home.MFi-20161123115000</UserSecretsId>
-    <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
-    <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="2.0.1" />
@@ -30,6 +29,7 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.0.0" />
     <PackageReference Include="SSH.NET" Version="2016.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.0.0" />
+    <PackageReference Include="Threax.AspNetCore.BuiltInTools" Version="5.0.2" />
     <PackageReference Include="Threax.AspNetCore.ExceptionFilter" Version="5.0.2" />
   </ItemGroup>
 

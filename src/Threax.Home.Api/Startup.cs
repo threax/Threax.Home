@@ -38,7 +38,7 @@ namespace Threax.Home.Api
         {
             services.AddMvc(o =>
             {
-                o.UseExceptionErrorFilters(isDev);
+                o.UseExceptionErrorFilters();
             })
             .AddJsonOptions(o =>
             {

@@ -20,23 +20,13 @@ namespace Threax.Home.Hue
         private bool isDev;
         private AppConfig appConfig = new AppConfig();
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-            .SetBasePath(env.ContentRootPath)
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
-
-            isDev = env.IsEnvironment("Development");
-
-            builder.AddUserSecrets();
-
-            builder.AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
             ConfigurationBinder.Bind(Configuration.GetSection("AppConfig"), appConfig);
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
@@ -58,7 +48,7 @@ namespace Threax.Home.Hue
 
             services.AddMvc(o =>
             {
-                o.UseExceptionErrorFilters(isDev);
+                o.UseExceptionErrorFilters();
                 o.UseConventionalHalcyon(halOptions);
             })
             .AddJsonOptions(o =>

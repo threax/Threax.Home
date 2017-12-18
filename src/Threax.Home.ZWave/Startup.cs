@@ -57,7 +57,7 @@ namespace Threax.Home.ZWave
 
             services.AddMvc(o =>
             {
-                o.UseExceptionErrorFilters(isDev);
+                o.UseExceptionErrorFilters();
                 o.UseConventionalHalcyon(halOptions);
             })
             .AddJsonOptions(o =>
