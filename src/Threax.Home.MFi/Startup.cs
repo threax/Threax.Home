@@ -36,6 +36,8 @@ namespace Threax.Home.MFi
                 return new PowerStripManager(clients);
             });
 
+            services.AddExceptionErrorFilters(appConfig.ExceptionOptions);
+
             services.AddMvc(o =>
             {
                 o.UseExceptionErrorFilters();

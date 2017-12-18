@@ -39,6 +39,8 @@ namespace Threax.Home.SwitchGroups
         {
             services.UseAppDatabase(appConfig.ConnectionString);
 
+            services.AddExceptionErrorFilters(appConfig.ExceptionOptions);
+
             services.AddMvc(o =>
             {
                 o.UseExceptionErrorFilters();

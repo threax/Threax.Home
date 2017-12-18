@@ -46,6 +46,8 @@ namespace Threax.Home.Hue
                 return new HueClientManager(clients);
             });
 
+            services.AddExceptionErrorFilters(appConfig.ExceptionOptions);
+
             services.AddMvc(o =>
             {
                 o.UseExceptionErrorFilters();

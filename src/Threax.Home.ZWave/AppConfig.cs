@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,5 +17,7 @@ namespace Threax.Home.ZWave
         /// The com port of your z-wave device.
         /// </summary>
         public String ComPort { get; set; }
+
+        public ExceptionFilterOptions ExceptionOptions { get; set; } = new ExceptionFilterOptions();
     }
 }
