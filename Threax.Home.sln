@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.SwitchGroups", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.ComputerControl", "src\Threax.Home.ComputerControl\Threax.Home.ComputerControl.csproj", "{1F3C1C73-DC6C-486B-9A78-96DE0EC03A63}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home", "Threax.Home\Threax.Home.csproj", "{84D83DE7-0F48-47C5-80A1-20FA5B99ED51}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "Threax.Home\DockerCompose\docker-compose.dcproj", "{15C4A629-A868-4C70-90A2-E3F6B6EB1168}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,14 @@ Global
 		{1F3C1C73-DC6C-486B-9A78-96DE0EC03A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F3C1C73-DC6C-486B-9A78-96DE0EC03A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F3C1C73-DC6C-486B-9A78-96DE0EC03A63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84D83DE7-0F48-47C5-80A1-20FA5B99ED51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D83DE7-0F48-47C5-80A1-20FA5B99ED51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D83DE7-0F48-47C5-80A1-20FA5B99ED51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D83DE7-0F48-47C5-80A1-20FA5B99ED51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15C4A629-A868-4C70-90A2-E3F6B6EB1168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15C4A629-A868-4C70-90A2-E3F6B6EB1168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15C4A629-A868-4C70-90A2-E3F6B6EB1168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15C4A629-A868-4C70-90A2-E3F6B6EB1168}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,5 +79,8 @@ Global
 		{B65884BF-850F-4C10-8E7A-682571A37251} = {D6C47EF9-F0B9-4870-A2B9-165DC361C700}
 		{B4F2BE77-CC05-45EB-B778-EFE585613585} = {D6C47EF9-F0B9-4870-A2B9-165DC361C700}
 		{1F3C1C73-DC6C-486B-9A78-96DE0EC03A63} = {D6C47EF9-F0B9-4870-A2B9-165DC361C700}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D3FDD7D7-E4AA-4369-AA98-6B8E6F81D851}
 	EndGlobalSection
 EndGlobal
