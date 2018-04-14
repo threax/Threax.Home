@@ -9,17 +9,17 @@ namespace Threax.Home.MFi.Services
     /// <summary>
     /// This class manages multiple power strip clients.
     /// </summary>
-    public class PowerStripManager
+    public class PowerStripManager : IPowerStripManager
     {
-        private Dictionary<String, SynchedPowerStrip> clients;
+        private Dictionary<String, IPowerStrip> clients = new Dictionary<string, IPowerStrip>();
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="clients">The clients to manage.</param>
-        public PowerStripManager(Dictionary<String, SynchedPowerStrip> clients)
+        public PowerStripManager()
         {
-            this.clients = clients;
+            
         }
 
         /// <summary>
@@ -38,9 +38,14 @@ namespace Threax.Home.MFi.Services
         /// </summary>
         /// <param name="name">The name of the client to get.</param>
         /// <returns>The client.</returns>
-        public SynchedPowerStrip GetClient(String name)
+        public IPowerStrip GetClient(String name)
         {
             return this.clients[name];
+        }
+
+        public void SetClient(String name, IPowerStrip client)
+        {
+            this.clients[name] = client;
         }
     }
 }

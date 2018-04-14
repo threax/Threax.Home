@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using Threax.Home.MFi;
 
 namespace MfiSharp
 {
@@ -22,16 +23,13 @@ namespace MfiSharp
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="host">The host to connect to.</param>
-        /// <param name="user">The user name.</param>
-        /// <param name="pass">The password.</param>
-        /// <param name="relayCount">The number of relays on the power strip.</param>
-        public PowerStrip(String host, String user, String pass, int relayCount)
+        /// <param name="config">The config.</param>
+        public PowerStrip(PowerStripConfig config)
         {
-            this.host = host;
-            this.user = user;
-            this.pass = pass;
-            this.RelayCount = relayCount;
+            this.host = config.Host;
+            this.user = config.User;
+            this.pass = config.Pass;
+            this.RelayCount = config.RelayCount;
         }
 
         /// <summary>
