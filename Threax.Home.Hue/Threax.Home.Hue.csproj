@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Threax.Home.Core\Threax.Home.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Q42.HueApi" Version="3.4.2" />
+    <PackageReference Include="Q42.HueApi.ColorConverters" Version="3.4.0" />
+  </ItemGroup>
+  
+</Project>

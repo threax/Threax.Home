@@ -53,7 +53,10 @@ namespace Threax.Home
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Threax.AspNetCore.Docker.Certs.CertManager.LoadTrustedRoots();
+            Threax.AspNetCore.Docker.Certs.CertManager.LoadTrustedRoots(o => Configuration.Bind("CertManager", o));
+
+            services.AddHue(o => Configuration.Bind("Hue", o));
+            services.AddMfi(o => Configuration.Bind("Mfi", o));
 
             //Add the client side configuration object
             services.AddClientConfig(clientConfig, o =>

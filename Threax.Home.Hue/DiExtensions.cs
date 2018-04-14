@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class DiExtensions
     {
-        public static IServiceCollection AddMfi(this IServiceCollection services, Action<HueConfig> configure)
+        public static IServiceCollection AddHue(this IServiceCollection services, Action<HueConfig> configure)
         {
             var options = new HueConfig();
             configure?.Invoke(options);
