@@ -13,7 +13,7 @@ namespace Threax.Home.ZWave.Controllers
     /// <summary>
     /// Manage switches.
     /// </summary>
-    public class SwitchController
+    public class MfiRepository
     {
         private PowerStripManager manager;
 
@@ -21,7 +21,7 @@ namespace Threax.Home.ZWave.Controllers
         /// Constructor
         /// </summary>
         /// <param name="manager">The PowerStripManager to use.</param>
-        public SwitchController(PowerStripManager manager)
+        public MfiRepository(PowerStripManager manager)
         {
             this.manager = manager;
         }
