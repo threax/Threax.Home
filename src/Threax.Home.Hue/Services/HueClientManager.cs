@@ -9,17 +9,17 @@ namespace Threax.Home.Hue.Services
     /// <summary>
     /// This class manages multiple named hue clients.
     /// </summary>
-    public class HueClientManager : IDisposable
+    public class HueClientManager : IHueClientManager
     {
-        private Dictionary<String, SyncedHueClient> clients;
+        private Dictionary<String, SyncedHueClient> clients = new Dictionary<String, SyncedHueClient>();
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="clients">The clients to manage.</param>
-        public HueClientManager(Dictionary<String, SyncedHueClient> clients)
+        public HueClientManager()
         {
-            this.clients = clients;
+            
         }
 
         /// <summary>
@@ -41,6 +41,16 @@ namespace Threax.Home.Hue.Services
         public SyncedHueClient GetClient(String name)
         {
             return this.clients[name];
+        }
+
+        /// <summary>
+        /// Get a specific client.
+        /// </summary>
+        /// <param name="name">The name of the client.</param>
+        /// <returns>The client</returns>
+        public void SetClient(String name, SyncedHueClient client)
+        {
+            this.clients[name] = client;
         }
 
         public IEnumerable<String> GetClientNames()

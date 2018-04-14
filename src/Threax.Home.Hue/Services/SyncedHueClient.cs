@@ -11,7 +11,7 @@ namespace Threax.Home.Hue.Services
     /// <summary>
     /// This class wraps the hue client and throttles access to the actual hue bridge.
     /// </summary>
-    public class SyncedHueClient : IDisposable
+    public class SyncedHueClient : IHueClient
     {
         private SemaphoreSlimLock locker = new SemaphoreSlimLock();
         private LocalHueClient client;
@@ -19,9 +19,10 @@ namespace Threax.Home.Hue.Services
         /// <summary>
         /// Constructor.
         /// </summary>
-        public SyncedHueClient()
+        public SyncedHueClient(HueClientConfig config)
         {
-            
+            this.AppKey = config.AppKey;
+            this.HostIp = config.HostIp;
         }
 
         /// <summary>
