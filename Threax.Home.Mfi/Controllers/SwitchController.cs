@@ -13,8 +13,7 @@ namespace Threax.Home.ZWave.Controllers
     /// <summary>
     /// Manage switches.
     /// </summary>
-    [Route("{strip}/[controller]/[action]")]
-    public class SwitchController : Controller, ISwitchController<SwitchPosition<int>, int, String>
+    public class SwitchController
     {
         private PowerStripManager manager;
 
@@ -33,7 +32,6 @@ namespace Threax.Home.ZWave.Controllers
         /// <param name="ids">The ids of the switches to lookup.</param>
         /// <param name="strip">The name of the power strip to use.</param>
         /// <returns>The position of the switch.</returns>
-        [HttpGet]
         public async Task<IEnumerable<SwitchPosition<int>>> GetPosition(String strip, [FromQuery] IEnumerable<int> ids)
         {
             var settings = await manager.GetClient(strip).GetSettings();
@@ -50,7 +48,6 @@ namespace Threax.Home.ZWave.Controllers
         /// </summary>
         /// <param name="positions">The position of the switch.</param>
         /// <param name="strip">The name of the power strip to use.</param>
-        [HttpPut]
         public async Task SetPosition(String strip, [FromBody] IEnumerable<SwitchPosition<int>> positions)
         {
             await manager.GetClient(strip).ApplySettings(positions.Select(i =>
@@ -65,7 +62,6 @@ namespace Threax.Home.ZWave.Controllers
         /// </summary>
         /// <param name="strip">The name of the power strip to use.</param>
         /// <returns></returns>
-        [HttpGet]
         public async Task<IEnumerable<SwitchInfo<int>>> List(String strip)
         {
             var settings = await manager.GetClient(strip).GetSettings();

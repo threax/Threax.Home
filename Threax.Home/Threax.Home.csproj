@@ -69,4 +69,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Threax.Home.Mfi\Threax.Home.Mfi.csproj" />
+  </ItemGroup>
+
 </Project>
