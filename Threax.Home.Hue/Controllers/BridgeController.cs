@@ -9,7 +9,7 @@ using Threax.Home.Hue.ViewModels;
 
 namespace Threax.Home.Hue.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/hue/[controller]")]
     [ResponseCache(NoStore = true)]
     public class BridgeController : Controller
     {
@@ -18,13 +18,13 @@ namespace Threax.Home.Hue.Controllers
             public const string ListBridges = "ListBridges";
         }
 
-        private HueClientManager clientManager;
+        private IHueClientManager clientManager;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="clientManager"></param>
-        public BridgeController(HueClientManager clientManager)
+        public BridgeController(IHueClientManager clientManager)
         {
             this.clientManager = clientManager;
         }

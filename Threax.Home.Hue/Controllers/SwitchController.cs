@@ -17,7 +17,7 @@ namespace Threax.Home.Hue.Controllers
     /// <summary>
     /// Color switch controller for hue lights.
     /// </summary>
-    [Route("[controller]/{Bridge}")]
+    [Route("api/hue/[controller]/{Bridge}")]
     [ResponseCache(NoStore=true)]
     public class SwitchController : Controller
     {
@@ -29,13 +29,13 @@ namespace Threax.Home.Hue.Controllers
             public const String GetSwitch = "GetSwitch";
         }
 
-        private HueClientManager clientManager;
+        private IHueClientManager clientManager;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="clientManager"></param>
-        public SwitchController(HueClientManager clientManager)
+        public SwitchController(IHueClientManager clientManager)
         {
             this.clientManager = clientManager;
         }
