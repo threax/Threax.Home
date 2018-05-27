@@ -21,8 +21,6 @@ namespace Threax.Home.Models
 
         String Value { get; set; }
 
-        int? Brightness { get; set; }
-
         String HexColor { get; set; }
 
     }

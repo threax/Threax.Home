@@ -38,7 +38,7 @@ namespace Threax.Home.Migrations
                 {
                     SwitchId = table.Column<Guid>(nullable: false),
                     Bridge = table.Column<string>(maxLength: 450, nullable: false),
-                    Brightness = table.Column<int>(nullable: true),
+                    Brightness = table.Column<byte>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     HexColor = table.Column<string>(maxLength: 450, nullable: true),
                     Id = table.Column<string>(maxLength: 450, nullable: false),

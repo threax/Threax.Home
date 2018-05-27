@@ -67,7 +67,7 @@ namespace Threax.Home.Migrations
                         .IsRequired()
                         .HasMaxLength(450);
 
-                    b.Property<int?>("Brightness");
+                    b.Property<byte?>("Brightness");
 
                     b.Property<DateTime>("Created");
 

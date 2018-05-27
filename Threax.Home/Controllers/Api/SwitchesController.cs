@@ -9,6 +9,7 @@ using Threax.Home.ViewModels;
 using Threax.Home.InputModels;
 using Threax.Home.Models;
 using Microsoft.AspNetCore.Authorization;
+using Threax.Home.Hue.Repository;
 
 namespace Threax.Home.Controllers.Api
 {
@@ -19,7 +20,7 @@ namespace Threax.Home.Controllers.Api
     {
         private ISwitchRepository repo;
 
-        public SwitchesController(ISwitchRepository repo)
+        public SwitchesController(ISwitchRepository repo /*IHueSwitchRepository<Switch> hueSwitchRepository*/)
         {
             this.repo = repo;
         }

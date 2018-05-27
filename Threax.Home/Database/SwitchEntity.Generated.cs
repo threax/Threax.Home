@@ -35,8 +35,6 @@ namespace Threax.Home.Database
         [MaxLength(450, ErrorMessage = "Value must be less than 450 characters.")]
         public String Value { get; set; }
 
-        public int? Brightness { get; set; }
-
         [MaxLength(450, ErrorMessage = "Hex Color must be less than 450 characters.")]
         public String HexColor { get; set; }
 

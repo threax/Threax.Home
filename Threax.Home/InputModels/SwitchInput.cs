@@ -13,5 +13,7 @@ namespace Threax.Home.InputModels
     {
         //You can add your own customizations here. These will not be overwritten by the model generator.
         //See SwitchInput.Generated for the generated code
+
+        public byte? Brightness { get; set; }
     }
 }

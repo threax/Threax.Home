@@ -27,8 +27,6 @@ namespace Threax.Home.ViewModels
 
         public String Value { get; set; }
 
-        public int? Brightness { get; set; }
-
         public String HexColor { get; set; }
 
         [UiOrder(0, 2147483646)]

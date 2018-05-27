@@ -11,7 +11,7 @@ using Threax.Home.Database;
 namespace Threax.Home.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20180527115338_initial")]
+    [Migration("20180527122602_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,7 +68,7 @@ namespace Threax.Home.Migrations
                         .IsRequired()
                         .HasMaxLength(450);
 
-                    b.Property<int?>("Brightness");
+                    b.Property<byte?>("Brightness");
 
                     b.Property<DateTime>("Created");
 

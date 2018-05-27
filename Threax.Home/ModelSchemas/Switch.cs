@@ -49,7 +49,9 @@ namespace Threax.Home.ModelSchemas
         /// <summary>
         /// The brightness to set.
         /// </summary>
-        [MaxLength(450)]
+        [NoInputModel]
+        [NoEntity]
+        [NoViewModel]
         public byte? Brightness { get; set; }
 
         /// <summary>
