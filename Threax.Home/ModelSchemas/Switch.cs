@@ -13,6 +13,13 @@ namespace Threax.Home.ModelSchemas
     public abstract class Switch : ISwitch
     {
         /// <summary>
+        /// The name of the switch. Suitable for display.
+        /// </summary>
+        [Required]
+        [MaxLength(450)]
+        public String Name { get; set; }
+
+        /// <summary>
         /// Which type of system the switch belongs to. (Hue, ZWave, etc.)
         /// </summary>
         [Required]
@@ -36,29 +43,19 @@ namespace Threax.Home.ModelSchemas
         /// <summary>
         /// The value of the switch.
         /// </summary>
-        [Required]
         [MaxLength(450)]
         public String Value { get; set; }
 
         /// <summary>
         /// The brightness to set.
         /// </summary>
-        [Required]
         [MaxLength(450)]
         public byte? Brightness { get; set; }
 
         /// <summary>
         /// The color to set.
         /// </summary>
-        [Required]
         [MaxLength(450)]
         public string HexColor { get; set; }
-
-        /// <summary>
-        /// The name of the switch. Suitable for display.
-        /// </summary>
-        [Required]
-        [MaxLength(450)]
-        public String Name { get; set; }
     }
 }

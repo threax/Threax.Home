@@ -5,38 +5,20 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using Threax.Home.Database;
 using System;
+using Threax.Home.Database;
 
 namespace Threax.Home.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20171201180958_values")]
-    partial class values
+    [Migration("20180527115338_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Threax.Home.Database.ValueEntity", b =>
-                {
-                    b.Property<Guid>("ValueId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<DateTime>("Modified");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(450);
-
-                    b.HasKey("ValueId");
-
-                    b.ToTable("Values");
-                });
+                .HasAnnotation("ProductVersion", "2.0.3-rtm-10026");
 
             modelBuilder.Entity("Threax.AspNetCore.UserBuilder.Entities.Role", b =>
                 {
@@ -75,6 +57,44 @@ namespace Threax.Home.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("spc.auth.UsersToRoles");
+                });
+
+            modelBuilder.Entity("Threax.Home.Database.SwitchEntity", b =>
+                {
+                    b.Property<Guid>("SwitchId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Bridge")
+                        .IsRequired()
+                        .HasMaxLength(450);
+
+                    b.Property<int?>("Brightness");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("HexColor")
+                        .HasMaxLength(450);
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasMaxLength(450);
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(450);
+
+                    b.Property<string>("Subsystem")
+                        .IsRequired()
+                        .HasMaxLength(450);
+
+                    b.Property<string>("Value")
+                        .HasMaxLength(450);
+
+                    b.HasKey("SwitchId");
+
+                    b.ToTable("Switches");
                 });
 
             modelBuilder.Entity("Threax.AspNetCore.UserBuilder.Entities.UserToRole", b =>

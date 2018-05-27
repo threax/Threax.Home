@@ -16,6 +16,10 @@ namespace Threax.Home.Database
         [Key]
         public Guid SwitchId { get; set; }
 
+        [Required(ErrorMessage = "Name must have a value.")]
+        [MaxLength(450, ErrorMessage = "Name must be less than 450 characters.")]
+        public String Name { get; set; }
+
         [Required(ErrorMessage = "Subsystem must have a value.")]
         [MaxLength(450, ErrorMessage = "Subsystem must be less than 450 characters.")]
         public String Subsystem { get; set; }
@@ -28,20 +32,13 @@ namespace Threax.Home.Database
         [MaxLength(450, ErrorMessage = "Id must be less than 450 characters.")]
         public String Id { get; set; }
 
-        [Required(ErrorMessage = "Value must have a value.")]
         [MaxLength(450, ErrorMessage = "Value must be less than 450 characters.")]
         public String Value { get; set; }
 
-        [Required(ErrorMessage = "Brightness must have a value.")]
-        public int Brightness { get; set; }
+        public int? Brightness { get; set; }
 
-        [Required(ErrorMessage = "Hex Color must have a value.")]
         [MaxLength(450, ErrorMessage = "Hex Color must be less than 450 characters.")]
         public String HexColor { get; set; }
-
-        [Required(ErrorMessage = "Name must have a value.")]
-        [MaxLength(450, ErrorMessage = "Name must be less than 450 characters.")]
-        public String Name { get; set; }
 
         public DateTime Created { get; set; }
 

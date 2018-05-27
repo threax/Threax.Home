@@ -807,18 +807,24 @@ export interface SwitchCollection {
 }
 
 export interface SwitchInput {
+    name: string;
     subsystem: string;
     bridge: string;
-    name: string;
-    prettyName: string;
+    id: string;
+    value?: string;
+    brightness?: number;
+    hexColor?: string;
 }
 
 export interface Switch {
     switchId?: string;
+    name?: string;
     subsystem?: string;
     bridge?: string;
-    name?: string;
-    prettyName?: string;
+    id?: string;
+    value?: string;
+    brightness?: number;
+    hexColor?: string;
     created?: string;
     modified?: string;
 }

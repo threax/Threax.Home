@@ -17,6 +17,8 @@ namespace Threax.Home.ViewModels
        {
         public Guid SwitchId { get; set; }
 
+        public String Name { get; set; }
+
         public String Subsystem { get; set; }
 
         public String Bridge { get; set; }
@@ -25,11 +27,9 @@ namespace Threax.Home.ViewModels
 
         public String Value { get; set; }
 
-        public int Brightness { get; set; }
+        public int? Brightness { get; set; }
 
         public String HexColor { get; set; }
-
-        public String Name { get; set; }
 
         [UiOrder(0, 2147483646)]
         public DateTime Created { get; set; }

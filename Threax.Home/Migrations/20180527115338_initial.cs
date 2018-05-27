@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Threax.Home.Migrations
 {
-    public partial class values : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,17 +33,23 @@ namespace Threax.Home.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Values",
+                name: "Switches",
                 columns: table => new
                 {
-                    ValueId = table.Column<Guid>(nullable: false),
+                    SwitchId = table.Column<Guid>(nullable: false),
+                    Bridge = table.Column<string>(maxLength: 450, nullable: false),
+                    Brightness = table.Column<int>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
+                    HexColor = table.Column<string>(maxLength: 450, nullable: true),
+                    Id = table.Column<string>(maxLength: 450, nullable: false),
                     Modified = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(maxLength: 450, nullable: true)
+                    Name = table.Column<string>(maxLength: 450, nullable: false),
+                    Subsystem = table.Column<string>(maxLength: 450, nullable: false),
+                    Value = table.Column<string>(maxLength: 450, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Values", x => x.ValueId);
+                    table.PrimaryKey("PK_Switches", x => x.SwitchId);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,7 +88,7 @@ namespace Threax.Home.Migrations
                 name: "spc.auth.UsersToRoles");
 
             migrationBuilder.DropTable(
-                name: "Values");
+                name: "Switches");
 
             migrationBuilder.DropTable(
                 name: "spc.auth.Roles");

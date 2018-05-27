@@ -67,7 +67,16 @@ namespace Threax.Home.Migrations
                         .IsRequired()
                         .HasMaxLength(450);
 
+                    b.Property<int?>("Brightness");
+
                     b.Property<DateTime>("Created");
+
+                    b.Property<string>("HexColor")
+                        .HasMaxLength(450);
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasMaxLength(450);
 
                     b.Property<DateTime>("Modified");
 
@@ -75,12 +84,11 @@ namespace Threax.Home.Migrations
                         .IsRequired()
                         .HasMaxLength(450);
 
-                    b.Property<string>("PrettyName")
+                    b.Property<string>("Subsystem")
                         .IsRequired()
                         .HasMaxLength(450);
 
-                    b.Property<string>("Subsystem")
-                        .IsRequired()
+                    b.Property<string>("Value")
                         .HasMaxLength(450);
 
                     b.HasKey("SwitchId");

@@ -11,6 +11,8 @@ namespace Threax.Home.Models
 {
     public partial interface ISwitch 
     {
+        String Name { get; set; }
+
         String Subsystem { get; set; }
 
         String Bridge { get; set; }
@@ -19,11 +21,9 @@ namespace Threax.Home.Models
 
         String Value { get; set; }
 
-        int Brightness { get; set; }
+        int? Brightness { get; set; }
 
         String HexColor { get; set; }
-
-        String Name { get; set; }
 
     }
 
