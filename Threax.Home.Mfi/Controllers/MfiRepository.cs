@@ -10,51 +10,31 @@ using Threax.Home.MFi.Services;
 
 namespace Threax.Home.ZWave.Controllers
 {
+    public interface IMfiSwitchRepository<TIn, TOut>
+       where TIn : ISwitch, new()
+       where TOut : ISwitch, new()
+    {
+        Task<TOut> Get(string bridge, string id);
+        Task<IEnumerable<TOut>> List();
+        Task Set(TIn setting);
+    }
+
     /// <summary>
     /// Manage switches.
     /// </summary>
-    public class MfiRepository
+    public class MfiRepository<TIn, TOut> : IMfiSwitchRepository<TIn, TOut>
+       where TIn : ISwitch, new()
+       where TOut : ISwitch, new()
     {
-        private PowerStripManager manager;
+        private IPowerStripManager manager;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="manager">The PowerStripManager to use.</param>
-        public MfiRepository(PowerStripManager manager)
+        public MfiRepository(IPowerStripManager manager)
         {
             this.manager = manager;
-        }
-
-        /// <summary>
-        /// Get the position of a named switch.
-        /// </summary>
-        /// <param name="ids">The ids of the switches to lookup.</param>
-        /// <param name="strip">The name of the power strip to use.</param>
-        /// <returns>The position of the switch.</returns>
-        public async Task<IEnumerable<SwitchPosition<int>>> GetPosition(String strip, [FromQuery] IEnumerable<int> ids)
-        {
-            var settings = await manager.GetClient(strip).GetSettings();
-            return settings.Where(i => ids.Contains(i.Index)).Select(i =>
-                new SwitchPosition<int>()
-                {
-                    Id = i.Index,
-                    Value = i.On ? "on" : "off"
-                });
-        }
-
-        /// <summary>
-        /// Set the position of a named switch.
-        /// </summary>
-        /// <param name="positions">The position of the switch.</param>
-        /// <param name="strip">The name of the power strip to use.</param>
-        public async Task SetPosition(String strip, [FromBody] IEnumerable<SwitchPosition<int>> positions)
-        {
-            await manager.GetClient(strip).ApplySettings(positions.Select(i =>
-            {
-                var name = i.Id;
-                return new RelaySetting(name, i.Value == "on");
-            }));
         }
 
         /// <summary>
@@ -70,6 +50,42 @@ namespace Threax.Home.ZWave.Controllers
                 Id = i.Index,
                 Positions = new List<String>() { "on", "off" },
                 DisplayName = $"{strip} Relay {i.Index}"
+            });
+        }
+
+        public async Task<TOut> Get(string bridge, string id)
+        {
+            var settings = await manager.GetClient(bridge).GetSettings();
+            var intId = int.Parse(id);
+            return settings.Where(i => i.Index == intId).Select(i =>
+                new TOut()
+                {
+                    Id = i.Index.ToString(),
+                    Value = i.On ? "on" : "off"
+                }).First();
+        }
+
+        public async Task<IEnumerable<TOut>> List()
+        {
+            var clients = new List<TOut>();
+            foreach (var bridge in this.manager.ClientNames)
+            {
+                var settings = await manager.GetClient(bridge).GetSettings();
+                clients.AddRange(settings.Select(i =>
+                    new TOut()
+                    {
+                        Id = i.Index.ToString(),
+                        Value = i.On ? "on" : "off"
+                    }));
+            }
+            return clients;
+        }
+
+        public async Task Set(TIn setting)
+        {
+            await manager.GetClient(setting.Bridge).ApplySettings(new RelaySetting[]
+            {
+                new RelaySetting(int.Parse(setting.Id), setting.Value == "on")
             });
         }
     }

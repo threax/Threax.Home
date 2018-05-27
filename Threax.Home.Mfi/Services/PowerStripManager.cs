@@ -47,5 +47,7 @@ namespace Threax.Home.MFi.Services
         {
             this.clients[name] = client;
         }
+
+        public IEnumerable<String> ClientNames => clients.Keys;
     }
 }
