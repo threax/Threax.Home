@@ -11,10 +11,16 @@ namespace Threax.Home.ModelSchemas
     [PluralName("Switches")]
     public abstract class Switch
     {
+        /// <summary>
+        /// Which type of system the switch belongs to. (Hue, ZWave, etc.)
+        /// </summary>
         [Required]
         [MaxLength(450)]
         public String Subsystem { get; set; }
 
+        /// <summary>
+        /// A logical hardware grouping for the switch.
+        /// </summary>
         [Required]
         [MaxLength(450)]
         public String Bridge { get; set; }
@@ -48,7 +54,7 @@ namespace Threax.Home.ModelSchemas
         public string HexColor { get; set; }
 
         /// <summary>
-        /// The name of the light.
+        /// The name of the switch. Suitable for display.
         /// </summary>
         [Required]
         [MaxLength(450)]

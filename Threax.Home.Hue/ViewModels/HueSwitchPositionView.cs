@@ -1,12 +1,15 @@
 ﻿using System;
+using Threax.Home.Core;
 
 namespace Threax.Home.Hue.ViewModels
 {
     /// <summary>
     /// View model for switch position.
     /// </summary>
-    public class HueSwitchPositionView
+    public class HueSwitchPositionView : ISwitch
     {
+        public string Subsystem { get; set; } = "Hue";
+
         /// <summary>
         /// The id of the switch.
         /// </summary>

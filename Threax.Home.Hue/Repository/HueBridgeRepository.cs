@@ -20,13 +20,13 @@ namespace Threax.Home.Hue.Repository
             this.clientManager = clientManager;
         }
 
-        public BridgeCollection List()
+        public IEnumerable<BridgeView> List()
         {
             var query = clientManager.GetClientNames().Select(i => new BridgeView()
             {
                 Bridge = i
             });
-            return new BridgeCollection(query);
+            return query.ToList();
         }
     }
 }

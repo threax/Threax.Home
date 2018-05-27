@@ -1,9 +1,10 @@
-﻿using Threax.Home.Hue.ViewModels;
+﻿using System.Collections.Generic;
+using Threax.Home.Hue.ViewModels;
 
 namespace Threax.Home.Hue.Repository
 {
     public interface IHueBridgeRepository
     {
-        BridgeCollection List();
+        IEnumerable<BridgeView> List();
     }
 }

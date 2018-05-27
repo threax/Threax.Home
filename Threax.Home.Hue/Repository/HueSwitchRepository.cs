@@ -2,9 +2,9 @@
 using Q42.HueApi.ColorConverters;
 using Q42.HueApi.ColorConverters.OriginalWithModel;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Threax.Home.Hue.Models;
 using Threax.Home.Hue.Services;
 using Threax.Home.Hue.ViewModels;
 
@@ -53,7 +53,7 @@ namespace Threax.Home.Hue.Repository
         /// </summary>
         /// <param name="bridge">The bridge.</param>
         /// <returns>The switch position status.</returns>
-        public async Task<HueSwitchCollection> List(String bridge)
+        public async Task<IEnumerable<HueSwitchPositionView>> List(String bridge)
         {
             var lightInfos = await clientManager.GetClient(bridge).GetLightsAsync();
             var switches = lightInfos.Select(light => new HueSwitchPositionView()
@@ -84,7 +84,7 @@ namespace Threax.Home.Hue.Repository
             //    }))
             //);
 
-            return new HueSwitchCollection(switches.ToList(), bridge);
+            return switches.ToList();
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Threax.Home.Hue.Repository
         /// <param name="id">The id of the light to set.</param>
         /// <param name="setting">The position to apply.</param>
         /// <returns>void</returns>
-        public async Task Set(String bridge, String id, HueSwitchPosition setting)
+        public async Task Set(String bridge, String id, HueSwitchPositionView setting)
         {
             LightCommand command = new LightCommand()
             {

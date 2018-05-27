@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.Home.Hue;
+using Threax.Home.Hue.Repository;
 using Threax.Home.Hue.Services;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -24,6 +25,9 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
                 return manager;
             });
+
+            services.TryAddScoped<IHueSwitchRepository, HueSwitchRepository>();
+            services.TryAddScoped<IHueBridgeRepository, HueBridgeRepository>();
 
             return services;
         }
