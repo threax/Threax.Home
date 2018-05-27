@@ -10,7 +10,7 @@ using Threax.Home.Hue.ViewModels;
 
 namespace Threax.Home.Hue.Repository
 {
-    public class HueSwitchRepository
+    public class HueSwitchRepository : IHueSwitchRepository
     {
         private IHueClientManager clientManager;
 
