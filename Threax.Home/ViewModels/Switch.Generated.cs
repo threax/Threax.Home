@@ -21,9 +21,15 @@ namespace Threax.Home.ViewModels
 
         public String Bridge { get; set; }
 
-        public String Name { get; set; }
+        public String Id { get; set; }
 
-        public String PrettyName { get; set; }
+        public String Value { get; set; }
+
+        public int Brightness { get; set; }
+
+        public String HexColor { get; set; }
+
+        public String Name { get; set; }
 
         [UiOrder(0, 2147483646)]
         public DateTime Created { get; set; }

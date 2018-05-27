@@ -15,9 +15,15 @@ namespace Threax.Home.Models
 
         String Bridge { get; set; }
 
-        String Name { get; set; }
+        String Id { get; set; }
 
-        String PrettyName { get; set; }
+        String Value { get; set; }
+
+        int Brightness { get; set; }
+
+        String HexColor { get; set; }
+
+        String Name { get; set; }
 
     }
 

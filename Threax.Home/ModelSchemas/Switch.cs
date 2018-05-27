@@ -4,12 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Models;
+using Threax.Home.Core;
 
 namespace Threax.Home.ModelSchemas
 {
     //[RequireAuthorization(typeof(Roles), nameof(Roles.EditValues))]
     [PluralName("Switches")]
-    public abstract class Switch
+    public abstract class Switch : ISwitch
     {
         /// <summary>
         /// Which type of system the switch belongs to. (Hue, ZWave, etc.)

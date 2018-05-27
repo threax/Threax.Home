@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Threax.Home.Hue.ViewModels;
+using Threax.Home.Core;
 
 namespace Threax.Home.Hue.Repository
 {
-    public interface IHueSwitchRepository
+    public interface IHueSwitchRepository<T>
+        where T : ISwitch, new()
     {
-        Task<HueSwitchPositionView> Get(string bridge, string id);
-        Task<IEnumerable<HueSwitchPositionView>> List(string bridge);
-        Task Set(string bridge, string id, HueSwitchPositionView setting);
+        Task<T> Get(string bridge, string id);
+        Task<IEnumerable<T>> List();
+        Task Set(T setting);
     }
 }

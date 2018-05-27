@@ -26,8 +26,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 return manager;
             });
 
-            services.TryAddScoped<IHueSwitchRepository, HueSwitchRepository>();
-            services.TryAddScoped<IHueBridgeRepository, HueBridgeRepository>();
+            services.TryAddScoped(typeof(IHueSwitchRepository<>), typeof(HueSwitchRepository<>));
+            //services.TryAddScoped(typeof(IHueBridgeRepository<>), typeof(HueBridgeRepository<>))
 
             return services;
         }
