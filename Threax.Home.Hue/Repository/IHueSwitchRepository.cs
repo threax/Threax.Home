@@ -4,11 +4,12 @@ using Threax.Home.Core;
 
 namespace Threax.Home.Hue.Repository
 {
-    public interface IHueSwitchRepository<T>
-        where T : ISwitch, new()
+    public interface IHueSwitchRepository<TIn, TOut>
+        where TIn : ISwitch, new()
+        where TOut : ISwitch, new()
     {
-        Task<T> Get(string bridge, string id);
-        Task<IEnumerable<T>> List();
-        Task Set(T setting);
+        Task<TOut> Get(string bridge, string id);
+        Task<IEnumerable<TOut>> List();
+        Task Set(TIn setting);
     }
 }

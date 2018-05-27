@@ -19,17 +19,22 @@ namespace Threax.Home.Controllers.Api
     public partial class SwitchesController : Controller
     {
         private ISwitchRepository repo;
+        private IHueSwitchRepository<SwitchInput, Switch> hueSwitchRepository;
 
-        public SwitchesController(ISwitchRepository repo /*IHueSwitchRepository<Switch> hueSwitchRepository*/)
+        public SwitchesController(ISwitchRepository repo, IHueSwitchRepository<SwitchInput, Switch> hueSwitchRepository)
         {
             this.repo = repo;
+            this.hueSwitchRepository = hueSwitchRepository;
         }
 
         [HttpGet]
         [HalRel(CrudRels.List)]
         public async Task<SwitchCollection> List([FromQuery] SwitchQuery query)
         {
-            return await repo.List(query);
+            //return await repo.List(query);
+            var items = await hueSwitchRepository.List();
+            var count = items.Count();
+            return new SwitchCollection(query, items.Count(), items.Skip(query.SkipTo(count)).Take(query.Limit));
         }
 
         [HttpGet("{SwitchId}")]

@@ -10,8 +10,9 @@ using Threax.Home.Hue.Services;
 
 namespace Threax.Home.Hue.Repository
 {
-    public class HueSwitchRepository<T> : IHueSwitchRepository<T>
-        where T : ISwitch, new()
+    public class HueSwitchRepository<TIn, TOut> : IHueSwitchRepository<TIn, TOut>
+        where TIn : ISwitch, new()
+        where TOut : ISwitch, new()
     {
         private IHueClientManager clientManager;
 
@@ -54,40 +55,29 @@ namespace Threax.Home.Hue.Repository
         /// </summary>
         /// <param name="bridge">The bridge.</param>
         /// <returns>The switch position status.</returns>
-        public async Task<IEnumerable<T>> List()
+        public async Task<IEnumerable<TOut>> List()
         {
-            var switches = Enumerable.Empty<T>();
+            var switches = new List<TOut>();
             foreach (var bridge in clientManager.GetClientNames())
             {
                 var lightInfos = await clientManager.GetClient(bridge).GetLightsAsync();
-                switches = switches.Concat(lightInfos.Select(light => new T()
+                var tasks = lightInfos.Select(async lightInfo => {
+                    var light = await clientManager.GetClient(bridge).GetLightAsync(lightInfo.Id);
+                    return new TOut()
+                    {
+                        Brightness = light.State.Brightness,
+                        Value = light.State.On ? "on" : "off",
+                        HexColor = light.State.ToHex(),
+                        Id = light.Id,
+                        Name = light.Name,
+                        Bridge = bridge
+                    };
+                });
+                foreach(var task in tasks)
                 {
-                    Brightness = light.State.Brightness,
-                    Value = light.State.On ? "on" : "off",
-                    HexColor = light.State.ToHex(),
-                    Id = light.Id,
-                    Name = light.Name,
-                    Bridge = bridge
-                }));
+                    switches.Add(await task);
+                }
             }
-
-            //var switches = await Task.WhenAll<HueSwitchPositionView>(
-            //    lightInfos.Select(lightInfo => clientManager.GetClient(bridge).GetLightAsync(lightInfo.Id)
-            //    .ContinueWith(ante =>
-            //    {
-            //        var light = ante.GetAwaiter().GetResult();
-            //        var position = new HueSwitchPositionView()
-            //        {
-            //            Brightness = light.State.Brightness,
-            //            Value = light.State.On ? "on" : "off",
-            //            HexColor = light.State.ToHex(),
-            //            Id = light.Id,
-            //            Name = light.Name,
-            //            Bridge = bridge
-            //        };
-            //        return position;
-            //    }))
-            //);
 
             return switches.ToList();
         }
@@ -99,7 +89,7 @@ namespace Threax.Home.Hue.Repository
         /// <param name="id">The id of the light to set.</param>
         /// <param name="setting">The position to apply.</param>
         /// <returns>void</returns>
-        public async Task Set(T setting)
+        public async Task Set(TIn setting)
         {
             LightCommand command = new LightCommand()
             {
@@ -119,11 +109,11 @@ namespace Threax.Home.Hue.Repository
         /// <param name="bridge">The bridge to use.</param>
         /// <param name="id">The id of the light to get.</param>
         /// <returns>void</returns>
-        public async Task<T> Get(String bridge, String id)
+        public async Task<TOut> Get(String bridge, String id)
         {
             var light = await clientManager.GetClient(bridge).GetLightAsync(id);
 
-            return new T()
+            return new TOut()
             {
                 Brightness = light.State.Brightness,
                 Value = light.State.On ? "on" : "off",

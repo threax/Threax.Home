@@ -9,7 +9,7 @@ using Threax.AspNetCore.Models;
 
 namespace Threax.Home.Models
 {
-    public partial interface ISwitch
+    public partial interface ISwitch : Threax.Home.Core.ISwitch
     {
         //Customize main interface here, see Switch.Generated for generated code
     }  
