@@ -71,7 +71,7 @@ namespace Threax.Home.Hue.Repository
                         Id = light.Id,
                         Name = light.Name,
                         Bridge = bridge,
-                        Subsystem = "Hue"
+                        Subsystem = SubsystemName
                     };
                 });
                 foreach(var task in tasks)
@@ -122,8 +122,10 @@ namespace Threax.Home.Hue.Repository
                 Id = light.Id,
                 Name = light.Name,
                 Bridge = bridge,
-                Subsystem = "Hue"
+                Subsystem = SubsystemName
             };
         }
+
+        public String SubsystemName => "Hue";
     }
 }

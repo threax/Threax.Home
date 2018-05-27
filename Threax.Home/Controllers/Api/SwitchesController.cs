@@ -10,6 +10,7 @@ using Threax.Home.InputModels;
 using Threax.Home.Models;
 using Microsoft.AspNetCore.Authorization;
 using Threax.Home.Hue.Repository;
+using Threax.Home.Core;
 
 namespace Threax.Home.Controllers.Api
 {
@@ -18,9 +19,9 @@ namespace Threax.Home.Controllers.Api
     [Authorize(AuthenticationSchemes = AuthCoreSchemes.Bearer)]
     public partial class SwitchesController : Controller
     {
-        private ISwitchRepository repo;
+        private Repository.ISwitchRepository repo;
 
-        public SwitchesController(ISwitchRepository repo)
+        public SwitchesController(Repository.ISwitchRepository repo)
         {
             this.repo = repo;
         }
@@ -34,7 +35,7 @@ namespace Threax.Home.Controllers.Api
 
         [HttpPost("[action]")]
         [HalRel(nameof(AddHueSwitches))]
-        public async Task AddHueSwitches([FromServices] IHueSwitchRepository<SwitchInput, SwitchInput> hueSwitchRepository)
+        public async Task AddHueSwitches([FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> hueSwitchRepository)
         {
             foreach(var item in await hueSwitchRepository.List())
             {
@@ -49,10 +50,10 @@ namespace Threax.Home.Controllers.Api
 
         [HttpGet("{SwitchId}")]
         [HalRel(CrudRels.Get)]
-        public async Task<Switch> Get(Guid switchId, [FromServices] IHueSwitchRepository<SwitchInput, SwitchInput> hueSwitchRepository)
+        public async Task<Switch> Get(Guid switchId, [FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> hueSwitchRepository)
         {
             var cachedSwitch = await repo.Get(switchId);
-            var liveSwitch = await hueSwitchRepository.Get(cachedSwitch.Bridge, cachedSwitch.Id);
+            var liveSwitch = await hueSwitchRepository.Get(cachedSwitch.Subsystem, cachedSwitch.Bridge, cachedSwitch.Id);
             return await repo.Update(switchId, liveSwitch);
         }
 
@@ -67,14 +68,14 @@ namespace Threax.Home.Controllers.Api
         [HttpPut("{SwitchId}")]
         [HalRel(CrudRels.Update)]
         [AutoValidate("Cannot update @switch")]
-        public async Task<Switch> Update(Guid switchId, [FromBody]SwitchInput @switch, [FromServices] IHueSwitchRepository<SwitchInput, SwitchInput> hueSwitchRepository)
+        public async Task<Switch> Update(Guid switchId, [FromBody]SwitchInput @switch, [FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> hueSwitchRepository)
         {
             var cachedSwitch = await repo.Get(switchId);
             @switch.Bridge = cachedSwitch.Bridge;
             @switch.Subsystem = cachedSwitch.Subsystem;
             @switch.Id = cachedSwitch.Id;
             await hueSwitchRepository.Set(@switch);
-            var liveSwitch = await hueSwitchRepository.Get(cachedSwitch.Bridge, cachedSwitch.Id);
+            var liveSwitch = await hueSwitchRepository.Get(cachedSwitch.Subsystem, cachedSwitch.Bridge, cachedSwitch.Id);
             return await repo.Update(switchId, liveSwitch);
         }
 

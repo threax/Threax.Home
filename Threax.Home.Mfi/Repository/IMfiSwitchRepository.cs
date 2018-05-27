@@ -10,12 +10,10 @@ using Threax.Home.MFi.Services;
 
 namespace Threax.Home.ZWave.Repository
 {
-    public interface IMfiSwitchRepository<TIn, TOut>
+    public interface IMfiSwitchRepository<TIn, TOut> : ISwitchRepository<TIn, TOut>
        where TIn : ISwitch, new()
        where TOut : ISwitch, new()
     {
-        Task<TOut> Get(string bridge, string id);
-        Task<IEnumerable<TOut>> List();
-        Task Set(TIn setting);
+        
     }
 }

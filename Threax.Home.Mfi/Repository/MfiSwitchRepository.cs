@@ -28,22 +28,6 @@ namespace Threax.Home.ZWave.Repository
             this.manager = manager;
         }
 
-        /// <summary>
-        /// List all the switches.
-        /// </summary>
-        /// <param name="strip">The name of the power strip to use.</param>
-        /// <returns></returns>
-        public async Task<IEnumerable<SwitchInfo<int>>> List(String strip)
-        {
-            var settings = await manager.GetClient(strip).GetSettings();
-            return settings.Select(i => new SwitchInfo<int>()
-            {
-                Id = i.Index,
-                Positions = new List<String>() { "on", "off" },
-                DisplayName = $"{strip} Relay {i.Index}"
-            });
-        }
-
         public async Task<TOut> Get(string bridge, string id)
         {
             var settings = await manager.GetClient(bridge).GetSettings();
@@ -52,7 +36,8 @@ namespace Threax.Home.ZWave.Repository
                 new TOut()
                 {
                     Id = i.Index.ToString(),
-                    Value = i.On ? "on" : "off"
+                    Value = i.On ? "on" : "off",
+                    Subsystem = SubsystemName
                 }).First();
         }
 
@@ -66,7 +51,8 @@ namespace Threax.Home.ZWave.Repository
                     new TOut()
                     {
                         Id = i.Index.ToString(),
-                        Value = i.On ? "on" : "off"
+                        Value = i.On ? "on" : "off",
+                        Subsystem = SubsystemName
                     }));
             }
             return clients;
@@ -79,5 +65,7 @@ namespace Threax.Home.ZWave.Repository
                 new RelaySetting(int.Parse(setting.Id), setting.Value == "on")
             });
         }
+
+        public String SubsystemName => "Mfi";
     }
 }
