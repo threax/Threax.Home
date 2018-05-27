@@ -37,7 +37,9 @@ namespace Threax.Home.ZWave.Repository
                 {
                     Id = i.Index.ToString(),
                     Value = i.On ? "on" : "off",
-                    Subsystem = SubsystemName
+                    Subsystem = SubsystemName,
+                    Bridge = bridge,
+                    Name = bridge + i.Index.ToString()
                 }).First();
         }
 
@@ -52,7 +54,9 @@ namespace Threax.Home.ZWave.Repository
                     {
                         Id = i.Index.ToString(),
                         Value = i.On ? "on" : "off",
-                        Subsystem = SubsystemName
+                        Subsystem = SubsystemName,
+                        Bridge = bridge,
+                        Name = bridge + i.Index.ToString()
                     }));
             }
             return clients;
