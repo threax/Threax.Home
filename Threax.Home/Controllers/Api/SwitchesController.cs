@@ -49,12 +49,11 @@ namespace Threax.Home.Controllers.Api
 
         [HttpGet("{SwitchId}")]
         [HalRel(CrudRels.Get)]
-        public async Task<Switch> Get(Guid switchId, [FromServices] IHueSwitchRepository<Switch, Switch> hueSwitchRepository)
+        public async Task<Switch> Get(Guid switchId, [FromServices] IHueSwitchRepository<SwitchInput, SwitchInput> hueSwitchRepository)
         {
             var cachedSwitch = await repo.Get(switchId);
             var liveSwitch = await hueSwitchRepository.Get(cachedSwitch.Bridge, cachedSwitch.Id);
-            liveSwitch.SwitchId = cachedSwitch.SwitchId;
-            return liveSwitch;
+            return await repo.Update(switchId, liveSwitch);
         }
 
         //[HttpPost]
