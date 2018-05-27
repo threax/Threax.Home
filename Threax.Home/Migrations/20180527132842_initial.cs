@@ -80,6 +80,12 @@ namespace Threax.Home.Migrations
                 name: "IX_spc.auth.UsersToRoles_RoleId",
                 table: "spc.auth.UsersToRoles",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Switches_Bridge_Subsystem_Id",
+                table: "Switches",
+                columns: new[] { "Bridge", "Subsystem", "Id" },
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

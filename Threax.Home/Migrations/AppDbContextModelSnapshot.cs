@@ -93,6 +93,9 @@ namespace Threax.Home.Migrations
 
                     b.HasKey("SwitchId");
 
+                    b.HasIndex("Bridge", "Subsystem", "Id")
+                        .IsUnique();
+
                     b.ToTable("Switches");
                 });
 

@@ -14,5 +14,13 @@ namespace Threax.Home.Database
         }
 
         //The dbset declarations are in the other parial classes. Expand the AppDbContext.cs class node to see them.
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<SwitchEntity>()
+                .HasIndex(i => new { i.Bridge, i.Subsystem, i.Id })
+                .IsUnique(true);
+        }
     }
 }

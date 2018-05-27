@@ -14,7 +14,7 @@ namespace Threax.Home.ViewModels
     [HalModel]
     [HalSelfActionLink(typeof(SwitchesController), nameof(SwitchesController.Get))]
     [HalActionLink(typeof(SwitchesController), nameof(SwitchesController.Update))]
-    [HalActionLink(typeof(SwitchesController), nameof(SwitchesController.Delete))]
+    //[HalActionLink(typeof(SwitchesController), nameof(SwitchesController.Delete))]
     public partial class Switch
     {
         //You can add your own customizations here. These will not be overwritten by the model generator.

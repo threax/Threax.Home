@@ -13,6 +13,7 @@ namespace Threax.Home.ViewModels
     [HalActionLink(RolesControllerRels.ListUsers, typeof(RolesController))]
     [HalActionLink(RolesControllerRels.SetUser, typeof(RolesController))]
     //The additional entry point links are in the other entry point partial classes, expand this node to see them
+    [HalActionLink(typeof(SwitchesController), nameof(SwitchesController.AddHueSwitches))]
     public partial class EntryPoint
     {
     }

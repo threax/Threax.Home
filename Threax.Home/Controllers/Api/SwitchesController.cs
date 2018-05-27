@@ -19,52 +19,69 @@ namespace Threax.Home.Controllers.Api
     public partial class SwitchesController : Controller
     {
         private ISwitchRepository repo;
-        private IHueSwitchRepository<SwitchInput, Switch> hueSwitchRepository;
 
-        public SwitchesController(ISwitchRepository repo, IHueSwitchRepository<SwitchInput, Switch> hueSwitchRepository)
+        public SwitchesController(ISwitchRepository repo)
         {
             this.repo = repo;
-            this.hueSwitchRepository = hueSwitchRepository;
         }
 
         [HttpGet]
         [HalRel(CrudRels.List)]
         public async Task<SwitchCollection> List([FromQuery] SwitchQuery query)
         {
-            //return await repo.List(query);
-            var items = await hueSwitchRepository.List();
-            var count = items.Count();
-            return new SwitchCollection(query, items.Count(), items.Skip(query.SkipTo(count)).Take(query.Limit));
+            return await repo.List(query);
+        }
+
+        [HttpPost("[action]")]
+        [HalRel(nameof(AddHueSwitches))]
+        public async Task AddHueSwitches([FromServices] IHueSwitchRepository<SwitchInput, SwitchInput> hueSwitchRepository)
+        {
+            foreach(var item in await hueSwitchRepository.List())
+            {
+                try
+                {
+                    //Kind of brute force
+                    await repo.Add(item);
+                }
+                catch (Exception){ }
+            }
         }
 
         [HttpGet("{SwitchId}")]
         [HalRel(CrudRels.Get)]
-        public async Task<Switch> Get(Guid switchId)
+        public async Task<Switch> Get(Guid switchId, [FromServices] IHueSwitchRepository<Switch, Switch> hueSwitchRepository)
         {
-            return await repo.Get(switchId);
+            var cachedSwitch = await repo.Get(switchId);
+            var liveSwitch = await hueSwitchRepository.Get(cachedSwitch.Bridge, cachedSwitch.Id);
+            liveSwitch.SwitchId = cachedSwitch.SwitchId;
+            return liveSwitch;
         }
 
-        [HttpPost]
-        [HalRel(CrudRels.Add)]
-        [AutoValidate("Cannot add new @switch")]
-        public async Task<Switch> Add([FromBody]SwitchInput @switch)
-        {
-            return await repo.Add(@switch);
-        }
+        //[HttpPost]
+        //[HalRel(CrudRels.Add)]
+        //[AutoValidate("Cannot add new @switch")]
+        //public async Task<Switch> Add([FromBody]SwitchInput @switch)
+        //{
+        //    return await repo.Add(@switch);
+        //}
 
         [HttpPut("{SwitchId}")]
         [HalRel(CrudRels.Update)]
         [AutoValidate("Cannot update @switch")]
-        public async Task<Switch> Update(Guid switchId, [FromBody]SwitchInput @switch)
+        public async Task<Switch> Update(Guid switchId, [FromBody]SwitchInput @switch, [FromServices] IHueSwitchRepository<SwitchInput, Switch> hueSwitchRepository)
         {
-            return await repo.Update(switchId, @switch);
+            var cachedSwitch = await repo.Update(switchId, @switch);
+            await hueSwitchRepository.Set(@switch);
+            var liveSwitch = await hueSwitchRepository.Get(cachedSwitch.Bridge, cachedSwitch.Id);
+            liveSwitch.SwitchId = switchId;
+            return liveSwitch;
         }
 
-        [HttpDelete("{SwitchId}")]
-        [HalRel(CrudRels.Delete)]
-        public async Task Delete(Guid switchId)
-        {
-            await repo.Delete(switchId);
-        }
+        //[HttpDelete("{SwitchId}")]
+        //[HalRel(CrudRels.Delete)]
+        //public async Task Delete(Guid switchId)
+        //{
+        //    await repo.Delete(switchId);
+        //}
     }
 }

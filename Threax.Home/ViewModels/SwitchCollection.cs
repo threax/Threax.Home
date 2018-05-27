@@ -15,7 +15,7 @@ namespace Threax.Home.ViewModels
     [HalActionLink(typeof(SwitchesController), nameof(SwitchesController.Get), DocsOnly = true)] //This provides access to docs for showing items
     [HalActionLink(typeof(SwitchesController), nameof(SwitchesController.List), DocsOnly = true)] //This provides docs for searching the list
     [HalActionLink(typeof(SwitchesController), nameof(SwitchesController.Update), DocsOnly = true)] //This provides access to docs for updating items if the ui has different modes
-    [HalActionLink(typeof(SwitchesController), nameof(SwitchesController.Add))]
+    //[HalActionLink(typeof(SwitchesController), nameof(SwitchesController.Add))]
     [DeclareHalLink(typeof(SwitchesController), nameof(SwitchesController.List), PagedCollectionView<Object>.Rels.Next, ResponseOnly = true)]
     [DeclareHalLink(typeof(SwitchesController), nameof(SwitchesController.List), PagedCollectionView<Object>.Rels.Previous, ResponseOnly = true)]
     [DeclareHalLink(typeof(SwitchesController), nameof(SwitchesController.List), PagedCollectionView<Object>.Rels.First, ResponseOnly = true)]

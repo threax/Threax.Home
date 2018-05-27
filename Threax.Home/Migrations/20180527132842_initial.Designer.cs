@@ -11,7 +11,7 @@ using Threax.Home.Database;
 namespace Threax.Home.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20180527122602_initial")]
+    [Migration("20180527132842_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,6 +93,9 @@ namespace Threax.Home.Migrations
                         .HasMaxLength(450);
 
                     b.HasKey("SwitchId");
+
+                    b.HasIndex("Bridge", "Subsystem", "Id")
+                        .IsUnique();
 
                     b.ToTable("Switches");
                 });

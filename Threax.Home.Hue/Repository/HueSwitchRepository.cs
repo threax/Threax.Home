@@ -70,7 +70,8 @@ namespace Threax.Home.Hue.Repository
                         HexColor = light.State.ToHex(),
                         Id = light.Id,
                         Name = light.Name,
-                        Bridge = bridge
+                        Bridge = bridge,
+                        Subsystem = "Hue"
                     };
                 });
                 foreach(var task in tasks)
@@ -121,6 +122,7 @@ namespace Threax.Home.Hue.Repository
                 Id = light.Id,
                 Name = light.Name,
                 Bridge = bridge,
+                Subsystem = "Hue"
             };
         }
     }
