@@ -67,13 +67,15 @@ namespace Threax.Home.Controllers.Api
         [HttpPut("{SwitchId}")]
         [HalRel(CrudRels.Update)]
         [AutoValidate("Cannot update @switch")]
-        public async Task<Switch> Update(Guid switchId, [FromBody]SwitchInput @switch, [FromServices] IHueSwitchRepository<SwitchInput, Switch> hueSwitchRepository)
+        public async Task<Switch> Update(Guid switchId, [FromBody]SwitchInput @switch, [FromServices] IHueSwitchRepository<SwitchInput, SwitchInput> hueSwitchRepository)
         {
-            var cachedSwitch = await repo.Update(switchId, @switch);
+            var cachedSwitch = await repo.Get(switchId);
+            @switch.Bridge = cachedSwitch.Bridge;
+            @switch.Subsystem = cachedSwitch.Subsystem;
+            @switch.Id = cachedSwitch.Id;
             await hueSwitchRepository.Set(@switch);
             var liveSwitch = await hueSwitchRepository.Get(cachedSwitch.Bridge, cachedSwitch.Id);
-            liveSwitch.SwitchId = switchId;
-            return liveSwitch;
+            return await repo.Update(switchId, liveSwitch);
         }
 
         //[HttpDelete("{SwitchId}")]
