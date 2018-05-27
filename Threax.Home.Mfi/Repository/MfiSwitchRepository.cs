@@ -8,21 +8,12 @@ using System.Threading.Tasks;
 using Threax.Home.Core;
 using Threax.Home.MFi.Services;
 
-namespace Threax.Home.ZWave.Controllers
+namespace Threax.Home.ZWave.Repository
 {
-    public interface IMfiSwitchRepository<TIn, TOut>
-       where TIn : ISwitch, new()
-       where TOut : ISwitch, new()
-    {
-        Task<TOut> Get(string bridge, string id);
-        Task<IEnumerable<TOut>> List();
-        Task Set(TIn setting);
-    }
-
     /// <summary>
     /// Manage switches.
     /// </summary>
-    public class MfiRepository<TIn, TOut> : IMfiSwitchRepository<TIn, TOut>
+    public class MfiSwitchRepository<TIn, TOut> : IMfiSwitchRepository<TIn, TOut>
        where TIn : ISwitch, new()
        where TOut : ISwitch, new()
     {
@@ -32,7 +23,7 @@ namespace Threax.Home.ZWave.Controllers
         /// Constructor
         /// </summary>
         /// <param name="manager">The PowerStripManager to use.</param>
-        public MfiRepository(IPowerStripManager manager)
+        public MfiSwitchRepository(IPowerStripManager manager)
         {
             this.manager = manager;
         }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Threax.Home.MFi;
 using Threax.Home.MFi.Services;
+using Threax.Home.ZWave.Repository;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -25,6 +26,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
                 return manager;
             });
+
+            services.TryAddScoped(typeof(IMfiSwitchRepository<,>), typeof(MfiSwitchRepository<,>));
 
             return services;
         }
