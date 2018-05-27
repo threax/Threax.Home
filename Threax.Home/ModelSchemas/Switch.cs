@@ -13,6 +13,18 @@ namespace Threax.Home.ModelSchemas
     {
         [Required]
         [MaxLength(450)]
+        public String Subsystem { get; set; }
+
+        [Required]
+        [MaxLength(450)]
+        public String Bridge { get; set; }
+
+        [Required]
+        [MaxLength(450)]
         public String Name { get; set; }
+
+        [Required]
+        [MaxLength(450)]
+        public String PrettyName { get; set; }
     }
 }
