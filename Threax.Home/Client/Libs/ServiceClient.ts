@@ -233,78 +233,78 @@ export class EntryPointResult {
         return this.client.HasLinkDoc("SetUser");
     }
 
-    public listValues(query: ValueQuery): Promise<ValueCollectionResult> {
-        return this.client.LoadLinkWithQuery("ListValues", query)
+    public listSwitches(query: SwitchQuery): Promise<SwitchCollectionResult> {
+        return this.client.LoadLinkWithQuery("ListSwitches", query)
                .then(r => {
-                    return new ValueCollectionResult(r);
+                    return new SwitchCollectionResult(r);
                 });
 
     }
 
-    public canListValues(): boolean {
-        return this.client.HasLink("ListValues");
+    public canListSwitches(): boolean {
+        return this.client.HasLink("ListSwitches");
     }
 
-    public linkForListValues(): hal.HalLink {
-        return this.client.GetLink("ListValues");
+    public linkForListSwitches(): hal.HalLink {
+        return this.client.GetLink("ListSwitches");
     }
 
-    public getListValuesDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("ListValues")
+    public getListSwitchesDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("ListSwitches")
             .then(r => {
                 return r.GetData<hal.HalEndpointDoc>();
             });
     }
 
-    public hasListValuesDocs(): boolean {
-        return this.client.HasLinkDoc("ListValues");
+    public hasListSwitchesDocs(): boolean {
+        return this.client.HasLinkDoc("ListSwitches");
     }
 
-    public addValue(data: ValueInput): Promise<ValueResult> {
-        return this.client.LoadLinkWithBody("AddValue", data)
+    public addSwitch(data: SwitchInput): Promise<SwitchResult> {
+        return this.client.LoadLinkWithBody("AddSwitch", data)
                .then(r => {
-                    return new ValueResult(r);
+                    return new SwitchResult(r);
                 });
 
     }
 
-    public canAddValue(): boolean {
-        return this.client.HasLink("AddValue");
+    public canAddSwitch(): boolean {
+        return this.client.HasLink("AddSwitch");
     }
 
-    public linkForAddValue(): hal.HalLink {
-        return this.client.GetLink("AddValue");
+    public linkForAddSwitch(): hal.HalLink {
+        return this.client.GetLink("AddSwitch");
     }
 
-    public getAddValueDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("AddValue")
+    public getAddSwitchDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("AddSwitch")
             .then(r => {
                 return r.GetData<hal.HalEndpointDoc>();
             });
     }
 
-    public hasAddValueDocs(): boolean {
-        return this.client.HasLinkDoc("AddValue");
+    public hasAddSwitchDocs(): boolean {
+        return this.client.HasLinkDoc("AddSwitch");
     }
 }
 
-export class ValueResult {
+export class SwitchResult {
     private client: hal.HalEndpointClient;
 
     constructor(client: hal.HalEndpointClient) {
         this.client = client;
     }
 
-    private strongData: Value = undefined;
-    public get data(): Value {
-        this.strongData = this.strongData || this.client.GetData<Value>();
+    private strongData: Switch = undefined;
+    public get data(): Switch {
+        this.strongData = this.strongData || this.client.GetData<Switch>();
         return this.strongData;
     }
 
-    public refresh(): Promise<ValueResult> {
+    public refresh(): Promise<SwitchResult> {
         return this.client.LoadLink("self")
                .then(r => {
-                    return new ValueResult(r);
+                    return new SwitchResult(r);
                 });
 
     }
@@ -328,10 +328,10 @@ export class ValueResult {
         return this.client.HasLinkDoc("self");
     }
 
-    public update(data: ValueInput): Promise<ValueResult> {
+    public update(data: SwitchInput): Promise<SwitchResult> {
         return this.client.LoadLinkWithBody("Update", data)
                .then(r => {
-                    return new ValueResult(r);
+                    return new SwitchResult(r);
                 });
 
     }
@@ -368,36 +368,36 @@ export class ValueResult {
     }
 }
 
-export class ValueCollectionResult {
+export class SwitchCollectionResult {
     private client: hal.HalEndpointClient;
 
     constructor(client: hal.HalEndpointClient) {
         this.client = client;
     }
 
-    private strongData: ValueCollection = undefined;
-    public get data(): ValueCollection {
-        this.strongData = this.strongData || this.client.GetData<ValueCollection>();
+    private strongData: SwitchCollection = undefined;
+    public get data(): SwitchCollection {
+        this.strongData = this.strongData || this.client.GetData<SwitchCollection>();
         return this.strongData;
     }
 
-    private strongItems: ValueResult[];
-    public get items(): ValueResult[] {
+    private strongItems: SwitchResult[];
+    public get items(): SwitchResult[] {
         if (this.strongItems === undefined) {
             var embeds = this.client.GetEmbed("values");
             var clients = embeds.GetAllClients();
             this.strongItems = [];
             for (var i = 0; i < clients.length; ++i) {
-                this.strongItems.push(new ValueResult(clients[i]));
+                this.strongItems.push(new SwitchResult(clients[i]));
             }
         }
         return this.strongItems;
     }
 
-    public refresh(): Promise<ValueCollectionResult> {
+    public refresh(): Promise<SwitchCollectionResult> {
         return this.client.LoadLink("self")
                .then(r => {
-                    return new ValueCollectionResult(r);
+                    return new SwitchCollectionResult(r);
                 });
 
     }
@@ -443,10 +443,21 @@ export class ValueCollectionResult {
         return this.client.HasLinkDoc("List");
     }
 
-    public add(data: ValueInput): Promise<ValueResult> {
+    public getUpdateDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Update")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasUpdateDocs(): boolean {
+        return this.client.HasLinkDoc("Update");
+    }
+
+    public add(data: SwitchInput): Promise<SwitchResult> {
         return this.client.LoadLinkWithBody("Add", data)
                .then(r => {
-                    return new ValueResult(r);
+                    return new SwitchResult(r);
                 });
 
     }
@@ -470,10 +481,10 @@ export class ValueCollectionResult {
         return this.client.HasLinkDoc("Add");
     }
 
-    public next(): Promise<ValueCollectionResult> {
+    public next(): Promise<SwitchCollectionResult> {
         return this.client.LoadLink("next")
                .then(r => {
-                    return new ValueCollectionResult(r);
+                    return new SwitchCollectionResult(r);
                 });
 
     }
@@ -497,10 +508,10 @@ export class ValueCollectionResult {
         return this.client.HasLinkDoc("next");
     }
 
-    public previous(): Promise<ValueCollectionResult> {
+    public previous(): Promise<SwitchCollectionResult> {
         return this.client.LoadLink("previous")
                .then(r => {
-                    return new ValueCollectionResult(r);
+                    return new SwitchCollectionResult(r);
                 });
 
     }
@@ -524,10 +535,10 @@ export class ValueCollectionResult {
         return this.client.HasLinkDoc("previous");
     }
 
-    public first(): Promise<ValueCollectionResult> {
+    public first(): Promise<SwitchCollectionResult> {
         return this.client.LoadLink("first")
                .then(r => {
-                    return new ValueCollectionResult(r);
+                    return new SwitchCollectionResult(r);
                 });
 
     }
@@ -551,10 +562,10 @@ export class ValueCollectionResult {
         return this.client.HasLinkDoc("first");
     }
 
-    public last(): Promise<ValueCollectionResult> {
+    public last(): Promise<SwitchCollectionResult> {
         return this.client.LoadLink("last")
                .then(r => {
-                    return new ValueCollectionResult(r);
+                    return new SwitchCollectionResult(r);
                 });
 
     }
@@ -742,7 +753,7 @@ export class UserCollectionResult {
 }
 //----------------------
 // <auto-generated>
-//     Generated using the NSwag toolchain v9.10.10.0 (Newtonsoft.Json v10.0.0.0) (http://NJsonSchema.org)
+//     Generated using the NSwag toolchain v9.10.10.0 (Newtonsoft.Json v11.0.0.0) (http://NJsonSchema.org)
 // </auto-generated>
 //----------------------
 
@@ -762,7 +773,9 @@ export interface EntryPoint {
 }
 
 export interface RolesQuery {
+    /** The guid for the user, this is used to look up the user. */
     userId?: string[];
+    /** A name for the user. Used only as a reference, will be added to the result if the user is not found. */
     name?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
@@ -776,28 +789,36 @@ export interface UserCollection {
     total?: number;
 }
 
-export interface ValueQuery {
-    valueId?: string;
+export interface SwitchQuery {
+    switchId?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
     /** The limit of the number of items to return. */
     limit?: number;
 }
 
-export interface ValueCollection {
-    valueId?: string;
+export interface SwitchCollection {
+    /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
-    limit?: number;
+    switchId?: string;
     total?: number;
+    /** The limit of the number of items to return. */
+    limit?: number;
 }
 
-export interface ValueInput {
+export interface SwitchInput {
+    subsystem: string;
+    bridge: string;
     name: string;
+    prettyName: string;
 }
 
-export interface Value {
-    valueId?: string;
+export interface Switch {
+    switchId?: string;
+    subsystem?: string;
+    bridge?: string;
     name?: string;
-    created?: Date;
-    modified?: Date;
+    prettyName?: string;
+    created?: string;
+    modified?: string;
 }

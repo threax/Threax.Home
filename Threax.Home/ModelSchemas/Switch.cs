@@ -19,12 +19,39 @@ namespace Threax.Home.ModelSchemas
         [MaxLength(450)]
         public String Bridge { get; set; }
 
+        /// <summary>
+        /// The id of the switch.
+        /// </summary>
+        [Required]
+        [MaxLength(450)]
+        public String Id { get; set; }
+
+        /// <summary>
+        /// The value of the switch.
+        /// </summary>
+        [Required]
+        [MaxLength(450)]
+        public String Value { get; set; }
+
+        /// <summary>
+        /// The brightness to set.
+        /// </summary>
+        [Required]
+        [MaxLength(450)]
+        public byte? Brightness { get; set; }
+
+        /// <summary>
+        /// The color to set.
+        /// </summary>
+        [Required]
+        [MaxLength(450)]
+        public string HexColor { get; set; }
+
+        /// <summary>
+        /// The name of the light.
+        /// </summary>
         [Required]
         [MaxLength(450)]
         public String Name { get; set; }
-
-        [Required]
-        [MaxLength(450)]
-        public String PrettyName { get; set; }
     }
 }

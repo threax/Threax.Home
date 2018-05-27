@@ -10,8 +10,8 @@ using Threax.Home.Hue.Models;
 namespace Threax.Home.Hue.ViewModels
 {
     [HalModel]
-    [HalSelfActionLink(SwitchController.Rels.ListSwitches, typeof(SwitchController))]
-    [HalActionLink(SwitchController.Rels.ListSwitches, typeof(SwitchController))]
+    //[HalSelfActionLink(SwitchController.Rels.ListSwitches, typeof(SwitchController))]
+    //[HalActionLink(SwitchController.Rels.ListSwitches, typeof(SwitchController))]
     //[HalActionLink(SwitchController.Rels.SetSwitches, typeof(SwitchController))]
     public class HueSwitchCollection : CollectionView<HueSwitchPositionView>
     {
