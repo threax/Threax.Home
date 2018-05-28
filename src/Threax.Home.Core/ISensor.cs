@@ -19,20 +19,20 @@ namespace Threax.Home.Core
         /// </summary>
         String Id { get; set; }
 
-        float TempValue { get; set; }
+        float? TempValue { get; set; }
 
-        Units TempUnits { get; set; }
+        Units? TempUnits { get; set; }
 
-        float LightValue { get; set; }
+        float? LightValue { get; set; }
 
-        Units LightUnits { get; set; }
+        Units? LightUnits { get; set; }
 
-        float HumidityValue { get; set; }
+        float? HumidityValue { get; set; }
 
-        Units HumidityUnits { get; set; }
+        Units? HumidityUnits { get; set; }
 
-        float UvValue { get; set; }
+        float? UvValue { get; set; }
 
-        Units UvUnits { get; set; }
+        Units? UvUnits { get; set; }
     }
 }
