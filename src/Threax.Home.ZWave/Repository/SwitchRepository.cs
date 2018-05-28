@@ -11,12 +11,12 @@ using Threax.Home.ZWave.Models;
 using ZWave;
 using ZWave.CommandClasses;
 
-namespace Threax.Home.ZWave.Controllers
+namespace Threax.Home.ZWave.Repository
 {
     /// <summary>
     /// Manage switches.
     /// </summary>
-    public class SwitchController<TIn, TOut> : ISwitchRepository<TIn, TOut>
+    public class SwitchRepository<TIn, TOut> : IZWaveSwitchRepository<TIn, TOut>
         where TIn : ISwitch, new()
         where TOut : ISwitch, new()
     {
@@ -29,7 +29,7 @@ namespace Threax.Home.ZWave.Controllers
         /// Constructor
         /// </summary>
         /// <param name="zwave">The ZWaveController to use.</param>
-        public SwitchController(ZWaveController zwave, ZWaveConfig config)
+        public SwitchRepository(ZWaveController zwave, ZWaveConfig config)
         {
             this.zwave = zwave;
             this.config = config;
