@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Threax.Home.MFi;
 using Threax.Home.MFi.Services;
-using Threax.Home.ZWave.Repository;
+using Threax.Home.MFi.Repository;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

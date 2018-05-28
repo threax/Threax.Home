@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Threax.Home.Core;
 using Threax.Home.MFi.Services;
 
-namespace Threax.Home.ZWave.Repository
+namespace Threax.Home.MFi.Repository
 {
     /// <summary>
     /// Manage switches.

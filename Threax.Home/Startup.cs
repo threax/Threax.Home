@@ -149,8 +149,9 @@ namespace Threax.Home
 
             services.SetupSwitches(o =>
             {
-                o.AddConfig(typeof(ZWave.Repository.IMfiSwitchRepository<,>));
+                o.AddConfig(typeof(MFi.Repository.IMfiSwitchRepository<,>));
                 o.AddConfig(typeof(Hue.Repository.IHueSwitchRepository<,>));
+                o.AddConfig(typeof(ZWave.Repository.IZWaveSwitchRepository<,>));
             });
         }
 
