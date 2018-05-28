@@ -45,9 +45,9 @@ namespace Threax.Home.Controllers.Api
         [HalRel(CrudRels.Get)]
         public async Task<Switch> Get(Guid switchId, [FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo)
         {
-            var cachedSwitch = await repo.Get(switchId);
-            var liveSwitch = await switchRepo.Get(cachedSwitch.Subsystem, cachedSwitch.Bridge, cachedSwitch.Id);
-            return await repo.Update(switchId, liveSwitch);
+            var cached = await repo.Get(switchId);
+            var live = await switchRepo.Get(cached.Subsystem, cached.Bridge, cached.Id);
+            return await repo.Update(switchId, live);
         }
 
         //[HttpPost]

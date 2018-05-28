@@ -10,7 +10,7 @@ using ZWave.CommandClasses;
 
 namespace Threax.Home.ZWave.Repository
 {
-    public class ZWaveSensorRepository<TSensor> : IZWaveSensorRepository<TSensor>, IDisposable
+    public class ZWaveSensorRepository<TSensor> : IZWaveSensorRepository<TSensor>
         where TSensor : ICoreSensor, new()
     {
         enum Sensor : byte
@@ -36,12 +36,6 @@ namespace Threax.Home.ZWave.Repository
         {
             this.zwave = zwave;
             this.config = config;
-            this.zwave.Open();
-        }
-
-        public void Dispose()
-        {
-            this.zwave.Close();
         }
 
         public async Task<IEnumerable<TSensor>> List()

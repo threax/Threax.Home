@@ -16,7 +16,7 @@ namespace Threax.Home.ViewModels
     [HalActionLink(typeof(SensorsController), nameof(SensorsController.Get), DocsOnly = true)] //This provides access to docs for showing items
     [HalActionLink(typeof(SensorsController), nameof(SensorsController.List), DocsOnly = true)] //This provides docs for searching the list
     [HalActionLink(typeof(SensorsController), nameof(SensorsController.Update), DocsOnly = true)] //This provides access to docs for updating items if the ui has different modes
-    [HalActionLink(typeof(SensorsController), nameof(SensorsController.Add))]
+    //[HalActionLink(typeof(SensorsController), nameof(SensorsController.Add))]
     [DeclareHalLink(typeof(SensorsController), nameof(SensorsController.List), PagedCollectionView<Object>.Rels.Next, ResponseOnly = true)]
     [DeclareHalLink(typeof(SensorsController), nameof(SensorsController.List), PagedCollectionView<Object>.Rels.Previous, ResponseOnly = true)]
     [DeclareHalLink(typeof(SensorsController), nameof(SensorsController.List), PagedCollectionView<Object>.Rels.First, ResponseOnly = true)]

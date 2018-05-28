@@ -42,18 +42,20 @@ namespace Threax.Home.Controllers.Api
 
         [HttpGet("{SensorId}")]
         [HalRel(CrudRels.Get)]
-        public async Task<Sensor> Get(Guid sensorId)
+        public async Task<Sensor> Get(Guid sensorId, [FromServices] ISensorSubsystemManager<SensorInput> sensors)
         {
-            return await repo.Get(sensorId);
+            var cached = await repo.Get(sensorId);
+            var live = await sensors.Get(cached.Subsystem, cached.Bridge, cached.Id);
+            return await repo.Update(sensorId, live);
         }
 
-        [HttpPost]
-        [HalRel(CrudRels.Add)]
-        [AutoValidate("Cannot add new sensor")]
-        public async Task<Sensor> Add([FromBody]SensorInput sensor)
-        {
-            return await repo.Add(sensor);
-        }
+        //[HttpPost]
+        //[HalRel(CrudRels.Add)]
+        //[AutoValidate("Cannot add new sensor")]
+        //public async Task<Sensor> Add([FromBody]SensorInput sensor)
+        //{
+        //    return await repo.Add(sensor);
+        //}
 
         [HttpPut("{SensorId}")]
         [HalRel(CrudRels.Update)]
@@ -63,11 +65,11 @@ namespace Threax.Home.Controllers.Api
             return await repo.Update(sensorId, sensor);
         }
 
-        [HttpDelete("{SensorId}")]
-        [HalRel(CrudRels.Delete)]
-        public async Task Delete(Guid sensorId)
-        {
-            await repo.Delete(sensorId);
-        }
+        //[HttpDelete("{SensorId}")]
+        //[HalRel(CrudRels.Delete)]
+        //public async Task Delete(Guid sensorId)
+        //{
+        //    await repo.Delete(sensorId);
+        //}
     }
 }

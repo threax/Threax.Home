@@ -15,7 +15,7 @@ namespace Threax.Home.ViewModels
     [HalModel]
     [HalSelfActionLink(typeof(SensorsController), nameof(SensorsController.Get))]
     [HalActionLink(typeof(SensorsController), nameof(SensorsController.Update))]
-    [HalActionLink(typeof(SensorsController), nameof(SensorsController.Delete))]
+    //[HalActionLink(typeof(SensorsController), nameof(SensorsController.Delete))]
     public partial class Sensor
     {
         //You can add your own customizations here. These will not be overwritten by the model generator.

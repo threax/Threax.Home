@@ -19,7 +19,9 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<ZWaveConfig>(options);
             services.TryAddSingleton<ZWaveController>(s =>
             {
-                return new ZWaveController(options.ComPort);
+                var controller = new ZWaveController(options.ComPort);
+                controller.Open();
+                return controller;
             });
 
             services.TryAddScoped(typeof(IZWaveSwitchRepository<,>), typeof(ZWaveSwitchRepository<,>));

@@ -63,7 +63,9 @@ namespace Threax.Home.Repository
             var entity = await this.Entity(sensorId);
             if (entity != null)
             {
+                var oldName = entity.Name;
                 mapper.Map(sensor, entity);
+                entity.Name = oldName;
                 await SaveChanges();
                 return mapper.Map<Sensor>(entity);
             }
