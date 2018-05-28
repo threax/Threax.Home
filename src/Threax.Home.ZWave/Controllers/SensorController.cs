@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
-using Threax.Home.Core.ViewModels;
+using Threax.Home.Core;
 using Threax.Home.ZWave.Models;
 using Threax.Home.ZWave.ViewModels;
 using ZWave;

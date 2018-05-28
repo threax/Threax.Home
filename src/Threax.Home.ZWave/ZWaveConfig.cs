@@ -8,7 +8,7 @@ namespace Threax.Home.ZWave
     /// <summary>
     /// Configuration for zwave api.
     /// </summary>
-    public class AppConfig
+    public class ZWaveConfig
     {
         public string BaseUrl { get; set; } = "{{host}}";
 
