@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.Home.Core;
@@ -9,7 +10,8 @@ using ZWave.CommandClasses;
 
 namespace Threax.Home.ZWave.Repository
 {
-    public class SensorRepository<TTemp, TLight, THumidity, TUv>
+    public class SensorRepository<TSensorInfo, TTemp, TLight, THumidity, TUv>
+        where TSensorInfo : ISensorInfoView, new()
         where TTemp : ISensorDataView, new()
         where TLight : ISensorDataView, new()
         where THumidity : ISensorDataView, new()
@@ -31,24 +33,22 @@ namespace Threax.Home.ZWave.Repository
             this.zwave = zwave;
         }
 
-        public async Task<SensorInfoCollectionView> List()
+        public async Task<IEnumerable<TSensorInfo>> List()
         {
-            return new SensorInfoCollectionView(new SensorInfoView[]
-            {
-                new SensorInfoView()
+            return new TSensorInfo[]{
+                new TSensorInfo()
                 {
-                    Id = 3
-                }
-            });
+                    Id = "3"
+                }};
         }
 
-        public async Task<SensorInfoView> Get(byte id)
+        public async Task<TSensorInfo> Get(String id)
         {
             var query = await List();
-            return query.Items.First(i => i.Id == id);
+            return query.First(i => i.Id == id);
         }
 
-        public async Task<TTemp> Temperature(byte id)
+        public async Task<TTemp> Temperature(String id)
         {
             var report = await GetSensorData(id, SensorFarenheight);
             return new TTemp()
@@ -58,7 +58,7 @@ namespace Threax.Home.ZWave.Repository
             };
         }
 
-        public async Task<TLight> Light(byte id)
+        public async Task<TLight> Light(String id)
         {
             var report = await GetSensorData(id, SensorLight);
             return new TLight()
@@ -68,7 +68,7 @@ namespace Threax.Home.ZWave.Repository
             };
         }
 
-        public async Task<THumidity> Humidity(byte id)
+        public async Task<THumidity> Humidity(String id)
         {
             var report = await GetSensorData(id, SensorHumidity);
             return new THumidity()
@@ -78,7 +78,7 @@ namespace Threax.Home.ZWave.Repository
             };
         }
 
-        public async Task<TUv> Uv(byte id)
+        public async Task<TUv> Uv(String id)
         {
             var report = await GetSensorData(id, SensorUv);
             return new TUv()
@@ -88,12 +88,13 @@ namespace Threax.Home.ZWave.Repository
             };
         }
 
-        private async Task<SensorMultiLevelReport2> GetSensorData(byte id, byte sensor)
+        private async Task<SensorMultiLevelReport2> GetSensorData(String id, byte sensor)
         {
+            var byteId = byte.Parse(id);
             var nodes = await zwave.GetNodes();
-            var node = nodes[id];
+            var node = nodes[byteId];
 
-            var response = await zwave.Channel.Send(id, new Command(CommandClass.SensorMultiLevel, 0x04, sensor), 0x05);
+            var response = await zwave.Channel.Send(byteId, new Command(CommandClass.SensorMultiLevel, 0x04, sensor), 0x05);
             return new SensorMultiLevelReport2(node, response);
         }
     }
