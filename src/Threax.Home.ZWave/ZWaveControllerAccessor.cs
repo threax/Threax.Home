@@ -5,11 +5,11 @@ using ZWave;
 
 namespace Threax.Home.ZWave
 {
-    public class ZWaveControllerManager : IDisposable, IZWaveControllerManager
+    public class ZWaveControllerAccessor : IDisposable, IZWaveControllerAccessor
     {
         private ZWaveController controller;
 
-        public ZWaveControllerManager(ZWaveConfig options)
+        public ZWaveControllerAccessor(ZWaveConfig options)
         {
             controller = new ZWaveController(options.ComPort);
             controller.Open();

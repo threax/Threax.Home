@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
             configure?.Invoke(options);
 
             services.TryAddSingleton<ZWaveConfig>(options);
-            services.TryAddSingleton<IZWaveControllerManager, ZWaveControllerManager>();
+            services.TryAddSingleton<IZWaveControllerAccessor, ZWaveControllerAccessor>();
 
             services.TryAddScoped(typeof(IZWaveSwitchRepository<,>), typeof(ZWaveSwitchRepository<,>));
             services.TryAddScoped(typeof(IZWaveSensorRepository<>), typeof(ZWaveSensorRepository<>));

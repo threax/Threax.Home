@@ -2,7 +2,7 @@
 
 namespace Threax.Home.ZWave
 {
-    public interface IZWaveControllerManager
+    public interface IZWaveControllerAccessor
     {
         ZWaveController Controller { get; }
     }
