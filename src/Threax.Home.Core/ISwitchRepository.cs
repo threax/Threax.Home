@@ -11,8 +11,8 @@ namespace Threax.Home.Core
     }
 
     public interface ISwitchRepository<TIn, TOut> : ISwitchRepository
-       where TIn : ISwitch, new()
-       where TOut : ISwitch, new()
+       where TIn : ICoreSwitch, new()
+       where TOut : ICoreSwitch, new()
     {
         Task<TOut> Get(string bridge, string id);
         Task<IEnumerable<TOut>> List();

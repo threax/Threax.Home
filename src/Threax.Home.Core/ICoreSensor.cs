@@ -2,7 +2,7 @@
 
 namespace Threax.Home.Core
 {
-    public interface ISensor
+    public interface ICoreSensor
     {
         /// <summary>
         /// Which type of system the switch belongs to. (Hue, ZWave, etc.)

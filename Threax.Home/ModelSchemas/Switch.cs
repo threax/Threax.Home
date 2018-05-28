@@ -10,7 +10,7 @@ namespace Threax.Home.ModelSchemas
 {
     //[RequireAuthorization(typeof(Roles), nameof(Roles.EditValues))]
     [PluralName("Switches")]
-    public abstract class Switch : ISwitch
+    public abstract class Switch : ICoreSwitch
     {
         /// <summary>
         /// The name of the switch. Suitable for display.

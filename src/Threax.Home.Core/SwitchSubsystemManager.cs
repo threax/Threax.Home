@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Threax.Home.Core
 {
     public class SwitchSubsystemManager<TIn, TOut> : ISwitchSubsystemManager<TIn, TOut>
-        where TIn : ISwitch, new()
-        where TOut : ISwitch, new()
+        where TIn : ICoreSwitch, new()
+        where TOut : ICoreSwitch, new()
     {
         private Dictionary<String, ISwitchRepository<TIn, TOut>> switchRepos = new Dictionary<string, ISwitchRepository<TIn, TOut>>();
         private IHttpContextAccessor httpContextAccessor;

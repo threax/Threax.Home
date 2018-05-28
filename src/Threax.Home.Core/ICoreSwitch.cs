@@ -7,7 +7,7 @@ namespace Threax.Home.Core
     /// <summary>
     /// Interface for switches.
     /// </summary>
-    public interface ISwitch
+    public interface ICoreSwitch
     {
         /// <summary>
         /// Which type of system the switch belongs to. (Hue, ZWave, etc.)

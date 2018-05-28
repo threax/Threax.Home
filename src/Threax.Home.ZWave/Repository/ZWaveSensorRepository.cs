@@ -11,7 +11,7 @@ using ZWave.CommandClasses;
 namespace Threax.Home.ZWave.Repository
 {
     public class ZWaveSensorRepository<TSensor> : IZWaveSensorRepository<TSensor>
-        where TSensor : ISensor, new()
+        where TSensor : ICoreSensor, new()
     {
         enum Sensor : byte
         {

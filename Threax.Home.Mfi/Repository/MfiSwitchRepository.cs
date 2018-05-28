@@ -14,8 +14,8 @@ namespace Threax.Home.MFi.Repository
     /// Manage switches.
     /// </summary>
     public class MfiSwitchRepository<TIn, TOut> : IMfiSwitchRepository<TIn, TOut>
-       where TIn : ISwitch, new()
-       where TOut : ISwitch, new()
+       where TIn : ICoreSwitch, new()
+       where TOut : ICoreSwitch, new()
     {
         private IPowerStripManager manager;
 

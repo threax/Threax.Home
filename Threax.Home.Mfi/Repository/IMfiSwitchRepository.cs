@@ -11,8 +11,8 @@ using Threax.Home.MFi.Services;
 namespace Threax.Home.MFi.Repository
 {
     public interface IMfiSwitchRepository<TIn, TOut> : ISwitchRepository<TIn, TOut>
-       where TIn : ISwitch, new()
-       where TOut : ISwitch, new()
+       where TIn : ICoreSwitch, new()
+       where TOut : ICoreSwitch, new()
     {
         
     }

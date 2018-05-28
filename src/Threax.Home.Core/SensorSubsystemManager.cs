@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Threax.Home.Core
 {
     public class SensorSubsystemManager<TSensor> : ISensorSubsystemManager<TSensor>
-        where TSensor : ISensor, new()
+        where TSensor : ICoreSensor, new()
     {
         private Dictionary<String, ISensorRepository<TSensor>> switchRepos = new Dictionary<string, ISensorRepository<TSensor>>();
         private IHttpContextAccessor httpContextAccessor;

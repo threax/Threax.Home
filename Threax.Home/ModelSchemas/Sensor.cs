@@ -10,7 +10,8 @@ namespace Threax.Home.ModelSchemas
 {
     //[RequireAuthorization(typeof(Roles), nameof(Roles.EditValues))]
     [PluralName("Switches")]
-    public abstract class Sensor : ISensor
+    [AddNamespaces("using Threax.Home.Core;")]
+    public abstract class Sensor : ICoreSensor
     {
         /// <summary>
         /// The name of the switch. Suitable for display.

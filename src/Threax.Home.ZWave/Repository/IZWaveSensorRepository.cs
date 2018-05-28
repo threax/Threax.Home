@@ -5,7 +5,7 @@ using Threax.Home.Core;
 namespace Threax.Home.ZWave.Repository
 {
     public interface IZWaveSensorRepository<TSensorInfo> : ISensorRepository<TSensorInfo>
-        where TSensorInfo : ISensor, new()
+        where TSensorInfo : ICoreSensor, new()
     {
         
     }

@@ -17,8 +17,8 @@ namespace Threax.Home.ZWave.Repository
     /// Manage switches.
     /// </summary>
     public class ZWaveSwitchRepository<TIn, TOut> : IZWaveSwitchRepository<TIn, TOut>, IDisposable
-        where TIn : ISwitch, new()
-        where TOut : ISwitch, new()
+        where TIn : ICoreSwitch, new()
+        where TOut : ICoreSwitch, new()
     {
         private ZWaveController zwave;
         private ZWaveConfig config;
