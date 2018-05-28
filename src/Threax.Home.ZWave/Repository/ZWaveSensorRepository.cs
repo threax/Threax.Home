@@ -10,8 +10,8 @@ using ZWave.CommandClasses;
 
 namespace Threax.Home.ZWave.Repository
 {
-    public class ZWaveSensorRepository<TSensorInfo>
-        where TSensorInfo : ISensor, new()
+    public class ZWaveSensorRepository<TSensor> : IZWaveSensorRepository<TSensor>
+        where TSensor : ISensor, new()
     {
         enum Sensor : byte
         {
@@ -21,40 +21,48 @@ namespace Threax.Home.ZWave.Repository
             SensorUv = 27,
         }
 
+        private static readonly Sensor[] AllSensors = new Sensor[] { Sensor.SensorFarenheight, Sensor.SensorHumidity, Sensor.SensorLight, Sensor.SensorUv };
+
+        public string SubsystemName => "ZWave";
+
         private ZWaveController zwave;
+        private ZWaveConfig config;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="zwave">The ZWaveController to use.</param>
-        public ZWaveSensorRepository(ZWaveController zwave)
+        public ZWaveSensorRepository(ZWaveController zwave, ZWaveConfig config)
         {
             this.zwave = zwave;
+            this.config = config;
         }
 
-        public async Task<IEnumerable<TSensorInfo>> List()
+        public async Task<IEnumerable<TSensor>> List()
         {
-            return new TSensorInfo[]
+            return new TSensor[]
             {
-                await GetSensorData("3", new Sensor[]{ Sensor.SensorFarenheight, Sensor.SensorHumidity, Sensor.SensorLight, Sensor.SensorUv })
+                await GetSensorData(config.ComPort, "3", AllSensors)
             };
         }
 
-        public async Task<TSensorInfo> Get(String id)
+        public async Task<TSensor> Get(String bridge, String id)
         {
-            var query = await List();
-            return query.First(i => i.Id == id);
+            var result = await GetSensorData(bridge, id, AllSensors);
+            return result;
         }
 
-        private async Task<TSensorInfo> GetSensorData(String id, IEnumerable<Sensor> sensors)
+        private async Task<TSensor> GetSensorData(String bridge, String id, IEnumerable<Sensor> sensors)
         {
             var byteId = byte.Parse(id);
             var nodes = await zwave.GetNodes();
             var node = nodes[byteId];
 
-            var sensorInfo = new TSensorInfo()
+            var sensorInfo = new TSensor()
             {
-                Id = id
+                Id = id,
+                Bridge = bridge,
+                Subsystem = SubsystemName
             };
 
             foreach (var sensor in sensors)

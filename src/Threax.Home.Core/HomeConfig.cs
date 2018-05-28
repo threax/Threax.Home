@@ -6,16 +6,17 @@ namespace Threax.Home.Core
 {
     public class HomeConfig
     {
-        private List<Action<ISwitchSubsystemConfiguration>> addSubsystemCallbacks = new List<Action<ISwitchSubsystemConfiguration>>();
+        private List<Action<ISwitchSubsystemConfiguration>> switchCallbacks = new List<Action<ISwitchSubsystemConfiguration>>();
+        private List<Action<ISensorSubsystemConfiguration>> sensorCallbacks = new List<Action<ISensorSubsystemConfiguration>>();
 
-        public void AddConfig(Action<ISwitchSubsystemConfiguration> configs)
+        public void AddSwitch(Action<ISwitchSubsystemConfiguration> configs)
         {
-            addSubsystemCallbacks.Add(configs);
+            switchCallbacks.Add(configs);
         }
 
-        public void AddConfig(Type baseType)
+        public void AddSwitch(Type baseType)
         {
-            addSubsystemCallbacks.Add(c =>
+            AddSwitch(c =>
             {
                 c.AddSubsystem((ISwitchRepository)c.Services.GetService(baseType.MakeGenericType(c.TInType, c.TOutType)));
             });
@@ -23,7 +24,28 @@ namespace Threax.Home.Core
 
         internal void SetupConfigs(ISwitchSubsystemConfiguration config)
         {
-            foreach(var callback in addSubsystemCallbacks)
+            foreach(var callback in switchCallbacks)
+            {
+                callback(config);
+            }
+        }
+
+        public void AddSensorConfig(Action<ISensorSubsystemConfiguration> configs)
+        {
+            sensorCallbacks.Add(configs);
+        }
+
+        public void AddSensorConfig(Type baseType)
+        {
+            AddSensorConfig(c =>
+            {
+                c.AddSubsystem((ISensorRepository)c.Services.GetService(baseType.MakeGenericType(c.TSensorType)));
+            });
+        }
+
+        internal void SetupConfigs(ISensorSubsystemConfiguration config)
+        {
+            foreach (var callback in sensorCallbacks)
             {
                 callback(config);
             }

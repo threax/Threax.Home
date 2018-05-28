@@ -1,8 +1,23 @@
-﻿namespace Threax.Home.Core
+﻿using System;
+
+namespace Threax.Home.Core
 {
     public interface ISensor
     {
-        string Id { get; set; }
+        /// <summary>
+        /// Which type of system the switch belongs to. (Hue, ZWave, etc.)
+        /// </summary>
+        String Subsystem { get; set; }
+
+        /// <summary>
+        /// A logical hardware grouping for the switch.
+        /// </summary>
+        String Bridge { get; set; }
+
+        /// <summary>
+        /// The id of the switch.
+        /// </summary>
+        String Id { get; set; }
 
         float TempValue { get; set; }
 
