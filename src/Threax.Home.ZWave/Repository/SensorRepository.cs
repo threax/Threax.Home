@@ -1,36 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Threax.AspNetCore.Halcyon.Ext;
 using Threax.Home.Core;
 using Threax.Home.ZWave.Models;
-using Threax.Home.ZWave.ViewModels;
 using ZWave;
 using ZWave.Channel;
 using ZWave.CommandClasses;
 
-namespace Threax.Home.ZWave.Controllers
+namespace Threax.Home.ZWave.Repository
 {
-    [Route("[controller]/[action]")]
-    [ResponseCache(NoStore = true)]
-    public class SensorController : Controller
+    public class SensorRepository<TTemp, TLight, THumidity, TUv>
+        where TTemp : ISensorDataView, new()
+        where TLight : ISensorDataView, new()
+        where THumidity : ISensorDataView, new()
+        where TUv : ISensorDataView, new()
     {
         private const byte SensorFarenheight = 2;
         private const byte SensorLight = 3;
         private const byte SensorHumidity = 5;
         private const byte SensorUv = 27;
-
-        public static class Rels
-        {
-            public const String ListSensors = "ListSensors";
-            public const String GetTemperature = "GetTemperature";
-            public const String GetLight = "GetLight";
-            public const String GetHumidity = "GetHumidity";
-            public const String GetUv = "GetUv";
-            public const String GetSensor = "GetSensor";
-        }
 
         private ZWaveController zwave;
 
@@ -38,13 +26,11 @@ namespace Threax.Home.ZWave.Controllers
         /// Constructor
         /// </summary>
         /// <param name="zwave">The ZWaveController to use.</param>
-        public SensorController(ZWaveController zwave)
+        public SensorRepository(ZWaveController zwave)
         {
             this.zwave = zwave;
         }
 
-        [HttpGet]
-        [HalRel(Rels.ListSensors)]
         public async Task<SensorInfoCollectionView> List()
         {
             return new SensorInfoCollectionView(new SensorInfoView[]
@@ -56,56 +42,46 @@ namespace Threax.Home.ZWave.Controllers
             });
         }
 
-        [HttpGet("{Id}")]
-        [HalRel(Rels.GetSensor)]
         public async Task<SensorInfoView> Get(byte id)
         {
             var query = await List();
             return query.Items.First(i => i.Id == id);
         }
 
-        [HttpGet("{Id}")]
-        [HalRel(Rels.GetTemperature)]
-        public async Task<TemperatureDataView> Temperature(byte id)
+        public async Task<TTemp> Temperature(byte id)
         {
             var report = await GetSensorData(id, SensorFarenheight);
-            return new TemperatureDataView()
+            return new TTemp()
             {
                 Value = report.Value,
                 Units = Units.Fahrenheit
             };
         }
 
-        [HttpGet("{Id}")]
-        [HalRel(Rels.GetLight)]
-        public async Task<LightDataView> Light(byte id)
+        public async Task<TLight> Light(byte id)
         {
             var report = await GetSensorData(id, SensorLight);
-            return new LightDataView()
+            return new TLight()
             {
                 Value = report.Value,
                 Units = Units.Lux
             };
         }
 
-        [HttpGet("{Id}")]
-        [HalRel(Rels.GetHumidity)]
-        public async Task<HumidityDataView> Humidity(byte id)
+        public async Task<THumidity> Humidity(byte id)
         {
             var report = await GetSensorData(id, SensorHumidity);
-            return new HumidityDataView()
+            return new THumidity()
             {
                 Value = report.Value,
                 Units = Units.Percent
             };
         }
 
-        [HttpGet("{Id}")]
-        [HalRel(Rels.GetUv)]
-        public async Task<UvDataView> Uv(byte id)
+        public async Task<TUv> Uv(byte id)
         {
             var report = await GetSensorData(id, SensorUv);
-            return new UvDataView()
+            return new TUv()
             {
                 Value = report.Value,
                 Units = Units.None
