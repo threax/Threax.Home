@@ -16,7 +16,7 @@ namespace Threax.Home.ZWave.Repository
     /// <summary>
     /// Manage switches.
     /// </summary>
-    public class SwitchRepository<TIn, TOut> : IZWaveSwitchRepository<TIn, TOut>
+    public class ZWaveSwitchRepository<TIn, TOut> : IZWaveSwitchRepository<TIn, TOut>
         where TIn : ISwitch, new()
         where TOut : ISwitch, new()
     {
@@ -29,7 +29,7 @@ namespace Threax.Home.ZWave.Repository
         /// Constructor
         /// </summary>
         /// <param name="zwave">The ZWaveController to use.</param>
-        public SwitchRepository(ZWaveController zwave, ZWaveConfig config)
+        public ZWaveSwitchRepository(ZWaveController zwave, ZWaveConfig config)
         {
             this.zwave = zwave;
             this.config = config;

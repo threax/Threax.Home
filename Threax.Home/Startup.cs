@@ -57,6 +57,7 @@ namespace Threax.Home
 
             services.AddHue(o => Configuration.Bind("Hue", o));
             services.AddMfi(o => Configuration.Bind("Mfi", o));
+            services.AddZWave(o => Configuration.Bind("ZWave", o));
 
             //Add the client side configuration object
             services.AddClientConfig(clientConfig, o =>
