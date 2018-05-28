@@ -9,7 +9,6 @@ using Threax.Home.Core;
 namespace Threax.Home.ModelSchemas
 {
     //[RequireAuthorization(typeof(Roles), nameof(Roles.EditValues))]
-    [PluralName("Switches")]
     [AddNamespaces("using Threax.Home.Core;")]
     public abstract class Sensor : ICoreSensor
     {

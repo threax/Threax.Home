@@ -233,6 +233,72 @@ export class EntryPointResult {
         return this.client.HasLinkDoc("SetUser");
     }
 
+    public addNewSwitches(): Promise<void> {
+        return this.client.LoadLink("AddNewSwitches").then(hal.makeVoid);
+    }
+
+    public canAddNewSwitches(): boolean {
+        return this.client.HasLink("AddNewSwitches");
+    }
+
+    public linkForAddNewSwitches(): hal.HalLink {
+        return this.client.GetLink("AddNewSwitches");
+    }
+
+    public listSensors(query: SensorQuery): Promise<SensorCollectionResult> {
+        return this.client.LoadLinkWithQuery("ListSensors", query)
+               .then(r => {
+                    return new SensorCollectionResult(r);
+                });
+
+    }
+
+    public canListSensors(): boolean {
+        return this.client.HasLink("ListSensors");
+    }
+
+    public linkForListSensors(): hal.HalLink {
+        return this.client.GetLink("ListSensors");
+    }
+
+    public getListSensorsDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("ListSensors")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasListSensorsDocs(): boolean {
+        return this.client.HasLinkDoc("ListSensors");
+    }
+
+    public addSensor(data: SensorInput): Promise<SensorResult> {
+        return this.client.LoadLinkWithBody("AddSensor", data)
+               .then(r => {
+                    return new SensorResult(r);
+                });
+
+    }
+
+    public canAddSensor(): boolean {
+        return this.client.HasLink("AddSensor");
+    }
+
+    public linkForAddSensor(): hal.HalLink {
+        return this.client.GetLink("AddSensor");
+    }
+
+    public getAddSensorDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("AddSensor")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasAddSensorDocs(): boolean {
+        return this.client.HasLinkDoc("AddSensor");
+    }
+
     public listSwitches(query: SwitchQuery): Promise<SwitchCollectionResult> {
         return this.client.LoadLinkWithQuery("ListSwitches", query)
                .then(r => {
@@ -259,32 +325,307 @@ export class EntryPointResult {
     public hasListSwitchesDocs(): boolean {
         return this.client.HasLinkDoc("ListSwitches");
     }
+}
 
-    public addSwitch(data: SwitchInput): Promise<SwitchResult> {
-        return this.client.LoadLinkWithBody("AddSwitch", data)
+export class SensorResult {
+    private client: hal.HalEndpointClient;
+
+    constructor(client: hal.HalEndpointClient) {
+        this.client = client;
+    }
+
+    private strongData: Sensor = undefined;
+    public get data(): Sensor {
+        this.strongData = this.strongData || this.client.GetData<Sensor>();
+        return this.strongData;
+    }
+
+    public refresh(): Promise<SensorResult> {
+        return this.client.LoadLink("self")
                .then(r => {
-                    return new SwitchResult(r);
+                    return new SensorResult(r);
                 });
 
     }
 
-    public canAddSwitch(): boolean {
-        return this.client.HasLink("AddSwitch");
+    public canRefresh(): boolean {
+        return this.client.HasLink("self");
     }
 
-    public linkForAddSwitch(): hal.HalLink {
-        return this.client.GetLink("AddSwitch");
+    public linkForRefresh(): hal.HalLink {
+        return this.client.GetLink("self");
     }
 
-    public getAddSwitchDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("AddSwitch")
+    public getRefreshDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("self")
             .then(r => {
                 return r.GetData<hal.HalEndpointDoc>();
             });
     }
 
-    public hasAddSwitchDocs(): boolean {
-        return this.client.HasLinkDoc("AddSwitch");
+    public hasRefreshDocs(): boolean {
+        return this.client.HasLinkDoc("self");
+    }
+
+    public update(data: SensorInput): Promise<SensorResult> {
+        return this.client.LoadLinkWithBody("Update", data)
+               .then(r => {
+                    return new SensorResult(r);
+                });
+
+    }
+
+    public canUpdate(): boolean {
+        return this.client.HasLink("Update");
+    }
+
+    public linkForUpdate(): hal.HalLink {
+        return this.client.GetLink("Update");
+    }
+
+    public getUpdateDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Update")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasUpdateDocs(): boolean {
+        return this.client.HasLinkDoc("Update");
+    }
+
+    public delete(): Promise<void> {
+        return this.client.LoadLink("Delete").then(hal.makeVoid);
+    }
+
+    public canDelete(): boolean {
+        return this.client.HasLink("Delete");
+    }
+
+    public linkForDelete(): hal.HalLink {
+        return this.client.GetLink("Delete");
+    }
+}
+
+export class SensorCollectionResult {
+    private client: hal.HalEndpointClient;
+
+    constructor(client: hal.HalEndpointClient) {
+        this.client = client;
+    }
+
+    private strongData: SensorCollection = undefined;
+    public get data(): SensorCollection {
+        this.strongData = this.strongData || this.client.GetData<SensorCollection>();
+        return this.strongData;
+    }
+
+    private strongItems: SensorResult[];
+    public get items(): SensorResult[] {
+        if (this.strongItems === undefined) {
+            var embeds = this.client.GetEmbed("values");
+            var clients = embeds.GetAllClients();
+            this.strongItems = [];
+            for (var i = 0; i < clients.length; ++i) {
+                this.strongItems.push(new SensorResult(clients[i]));
+            }
+        }
+        return this.strongItems;
+    }
+
+    public refresh(): Promise<SensorCollectionResult> {
+        return this.client.LoadLink("self")
+               .then(r => {
+                    return new SensorCollectionResult(r);
+                });
+
+    }
+
+    public canRefresh(): boolean {
+        return this.client.HasLink("self");
+    }
+
+    public linkForRefresh(): hal.HalLink {
+        return this.client.GetLink("self");
+    }
+
+    public getRefreshDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("self")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasRefreshDocs(): boolean {
+        return this.client.HasLinkDoc("self");
+    }
+
+    public getGetDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Get")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasGetDocs(): boolean {
+        return this.client.HasLinkDoc("Get");
+    }
+
+    public getListDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("List")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasListDocs(): boolean {
+        return this.client.HasLinkDoc("List");
+    }
+
+    public getUpdateDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Update")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasUpdateDocs(): boolean {
+        return this.client.HasLinkDoc("Update");
+    }
+
+    public add(data: SensorInput): Promise<SensorResult> {
+        return this.client.LoadLinkWithBody("Add", data)
+               .then(r => {
+                    return new SensorResult(r);
+                });
+
+    }
+
+    public canAdd(): boolean {
+        return this.client.HasLink("Add");
+    }
+
+    public linkForAdd(): hal.HalLink {
+        return this.client.GetLink("Add");
+    }
+
+    public getAddDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Add")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasAddDocs(): boolean {
+        return this.client.HasLinkDoc("Add");
+    }
+
+    public next(): Promise<SensorCollectionResult> {
+        return this.client.LoadLink("next")
+               .then(r => {
+                    return new SensorCollectionResult(r);
+                });
+
+    }
+
+    public canNext(): boolean {
+        return this.client.HasLink("next");
+    }
+
+    public linkForNext(): hal.HalLink {
+        return this.client.GetLink("next");
+    }
+
+    public getNextDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("next")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasNextDocs(): boolean {
+        return this.client.HasLinkDoc("next");
+    }
+
+    public previous(): Promise<SensorCollectionResult> {
+        return this.client.LoadLink("previous")
+               .then(r => {
+                    return new SensorCollectionResult(r);
+                });
+
+    }
+
+    public canPrevious(): boolean {
+        return this.client.HasLink("previous");
+    }
+
+    public linkForPrevious(): hal.HalLink {
+        return this.client.GetLink("previous");
+    }
+
+    public getPreviousDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("previous")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasPreviousDocs(): boolean {
+        return this.client.HasLinkDoc("previous");
+    }
+
+    public first(): Promise<SensorCollectionResult> {
+        return this.client.LoadLink("first")
+               .then(r => {
+                    return new SensorCollectionResult(r);
+                });
+
+    }
+
+    public canFirst(): boolean {
+        return this.client.HasLink("first");
+    }
+
+    public linkForFirst(): hal.HalLink {
+        return this.client.GetLink("first");
+    }
+
+    public getFirstDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("first")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasFirstDocs(): boolean {
+        return this.client.HasLinkDoc("first");
+    }
+
+    public last(): Promise<SensorCollectionResult> {
+        return this.client.LoadLink("last")
+               .then(r => {
+                    return new SensorCollectionResult(r);
+                });
+
+    }
+
+    public canLast(): boolean {
+        return this.client.HasLink("last");
+    }
+
+    public linkForLast(): hal.HalLink {
+        return this.client.GetLink("last");
+    }
+
+    public getLastDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("last")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasLastDocs(): boolean {
+        return this.client.HasLinkDoc("last");
     }
 }
 
@@ -353,18 +694,6 @@ export class SwitchResult {
 
     public hasUpdateDocs(): boolean {
         return this.client.HasLinkDoc("Update");
-    }
-
-    public delete(): Promise<void> {
-        return this.client.LoadLink("Delete").then(hal.makeVoid);
-    }
-
-    public canDelete(): boolean {
-        return this.client.HasLink("Delete");
-    }
-
-    public linkForDelete(): hal.HalLink {
-        return this.client.GetLink("Delete");
     }
 }
 
@@ -452,33 +781,6 @@ export class SwitchCollectionResult {
 
     public hasUpdateDocs(): boolean {
         return this.client.HasLinkDoc("Update");
-    }
-
-    public add(data: SwitchInput): Promise<SwitchResult> {
-        return this.client.LoadLinkWithBody("Add", data)
-               .then(r => {
-                    return new SwitchResult(r);
-                });
-
-    }
-
-    public canAdd(): boolean {
-        return this.client.HasLink("Add");
-    }
-
-    public linkForAdd(): hal.HalLink {
-        return this.client.GetLink("Add");
-    }
-
-    public getAddDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("Add")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasAddDocs(): boolean {
-        return this.client.HasLinkDoc("Add");
     }
 
     public next(): Promise<SwitchCollectionResult> {
@@ -789,6 +1091,64 @@ export interface UserCollection {
     total?: number;
 }
 
+export interface SensorQuery {
+    sensorId?: string;
+    /** The number of pages (item number = Offset * Limit) into the collection to query. */
+    offset?: number;
+    /** The limit of the number of items to return. */
+    limit?: number;
+}
+
+export interface SensorCollection {
+    /** The number of pages (item number = Offset * Limit) into the collection to query. */
+    offset?: number;
+    sensorId?: string;
+    total?: number;
+    /** The limit of the number of items to return. */
+    limit?: number;
+}
+
+export enum Units {
+    None = <any>"None", 
+    Fahrenheit = <any>"Fahrenheit", 
+    Celsius = <any>"Celsius", 
+    Lux = <any>"Lux", 
+    Percent = <any>"Percent", 
+}
+
+export interface SensorInput {
+    name: string;
+    subsystem: string;
+    bridge: string;
+    id: string;
+    tempValue?: number;
+    tempUnits?: SensorInputTempUnits;
+    lightValue?: number;
+    lightUnits?: SensorInputLightUnits;
+    humidityValue?: number;
+    humidityUnits?: SensorInputHumidityUnits;
+    uvValue?: number;
+    uvUnits?: SensorInputUvUnits;
+}
+
+export interface Sensor {
+    sensorId?: string;
+    name?: string;
+    subsystem?: string;
+    bridge?: string;
+    id?: string;
+    tempValue?: number;
+    tempUnits?: SensorTempUnits;
+    lightValue?: number;
+    lightUnits?: SensorLightUnits;
+    humidityValue?: number;
+    humidityUnits?: SensorHumidityUnits;
+    uvValue?: number;
+    uvUnits?: SensorUvUnits;
+    created?: string;
+    modified?: string;
+}
+
 export interface SwitchQuery {
     switchId?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
@@ -806,25 +1166,89 @@ export interface SwitchCollection {
     limit?: number;
 }
 
-export interface SwitchInput {
-    name: string;
-    subsystem: string;
-    bridge: string;
-    id: string;
-    value?: string;
-    brightness?: number;
-    hexColor?: string;
-}
-
 export interface Switch {
+    brightness?: number;
     switchId?: string;
     name?: string;
     subsystem?: string;
     bridge?: string;
     id?: string;
     value?: string;
-    brightness?: number;
     hexColor?: string;
     created?: string;
     modified?: string;
+}
+
+export interface SwitchInput {
+    brightness?: number;
+    name: string;
+    subsystem: string;
+    bridge: string;
+    id: string;
+    value?: string;
+    hexColor?: string;
+}
+
+export enum SensorInputTempUnits {
+    None = <any>"None", 
+    Fahrenheit = <any>"Fahrenheit", 
+    Celsius = <any>"Celsius", 
+    Lux = <any>"Lux", 
+    Percent = <any>"Percent", 
+}
+
+export enum SensorInputLightUnits {
+    None = <any>"None", 
+    Fahrenheit = <any>"Fahrenheit", 
+    Celsius = <any>"Celsius", 
+    Lux = <any>"Lux", 
+    Percent = <any>"Percent", 
+}
+
+export enum SensorInputHumidityUnits {
+    None = <any>"None", 
+    Fahrenheit = <any>"Fahrenheit", 
+    Celsius = <any>"Celsius", 
+    Lux = <any>"Lux", 
+    Percent = <any>"Percent", 
+}
+
+export enum SensorInputUvUnits {
+    None = <any>"None", 
+    Fahrenheit = <any>"Fahrenheit", 
+    Celsius = <any>"Celsius", 
+    Lux = <any>"Lux", 
+    Percent = <any>"Percent", 
+}
+
+export enum SensorTempUnits {
+    None = <any>"None", 
+    Fahrenheit = <any>"Fahrenheit", 
+    Celsius = <any>"Celsius", 
+    Lux = <any>"Lux", 
+    Percent = <any>"Percent", 
+}
+
+export enum SensorLightUnits {
+    None = <any>"None", 
+    Fahrenheit = <any>"Fahrenheit", 
+    Celsius = <any>"Celsius", 
+    Lux = <any>"Lux", 
+    Percent = <any>"Percent", 
+}
+
+export enum SensorHumidityUnits {
+    None = <any>"None", 
+    Fahrenheit = <any>"Fahrenheit", 
+    Celsius = <any>"Celsius", 
+    Lux = <any>"Lux", 
+    Percent = <any>"Percent", 
+}
+
+export enum SensorUvUnits {
+    None = <any>"None", 
+    Fahrenheit = <any>"Fahrenheit", 
+    Celsius = <any>"Celsius", 
+    Lux = <any>"Lux", 
+    Percent = <any>"Percent", 
 }
