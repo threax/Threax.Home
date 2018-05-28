@@ -34,26 +34,19 @@ namespace Threax.Home.Controllers.Api
         }
 
         [HttpPost("[action]")]
-        [HalRel(nameof(AddHueSwitches))]
-        public async Task AddHueSwitches([FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> hueSwitchRepository)
+        [HalRel(nameof(AddNewSwitches))]
+        public async Task AddNewSwitches([FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo)
         {
-            foreach(var item in await hueSwitchRepository.List())
-            {
-                try
-                {
-                    //Kind of brute force
-                    await repo.Add(item);
-                }
-                catch (Exception){ }
-            }
+            var items = await switchRepo.List();
+            await repo.AddMissing(items);
         }
 
         [HttpGet("{SwitchId}")]
         [HalRel(CrudRels.Get)]
-        public async Task<Switch> Get(Guid switchId, [FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> hueSwitchRepository)
+        public async Task<Switch> Get(Guid switchId, [FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo)
         {
             var cachedSwitch = await repo.Get(switchId);
-            var liveSwitch = await hueSwitchRepository.Get(cachedSwitch.Subsystem, cachedSwitch.Bridge, cachedSwitch.Id);
+            var liveSwitch = await switchRepo.Get(cachedSwitch.Subsystem, cachedSwitch.Bridge, cachedSwitch.Id);
             return await repo.Update(switchId, liveSwitch);
         }
 
@@ -68,14 +61,14 @@ namespace Threax.Home.Controllers.Api
         [HttpPut("{SwitchId}")]
         [HalRel(CrudRels.Update)]
         [AutoValidate("Cannot update @switch")]
-        public async Task<Switch> Update(Guid switchId, [FromBody]SwitchInput @switch, [FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> hueSwitchRepository)
+        public async Task<Switch> Update(Guid switchId, [FromBody]SwitchInput @switch, [FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo)
         {
             var cachedSwitch = await repo.Get(switchId);
             @switch.Bridge = cachedSwitch.Bridge;
             @switch.Subsystem = cachedSwitch.Subsystem;
             @switch.Id = cachedSwitch.Id;
-            await hueSwitchRepository.Set(@switch);
-            var liveSwitch = await hueSwitchRepository.Get(cachedSwitch.Subsystem, cachedSwitch.Bridge, cachedSwitch.Id);
+            await switchRepo.Set(@switch);
+            var liveSwitch = await switchRepo.Get(cachedSwitch.Subsystem, cachedSwitch.Bridge, cachedSwitch.Id);
             return await repo.Update(switchId, liveSwitch);
         }
 

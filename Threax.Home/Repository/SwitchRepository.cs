@@ -62,6 +62,14 @@ namespace Threax.Home.Repository
             throw new KeyNotFoundException($"Cannot find @switch {switchId.ToString()}");
         }
 
+        public async Task AddMissing(IEnumerable<SwitchInput> switches)
+        {
+            var existing = await dbContext.Switches.ToListAsync();
+
+            var toAdd = switches.Where(o => !existing.Any(i => o.Subsystem == i.Subsystem && o.Bridge == i.Bridge && o.Id == i.Id));
+            await AddRange(toAdd);
+        }
+
         public async Task Delete(Guid id)
         {
             var entity = await this.Entity(id);
