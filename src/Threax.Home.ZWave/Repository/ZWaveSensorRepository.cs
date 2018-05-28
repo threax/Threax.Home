@@ -46,9 +46,11 @@ namespace Threax.Home.ZWave.Repository
 
         public async Task<IEnumerable<TSensor>> List()
         {
+            var sensor = await GetSensorData(config.ComPort, "6", AllSensors);
+            sensor.Name = "Outdoor Rear";
             return new TSensor[]
             {
-                await GetSensorData(config.ComPort, "6", AllSensors)
+                sensor
             };
         }
 
@@ -66,7 +68,7 @@ namespace Threax.Home.ZWave.Repository
         private async Task<TSensor> GetSensorData(String bridge, String id, IEnumerable<Sensor> sensors)
         {
             var byteId = byte.Parse(id);
-            //var nodes = await zwave.GetNodes();
+            var nodes = await zwave.GetNodes();
             var node = await GetNode(byteId);
 
             var sensorInfo = new TSensor()
@@ -78,24 +80,25 @@ namespace Threax.Home.ZWave.Repository
 
             foreach (var sensor in sensors)
             {
-                var commandClass = node.GetCommandClass<SensorMultiLevel>();
+                var response = await zwave.Channel.Send(byteId, new Command(CommandClass.SensorMultiLevel, 0x04, (byte)sensor), 0x05);
+                var report = new SensorMultiLevelReport2(node, response);
                 switch (sensor)
                 {
                     case Sensor.SensorFarenheight:
                         sensorInfo.TempUnits = Units.Fahrenheit;
-                        sensorInfo.TempValue = (await commandClass.Get(SensorType.Temperature)).Value;
+                        sensorInfo.TempValue = report.Value;
                         break;
                     case Sensor.SensorHumidity:
-                        sensorInfo.TempUnits = Units.Percent;
-                        sensorInfo.TempValue = (await commandClass.Get(SensorType.RelativeHumidity)).Value;
+                        sensorInfo.HumidityUnits = Units.Percent;
+                        sensorInfo.HumidityValue = report.Value;
                         break;
                     case Sensor.SensorLight:
-                        sensorInfo.TempUnits = Units.Lux;
-                        sensorInfo.TempValue = (await commandClass.Get(SensorType.Luminance)).Value;
+                        sensorInfo.LightUnits = Units.Lux;
+                        sensorInfo.LightValue = report.Value;
                         break;
                     case Sensor.SensorUv:
-                        sensorInfo.TempUnits = Units.None;
-                        sensorInfo.TempValue = (await commandClass.Get(SensorType.Ultraviolet)).Value;
+                        sensorInfo.UvUnits = Units.None;
+                        sensorInfo.UvValue = report.Value;
                         break;
                 }
             }

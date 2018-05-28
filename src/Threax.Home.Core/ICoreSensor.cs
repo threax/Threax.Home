@@ -19,6 +19,8 @@ namespace Threax.Home.Core
         /// </summary>
         String Id { get; set; }
 
+        String Name { get; set; }
+
         double? TempValue { get; set; }
 
         Units? TempUnits { get; set; }
