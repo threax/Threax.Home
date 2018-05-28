@@ -17,9 +17,9 @@ namespace Threax.Home.ZWave.Repository
         /// Constructor
         /// </summary>
         /// <param name="zwave">The ZWaveController to use.</param>
-        public ZWaveConfigRepository(ZWaveController zwave)
+        public ZWaveConfigRepository(IZWaveControllerManager zwave)
         {
-            this.zwave = zwave;
+            this.zwave = zwave.Controller;
         }
 
         public async Task<IEnumerable<CommandClassReportView>> GetSupportedCommandClasses(byte id)

@@ -32,9 +32,9 @@ namespace Threax.Home.ZWave.Repository
         /// Constructor
         /// </summary>
         /// <param name="zwave">The ZWaveController to use.</param>
-        public ZWaveSensorRepository(ZWaveController zwave, ZWaveConfig config)
+        public ZWaveSensorRepository(IZWaveControllerManager zwave, ZWaveConfig config)
         {
-            this.zwave = zwave;
+            this.zwave = zwave.Controller;
             this.config = config;
         }
 
