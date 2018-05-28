@@ -16,79 +16,36 @@ namespace Threax.Home.ZWave.Controllers
     /// <summary>
     /// Manage switches.
     /// </summary>
-    [Route("[controller]")]
-    [ResponseCache(NoStore = true)]
-    public class SwitchController : Controller
+    public class SwitchController<TIn, TOut> : ISwitchRepository<TIn, TOut>
+        where TIn : ISwitch, new()
+        where TOut : ISwitch, new()
     {
-        public static class Rels
-        {
-            public const String List = "listSwitches";
-            public const String SetSwitches = "setSwitches";
-            public const String SetSwitch = "set";
-            public const String GetSwitch = "get";
-        }
-
         private ZWaveController zwave;
+        private ZWaveConfig config;
+
+        public string SubsystemName => "ZWave";
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="zwave">The ZWaveController to use.</param>
-        public SwitchController(ZWaveController zwave)
+        public SwitchController(ZWaveController zwave, ZWaveConfig config)
         {
             this.zwave = zwave;
+            this.config = config;
         }
 
-        /// <summary>
-        /// Get the position of a named switch.
-        /// </summary>
-        /// <param name="ids">The ids of the switches to lookup.</param>
-        /// <returns>The position of the switch.</returns>
-        [HttpGet]
-        [HalRel(Rels.List)]
-        public async Task<ZWaveSwitchPositionCollectionView> Get([FromQuery] List<int> ids)
+        private async Task<Basic> GetBasicCommand(byte nodeId)
         {
-            if(ids.Count == 0)
-            {
-                ids.AddRange(GetSwitches());
-            }
-
-            var positions = new List<ZWaveSwitchPosition>();
-            foreach (var id in ids)
-            {
-                positions.Add(await Get(id));
-            }
-            return new ZWaveSwitchPositionCollectionView(positions);
+            return (await zwave.GetNodes()).First(n => n.NodeID == nodeId).GetCommandClass<Basic>();
         }
 
-        /// <summary>
-        /// Set multiple switch positions.
-        /// </summary>
-        /// <param name="bridge">The bridge to use.</param>
-        /// <param name="settings">The position to apply.</param>
-        /// <returns>void</returns>
-        [HttpPut]
-        [HalRel(Rels.SetSwitches)]
-        public async Task Set([FromBody] IEnumerable<ZWaveSwitchPosition> positions)
+        public async Task<TOut> Get(string bridge, string id)
         {
-            foreach (var position in positions)
-            {
-                await Set(position.Id, position);
-            }
-        }
-
-        /// <summary>
-        /// Get the position of a named switch.
-        /// </summary>
-        /// <param name="ids">The ids of the switches to lookup.</param>
-        /// <returns>The position of the switch.</returns>
-        [HttpGet("{Id}")]
-        [HalRel(Rels.GetSwitch)]
-        public async Task<ZWaveSwitchPosition> Get(int id)
-        {
+            var intId = int.Parse(id);
             //Hardcoded, for now
             Basic com;
-            switch (id)
+            switch (intId)
             {
                 case 2:
                     com = await GetBasicCommand(2);
@@ -115,27 +72,29 @@ namespace Threax.Home.ZWave.Controllers
             {
                 value = Switch3SwitchPosition.High;
             }
-            return new ZWaveSwitchPosition()
+            return new TOut()
             {
-                Id = id,
-                Value = value
+                Id = intId.ToString(),
+                Value = value.ToString(),
+                Bridge = bridge,
+                Subsystem = SubsystemName,
+                Name = "Bedroom Fan"
             };
         }
 
-        /// <summary>
-        /// Set multiple switch positions.
-        /// </summary>
-        /// <param name="bridge">The bridge to use.</param>
-        /// <param name="settings">The position to apply.</param>
-        /// <returns>void</returns>
-        [HttpPut("{Id}")]
-        [HalRel(Rels.SetSwitch)]
-        public async Task Set(int id, [FromBody] ZWaveSwitchPosition position)
+        public async Task<IEnumerable<TOut>> List()
         {
-            position.Id = id;
-            //Hardcoded, for now
+            var switches = new List<TOut>();
+
+            switches.Add(await Get(config.ComPort, "2"));
+
+            return switches;
+        }
+
+        public async Task Set(TIn setting)
+        {
             Basic com;
-            switch (position.Id)
+            switch (int.Parse(setting.Id))
             {
                 case 2:
                     com = await GetBasicCommand(2);
@@ -144,7 +103,7 @@ namespace Threax.Home.ZWave.Controllers
                     throw new FileNotFoundException();
             }
 
-            switch (position.Value)
+            switch (Enum.Parse(typeof(Switch3SwitchPosition), setting.Value))
             {
                 case Switch3SwitchPosition.Off:
                     await com.Set(0);
@@ -159,30 +118,8 @@ namespace Threax.Home.ZWave.Controllers
                     await com.Set(99);
                     break;
                 default:
-                    throw new ErrorResultException($"{position.Value} is not a valid position for {position.Id}");
+                    throw new ErrorResultException($"{setting.Value} is not a valid position for {setting.Id}");
             }
-        }
-
-        ///// <summary>
-        ///// List all the switches.
-        ///// </summary>
-        ///// <returns></returns>
-        //[HttpGet]
-        //[HalRel(Rels.List)]
-        //public async Task<IEnumerable<SwitchInfo<int>>> List()
-        //{
-        //    return await Task.FromResult(GetSwitches());
-        //}
-
-        private IEnumerable<int> GetSwitches()
-        {
-            //Hardcoded
-            yield return 2;
-        }
-
-        private async Task<Basic> GetBasicCommand(byte nodeId)
-        {
-            return (await zwave.GetNodes()).First(n => n.NodeID == nodeId).GetCommandClass<Basic>();
         }
     }
 }

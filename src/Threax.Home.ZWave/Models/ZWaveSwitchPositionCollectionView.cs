@@ -8,9 +8,6 @@ using Threax.Home.ZWave.Controllers;
 
 namespace Threax.Home.ZWave.Models
 {
-    [HalModel]
-    [HalSelfActionLink(SwitchController.Rels.List, typeof(SwitchController))]
-    [HalActionLink(SwitchController.Rels.List, typeof(SwitchController))]
     public class ZWaveSwitchPositionCollectionView : CollectionView<ZWaveSwitchPosition>
     {
         public ZWaveSwitchPositionCollectionView(IEnumerable<ZWaveSwitchPosition> items = null) : base(items)
