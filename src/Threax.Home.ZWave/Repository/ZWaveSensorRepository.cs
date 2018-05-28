@@ -10,7 +10,7 @@ using ZWave.CommandClasses;
 
 namespace Threax.Home.ZWave.Repository
 {
-    public class ZWaveSensorRepository<TSensor> : IZWaveSensorRepository<TSensor>
+    public class ZWaveSensorRepository<TSensor> : IZWaveSensorRepository<TSensor>, IDisposable
         where TSensor : ICoreSensor, new()
     {
         enum Sensor : byte
@@ -36,13 +36,19 @@ namespace Threax.Home.ZWave.Repository
         {
             this.zwave = zwave;
             this.config = config;
+            this.zwave.Open();
+        }
+
+        public void Dispose()
+        {
+            this.zwave.Close();
         }
 
         public async Task<IEnumerable<TSensor>> List()
         {
             return new TSensor[]
             {
-                await GetSensorData(config.ComPort, "3", AllSensors)
+                await GetSensorData(config.ComPort, "6", AllSensors)
             };
         }
 
@@ -52,11 +58,16 @@ namespace Threax.Home.ZWave.Repository
             return result;
         }
 
+        private async Task<Node> GetNode(byte nodeId)
+        {
+            return (await zwave.GetNodes()).First(n => n.NodeID == nodeId);
+        }
+
         private async Task<TSensor> GetSensorData(String bridge, String id, IEnumerable<Sensor> sensors)
         {
             var byteId = byte.Parse(id);
             var nodes = await zwave.GetNodes();
-            var node = nodes[byteId];
+            var node = await GetNode(byteId);
 
             var sensorInfo = new TSensor()
             {

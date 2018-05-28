@@ -30,14 +30,14 @@ namespace Threax.Home.Core
             }
         }
 
-        public void AddSensorConfig(Action<ISensorSubsystemConfiguration> configs)
+        public void AddSensor(Action<ISensorSubsystemConfiguration> configs)
         {
             sensorCallbacks.Add(configs);
         }
 
-        public void AddSensorConfig(Type baseType)
+        public void AddSensor(Type baseType)
         {
-            AddSensorConfig(c =>
+            AddSensor(c =>
             {
                 c.AddSubsystem((ISensorRepository)c.Services.GetService(baseType.MakeGenericType(c.TSensorType)));
             });

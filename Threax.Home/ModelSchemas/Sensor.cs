@@ -45,25 +45,25 @@ namespace Threax.Home.ModelSchemas
         public String Id { get; set; }
 
         [UiOrder]
-        public float? TempValue { get; set; }
+        public double? TempValue { get; set; }
 
         [UiOrder]
         public Units? TempUnits { get; set; }
 
         [UiOrder]
-        public float? LightValue { get; set; }
+        public double? LightValue { get; set; }
 
         [UiOrder]
         public Units? LightUnits { get; set; }
 
         [UiOrder]
-        public float? HumidityValue { get; set; }
+        public double? HumidityValue { get; set; }
 
         [UiOrder]
         public Units? HumidityUnits { get; set; }
 
         [UiOrder]
-        public float? UvValue { get; set; }
+        public double? UvValue { get; set; }
 
         [UiOrder]
         public Units? UvUnits { get; set; }

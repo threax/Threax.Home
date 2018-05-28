@@ -17,5 +17,6 @@ namespace Threax.Home.Repository
         Task<bool> HasSensors();
         Task<SensorCollection> List(SensorQuery query);
         Task<Sensor> Update(Guid sensorId, SensorInput value);
+        Task AddMissing(IEnumerable<SensorInput> sensors);
     }
 }

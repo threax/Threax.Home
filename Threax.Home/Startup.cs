@@ -152,6 +152,8 @@ namespace Threax.Home
                 o.AddSwitch(typeof(MFi.Repository.IMfiSwitchRepository<,>));
                 o.AddSwitch(typeof(Hue.Repository.IHueSwitchRepository<,>));
                 o.AddSwitch(typeof(ZWave.Repository.IZWaveSwitchRepository<,>));
+
+                o.AddSensor(typeof(ZWave.Repository.IZWaveSensorRepository<>));
             });
         }
 

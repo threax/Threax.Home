@@ -32,6 +32,14 @@ namespace Threax.Home.Controllers.Api
             return await repo.List(query);
         }
 
+        [HttpPost("[action]")]
+        [HalRel(nameof(AddNewSensors))]
+        public async Task AddNewSensors([FromServices] ISensorSubsystemManager<SensorInput> sensors)
+        {
+            var items = await sensors.List();
+            await repo.AddMissing(items);
+        }
+
         [HttpGet("{SensorId}")]
         [HalRel(CrudRels.Get)]
         public async Task<Sensor> Get(Guid sensorId)

@@ -10,7 +10,7 @@ namespace Threax.Home.Core
         String SubsystemName { get; }
     }
 
-    public interface ISensorRepository<TSensor>
+    public interface ISensorRepository<TSensor> : ISensorRepository
         where TSensor : ICoreSensor, new()
     {
         Task<TSensor> Get(string bridge, string id);

@@ -23,6 +23,7 @@ namespace Microsoft.Extensions.DependencyInjection
             });
 
             services.TryAddScoped(typeof(IZWaveSwitchRepository<,>), typeof(ZWaveSwitchRepository<,>));
+            services.TryAddScoped(typeof(IZWaveSensorRepository<>), typeof(ZWaveSensorRepository<>));
 
             return services;
         }

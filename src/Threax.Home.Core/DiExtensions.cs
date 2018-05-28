@@ -16,6 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.TryAddSingleton(options);
             services.TryAddScoped(typeof(ISwitchSubsystemManager<,>), typeof(SwitchSubsystemManager<,>));
+            services.TryAddScoped(typeof(ISensorSubsystemManager<>), typeof(SensorSubsystemManager<>));
 
             return services;
         }

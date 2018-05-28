@@ -50,6 +50,14 @@ namespace Threax.Home.Repository
             return mapper.Map<Sensor>(entity);
         }
 
+        public async Task AddMissing(IEnumerable<SensorInput> sensors)
+        {
+            var existing = await dbContext.Sensors.ToListAsync();
+
+            var toAdd = sensors.Where(o => !existing.Any(i => o.Subsystem == i.Subsystem && o.Bridge == i.Bridge && o.Id == i.Id));
+            await AddRange(toAdd);
+        }
+
         public async Task<Sensor> Update(Guid sensorId, SensorInput sensor)
         {
             var entity = await this.Entity(sensorId);
