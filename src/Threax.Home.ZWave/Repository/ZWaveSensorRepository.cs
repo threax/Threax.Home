@@ -48,7 +48,7 @@ namespace Threax.Home.ZWave.Repository
         {
             return new TSensor[]
             {
-                await GetSensorData(config.ComPort, "1", AllSensors)
+                await GetSensorData(config.ComPort, "6", AllSensors)
             };
         }
 
