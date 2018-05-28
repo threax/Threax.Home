@@ -16,7 +16,7 @@ namespace Threax.Home.ZWave.Repository
     /// <summary>
     /// Manage switches.
     /// </summary>
-    public class ZWaveSwitchRepository<TIn, TOut> : IZWaveSwitchRepository<TIn, TOut>
+    public class ZWaveSwitchRepository<TIn, TOut> : IZWaveSwitchRepository<TIn, TOut>, IDisposable
         where TIn : ISwitch, new()
         where TOut : ISwitch, new()
     {
@@ -32,7 +32,13 @@ namespace Threax.Home.ZWave.Repository
         public ZWaveSwitchRepository(ZWaveController zwave, ZWaveConfig config)
         {
             this.zwave = zwave;
+            this.zwave.Open();
             this.config = config;
+        }
+
+        public void Dispose()
+        {
+            this.zwave.Close();
         }
 
         private async Task<Basic> GetBasicCommand(byte nodeId)
