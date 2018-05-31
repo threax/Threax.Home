@@ -147,14 +147,7 @@ namespace Threax.Home
 
             services.AddUserBuilderForUserWhitelistWithRoles();
 
-            services.SetupSwitches(o =>
-            {
-                o.AddSwitch(typeof(MFi.Repository.IMfiSwitchRepository<,>));
-                o.AddSwitch(typeof(Hue.Repository.IHueSwitchRepository<,>));
-                o.AddSwitch(typeof(ZWave.Repository.IZWaveSwitchRepository<,>));
-
-                o.AddSensor(typeof(ZWave.Repository.IZWaveSensorRepository<>));
-            });
+            services.SetupSwitches();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

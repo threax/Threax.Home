@@ -28,6 +28,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.TryAddScoped(typeof(IHueSwitchRepository<,>), typeof(HueSwitchRepository<,>));
 
+            services.AdditionalSwitchConfiguration(o =>
+            {
+                o.AddSwitch(typeof(IHueSwitchRepository<,>));
+            });
+
             return services;
         }
     }

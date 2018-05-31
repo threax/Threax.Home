@@ -14,5 +14,10 @@ namespace Threax.Home.ZWave
         /// The com port of your z-wave device.
         /// </summary>
         public String ComPort { get; set; }
+
+        /// <summary>
+        /// Set to true (default) to enable the z wave device
+        /// </summary>
+        public bool Enabled { get; set; } = true;
     }
 }

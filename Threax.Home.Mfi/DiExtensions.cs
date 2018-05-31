@@ -29,6 +29,11 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.TryAddScoped(typeof(IMfiSwitchRepository<,>), typeof(MfiSwitchRepository<,>));
 
+            services.AdditionalSwitchConfiguration(o =>
+            {
+                o.AddSwitch(typeof(IMfiSwitchRepository<,>));
+            });
+
             return services;
         }
     }

@@ -9,14 +9,22 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class DiExtensions
     {
-        public static IServiceCollection SetupSwitches(this IServiceCollection services, Action<HomeConfig> configure)
+        static HomeConfig options = new HomeConfig();
+
+        public static IServiceCollection SetupSwitches(this IServiceCollection services, Action<HomeConfig> configure = null)
         {
-            var options = new HomeConfig();
             configure?.Invoke(options);
 
             services.TryAddSingleton(options);
             services.TryAddScoped(typeof(ISwitchSubsystemManager<,>), typeof(SwitchSubsystemManager<,>));
             services.TryAddScoped(typeof(ISensorSubsystemManager<>), typeof(SensorSubsystemManager<>));
+
+            return services;
+        }
+
+        public static IServiceCollection AdditionalSwitchConfiguration(this IServiceCollection services, Action<HomeConfig> configure)
+        {
+            configure?.Invoke(options);
 
             return services;
         }

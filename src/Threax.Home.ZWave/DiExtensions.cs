@@ -16,11 +16,20 @@ namespace Microsoft.Extensions.DependencyInjection
             var options = new ZWaveConfig();
             configure?.Invoke(options);
 
-            services.TryAddSingleton<ZWaveConfig>(options);
-            services.TryAddSingleton<IZWaveControllerAccessor, ZWaveControllerAccessor>();
+            if (options.Enabled)
+            {
+                services.TryAddSingleton<ZWaveConfig>(options);
+                services.TryAddSingleton<IZWaveControllerAccessor, ZWaveControllerAccessor>();
 
-            services.TryAddScoped(typeof(IZWaveSwitchRepository<,>), typeof(ZWaveSwitchRepository<,>));
-            services.TryAddScoped(typeof(IZWaveSensorRepository<>), typeof(ZWaveSensorRepository<>));
+                services.TryAddScoped(typeof(IZWaveSwitchRepository<,>), typeof(ZWaveSwitchRepository<,>));
+                services.TryAddScoped(typeof(IZWaveSensorRepository<>), typeof(ZWaveSensorRepository<>));
+
+                services.AdditionalSwitchConfiguration(o =>
+                {
+                    o.AddSwitch(typeof(IZWaveSwitchRepository<,>));
+                    o.AddSensor(typeof(IZWaveSensorRepository<>));
+                });
+            }
 
             return services;
         }
