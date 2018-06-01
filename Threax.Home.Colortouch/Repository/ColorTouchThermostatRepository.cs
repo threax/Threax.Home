@@ -8,8 +8,8 @@ using Threax.Home.Core;
 namespace Threax.Home.Colortouch.Repository
 {
     class ColorTouchThermostatRepository<TIn, TOut> : IColorTouchThermostatRepository<TIn, TOut>
-        where TIn : IThermostatSetting, new()
-        where TOut : IThermostat, new()
+        where TIn : ICoreThermostatSetting, new()
+        where TOut : ICoreThermostat, new()
     {
         public string SubsystemName => "ColorTouch";
 

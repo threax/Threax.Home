@@ -1,0 +1,103 @@
+@{
+    ViewData["Title"] = "Thermostats";
+}
+
+<div data-hr-controller="mainTable">
+    <h1>Thermostats</h1>
+    <load visible="true">
+        <p>Working...</p>
+    </load>
+    <main>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Subsystem</th>
+                        <th>Bridge</th>
+                        <th>Id</th>
+                        <th>Mode</th>
+                        <th>Fan</th>
+                        <th>HeatTemp</th>
+                        <th>CoolTemp</th>
+                        <th>State</th>
+                        <th>FanState</th>
+                        <th>TempUnits</th>
+                        <th>Schedule</th>
+                        <th>SchedulePart</th>
+                        <th>Away</th>
+                        <th>Holidy</th>
+                        <th>Override</th>
+                        <th>OverrideTime</th>
+                        <th>ForceUnocc</th>
+                        <th>SpaceTemp</th>
+                        <th>CoolTempMin</th>
+                        <th>CoolTempMax</th>
+                        <th>HeatTempMin</th>
+                        <th>HeatTempMax</th>
+                        <th>SetPointDelta</th>
+                        <th>Humidity</th>
+                        <th>AvailableModes</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody data-hr-view="listing" data-hr-view-component="mainTableBody"></tbody>
+            </table>
+            <template data-hr-component="mainTableBody">
+                <table>
+                    <tr>
+                        <td>{{name}}</td>
+                        <td>{{subsystem}}</td>
+                        <td>{{bridge}}</td>
+                        <td>{{id}}</td>
+                        <td>{{mode}}</td>
+                        <td>{{fan}}</td>
+                        <td>{{heatTemp}}</td>
+                        <td>{{coolTemp}}</td>
+                        <td>{{state}}</td>
+                        <td>{{fanState}}</td>
+                        <td>{{tempUnits}}</td>
+                        <td>{{schedule}}</td>
+                        <td>{{schedulePart}}</td>
+                        <td>{{away}}</td>
+                        <td>{{holidy}}</td>
+                        <td>{{@override}}</td>
+                        <td>{{overrideTime}}</td>
+                        <td>{{forceUnocc}}</td>
+                        <td>{{spaceTemp}}</td>
+                        <td>{{coolTempMin}}</td>
+                        <td>{{coolTempMax}}</td>
+                        <td>{{heatTempMin}}</td>
+                        <td>{{heatTempMax}}</td>
+                        <td>{{setPointDelta}}</td>
+                        <td>{{humidity}}</td>
+                        <td>{{availableModes}}</td>
+                        <td>
+                            <button data-hr-on-click="edit" class="btn btn-default" data-hr-toggle="edit" data-hr-style-off="display:none;">Edit</button>
+                            <button data-hr-on-click="del" class="btn btn-default" data-hr-toggle="del" data-hr-style-off="display:none;">Delete</button>
+                        </td>
+                    </tr>
+                </table>
+            </template>
+        </div>
+        <button data-hr-on-click="add" class="btn btn-default" data-hr-toggle="add" data-hr-style-off="display:none;">Add</button>
+
+        <page-numbers></page-numbers>
+    </main>
+
+    <error>
+        An error occured loading the thermostats. Please try again later.
+    </error>
+</div>
+
+<modal data-hr-controller="entryEditor" title-text="Thermostat" dialog-classes="modal-lg">
+    <load class="modal-body">
+        <p>Working...</p>
+    </load>
+    <main>
+        <item-edit-form class="form-horizontal" data-hr-form-component="hr.forms.horizontal"></item-edit-form>
+    </main>
+    <error class="modal-body">
+        <p>An error occured loading the value. Please try again later.</p>
+    </error>
+</modal>

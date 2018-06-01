@@ -11,8 +11,8 @@ namespace Threax.Home.Core
     }
 
     public interface IThermostatRepository<TIn, TOut> : ISensorRepository
-        where TIn : IThermostatSetting, new()
-        where TOut : IThermostat, new()
+        where TIn : ICoreThermostatSetting, new()
+        where TOut : ICoreThermostat, new()
     {
         Task<TOut> Get(string bridge, string id);
         Task<IEnumerable<TOut>> List();

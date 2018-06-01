@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Threax.Home.Core
 {
-    public interface IThermostatSetting
+    public interface ICoreThermostatSetting
     {
         string Subsystem { get; set; }
 
@@ -21,7 +21,7 @@ namespace Threax.Home.Core
         int CoolTemp { get; set; }
     }
 
-    public interface IThermostat : IThermostatSetting
+    public interface ICoreThermostat : ICoreThermostatSetting
     {
         String Name { get; set; }
 

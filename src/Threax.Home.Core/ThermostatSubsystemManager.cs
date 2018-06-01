@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Threax.Home.Core
 {
     public class ThermostatSubsystemManager<TIn, TOut> : IThermostatSubsystemManager<TIn, TOut>
-        where TIn : IThermostatSetting, new()
-        where TOut : IThermostat, new()
+        where TIn : ICoreThermostatSetting, new()
+        where TOut : ICoreThermostat, new()
     {
         private Dictionary<String, IThermostatRepository<TIn, TOut>> switchRepos = new Dictionary<string, IThermostatRepository<TIn, TOut>>();
         private IHttpContextAccessor httpContextAccessor;

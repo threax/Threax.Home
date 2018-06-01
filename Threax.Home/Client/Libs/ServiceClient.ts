@@ -245,6 +245,18 @@ export class EntryPointResult {
         return this.client.GetLink("AddNewSwitches");
     }
 
+    public addNewSensors(): Promise<void> {
+        return this.client.LoadLink("AddNewSensors").then(hal.makeVoid);
+    }
+
+    public canAddNewSensors(): boolean {
+        return this.client.HasLink("AddNewSensors");
+    }
+
+    public linkForAddNewSensors(): hal.HalLink {
+        return this.client.GetLink("AddNewSensors");
+    }
+
     public listSensors(query: SensorQuery): Promise<SensorCollectionResult> {
         return this.client.LoadLinkWithQuery("ListSensors", query)
                .then(r => {
@@ -272,33 +284,6 @@ export class EntryPointResult {
         return this.client.HasLinkDoc("ListSensors");
     }
 
-    public addSensor(data: SensorInput): Promise<SensorResult> {
-        return this.client.LoadLinkWithBody("AddSensor", data)
-               .then(r => {
-                    return new SensorResult(r);
-                });
-
-    }
-
-    public canAddSensor(): boolean {
-        return this.client.HasLink("AddSensor");
-    }
-
-    public linkForAddSensor(): hal.HalLink {
-        return this.client.GetLink("AddSensor");
-    }
-
-    public getAddSensorDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("AddSensor")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasAddSensorDocs(): boolean {
-        return this.client.HasLinkDoc("AddSensor");
-    }
-
     public listSwitches(query: SwitchQuery): Promise<SwitchCollectionResult> {
         return this.client.LoadLinkWithQuery("ListSwitches", query)
                .then(r => {
@@ -324,6 +309,33 @@ export class EntryPointResult {
 
     public hasListSwitchesDocs(): boolean {
         return this.client.HasLinkDoc("ListSwitches");
+    }
+
+    public listThermostats(query: ThermostatQuery): Promise<ThermostatCollectionResult> {
+        return this.client.LoadLinkWithQuery("ListThermostats", query)
+               .then(r => {
+                    return new ThermostatCollectionResult(r);
+                });
+
+    }
+
+    public canListThermostats(): boolean {
+        return this.client.HasLink("ListThermostats");
+    }
+
+    public linkForListThermostats(): hal.HalLink {
+        return this.client.GetLink("ListThermostats");
+    }
+
+    public getListThermostatsDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("ListThermostats")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasListThermostatsDocs(): boolean {
+        return this.client.HasLinkDoc("ListThermostats");
     }
 }
 
@@ -392,18 +404,6 @@ export class SensorResult {
 
     public hasUpdateDocs(): boolean {
         return this.client.HasLinkDoc("Update");
-    }
-
-    public delete(): Promise<void> {
-        return this.client.LoadLink("Delete").then(hal.makeVoid);
-    }
-
-    public canDelete(): boolean {
-        return this.client.HasLink("Delete");
-    }
-
-    public linkForDelete(): hal.HalLink {
-        return this.client.GetLink("Delete");
     }
 }
 
@@ -491,33 +491,6 @@ export class SensorCollectionResult {
 
     public hasUpdateDocs(): boolean {
         return this.client.HasLinkDoc("Update");
-    }
-
-    public add(data: SensorInput): Promise<SensorResult> {
-        return this.client.LoadLinkWithBody("Add", data)
-               .then(r => {
-                    return new SensorResult(r);
-                });
-
-    }
-
-    public canAdd(): boolean {
-        return this.client.HasLink("Add");
-    }
-
-    public linkForAdd(): hal.HalLink {
-        return this.client.GetLink("Add");
-    }
-
-    public getAddDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("Add")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasAddDocs(): boolean {
-        return this.client.HasLinkDoc("Add");
     }
 
     public next(): Promise<SensorCollectionResult> {
@@ -892,6 +865,269 @@ export class SwitchCollectionResult {
     }
 }
 
+export class ThermostatResult {
+    private client: hal.HalEndpointClient;
+
+    constructor(client: hal.HalEndpointClient) {
+        this.client = client;
+    }
+
+    private strongData: Thermostat = undefined;
+    public get data(): Thermostat {
+        this.strongData = this.strongData || this.client.GetData<Thermostat>();
+        return this.strongData;
+    }
+
+    public refresh(): Promise<ThermostatResult> {
+        return this.client.LoadLink("self")
+               .then(r => {
+                    return new ThermostatResult(r);
+                });
+
+    }
+
+    public canRefresh(): boolean {
+        return this.client.HasLink("self");
+    }
+
+    public linkForRefresh(): hal.HalLink {
+        return this.client.GetLink("self");
+    }
+
+    public getRefreshDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("self")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasRefreshDocs(): boolean {
+        return this.client.HasLinkDoc("self");
+    }
+
+    public update(data: ThermostatInput): Promise<ThermostatResult> {
+        return this.client.LoadLinkWithBody("Update", data)
+               .then(r => {
+                    return new ThermostatResult(r);
+                });
+
+    }
+
+    public canUpdate(): boolean {
+        return this.client.HasLink("Update");
+    }
+
+    public linkForUpdate(): hal.HalLink {
+        return this.client.GetLink("Update");
+    }
+
+    public getUpdateDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Update")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasUpdateDocs(): boolean {
+        return this.client.HasLinkDoc("Update");
+    }
+}
+
+export class ThermostatCollectionResult {
+    private client: hal.HalEndpointClient;
+
+    constructor(client: hal.HalEndpointClient) {
+        this.client = client;
+    }
+
+    private strongData: ThermostatCollection = undefined;
+    public get data(): ThermostatCollection {
+        this.strongData = this.strongData || this.client.GetData<ThermostatCollection>();
+        return this.strongData;
+    }
+
+    private strongItems: ThermostatResult[];
+    public get items(): ThermostatResult[] {
+        if (this.strongItems === undefined) {
+            var embeds = this.client.GetEmbed("values");
+            var clients = embeds.GetAllClients();
+            this.strongItems = [];
+            for (var i = 0; i < clients.length; ++i) {
+                this.strongItems.push(new ThermostatResult(clients[i]));
+            }
+        }
+        return this.strongItems;
+    }
+
+    public refresh(): Promise<ThermostatCollectionResult> {
+        return this.client.LoadLink("self")
+               .then(r => {
+                    return new ThermostatCollectionResult(r);
+                });
+
+    }
+
+    public canRefresh(): boolean {
+        return this.client.HasLink("self");
+    }
+
+    public linkForRefresh(): hal.HalLink {
+        return this.client.GetLink("self");
+    }
+
+    public getRefreshDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("self")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasRefreshDocs(): boolean {
+        return this.client.HasLinkDoc("self");
+    }
+
+    public getGetDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Get")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasGetDocs(): boolean {
+        return this.client.HasLinkDoc("Get");
+    }
+
+    public getListDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("List")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasListDocs(): boolean {
+        return this.client.HasLinkDoc("List");
+    }
+
+    public getUpdateDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Update")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasUpdateDocs(): boolean {
+        return this.client.HasLinkDoc("Update");
+    }
+
+    public next(): Promise<ThermostatCollectionResult> {
+        return this.client.LoadLink("next")
+               .then(r => {
+                    return new ThermostatCollectionResult(r);
+                });
+
+    }
+
+    public canNext(): boolean {
+        return this.client.HasLink("next");
+    }
+
+    public linkForNext(): hal.HalLink {
+        return this.client.GetLink("next");
+    }
+
+    public getNextDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("next")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasNextDocs(): boolean {
+        return this.client.HasLinkDoc("next");
+    }
+
+    public previous(): Promise<ThermostatCollectionResult> {
+        return this.client.LoadLink("previous")
+               .then(r => {
+                    return new ThermostatCollectionResult(r);
+                });
+
+    }
+
+    public canPrevious(): boolean {
+        return this.client.HasLink("previous");
+    }
+
+    public linkForPrevious(): hal.HalLink {
+        return this.client.GetLink("previous");
+    }
+
+    public getPreviousDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("previous")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasPreviousDocs(): boolean {
+        return this.client.HasLinkDoc("previous");
+    }
+
+    public first(): Promise<ThermostatCollectionResult> {
+        return this.client.LoadLink("first")
+               .then(r => {
+                    return new ThermostatCollectionResult(r);
+                });
+
+    }
+
+    public canFirst(): boolean {
+        return this.client.HasLink("first");
+    }
+
+    public linkForFirst(): hal.HalLink {
+        return this.client.GetLink("first");
+    }
+
+    public getFirstDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("first")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasFirstDocs(): boolean {
+        return this.client.HasLinkDoc("first");
+    }
+
+    public last(): Promise<ThermostatCollectionResult> {
+        return this.client.LoadLink("last")
+               .then(r => {
+                    return new ThermostatCollectionResult(r);
+                });
+
+    }
+
+    public canLast(): boolean {
+        return this.client.HasLink("last");
+    }
+
+    public linkForLast(): hal.HalLink {
+        return this.client.GetLink("last");
+    }
+
+    public getLastDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("last")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasLastDocs(): boolean {
+        return this.client.HasLinkDoc("last");
+    }
+}
+
 export class UserCollectionResult {
     private client: hal.HalEndpointClient;
 
@@ -1055,7 +1291,7 @@ export class UserCollectionResult {
 }
 //----------------------
 // <auto-generated>
-//     Generated using the NSwag toolchain v9.10.10.0 (Newtonsoft.Json v11.0.0.0) (http://NJsonSchema.org)
+//     Generated using the NSwag toolchain v9.10.49.0 (Newtonsoft.Json v11.0.0.0) (http://NJsonSchema.org)
 // </auto-generated>
 //----------------------
 
@@ -1108,27 +1344,46 @@ export interface SensorCollection {
     limit?: number;
 }
 
+export interface SwitchQuery {
+    switchId?: string;
+    /** The number of pages (item number = Offset * Limit) into the collection to query. */
+    offset?: number;
+    /** The limit of the number of items to return. */
+    limit?: number;
+}
+
+export interface SwitchCollection {
+    /** The number of pages (item number = Offset * Limit) into the collection to query. */
+    offset?: number;
+    switchId?: string;
+    total?: number;
+    /** The limit of the number of items to return. */
+    limit?: number;
+}
+
+export interface ThermostatQuery {
+    thermostatId?: string;
+    /** The number of pages (item number = Offset * Limit) into the collection to query. */
+    offset?: number;
+    /** The limit of the number of items to return. */
+    limit?: number;
+}
+
+export interface ThermostatCollection {
+    /** The number of pages (item number = Offset * Limit) into the collection to query. */
+    offset?: number;
+    thermostatId?: string;
+    total?: number;
+    /** The limit of the number of items to return. */
+    limit?: number;
+}
+
 export enum Units {
     None = <any>"None", 
     Fahrenheit = <any>"Fahrenheit", 
     Celsius = <any>"Celsius", 
     Lux = <any>"Lux", 
     Percent = <any>"Percent", 
-}
-
-export interface SensorInput {
-    name: string;
-    subsystem: string;
-    bridge: string;
-    id: string;
-    tempValue?: number;
-    tempUnits?: SensorInputTempUnits;
-    lightValue?: number;
-    lightUnits?: SensorInputLightUnits;
-    humidityValue?: number;
-    humidityUnits?: SensorInputHumidityUnits;
-    uvValue?: number;
-    uvUnits?: SensorInputUvUnits;
 }
 
 export interface Sensor {
@@ -1149,44 +1404,51 @@ export interface Sensor {
     modified?: string;
 }
 
-export interface SwitchQuery {
-    switchId?: string;
-    /** The number of pages (item number = Offset * Limit) into the collection to query. */
-    offset?: number;
-    /** The limit of the number of items to return. */
-    limit?: number;
+export enum SensorTempUnits {
+    None = <any>"None", 
+    Fahrenheit = <any>"Fahrenheit", 
+    Celsius = <any>"Celsius", 
+    Lux = <any>"Lux", 
+    Percent = <any>"Percent", 
 }
 
-export interface SwitchCollection {
-    /** The number of pages (item number = Offset * Limit) into the collection to query. */
-    offset?: number;
-    switchId?: string;
-    total?: number;
-    /** The limit of the number of items to return. */
-    limit?: number;
+export enum SensorLightUnits {
+    None = <any>"None", 
+    Fahrenheit = <any>"Fahrenheit", 
+    Celsius = <any>"Celsius", 
+    Lux = <any>"Lux", 
+    Percent = <any>"Percent", 
 }
 
-export interface Switch {
-    brightness?: number;
-    switchId?: string;
-    name?: string;
-    subsystem?: string;
-    bridge?: string;
-    id?: string;
-    value?: string;
-    hexColor?: string;
-    created?: string;
-    modified?: string;
+export enum SensorHumidityUnits {
+    None = <any>"None", 
+    Fahrenheit = <any>"Fahrenheit", 
+    Celsius = <any>"Celsius", 
+    Lux = <any>"Lux", 
+    Percent = <any>"Percent", 
 }
 
-export interface SwitchInput {
-    brightness?: number;
+export enum SensorUvUnits {
+    None = <any>"None", 
+    Fahrenheit = <any>"Fahrenheit", 
+    Celsius = <any>"Celsius", 
+    Lux = <any>"Lux", 
+    Percent = <any>"Percent", 
+}
+
+export interface SensorInput {
     name: string;
     subsystem: string;
     bridge: string;
     id: string;
-    value?: string;
-    hexColor?: string;
+    tempValue?: number;
+    tempUnits?: SensorInputTempUnits;
+    lightValue?: number;
+    lightUnits?: SensorInputLightUnits;
+    humidityValue?: number;
+    humidityUnits?: SensorInputHumidityUnits;
+    uvValue?: number;
+    uvUnits?: SensorInputUvUnits;
 }
 
 export enum SensorInputTempUnits {
@@ -1221,34 +1483,133 @@ export enum SensorInputUvUnits {
     Percent = <any>"Percent", 
 }
 
-export enum SensorTempUnits {
-    None = <any>"None", 
-    Fahrenheit = <any>"Fahrenheit", 
-    Celsius = <any>"Celsius", 
-    Lux = <any>"Lux", 
-    Percent = <any>"Percent", 
+export interface Switch {
+    brightness?: number;
+    switchId?: string;
+    name?: string;
+    subsystem?: string;
+    bridge?: string;
+    id?: string;
+    value?: string;
+    hexColor?: string;
+    created?: string;
+    modified?: string;
 }
 
-export enum SensorLightUnits {
-    None = <any>"None", 
-    Fahrenheit = <any>"Fahrenheit", 
-    Celsius = <any>"Celsius", 
-    Lux = <any>"Lux", 
-    Percent = <any>"Percent", 
+export interface SwitchInput {
+    brightness?: number;
+    name: string;
+    subsystem: string;
+    bridge: string;
+    id: string;
+    value?: string;
+    hexColor?: string;
 }
 
-export enum SensorHumidityUnits {
-    None = <any>"None", 
-    Fahrenheit = <any>"Fahrenheit", 
-    Celsius = <any>"Celsius", 
-    Lux = <any>"Lux", 
-    Percent = <any>"Percent", 
+export enum Mode {
+    Off = <any>"Off", 
+    Heat = <any>"Heat", 
+    Cool = <any>"Cool", 
+    Auto = <any>"Auto", 
 }
 
-export enum SensorUvUnits {
-    None = <any>"None", 
-    Fahrenheit = <any>"Fahrenheit", 
+export enum FanSetting {
+    Auto = <any>"Auto", 
+    On = <any>"On", 
+}
+
+export enum State {
+    Idle = <any>"Idle", 
+    Heating = <any>"Heating", 
+    Cooling = <any>"Cooling", 
+    Lockout = <any>"Lockout", 
+    Error = <any>"Error", 
+}
+
+export enum FanState {
+    Off = <any>"Off", 
+    On = <any>"On", 
+}
+
+export enum TempUnits {
+    Farenheit = <any>"Farenheit", 
     Celsius = <any>"Celsius", 
-    Lux = <any>"Lux", 
-    Percent = <any>"Percent", 
+}
+
+export enum SchedulePart {
+    Morning = <any>"Morning", 
+    Day = <any>"Day", 
+    Evening = <any>"Evening", 
+    Night = <any>"Night", 
+    Inactive = <any>"Inactive", 
+}
+
+export enum Away {
+    Home = <any>"Home", 
+    Away = <any>"Away", 
+}
+
+export enum Holiday {
+    NotObservingHoliday = <any>"NotObservingHoliday", 
+    ObservingHoliday = <any>"ObservingHoliday", 
+}
+
+export enum Override {
+    Off = <any>"Off", 
+    On = <any>"On", 
+}
+
+export enum ForceUnocc {
+    Off = <any>"Off", 
+    On = <any>"On", 
+}
+
+export enum AvailableModes {
+    AllModes = <any>"AllModes", 
+    HeatCoolOnly = <any>"HeatCoolOnly", 
+    HeatOnly = <any>"HeatOnly", 
+    CoolOnly = <any>"CoolOnly", 
+}
+
+export interface Thermostat {
+    thermostatId?: string;
+    name?: string;
+    subsystem?: string;
+    bridge?: string;
+    id?: string;
+    mode?: Mode;
+    fan?: FanSetting;
+    heatTemp?: number;
+    coolTemp?: number;
+    state?: State;
+    fanState?: FanState;
+    tempUnits?: TempUnits;
+    schedule?: SchedulePart;
+    schedulePart?: SchedulePart;
+    away?: Away;
+    holidy?: Holiday;
+    override?: Override;
+    overrideTime?: number;
+    forceUnocc?: ForceUnocc;
+    spaceTemp?: number;
+    coolTempMin?: number;
+    coolTempMax?: number;
+    heatTempMin?: number;
+    heatTempMax?: number;
+    setPointDelta?: number;
+    humidity?: number;
+    availableModes?: AvailableModes;
+    created?: string;
+    modified?: string;
+}
+
+export interface ThermostatInput {
+    name?: string;
+    subsystem?: string;
+    bridge?: string;
+    id?: string;
+    mode?: Mode;
+    fan?: FanSetting;
+    heatTemp?: number;
+    coolTemp?: number;
 }
