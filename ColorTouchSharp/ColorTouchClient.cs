@@ -9,20 +9,25 @@ using System.Web;
 
 namespace ColorTouchSharp
 {
-    public class ColorTouchClient
+    public class ColorTouchClient : IColorTouchClient
     {
-        public ColorTouchClient(String host)
+        private HttpClient client;
+
+        public ColorTouchClient(String name, String host, HttpClient client)
         {
+            this.Name = name;
             this.Host = host;
+            this.client = client;
         }
 
-        public String Host { get; set; }
+        public String Host { get; private set; }
+
+        public String Name { get; private set; }
 
         public int MinDelta { get; set; } = 5;
 
         public async Task<ApiInfo> GetApiInfoAsync()
         {
-            HttpClient client = new HttpClient();
             string stringResult = await client.GetStringAsync(new Uri(Host)).ConfigureAwait(false);
 
             JToken token = JToken.Parse(stringResult);
@@ -32,7 +37,6 @@ namespace ColorTouchSharp
 
         public async Task<ThermostatStatus> GetStatusAsync()
         {
-            HttpClient client = new HttpClient();
             string stringResult = await client.GetStringAsync(new Uri(String.Format("{0}/query/info", Host))).ConfigureAwait(false);
 
             JToken token = JToken.Parse(stringResult);
@@ -47,7 +51,6 @@ namespace ColorTouchSharp
                 setting.HeatTemp = setting.CoolTemp - MinDelta;
             }
 
-            HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(Host);
             var request = new HttpRequestMessage(HttpMethod.Post, "/control");
 

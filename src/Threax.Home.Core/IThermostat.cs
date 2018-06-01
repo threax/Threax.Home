@@ -4,15 +4,27 @@ using System.Text;
 
 namespace Threax.Home.Core
 {
-    public interface IThermostat
+    public interface IThermostatSetting
     {
-        String Name { get; set; }
+        String Bridge { get; set; }
+
+        String Id { get; set; }
 
         Mode Mode { get; set; }
 
-        State State { get; set; }
-
         FanSetting Fan { get; set; }
+
+        int HeatTemp { get; set; }
+
+        int CoolTemp { get; set; }
+
+    }
+
+    public interface IThermostat : IThermostatSetting
+    {
+        String Name { get; set; }
+
+        State State { get; set; }
 
         FanState FanState { get; set; }
 
@@ -33,10 +45,6 @@ namespace Threax.Home.Core
         ForceUnocc ForceUnocc { get; set; }
 
         int SpaceTemp { get; set; }
-
-        int HeatTemp { get; set; }
-
-        int CoolTemp { get; set; }
 
         int CoolTempMin { get; set; }
 
