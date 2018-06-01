@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Threax.Home.Colortouch;
+using Threax.Home.Colortouch.Repository;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -32,14 +33,12 @@ namespace Microsoft.Extensions.DependencyInjection
                     return manager;
                 });
 
-                //services.TryAddScoped(typeof(IZWaveSwitchRepository<,>), typeof(ZWaveSwitchRepository<,>));
-                //services.TryAddScoped(typeof(IZWaveSensorRepository<>), typeof(ZWaveSensorRepository<>));
+                services.TryAddScoped(typeof(IColorTouchThermostatRepository<,>), typeof(ColorTouchThermostatRepository<,>));
 
-                //services.AdditionalSwitchConfiguration(o =>
-                //{
-                //    o.AddSwitch(typeof(IZWaveSwitchRepository<,>));
-                //    o.AddSensor(typeof(IZWaveSensorRepository<>));
-                //});
+                services.AdditionalSwitchConfiguration(o =>
+                {
+                    o.AddThermostat(typeof(IColorTouchThermostatRepository<,>));
+                });
             }
 
             return services;

@@ -6,6 +6,8 @@ namespace Threax.Home.Core
 {
     public interface IThermostatSetting
     {
+        string Subsystem { get; set; }
+
         String Bridge { get; set; }
 
         String Id { get; set; }
@@ -17,7 +19,6 @@ namespace Threax.Home.Core
         int HeatTemp { get; set; }
 
         int CoolTemp { get; set; }
-
     }
 
     public interface IThermostat : IThermostatSetting

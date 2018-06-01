@@ -8,7 +8,9 @@ namespace Threax.Home.Core
     {
         void AddSubsystem(IThermostatRepository switchRepo);
 
-        Type TThermostatType { get; }
+        Type TInType { get; }
+
+        Type TOutType { get; }
 
         IServiceProvider Services { get; }
     }

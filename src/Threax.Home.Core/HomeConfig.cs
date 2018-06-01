@@ -8,6 +8,7 @@ namespace Threax.Home.Core
     {
         private List<Action<ISwitchSubsystemConfiguration>> switchCallbacks = new List<Action<ISwitchSubsystemConfiguration>>();
         private List<Action<ISensorSubsystemConfiguration>> sensorCallbacks = new List<Action<ISensorSubsystemConfiguration>>();
+        private List<Action<IThermostatRepositorySubsystemConfiguration>> thermostatCallbacks = new List<Action<IThermostatRepositorySubsystemConfiguration>>();
 
         public void AddSwitch(Action<ISwitchSubsystemConfiguration> configs)
         {
@@ -46,6 +47,27 @@ namespace Threax.Home.Core
         internal void SetupConfigs(ISensorSubsystemConfiguration config)
         {
             foreach (var callback in sensorCallbacks)
+            {
+                callback(config);
+            }
+        }
+
+        public void AddThermostat(Action<IThermostatRepositorySubsystemConfiguration> configs)
+        {
+            thermostatCallbacks.Add(configs);
+        }
+
+        public void AddThermostat(Type baseType)
+        {
+            AddThermostat(c =>
+            {
+                c.AddSubsystem((IThermostatRepository)c.Services.GetService(baseType.MakeGenericType(c.TInType, c.TOutType)));
+            });
+        }
+
+        internal void SetupConfigs(IThermostatRepositorySubsystemConfiguration config)
+        {
+            foreach (var callback in thermostatCallbacks)
             {
                 callback(config);
             }

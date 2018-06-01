@@ -7,7 +7,7 @@ using Threax.Home.Core;
 
 namespace Threax.Home.Colortouch.Repository
 {
-    class ColorTouchThermostatRepository<TIn, TOut> : IThermostatRepository<TIn, TOut>
+    class ColorTouchThermostatRepository<TIn, TOut> : IColorTouchThermostatRepository<TIn, TOut>
         where TIn : IThermostatSetting, new()
         where TOut : IThermostat, new()
     {
@@ -27,6 +27,7 @@ namespace Threax.Home.Colortouch.Repository
 
             return new TOut()
             {
+                Subsystem = SubsystemName,
                 Bridge = bridge,
                 Id = id,
                 Name = status.Name,
@@ -64,6 +65,7 @@ namespace Threax.Home.Colortouch.Repository
 
                 thermostats.Add(new TOut()
                 {
+                    Subsystem = SubsystemName,
                     Bridge = client.Name,
                     Id = "0",
                     Name = status.Name,
