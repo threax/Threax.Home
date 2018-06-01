@@ -10,7 +10,7 @@ namespace Threax.Home.Core
         String SubsystemName { get; }
     }
 
-    public interface IThermostatRepository<TIn, TOut> : ISensorRepository
+    public interface IThermostatRepository<TIn, TOut> : IThermostatRepository
         where TIn : ICoreThermostatSetting, new()
         where TOut : ICoreThermostat, new()
     {

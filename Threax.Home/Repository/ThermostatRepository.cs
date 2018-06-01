@@ -51,7 +51,19 @@ namespace Threax.Home.Repository
             return mapper.Map<Thermostat>(entity);
         }
 
-        public async Task<Thermostat> Update(Guid thermostatId, ICoreThermostatSetting thermostat)
+        public async Task<Thermostat> Update(Guid thermostatId, ThermostatInput thermostat)
+        {
+            var entity = await this.Entity(thermostatId);
+            if (entity != null)
+            {
+                mapper.Map(thermostat, entity);
+                await SaveChanges();
+                return mapper.Map<Thermostat>(entity);
+            }
+            throw new KeyNotFoundException($"Cannot find thermostat {thermostatId.ToString()}");
+        }
+
+        public async Task<Thermostat> Update(Guid thermostatId, Thermostat thermostat)
         {
             var entity = await this.Entity(thermostatId);
             if (entity != null)

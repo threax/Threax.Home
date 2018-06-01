@@ -15,6 +15,7 @@ namespace Threax.Home.ViewModels
     //The additional entry point links are in the other entry point partial classes, expand this node to see them
     [HalActionLink(typeof(SwitchesController), nameof(SwitchesController.AddNewSwitches))]
     [HalActionLink(typeof(SensorsController), nameof(SensorsController.AddNewSensors))]
+    [HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.AddNewThermostats))]
     public partial class EntryPoint
     {
     }

@@ -23,7 +23,7 @@ namespace Threax.Home.Core
 
         public Type TOutType => typeof(TOut);
 
-        public IServiceProvider Services => throw new NotImplementedException();
+        public IServiceProvider Services => httpContextAccessor.HttpContext.RequestServices;
 
         public void AddSubsystem(IThermostatRepository switchRepo)
         {

@@ -17,7 +17,8 @@ namespace Threax.Home.Repository
         Task<Thermostat> Get(Guid thermostatId);
         Task<bool> HasThermostats();
         Task<ThermostatCollection> List(ThermostatQuery query);
-        Task<Thermostat> Update(Guid thermostatId, ICoreThermostatSetting value);
+        Task<Thermostat> Update(Guid thermostatId, ThermostatInput value);
+        Task<Thermostat> Update(Guid thermostatId, Thermostat value);
         Task AddMissing(IEnumerable<Thermostat> items);
     }
 }

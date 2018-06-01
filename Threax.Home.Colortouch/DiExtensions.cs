@@ -19,6 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             if (options.Enabled)
             {
+                services.TryAddSingleton<HttpClient>();
                 services.TryAddSingleton<ColorTouchConfig>(options);
                 services.TryAddSingleton<IColorTouchClientManager>(s =>
                 {
