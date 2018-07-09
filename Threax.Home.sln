@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.Hue", "Threax.H
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorTouchSharp", "ColorTouchSharp\ColorTouchSharp.csproj", "{D0835D23-E2CA-4A77-B6BE-82AB7E479F6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threax.Home.Colortouch", "Threax.Home.Colortouch\Threax.Home.Colortouch.csproj", "{88029D02-7DCF-49DB-8B4B-1BE34726E6F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.Colortouch", "Threax.Home.Colortouch\Threax.Home.Colortouch.csproj", "{88029D02-7DCF-49DB-8B4B-1BE34726E6F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
