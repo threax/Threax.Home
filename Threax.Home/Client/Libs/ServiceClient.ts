@@ -41,7 +41,7 @@ export class RoleAssignmentsResult {
     }
 
     public setUser(data: RoleAssignments): Promise<RoleAssignmentsResult> {
-        return this.client.LoadLinkWithBody("SetUser", data)
+        return this.client.LoadLinkWithData("SetUser", data)
                .then(r => {
                     return new RoleAssignmentsResult(r);
                 });
@@ -180,7 +180,7 @@ export class EntryPointResult {
     }
 
     public listUsers(query: RolesQuery): Promise<UserCollectionResult> {
-        return this.client.LoadLinkWithQuery("ListUsers", query)
+        return this.client.LoadLinkWithData("ListUsers", query)
                .then(r => {
                     return new UserCollectionResult(r);
                 });
@@ -207,7 +207,7 @@ export class EntryPointResult {
     }
 
     public setUser(data: RoleAssignments): Promise<RoleAssignmentsResult> {
-        return this.client.LoadLinkWithBody("SetUser", data)
+        return this.client.LoadLinkWithData("SetUser", data)
                .then(r => {
                     return new RoleAssignmentsResult(r);
                 });
@@ -257,8 +257,20 @@ export class EntryPointResult {
         return this.client.GetLink("AddNewSensors");
     }
 
+    public addNewThermostats(): Promise<void> {
+        return this.client.LoadLink("AddNewThermostats").then(hal.makeVoid);
+    }
+
+    public canAddNewThermostats(): boolean {
+        return this.client.HasLink("AddNewThermostats");
+    }
+
+    public linkForAddNewThermostats(): hal.HalLink {
+        return this.client.GetLink("AddNewThermostats");
+    }
+
     public listSensors(query: SensorQuery): Promise<SensorCollectionResult> {
-        return this.client.LoadLinkWithQuery("ListSensors", query)
+        return this.client.LoadLinkWithData("ListSensors", query)
                .then(r => {
                     return new SensorCollectionResult(r);
                 });
@@ -285,7 +297,7 @@ export class EntryPointResult {
     }
 
     public listSwitches(query: SwitchQuery): Promise<SwitchCollectionResult> {
-        return this.client.LoadLinkWithQuery("ListSwitches", query)
+        return this.client.LoadLinkWithData("ListSwitches", query)
                .then(r => {
                     return new SwitchCollectionResult(r);
                 });
@@ -312,7 +324,7 @@ export class EntryPointResult {
     }
 
     public listThermostats(query: ThermostatQuery): Promise<ThermostatCollectionResult> {
-        return this.client.LoadLinkWithQuery("ListThermostats", query)
+        return this.client.LoadLinkWithData("ListThermostats", query)
                .then(r => {
                     return new ThermostatCollectionResult(r);
                 });
@@ -380,7 +392,7 @@ export class SensorResult {
     }
 
     public update(data: SensorInput): Promise<SensorResult> {
-        return this.client.LoadLinkWithBody("Update", data)
+        return this.client.LoadLinkWithData("Update", data)
                .then(r => {
                     return new SensorResult(r);
                 });
@@ -643,7 +655,7 @@ export class SwitchResult {
     }
 
     public update(data: SwitchInput): Promise<SwitchResult> {
-        return this.client.LoadLinkWithBody("Update", data)
+        return this.client.LoadLinkWithData("Update", data)
                .then(r => {
                     return new SwitchResult(r);
                 });
@@ -906,7 +918,7 @@ export class ThermostatResult {
     }
 
     public update(data: ThermostatInput): Promise<ThermostatResult> {
-        return this.client.LoadLinkWithBody("Update", data)
+        return this.client.LoadLinkWithData("Update", data)
                .then(r => {
                     return new ThermostatResult(r);
                 });

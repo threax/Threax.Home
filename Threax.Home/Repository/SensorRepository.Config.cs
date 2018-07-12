@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Threax.AspNetCore.Models;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Threax.Home.Repository;
+using Threax.ReflectedServices;
 
 namespace Threax.Home.Repository.Config
 {
