@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  home:
+    image: home
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    networks:
+      - public_proxy
+    volumes:
+      - type: bind
+        source: ../../../TrustedRoots
+        target: /usr/local/share/ca-certificates
+      - type: bind
+        source: ../../../DevData/home
+        target: /appdata
+
+networks:
+  public_proxy:
+    external: true

@@ -8,8 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Threax.AspNetCore.Halcyon.Ext" Version="8.0.0" />
+    <PackageReference Include="Threax.AspNetCore.Halcyon.Ext" Version="9.4.1" />
     <PackageReference Include="Threax.AspNetCore.ExceptionFilter" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
 </Project>
