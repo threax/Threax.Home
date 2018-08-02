@@ -179,8 +179,8 @@ export class EntryPointResult {
         return this.client.HasLinkDoc("GetUser");
     }
 
-    public listUsers(query: RolesQuery): Promise<UserCollectionResult> {
-        return this.client.LoadLinkWithData("ListUsers", query)
+    public listUsers(data: RolesQuery): Promise<UserCollectionResult> {
+        return this.client.LoadLinkWithData("ListUsers", data)
                .then(r => {
                     return new UserCollectionResult(r);
                 });
@@ -269,8 +269,8 @@ export class EntryPointResult {
         return this.client.GetLink("AddNewThermostats");
     }
 
-    public listSensors(query: SensorQuery): Promise<SensorCollectionResult> {
-        return this.client.LoadLinkWithData("ListSensors", query)
+    public listSensors(data: SensorQuery): Promise<SensorCollectionResult> {
+        return this.client.LoadLinkWithData("ListSensors", data)
                .then(r => {
                     return new SensorCollectionResult(r);
                 });
@@ -296,8 +296,8 @@ export class EntryPointResult {
         return this.client.HasLinkDoc("ListSensors");
     }
 
-    public listSwitches(query: SwitchQuery): Promise<SwitchCollectionResult> {
-        return this.client.LoadLinkWithData("ListSwitches", query)
+    public listSwitches(data: SwitchQuery): Promise<SwitchCollectionResult> {
+        return this.client.LoadLinkWithData("ListSwitches", data)
                .then(r => {
                     return new SwitchCollectionResult(r);
                 });
@@ -323,8 +323,8 @@ export class EntryPointResult {
         return this.client.HasLinkDoc("ListSwitches");
     }
 
-    public listThermostats(query: ThermostatQuery): Promise<ThermostatCollectionResult> {
-        return this.client.LoadLinkWithData("ListThermostats", query)
+    public listThermostats(data: ThermostatQuery): Promise<ThermostatCollectionResult> {
+        return this.client.LoadLinkWithData("ListThermostats", data)
                .then(r => {
                     return new ThermostatCollectionResult(r);
                 });
