@@ -9,10 +9,14 @@ namespace Threax.Home.ModelSchemas
     [NoUi]
     [NoController]
     [NoRepository]
+    [NoModelCollection]
     public class ButtonState
     {
         [UiOrder]
         public String Label { get; set; }
+
+        [UiOrder]
+        public int Order { get; set; }
 
         [UiOrder]
         [NoInputModel]

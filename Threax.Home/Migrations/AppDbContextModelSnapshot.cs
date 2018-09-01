@@ -84,6 +84,8 @@ namespace Threax.Home.Migrations
 
                     b.Property<DateTime>("Modified");
 
+                    b.Property<int>("Order");
+
                     b.HasKey("ButtonStateId");
 
                     b.HasIndex("ButtonId");

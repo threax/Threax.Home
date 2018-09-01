@@ -27,6 +27,7 @@ namespace Threax.Home.Migrations
                 {
                     ButtonStateId = table.Column<Guid>(nullable: false),
                     Label = table.Column<string>(nullable: true),
+                    Order = table.Column<int>(nullable: false),
                     ButtonId = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Modified = table.Column<DateTime>(nullable: false)

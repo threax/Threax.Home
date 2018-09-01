@@ -11,6 +11,7 @@ namespace Threax.Home.ModelSchemas
     [NoUi]
     [NoController]
     [NoRepository]
+    [NoModelCollection]
     public class SwitchSetting
     {
         [DefineValueProvider(typeof(SwitchValueProvider))]

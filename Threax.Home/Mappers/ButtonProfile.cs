@@ -19,7 +19,9 @@ namespace Threax.Home.Mappers
 
         public Button MapButton(ButtonEntity src, Button dest)
         {
-            return mapper.Map(src, dest);
+            var mapped = mapper.Map(src, dest);
+            mapped.ButtonStates?.Sort((i, j) => i.Order - j.Order);
+            return mapped;
         }
     }
 

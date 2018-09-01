@@ -9,7 +9,7 @@ using Threax.Home.Database;
 namespace Threax.Home.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20180901212206_button")]
+    [Migration("20180901214043_button")]
     partial class button
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,6 +85,8 @@ namespace Threax.Home.Migrations
                     b.Property<string>("Label");
 
                     b.Property<DateTime>("Modified");
+
+                    b.Property<int>("Order");
 
                     b.HasKey("ButtonStateId");
 

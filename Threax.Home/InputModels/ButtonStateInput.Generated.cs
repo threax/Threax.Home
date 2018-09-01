@@ -14,8 +14,11 @@ namespace Threax.Home.InputModels
     [HalModel]
     public partial class ButtonStateInput : IButtonState
     {
-        [UiOrder(0, 14)]
+        [UiOrder(0, 15)]
         public String Label { get; set; }
+
+        [UiOrder(0, 18)]
+        public int Order { get; set; }
 
     }
 }

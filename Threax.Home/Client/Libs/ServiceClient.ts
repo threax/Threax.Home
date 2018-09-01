@@ -1679,6 +1679,7 @@ export interface ButtonState {
     switchSettings?: SwitchSetting[];
     buttonStateId?: string;
     label?: string;
+    order?: number;
     created?: string;
     modified?: string;
 }
@@ -1704,6 +1705,7 @@ export interface Button {
 export interface ButtonStateInput {
     switchSettings?: SwitchSettingInput[];
     label?: string;
+    order?: number;
 }
 
 export interface SwitchSettingInput {

@@ -17,8 +17,11 @@ namespace Threax.Home.ViewModels
        {
         public Guid ButtonStateId { get; set; }
 
-        [UiOrder(0, 14)]
+        [UiOrder(0, 15)]
         public String Label { get; set; }
+
+        [UiOrder(0, 18)]
+        public int Order { get; set; }
 
         [UiOrder(0, 2147483646)]
         public DateTime Created { get; set; }
