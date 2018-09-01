@@ -99,6 +99,7 @@ namespace Threax.Home.Repository
                     Bridge = i.Bridge,
                     Subsystem = i.Subsystem,
                     Id = i.Id,
+                    Name = i.Name,
                     Brightness = (byte?)setting.Brightness, //TODO: Fix this type
                     HexColor = setting.HexColor,
                     Value = setting.Value
