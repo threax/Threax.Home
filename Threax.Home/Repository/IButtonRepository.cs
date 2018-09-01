@@ -5,6 +5,7 @@ using Threax.Home.InputModels;
 using Threax.Home.ViewModels;
 using Threax.Home.Models;
 using Threax.AspNetCore.Halcyon.Ext;
+using Threax.Home.Core;
 
 namespace Threax.Home.Repository
 {
@@ -17,5 +18,6 @@ namespace Threax.Home.Repository
         Task<bool> HasButtons();
         Task<ButtonCollection> List(ButtonQuery query);
         Task<Button> Update(Guid buttonId, ButtonInput value);
+        Task Apply(ApplyButtonInput input, ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo);
     }
 }

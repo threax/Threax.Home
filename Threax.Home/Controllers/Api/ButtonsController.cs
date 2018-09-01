@@ -9,6 +9,7 @@ using Threax.Home.ViewModels;
 using Threax.Home.InputModels;
 using Threax.Home.Models;
 using Microsoft.AspNetCore.Authorization;
+using Threax.Home.Core;
 
 namespace Threax.Home.Controllers.Api
 {
@@ -59,6 +60,13 @@ namespace Threax.Home.Controllers.Api
         public async Task Delete(Guid buttonId)
         {
             await repo.Delete(buttonId);
+        }
+
+        [HttpGet("[action]")]
+        [HalRel("Apply")]
+        public async Task Apply([FromQuery] ApplyButtonInput input, [FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo)
+        {
+            await repo.Apply(input, switchRepo);
         }
     }
 }

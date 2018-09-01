@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
+using Threax.Home.Core;
 
 namespace Threax.Home.Repository
 {
@@ -82,6 +83,34 @@ namespace Threax.Home.Repository
             var entities = buttons.Select(i => mapper.MapButton(i, new ButtonEntity()));
             this.dbContext.Buttons.AddRange(entities);
             await SaveChanges();
+        }
+
+        public async Task Apply(ApplyButtonInput input, ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo)
+        {
+            var buttonstate = await dbContext.ButtonStates.Include(i => i.SwitchSettings).Where(i => i.ButtonStateId == input.ButtonStateId).FirstAsync();
+            var switchIds = buttonstate.SwitchSettings.Select(i => i.SwitchId);
+            var switches = await dbContext.Switches.Where(i => switchIds.Contains(i.SwitchId)).ToListAsync();
+            var switchInputs = switches.Select(i =>
+            {
+                var setting = buttonstate.SwitchSettings.Where(j => j.SwitchId == i.SwitchId).First();
+
+                return new SwitchInput()
+                {
+                    Bridge = i.Bridge,
+                    Subsystem = i.Subsystem,
+                    Id = i.Id,
+                    Brightness = (byte?)setting.Brightness, //TODO: Fix this type
+                    HexColor = setting.HexColor,
+                    Value = setting.Value
+                };
+            });
+
+            foreach(var item in switchInputs)
+            {
+                await switchRepo.Set(item);
+            }
+
+            //TODO: Update database status for switches
         }
 
         protected virtual async Task SaveChanges()

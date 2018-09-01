@@ -158,6 +158,29 @@ export class ButtonResult {
     public linkForDelete(): hal.HalLink {
         return this.client.GetLink("Delete");
     }
+
+    public apply(data: ApplyButtonInput): Promise<void> {
+        return this.client.LoadLinkWithData("Apply", data).then(hal.makeVoid);
+    }
+
+    public canApply(): boolean {
+        return this.client.HasLink("Apply");
+    }
+
+    public linkForApply(): hal.HalLink {
+        return this.client.GetLink("Apply");
+    }
+
+    public getApplyDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Apply")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasApplyDocs(): boolean {
+        return this.client.HasLinkDoc("Apply");
+    }
 }
 
 export class ButtonCollectionResult {
@@ -1718,6 +1741,10 @@ export interface SwitchSettingInput {
 export interface ButtonInput {
     buttonStates?: ButtonStateInput[];
     label?: string;
+}
+
+export interface ApplyButtonInput {
+    buttonStateId?: string;
 }
 
 export interface ButtonCollection {

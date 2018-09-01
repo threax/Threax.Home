@@ -15,6 +15,7 @@ namespace Threax.Home.ViewModels
     [HalSelfActionLink(typeof(ButtonsController), nameof(ButtonsController.Get))]
     [HalActionLink(typeof(ButtonsController), nameof(ButtonsController.Update))]
     [HalActionLink(typeof(ButtonsController), nameof(ButtonsController.Delete))]
+    [HalActionLink(typeof(ButtonsController), nameof(ButtonsController.Apply))]
     public partial class Button
     {
         //You can add your own customizations here. These will not be overwritten by the model generator.
