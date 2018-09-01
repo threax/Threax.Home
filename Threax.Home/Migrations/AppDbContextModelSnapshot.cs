@@ -55,12 +55,30 @@ namespace Threax.Home.Migrations
                     b.ToTable("spc.auth.UsersToRoles");
                 });
 
+            modelBuilder.Entity("Threax.Home.Database.ButtonEntity", b =>
+                {
+                    b.Property<Guid>("ButtonId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Label");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.HasKey("ButtonId");
+
+                    b.ToTable("Buttons");
+                });
+
             modelBuilder.Entity("Threax.Home.Database.ButtonSettingEntity", b =>
                 {
                     b.Property<Guid>("ButtonSettingId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("Brightness");
+
+                    b.Property<Guid>("ButtonId");
 
                     b.Property<DateTime>("Created");
 
@@ -74,6 +92,8 @@ namespace Threax.Home.Migrations
                     b.Property<string>("Value");
 
                     b.HasKey("ButtonSettingId");
+
+                    b.HasIndex("ButtonId");
 
                     b.ToTable("ButtonSettings");
                 });
@@ -241,6 +261,14 @@ namespace Threax.Home.Migrations
                     b.HasOne("Threax.AspNetCore.UserBuilder.Entities.User", "User")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Threax.Home.Database.ButtonSettingEntity", b =>
+                {
+                    b.HasOne("Threax.Home.Database.ButtonEntity", "Button")
+                        .WithMany("ButtonSettings")
+                        .HasForeignKey("ButtonId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

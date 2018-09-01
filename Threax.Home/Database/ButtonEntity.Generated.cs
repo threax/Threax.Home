@@ -11,23 +11,14 @@ using Threax.Home.Models;
 
 namespace Threax.Home.Database 
 {
-    public partial class ButtonSettingEntity : IButtonSetting, IButtonSettingId, ICreatedModified
+    public partial class ButtonEntity : IButton, IButtonId, ICreatedModified
     {
         [Key]
-        public Guid ButtonSettingId { get; set; }
-
-        public Guid SwitchId { get; set; }
-
-        public String Value { get; set; }
-
-        public int? Brightness { get; set; }
-
-        [MaxLength(450, ErrorMessage = "Hex Color must be less than 450 characters.")]
-        public String HexColor { get; set; }
-
         public Guid ButtonId { get; set; }
 
-        public ButtonEntity Button { get; set; }
+        public String Label { get; set; }
+
+        public List<ButtonSettingEntity> ButtonSettings { get; set; }
 
         public DateTime Created { get; set; }
 
