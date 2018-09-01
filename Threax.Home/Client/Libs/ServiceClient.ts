@@ -382,308 +382,6 @@ export class ButtonCollectionResult {
     }
 }
 
-export class ButtonSettingResult {
-    private client: hal.HalEndpointClient;
-
-    constructor(client: hal.HalEndpointClient) {
-        this.client = client;
-    }
-
-    private strongData: ButtonSetting = undefined;
-    public get data(): ButtonSetting {
-        this.strongData = this.strongData || this.client.GetData<ButtonSetting>();
-        return this.strongData;
-    }
-
-    public refresh(): Promise<ButtonSettingResult> {
-        return this.client.LoadLink("self")
-               .then(r => {
-                    return new ButtonSettingResult(r);
-                });
-
-    }
-
-    public canRefresh(): boolean {
-        return this.client.HasLink("self");
-    }
-
-    public linkForRefresh(): hal.HalLink {
-        return this.client.GetLink("self");
-    }
-
-    public getRefreshDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("self")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasRefreshDocs(): boolean {
-        return this.client.HasLinkDoc("self");
-    }
-
-    public update(data: ButtonSettingInput): Promise<ButtonSettingResult> {
-        return this.client.LoadLinkWithData("Update", data)
-               .then(r => {
-                    return new ButtonSettingResult(r);
-                });
-
-    }
-
-    public canUpdate(): boolean {
-        return this.client.HasLink("Update");
-    }
-
-    public linkForUpdate(): hal.HalLink {
-        return this.client.GetLink("Update");
-    }
-
-    public getUpdateDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("Update")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasUpdateDocs(): boolean {
-        return this.client.HasLinkDoc("Update");
-    }
-
-    public delete(): Promise<void> {
-        return this.client.LoadLink("Delete").then(hal.makeVoid);
-    }
-
-    public canDelete(): boolean {
-        return this.client.HasLink("Delete");
-    }
-
-    public linkForDelete(): hal.HalLink {
-        return this.client.GetLink("Delete");
-    }
-}
-
-export class ButtonSettingCollectionResult {
-    private client: hal.HalEndpointClient;
-
-    constructor(client: hal.HalEndpointClient) {
-        this.client = client;
-    }
-
-    private strongData: ButtonSettingCollection = undefined;
-    public get data(): ButtonSettingCollection {
-        this.strongData = this.strongData || this.client.GetData<ButtonSettingCollection>();
-        return this.strongData;
-    }
-
-    private strongItems: ButtonSettingResult[];
-    public get items(): ButtonSettingResult[] {
-        if (this.strongItems === undefined) {
-            var embeds = this.client.GetEmbed("values");
-            var clients = embeds.GetAllClients();
-            this.strongItems = [];
-            for (var i = 0; i < clients.length; ++i) {
-                this.strongItems.push(new ButtonSettingResult(clients[i]));
-            }
-        }
-        return this.strongItems;
-    }
-
-    public refresh(): Promise<ButtonSettingCollectionResult> {
-        return this.client.LoadLink("self")
-               .then(r => {
-                    return new ButtonSettingCollectionResult(r);
-                });
-
-    }
-
-    public canRefresh(): boolean {
-        return this.client.HasLink("self");
-    }
-
-    public linkForRefresh(): hal.HalLink {
-        return this.client.GetLink("self");
-    }
-
-    public getRefreshDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("self")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasRefreshDocs(): boolean {
-        return this.client.HasLinkDoc("self");
-    }
-
-    public getGetDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("Get")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasGetDocs(): boolean {
-        return this.client.HasLinkDoc("Get");
-    }
-
-    public getListDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("List")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasListDocs(): boolean {
-        return this.client.HasLinkDoc("List");
-    }
-
-    public getUpdateDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("Update")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasUpdateDocs(): boolean {
-        return this.client.HasLinkDoc("Update");
-    }
-
-    public add(data: ButtonSettingInput): Promise<ButtonSettingResult> {
-        return this.client.LoadLinkWithData("Add", data)
-               .then(r => {
-                    return new ButtonSettingResult(r);
-                });
-
-    }
-
-    public canAdd(): boolean {
-        return this.client.HasLink("Add");
-    }
-
-    public linkForAdd(): hal.HalLink {
-        return this.client.GetLink("Add");
-    }
-
-    public getAddDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("Add")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasAddDocs(): boolean {
-        return this.client.HasLinkDoc("Add");
-    }
-
-    public next(): Promise<ButtonSettingCollectionResult> {
-        return this.client.LoadLink("next")
-               .then(r => {
-                    return new ButtonSettingCollectionResult(r);
-                });
-
-    }
-
-    public canNext(): boolean {
-        return this.client.HasLink("next");
-    }
-
-    public linkForNext(): hal.HalLink {
-        return this.client.GetLink("next");
-    }
-
-    public getNextDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("next")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasNextDocs(): boolean {
-        return this.client.HasLinkDoc("next");
-    }
-
-    public previous(): Promise<ButtonSettingCollectionResult> {
-        return this.client.LoadLink("previous")
-               .then(r => {
-                    return new ButtonSettingCollectionResult(r);
-                });
-
-    }
-
-    public canPrevious(): boolean {
-        return this.client.HasLink("previous");
-    }
-
-    public linkForPrevious(): hal.HalLink {
-        return this.client.GetLink("previous");
-    }
-
-    public getPreviousDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("previous")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasPreviousDocs(): boolean {
-        return this.client.HasLinkDoc("previous");
-    }
-
-    public first(): Promise<ButtonSettingCollectionResult> {
-        return this.client.LoadLink("first")
-               .then(r => {
-                    return new ButtonSettingCollectionResult(r);
-                });
-
-    }
-
-    public canFirst(): boolean {
-        return this.client.HasLink("first");
-    }
-
-    public linkForFirst(): hal.HalLink {
-        return this.client.GetLink("first");
-    }
-
-    public getFirstDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("first")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasFirstDocs(): boolean {
-        return this.client.HasLinkDoc("first");
-    }
-
-    public last(): Promise<ButtonSettingCollectionResult> {
-        return this.client.LoadLink("last")
-               .then(r => {
-                    return new ButtonSettingCollectionResult(r);
-                });
-
-    }
-
-    public canLast(): boolean {
-        return this.client.HasLink("last");
-    }
-
-    public linkForLast(): hal.HalLink {
-        return this.client.GetLink("last");
-    }
-
-    public getLastDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("last")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasLastDocs(): boolean {
-        return this.client.HasLinkDoc("last");
-    }
-}
-
 export class EntryPointInjector {
     private url: string;
     private fetcher: hal.Fetcher;
@@ -781,60 +479,6 @@ export class EntryPointResult {
 
     public hasAddButtonDocs(): boolean {
         return this.client.HasLinkDoc("AddButton");
-    }
-
-    public listButtonSettings(data: ButtonSettingQuery): Promise<ButtonSettingCollectionResult> {
-        return this.client.LoadLinkWithData("ListButtonSettings", data)
-               .then(r => {
-                    return new ButtonSettingCollectionResult(r);
-                });
-
-    }
-
-    public canListButtonSettings(): boolean {
-        return this.client.HasLink("ListButtonSettings");
-    }
-
-    public linkForListButtonSettings(): hal.HalLink {
-        return this.client.GetLink("ListButtonSettings");
-    }
-
-    public getListButtonSettingsDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("ListButtonSettings")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasListButtonSettingsDocs(): boolean {
-        return this.client.HasLinkDoc("ListButtonSettings");
-    }
-
-    public addButtonSetting(data: ButtonSettingInput): Promise<ButtonSettingResult> {
-        return this.client.LoadLinkWithData("AddButtonSetting", data)
-               .then(r => {
-                    return new ButtonSettingResult(r);
-                });
-
-    }
-
-    public canAddButtonSetting(): boolean {
-        return this.client.HasLink("AddButtonSetting");
-    }
-
-    public linkForAddButtonSetting(): hal.HalLink {
-        return this.client.GetLink("AddButtonSetting");
-    }
-
-    public getAddButtonSettingDocs(): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("AddButtonSetting")
-            .then(r => {
-                return r.GetData<hal.HalEndpointDoc>();
-            });
-    }
-
-    public hasAddButtonSettingDocs(): boolean {
-        return this.client.HasLinkDoc("AddButtonSetting");
     }
 
     public refresh(): Promise<EntryPointResult> {
@@ -2031,15 +1675,47 @@ export interface RoleAssignments {
     superAdmin?: boolean;
 }
 
-export interface Button {
-    buttonId?: string;
-    buttonSettingIds?: string[];
+export interface ButtonState {
+    switchSettings?: SwitchSetting[];
+    buttonStateId?: string;
+    label?: string;
     created?: string;
     modified?: string;
 }
 
+export interface SwitchSetting {
+    switchSettingId?: string;
+    switchId?: string;
+    value?: string;
+    brightness?: number;
+    hexColor?: string;
+    created?: string;
+    modified?: string;
+}
+
+export interface Button {
+    buttonStates?: ButtonState[];
+    buttonId?: string;
+    label?: string;
+    created?: string;
+    modified?: string;
+}
+
+export interface ButtonStateInput {
+    switchSettings?: SwitchSettingInput[];
+    label?: string;
+}
+
+export interface SwitchSettingInput {
+    switchId?: string;
+    value?: string;
+    brightness?: number;
+    hexColor?: string;
+}
+
 export interface ButtonInput {
-    buttonSettingIds?: string[];
+    buttonStates?: ButtonStateInput[];
+    label?: string;
 }
 
 export interface ButtonCollection {
@@ -2053,40 +1729,6 @@ export interface ButtonCollection {
 
 export interface ButtonQuery {
     buttonId?: string;
-    /** The number of pages (item number = Offset * Limit) into the collection to query. */
-    offset?: number;
-    /** The limit of the number of items to return. */
-    limit?: number;
-}
-
-export interface ButtonSetting {
-    buttonSettingId?: string;
-    switchId?: string;
-    value?: string;
-    brightness?: number;
-    hexColor?: string;
-    created?: string;
-    modified?: string;
-}
-
-export interface ButtonSettingInput {
-    switchId?: string;
-    value?: string;
-    brightness?: number;
-    hexColor?: string;
-}
-
-export interface ButtonSettingCollection {
-    /** The number of pages (item number = Offset * Limit) into the collection to query. */
-    offset?: number;
-    buttonSettingId?: string;
-    total?: number;
-    /** The limit of the number of items to return. */
-    limit?: number;
-}
-
-export interface ButtonSettingQuery {
-    buttonSettingId?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
     /** The limit of the number of items to return. */
