@@ -94,6 +94,11 @@ namespace Threax.Home.Repository
             {
                 var setting = buttonstate.SwitchSettings.Where(j => j.SwitchId == i.SwitchId).First();
 
+                //Update the switch status on the entity
+                i.Value = setting.Value;
+                i.HexColor = setting.HexColor;
+                i.Brightness = (byte?)setting.Brightness; //TODO: Fix this type
+
                 return new SwitchInput()
                 {
                     Bridge = i.Bridge,
@@ -111,7 +116,8 @@ namespace Threax.Home.Repository
                 await switchRepo.Set(item);
             }
 
-            //TODO: Update database status for switches
+            //Save switch status updates
+            await dbContext.SaveChangesAsync();
         }
 
         protected virtual async Task SaveChanges()
