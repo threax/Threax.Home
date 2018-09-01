@@ -35,11 +35,11 @@ namespace Threax.Home.InputModels
             if (SensorId != null)
             {
                 query = query.Where(i => i.SensorId == SensorId);
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
     }

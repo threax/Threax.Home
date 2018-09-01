@@ -25,6 +25,12 @@ namespace Threax.Home.Models
 
     }
 
+    public partial interface ISwitch_Brightness
+    {
+        int? Brightness { get; set; }
+
+    }
+
     public partial interface ISwitchId
     {
         Guid SwitchId { get; set; }

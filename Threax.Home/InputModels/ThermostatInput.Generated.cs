@@ -13,7 +13,7 @@ using Threax.Home.Core;
 namespace Threax.Home.InputModels 
 {
     [HalModel]
-    public partial class ThermostatInput : Models.IThermostat
+    public partial class ThermostatInput : IThermostat
     {
         [UiOrder(0, 15)]
         public String Name { get; set; }

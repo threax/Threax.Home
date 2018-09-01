@@ -14,7 +14,7 @@ using Threax.Home.Core;
 
 namespace Threax.Home.ViewModels 
 {
-       public partial class Thermostat : Models.IThermostat, IThermostatId, IThermostat_State, IThermostat_FanState, IThermostat_TempUnits, IThermostat_Schedule, IThermostat_SchedulePart, IThermostat_Away, IThermostat_Holidy, IThermostat_Override, IThermostat_OverrideTime, IThermostat_ForceUnocc, IThermostat_SpaceTemp, IThermostat_CoolTempMin, IThermostat_CoolTempMax, IThermostat_HeatTempMin, IThermostat_HeatTempMax, IThermostat_SetPointDelta, IThermostat_Humidity, IThermostat_AvailableModes, ICreatedModified
+       public partial class Thermostat : IThermostat, IThermostatId, IThermostat_State, IThermostat_FanState, IThermostat_TempUnits, IThermostat_Schedule, IThermostat_SchedulePart, IThermostat_Away, IThermostat_Holidy, IThermostat_Override, IThermostat_OverrideTime, IThermostat_ForceUnocc, IThermostat_SpaceTemp, IThermostat_CoolTempMin, IThermostat_CoolTempMax, IThermostat_HeatTempMin, IThermostat_HeatTempMax, IThermostat_SetPointDelta, IThermostat_Humidity, IThermostat_AvailableModes, ICreatedModified
        {
         public Guid ThermostatId { get; set; }
 

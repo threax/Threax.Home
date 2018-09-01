@@ -34,11 +34,11 @@ namespace Threax.Home.InputModels
             if (SwitchId != null)
             {
                 query = query.Where(i => i.SwitchId == SwitchId);
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
     }
