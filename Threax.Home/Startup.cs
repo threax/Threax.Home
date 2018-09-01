@@ -20,6 +20,7 @@ using Threax.AspNetCore.IdServerAuth;
 using Threax.Extensions.Configuration.SchemaBinder;
 using Threax.AspNetCore.UserBuilder;
 using Microsoft.AspNetCore.HttpOverrides;
+using Threax.Home.ValueProviders;
 
 namespace Threax.Home
 {
@@ -95,7 +96,9 @@ namespace Threax.Home
                 };
             });
 
-            services.UseAppDatabase(appConfig.ConnectionString);
+            services.AddAppDatabase(appConfig.ConnectionString);
+            services.AddAppMapper();
+            services.AddAppRepositories();
 
             var halOptions = new HalcyonConventionOptions()
             {
@@ -149,6 +152,8 @@ namespace Threax.Home
             services.AddUserBuilderForUserWhitelistWithRoles();
 
             services.SetupSwitches();
+
+            services.AddScoped<SwitchValueProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

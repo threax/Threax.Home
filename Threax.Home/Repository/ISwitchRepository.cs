@@ -5,6 +5,7 @@ using Threax.Home.InputModels;
 using Threax.Home.ViewModels;
 using Threax.Home.Models;
 using Threax.AspNetCore.Halcyon.Ext;
+using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 
 namespace Threax.Home.Repository
 {
@@ -18,5 +19,6 @@ namespace Threax.Home.Repository
         Task<SwitchCollection> List(SwitchQuery query);
         Task<Switch> Update(Guid switchId, SwitchInput value);
         Task AddMissing(IEnumerable<SwitchInput> switches);
+        Task<IEnumerable<ILabelValuePair>> GetSwitchLabels();
     }
 }

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
+using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 
 namespace Threax.Home.Repository
 {
@@ -90,6 +91,11 @@ namespace Threax.Home.Repository
             var entities = switches.Select(i => mapper.Map<SwitchEntity>(i));
             this.dbContext.Switches.AddRange(entities);
             await SaveChanges();
+        }
+
+        public async Task<IEnumerable<ILabelValuePair>> GetSwitchLabels()
+        {
+            return await Entities.Select(i => new LabelValuePair<Guid>(i.Name, i.SwitchId)).ToListAsync();
         }
 
         protected virtual async Task SaveChanges()
