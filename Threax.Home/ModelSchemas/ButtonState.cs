@@ -6,7 +6,10 @@ using Threax.AspNetCore.Models;
 
 namespace Threax.Home.ModelSchemas
 {
-    public class Button
+    [NoUi]
+    [NoController]
+    [NoRepository]
+    public class ButtonState
     {
         [UiOrder]
         public String Label { get; set; }
@@ -14,6 +17,10 @@ namespace Threax.Home.ModelSchemas
         [UiOrder]
         [NoInputModel]
         [NoViewModel]
-        public List<ButtonState> ButtonStates { get; set; }
+        public List<SwitchSetting> SwitchSettings { get; set; }
+
+        [NoInputModel]
+        [NoViewModel]
+        public Button Button { get; set; }
     }
 }

@@ -8,7 +8,10 @@ using Threax.Home.ValueProviders;
 
 namespace Threax.Home.ModelSchemas
 {
-    public class ButtonSetting
+    [NoUi]
+    [NoController]
+    [NoRepository]
+    public class SwitchSetting
     {
         [DefineValueProvider(typeof(SwitchValueProvider))]
         public Guid SwitchId { get; set; }
@@ -28,6 +31,6 @@ namespace Threax.Home.ModelSchemas
 
         [NoInputModel]
         [NoViewModel]
-        public Button Button { get; set; }
+        public ButtonState ButtonState { get; set; }
     }
 }
