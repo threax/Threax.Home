@@ -9,8 +9,8 @@ using Threax.Home.Database;
 namespace Threax.Home.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20180601230737_thermostats")]
-    partial class thermostats
+    [Migration("20180903125103_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,6 +55,44 @@ namespace Threax.Home.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("spc.auth.UsersToRoles");
+                });
+
+            modelBuilder.Entity("Threax.Home.Database.ButtonEntity", b =>
+                {
+                    b.Property<Guid>("ButtonId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Label");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.HasKey("ButtonId");
+
+                    b.ToTable("Buttons");
+                });
+
+            modelBuilder.Entity("Threax.Home.Database.ButtonStateEntity", b =>
+                {
+                    b.Property<Guid>("ButtonStateId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("ButtonId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Label");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<int>("Order");
+
+                    b.HasKey("ButtonStateId");
+
+                    b.HasIndex("ButtonId");
+
+                    b.ToTable("ButtonStates");
                 });
 
             modelBuilder.Entity("Threax.Home.Database.SensorEntity", b =>
@@ -144,6 +182,35 @@ namespace Threax.Home.Migrations
                     b.ToTable("Switches");
                 });
 
+            modelBuilder.Entity("Threax.Home.Database.SwitchSettingEntity", b =>
+                {
+                    b.Property<Guid>("SwitchSettingId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("Brightness");
+
+                    b.Property<Guid>("ButtonStateId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("HexColor")
+                        .HasMaxLength(450);
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<Guid>("SwitchId");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("SwitchSettingId");
+
+                    b.HasIndex("ButtonStateId");
+
+                    b.HasIndex("SwitchId");
+
+                    b.ToTable("SwitchSettings");
+                });
+
             modelBuilder.Entity("Threax.Home.Database.ThermostatEntity", b =>
                 {
                     b.Property<Guid>("ThermostatId")
@@ -220,6 +287,27 @@ namespace Threax.Home.Migrations
                     b.HasOne("Threax.AspNetCore.UserBuilder.Entities.User", "User")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Threax.Home.Database.ButtonStateEntity", b =>
+                {
+                    b.HasOne("Threax.Home.Database.ButtonEntity", "Button")
+                        .WithMany("ButtonStates")
+                        .HasForeignKey("ButtonId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Threax.Home.Database.SwitchSettingEntity", b =>
+                {
+                    b.HasOne("Threax.Home.Database.ButtonStateEntity", "ButtonState")
+                        .WithMany("SwitchSettings")
+                        .HasForeignKey("ButtonStateId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Threax.Home.Database.SwitchEntity", "Switch")
+                        .WithMany("SwitchSettings")
+                        .HasForeignKey("SwitchId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

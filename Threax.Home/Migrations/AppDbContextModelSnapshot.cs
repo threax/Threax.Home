@@ -204,6 +204,8 @@ namespace Threax.Home.Migrations
 
                     b.HasIndex("ButtonStateId");
 
+                    b.HasIndex("SwitchId");
+
                     b.ToTable("SwitchSettings");
                 });
 
@@ -299,6 +301,11 @@ namespace Threax.Home.Migrations
                     b.HasOne("Threax.Home.Database.ButtonStateEntity", "ButtonState")
                         .WithMany("SwitchSettings")
                         .HasForeignKey("ButtonStateId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Threax.Home.Database.SwitchEntity", "Switch")
+                        .WithMany("SwitchSettings")
+                        .HasForeignKey("SwitchId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

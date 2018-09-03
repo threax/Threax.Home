@@ -129,7 +129,7 @@ namespace Threax.Home.Repository
         {
             get
             {
-                return dbContext.Buttons.Include(i => i.ButtonStates).ThenInclude(i => i.SwitchSettings);
+                return dbContext.Buttons.Include(i => i.ButtonStates).ThenInclude(i => i.SwitchSettings).ThenInclude(i => i.Switch);
             }
         }
 

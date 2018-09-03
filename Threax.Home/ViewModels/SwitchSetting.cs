@@ -16,5 +16,7 @@ namespace Threax.Home.ViewModels
     {
         //You can add your own customizations here. These will not be overwritten by the model generator.
         //See SwitchSetting.Generated for the generated code
+
+        public Switch Switch { get; set; }
     }
 }

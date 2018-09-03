@@ -15,5 +15,7 @@ namespace Threax.Home.Database
         //See SwitchEntity.Generated for the generated code
 
         public byte? Brightness { get; set; }
+
+        public List<SwitchSettingEntity> SwitchSettings { get; set; }
     }
 }

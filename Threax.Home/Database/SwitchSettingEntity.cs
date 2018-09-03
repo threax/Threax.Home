@@ -13,5 +13,7 @@ namespace Threax.Home.Database
     {
         //You can add your own customizations here. These will not be overwritten by the model generator.
         //See SwitchSettingEntity.Generated for the generated code
+
+        public SwitchEntity Switch { get; set; }
     }
 }
