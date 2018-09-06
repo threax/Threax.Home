@@ -1,1 +1,63 @@
 ﻿@brand-app: #5a1b58;
+
+.bulbShadow {
+    background-image: url('/Images/bulb_shadow.png');
+}
+
+.fan {
+    vertical-align: middle;
+    display: inline-block;
+    background-image: url('/Images/fanoff.png');
+    margin: 5px;
+    width: 64px;
+    height: 64px;
+    //background: #f00;
+    /* The animation part: */
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.fan-off {
+    /* The animation part: */
+    animation-name: initial;
+    animation-duration: initial;
+    animation-iteration-count: initial;
+    animation-timing-function: initial;
+}
+
+.fan-low {
+    animation-duration: 12000ms;
+}
+
+.fan-med {
+    animation-duration: 10000ms;
+    background-image: url('/Images/fanmed.png');
+}
+
+.fan-high {
+    animation-duration: 8000ms;
+    background-image: url('/Images/fanon.png');
+}
+
+.fan-load {
+    width: 64px;
+    height: 64px;
+    background-image: url('/Images/loading.gif');
+    /* The animation part: */
+    animation-name: initial;
+    animation-duration: initial;
+    animation-iteration-count: initial;
+    animation-timing-function: initial;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
