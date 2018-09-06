@@ -4,3 +4,14 @@
 
 <h1>Welcome to Threax.Home</h1>
 <p>This is the welcome page for Threax.Home.</p>
+
+<div data-hr-controller="buttons">
+    <div data-hr-view="mainButtons">
+        <template>
+            <strong>{{data.label}}</strong>
+            {{for i in data.buttonStates}}
+                <button value="{{i.buttonStateId}}" data-hr-on-click="pressButton" class="btn btn-default">{{i.label}}</button>
+            {{/for}}
+        </template>
+    </div>
+</div>
