@@ -8,10 +8,22 @@
 <div data-hr-controller="buttons">
     <div data-hr-view="mainButtons">
         <template>
-            <strong>{{data.label}}</strong>
-            {{for i in data.buttonStates}}
+            <div class="col-md-4 col-sm-6">
+                <h2>{{data.label}}</h2>
+
+                <div class="load-outer">
+                    <div class="ball-pulse load-inner" data-lightswitch-loading>
+                        <div class="loader">
+                            <div class="ball"></div>
+                        </div>
+                    </div>
+                    <img src="~/Images/bulb.png" data-lightswitch-status class="bulbShadow load-inner" style="display:none;" />
+                </div>
+
+                {{for i in data.buttonStates}}
                 <button value="{{i.buttonStateId}}" data-hr-on-click="pressButton" class="btn btn-default">{{i.label}}</button>
-            {{/for}}
+                {{/for}}
+            </div>
         </template>
     </div>
 </div>

@@ -61,3 +61,56 @@
         transform: rotate(360deg);
     }
 }
+
+
+/* ball-pulse is from (http://fareco.github.io/css-loader)/*/
+.ball-pulse .loader {
+    width: 100px;
+    height: 100px;
+}
+
+.ball-pulse .ball {
+    margin: 25% 0 0 25%;
+    width: 50%;
+    height: 50%;
+    background-color: #FFF;
+    border-radius: 50%;
+    animation: ballPulse 2s ease-in-out infinite;
+}
+
+@keyframes ballPulse {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.ball-pulse .ball {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.load-outer {
+    width: 64px;
+    height: 64px;
+    float: left;
+}
+
+.load-inner {
+    position: absolute;
+    left: 0px;
+}
+
+img.load-inner {
+    left: 10px;
+}
+
+div.load-inner {
+    left: -9px;
+}

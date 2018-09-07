@@ -27,11 +27,11 @@ export class ButtonGroupController {
     }
 
     constructor(bindings: controller.BindingCollection, private entryPointInjector: client.EntryPointInjector, private builder: controller.InjectedControllerBuilder) {
-        var mainButtons = bindings.getView("mainButtons");
+        var mainButtons = bindings.getView<client.ButtonResult>("mainButtons");
         this.setup(mainButtons);
     }
 
-    private async setup(mainButtons: controller.IView<any>): Promise<void> {
+    private async setup(mainButtons: controller.IView<client.ButtonResult>): Promise<void> {
         var entry = await this.entryPointInjector.load();
         var buttons = await entry.listButtons({
             limit: 10000,
