@@ -1708,10 +1708,24 @@ export interface ButtonState {
 }
 
 export interface SwitchSetting {
+    switch?: Switch;
     switchSettingId?: string;
     switchId?: string;
     value?: string;
     brightness?: number;
+    hexColor?: string;
+    created?: string;
+    modified?: string;
+}
+
+export interface Switch {
+    brightness?: number;
+    switchId?: string;
+    name?: string;
+    subsystem?: string;
+    bridge?: string;
+    id?: string;
+    value?: string;
     hexColor?: string;
     created?: string;
     modified?: string;
@@ -1938,19 +1952,6 @@ export enum SensorInputUvUnits {
     Celsius = <any>"Celsius", 
     Lux = <any>"Lux", 
     Percent = <any>"Percent", 
-}
-
-export interface Switch {
-    brightness?: number;
-    switchId?: string;
-    name?: string;
-    subsystem?: string;
-    bridge?: string;
-    id?: string;
-    value?: string;
-    hexColor?: string;
-    created?: string;
-    modified?: string;
 }
 
 export interface SwitchInput {

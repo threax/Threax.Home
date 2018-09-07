@@ -12,13 +12,15 @@
                 <h2>{{data.label}}</h2>
 
                 <div class="load-outer">
-                    <div class="ball-pulse load-inner" data-lightswitch-loading>
+                    <div class="ball-pulse load-inner" data-hr-toggle="load" data-hr-style-off="display:none;">
                         <div class="loader">
                             <div class="ball"></div>
                         </div>
                     </div>
-                    <img src="~/Images/bulb.png" data-lightswitch-status class="bulbShadow load-inner" style="display:none;" />
+                    <img src="~/Images/bulb.png" data-hr-toggle="main" class="bulbShadow load-inner startHidden" data-hr-style-on="display:block;" data-hr-handle="bulbcolor"/>
                 </div>
+
+                <div class="startHidden" data-hr-toggle="error">An error occured.</div>
 
                 {{for i in data.buttonStates}}
                 <button value="{{i.buttonStateId}}" data-hr-on-click="pressButton" class="btn btn-default">{{i.label}}</button>

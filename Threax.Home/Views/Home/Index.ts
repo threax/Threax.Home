@@ -3,21 +3,63 @@ import * as startup from 'clientlibs.startup';
 import * as deepLink from 'hr.deeplink';
 import * as client from 'clientlibs.ServiceClient';
 import * as iter from 'hr.iterable';
+import * as lcycle from 'hr.widgets.MainLoadErrorLifecycle';
 
 export class ButtonGroup {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
         return [controller.BindingCollection, controller.InjectControllerData];
     }
 
-    constructor(bindings: controller.BindingCollection, private data: client.ButtonResult) {
+    private load: controller.OnOffToggle;
+    private main: controller.OnOffToggle;
+    private error: controller.OnOffToggle;
+    private lifecycle: lcycle.MainLoadErrorLifecycle;
+    private bulbcolor: HTMLElement;
 
+    constructor(bindings: controller.BindingCollection, private data: client.ButtonResult) {
+        this.load = bindings.getToggle("load");
+        this.main = bindings.getToggle("main");
+        this.error = bindings.getToggle("error");
+        this.lifecycle = new lcycle.MainLoadErrorLifecycle(this.main, this.load, this.error, true);
+        this.bulbcolor = bindings.getHandle("bulbcolor");
+        this.lifecycle.showMain();
+        this.setIconState();
     }
 
     public async pressButton(evt: Event): Promise<void> {
         evt.preventDefault();
-        this.data.apply({
-            buttonStateId: (<any>evt.srcElement).value
-        });
+        try {
+            this.lifecycle.showLoad();
+            await this.data.apply({
+                buttonStateId: (<any>evt.srcElement).value
+            });
+            this.data = await this.data.refresh();
+            this.lifecycle.showMain();
+            this.setIconState();
+        }
+        catch (err) {
+            this.lifecycle.showError(err);
+            console.log(JSON.stringify(err));
+        }
+    }
+
+    private setIconState() {
+        //Order is important, must set this after the toggle or its overwritten
+        var buttonStates = this.data.data.buttonStates;
+        if (buttonStates) {
+            var switchSettings = buttonStates[0].switchSettings;
+            if (switchSettings) {
+                var sw = switchSettings[0].switch;
+                switch (sw.value) {
+                    case "on":
+                        this.bulbcolor.style.setProperty("background-color", "#b9b9b9");
+                        break;
+                    case "off":
+                        this.bulbcolor.style.setProperty("background-color", "transparent");
+                        break;
+                }
+            }
+        }
     }
 }
 
