@@ -31,12 +31,13 @@
     <div data-hr-view="main">
         <template>
             <h1>Thermostat</h1>
-            @*foreach (var preset in Model.ThermostatPresets)
-            {
-            @Html.ThermostatPreset(preset, preset);
-            }*@
-            <div thermostatcontrol style="margin-top:1em;">
+            <div style="margin-top:1em;">
                 <div data-hr-toggle="main" class="startHidden" data-hr-style-on="display:block;">
+                    <div data-hr-view="presets">
+                        <template>
+                            <button class="btn btn-default" data-hr-on-click="apply">{{data.label}}</button>
+                        </template>
+                    </div>
                     <div class="row">
                         <div class="col-sm-9">
                             <div class="row" style="font-size:45px;" data-hr-toggle="currentTemp">

@@ -3,9 +3,31 @@ import * as client from 'clientlibs.ServiceClient';
 import * as lcycle from 'hr.widgets.MainLoadErrorLifecycle';
 import * as toggles from 'hr.toggles';
 
+export class PresetButton {
+    public static get InjectorArgs(): controller.DiFunction<any>[] {
+        return [controller.BindingCollection, controller.InjectControllerData, ThermostatController];
+    }
+
+    constructor(bindings: controller.BindingCollection, private data: client.ThermostatSettingResult, private thermoController: ThermostatController) {
+
+    }
+
+    public async apply(evt: Event): Promise<void> {
+        try {
+            evt.preventDefault();
+            this.thermoController.showLoading();
+            await this.data.applySetting();
+            await this.thermoController.refresh();
+        }
+        catch (err) {
+            this.thermoController.showError(err);
+        }
+    }
+}
+
 export class ThermostatController {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
-        return [controller.BindingCollection, controller.InjectControllerData];
+        return [controller.BindingCollection, controller.InjectControllerData, controller.InjectedControllerBuilder];
     }
 
     private currentTempView: controller.IView<client.ThermostatResult>;
@@ -23,7 +45,10 @@ export class ThermostatController {
     private fanon: controller.OnOffToggle;
     private fanoff: controller.OnOffToggle;
 
-    constructor(bindings: controller.BindingCollection, private data: client.ThermostatResult) {
+    private presets: controller.IView<client.ThermostatSettingResult>;
+    private builder: controller.InjectedControllerBuilder;
+
+    constructor(bindings: controller.BindingCollection, private data: client.ThermostatResult, builder: controller.InjectedControllerBuilder) {
         this.currentTempView = bindings.getView("currentTemp");
         this.currentTempToggle = bindings.getToggle("currentTemp");
 
@@ -40,6 +65,11 @@ export class ThermostatController {
         this.fanoff = bindings.getToggle("fanoff");
         this.fanStatus = new toggles.Group(this.fanon, this.fanoff);
 
+        this.presets = bindings.getView("presets");
+
+        this.builder = builder.createChildBuilder();
+        this.builder.Services.addShared(ThermostatController, s => this);
+
         this.setup();
     }
 
@@ -47,6 +77,9 @@ export class ThermostatController {
         try {
             var tempSchema = await this.data.getSetTempDocs();
             this.tempForm.setSchema(tempSchema.requestSchema);
+
+            var settings = await this.data.getSettings();
+            this.presets.setData(settings.items, this.builder.createOnCallback(PresetButton));
 
             this.data = await this.data.refresh();
             this.syncData();
@@ -63,6 +96,26 @@ export class ThermostatController {
             this.lifecycle.showLoad();
             var newTemps = this.tempForm.getData();
             this.data = await this.data.setTemp(newTemps);
+            this.syncData();
+            this.lifecycle.showMain();
+        }
+        catch (err) {
+            this.lifecycle.showError(err);
+        }
+    }
+
+    public showLoading(): void {
+        this.lifecycle.showLoad();
+    }
+
+    public showError(err: any): void {
+        this.lifecycle.showError(err);
+    }
+
+    public async refresh(): Promise<void> {
+        try {
+            this.lifecycle.showLoad();
+            this.data = await this.data.refresh();
             this.syncData();
             this.lifecycle.showMain();
         }
@@ -122,6 +175,7 @@ export class ThermostatGroupController {
 }
 
 export function addServices(builder: controller.InjectedControllerBuilder) {
+    builder.Services.addTransient(PresetButton, PresetButton);
     builder.Services.addTransient(ThermostatController, ThermostatController);
     builder.Services.addShared(ThermostatGroupController, ThermostatGroupController);
 }
