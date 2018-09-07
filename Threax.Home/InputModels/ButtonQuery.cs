@@ -25,6 +25,7 @@ namespace Threax.Home.InputModels
             if(CreateGenerated(ref query))
             {
                 //Customize query further
+                query = query.OrderBy(i => i.Order);
             }
 
             return Task.FromResult(query);

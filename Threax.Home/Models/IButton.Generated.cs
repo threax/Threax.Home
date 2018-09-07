@@ -13,6 +13,8 @@ namespace Threax.Home.Models
     {
         String Label { get; set; }
 
+        int Order { get; set; }
+
     }
 
     public partial interface IButtonId

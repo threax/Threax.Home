@@ -20,6 +20,9 @@ namespace Threax.Home.ViewModels
         [UiOrder(0, 11)]
         public String Label { get; set; }
 
+        [UiOrder(0, 14)]
+        public int Order { get; set; }
+
         [UiOrder(0, 2147483646)]
         public DateTime Created { get; set; }
 

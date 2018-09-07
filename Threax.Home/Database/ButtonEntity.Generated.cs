@@ -18,6 +18,8 @@ namespace Threax.Home.Database
 
         public String Label { get; set; }
 
+        public int Order { get; set; }
+
         public List<ButtonStateEntity> ButtonStates { get; set; }
 
         public DateTime Created { get; set; }

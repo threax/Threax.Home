@@ -17,5 +17,8 @@ namespace Threax.Home.InputModels
         [UiOrder(0, 11)]
         public String Label { get; set; }
 
+        [UiOrder(0, 14)]
+        public int Order { get; set; }
+
     }
 }
