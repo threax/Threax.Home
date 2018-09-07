@@ -30,10 +30,9 @@ export class ButtonGroup {
         evt.preventDefault();
         try {
             this.lifecycle.showLoad();
-            await this.data.apply({
+            this.data = await this.data.apply({
                 buttonStateId: (<any>evt.srcElement).value
             });
-            this.data = await this.data.refresh();
             this.lifecycle.showMain();
             this.setIconState();
         }

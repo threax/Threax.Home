@@ -64,9 +64,9 @@ namespace Threax.Home.Controllers.Api
 
         [HttpGet("[action]")]
         [HalRel("Apply")]
-        public async Task Apply([FromQuery] ApplyButtonInput input, [FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo)
+        public async Task<Button> Apply([FromQuery] ApplyButtonInput input, [FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo)
         {
-            await repo.Apply(input, switchRepo);
+            return await repo.Apply(input, switchRepo);
         }
     }
 }

@@ -159,8 +159,12 @@ export class ButtonResult {
         return this.client.GetLink("Delete");
     }
 
-    public apply(data: ApplyButtonInput): Promise<void> {
-        return this.client.LoadLinkWithData("Apply", data).then(hal.makeVoid);
+    public apply(data: ApplyButtonInput): Promise<ButtonResult> {
+        return this.client.LoadLinkWithData("Apply", data)
+               .then(r => {
+                    return new ButtonResult(r);
+                });
+
     }
 
     public canApply(): boolean {
