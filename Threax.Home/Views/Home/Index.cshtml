@@ -28,9 +28,9 @@
 </div>
 
 <div data-hr-controller="thermostats" class="row">
-    <h1>Thermostat</h1>
     <div data-hr-view="main">
         <template>
+            <h1>Thermostat</h1>
             @*foreach (var preset in Model.ThermostatPresets)
             {
             @Html.ThermostatPreset(preset, preset);
@@ -65,11 +65,11 @@
                                 <div class="row" style="margin-top:2em;">
                                     <div class="col-sm-9">
                                         <button class="btn btn-default" data-hr-on-click="apply" value="submit">Apply</button>
-                                        <img src="~/Images/heaton.png" data-hr-toggle="heating" class="startHidden" data-hr-style-on="display:block;" />
-                                        <img src="~/Images/coolingon.png" data-hr-toggle="cooling" class="startHidden" data-hr-style-on="display:block;" />
-                                        <img src="~/Images/hvacoff.png" data-hr-toggle="off" class="startHidden" data-hr-style-on="display:block;" />
-                                        <img src="~/Images/fanon.png" data-hr-toggle="fanon" class="startHidden" data-hr-style-on="display:block;" />
-                                        <img src="~/Images/fanoff.png" data-hr-toggle="fanoff" class="startHidden" data-hr-style-on="display:block;" />
+                                        <img src="~/Images/heaton.png" data-hr-toggle="heating" class="startHidden" data-hr-style-on="display:inline;" />
+                                        <img src="~/Images/coolingon.png" data-hr-toggle="cooling" class="startHidden" data-hr-style-on="display:inline;" />
+                                        <img src="~/Images/hvacoff.png" data-hr-toggle="off" class="startHidden" data-hr-style-on="display:inline;" />
+                                        <img src="~/Images/fanon.png" data-hr-toggle="fanon" class="startHidden" data-hr-style-on="display:inline;" />
+                                        <img src="~/Images/fanoff.png" data-hr-toggle="fanoff" class="startHidden" data-hr-style-on="display:inline;" />
                                     </div>
                                 </div>
                             </form>
