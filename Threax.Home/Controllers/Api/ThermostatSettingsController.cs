@@ -38,6 +38,18 @@ namespace Threax.Home.Controllers.Api
             return await repo.Get(thermostatSettingId);
         }
 
+        [HttpGet("[action]/{ThermostatId}")]
+        [HalRel(nameof(GetForThermostat))]
+        public async Task<ThermostatSettingCollection> GetForThermostat(Guid thermostatId)
+        {
+            return await repo.List(new ThermostatSettingQuery()
+            {
+                ThermostatId = thermostatId,
+                Limit = int.MaxValue,
+                Offset = 0,
+            });
+        }
+
         [HttpPost]
         [HalRel(CrudRels.Add)]
         [AutoValidate("Cannot add new thermostatSetting")]

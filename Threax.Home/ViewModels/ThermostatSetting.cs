@@ -15,6 +15,7 @@ namespace Threax.Home.ViewModels
     [HalSelfActionLink(typeof(ThermostatSettingsController), nameof(ThermostatSettingsController.Get))]
     [HalActionLink(typeof(ThermostatSettingsController), nameof(ThermostatSettingsController.Update))]
     [HalActionLink(typeof(ThermostatSettingsController), nameof(ThermostatSettingsController.Delete))]
+    [HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.ApplySetting))]
     public partial class ThermostatSetting
     {
         //You can add your own customizations here. These will not be overwritten by the model generator.

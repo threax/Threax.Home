@@ -1407,6 +1407,33 @@ export class ThermostatResult {
     public hasSetTempDocs(): boolean {
         return this.client.HasLinkDoc("SetTemp");
     }
+
+    public getSettings(): Promise<ThermostatSettingCollectionResult> {
+        return this.client.LoadLink("GetSettings")
+               .then(r => {
+                    return new ThermostatSettingCollectionResult(r);
+                });
+
+    }
+
+    public canGetSettings(): boolean {
+        return this.client.HasLink("GetSettings");
+    }
+
+    public linkForGetSettings(): hal.HalLink {
+        return this.client.GetLink("GetSettings");
+    }
+
+    public getGetSettingsDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("GetSettings")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasGetSettingsDocs(): boolean {
+        return this.client.HasLinkDoc("GetSettings");
+    }
 }
 
 export class ThermostatCollectionResult {
@@ -1681,6 +1708,33 @@ export class ThermostatSettingResult {
 
     public linkForDelete(): hal.HalLink {
         return this.client.GetLink("Delete");
+    }
+
+    public applySetting(): Promise<ThermostatResult> {
+        return this.client.LoadLink("ApplySetting")
+               .then(r => {
+                    return new ThermostatResult(r);
+                });
+
+    }
+
+    public canApplySetting(): boolean {
+        return this.client.HasLink("ApplySetting");
+    }
+
+    public linkForApplySetting(): hal.HalLink {
+        return this.client.GetLink("ApplySetting");
+    }
+
+    public getApplySettingDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("ApplySetting")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasApplySettingDocs(): boolean {
+        return this.client.HasLinkDoc("ApplySetting");
     }
 }
 
@@ -2240,6 +2294,7 @@ export interface ThermostatCollection {
 
 export interface ThermostatSettingQuery {
     thermostatSettingId?: string;
+    thermostatId?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
     /** The limit of the number of items to return. */
@@ -2247,10 +2302,11 @@ export interface ThermostatSettingQuery {
 }
 
 export interface ThermostatSettingCollection {
-    /** The number of pages (item number = Offset * Limit) into the collection to query. */
-    offset?: number;
+    thermostatId?: string;
     thermostatSettingId?: string;
     total?: number;
+    /** The number of pages (item number = Offset * Limit) into the collection to query. */
+    offset?: number;
     /** The limit of the number of items to return. */
     limit?: number;
 }

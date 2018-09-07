@@ -21,6 +21,12 @@ namespace Threax.Home.InputModels
         /// </summary>
         public Guid? ThermostatSettingId { get; set; }
 
+        [UiOrder]
+        [Display(Name = "Thermostat")]
+        [UiSearch]
+        [ValueProvider(typeof(Threax.Home.ValueProviders.ThermostatProvider))]
+        public Guid? ThermostatId { get; set; }
+
 
         /// <summary>
         /// Populate an IQueryable for thermostatSettings. Does not apply the skip or limit. Will return
@@ -38,6 +44,11 @@ namespace Threax.Home.InputModels
             }
             else
             {
+                if (ThermostatId != null)
+                {
+                    query = query.Where(i => i.ThermostatId == ThermostatId);
+                }
+
                 return true;
             }
         }

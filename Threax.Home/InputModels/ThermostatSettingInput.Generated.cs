@@ -14,24 +14,25 @@ namespace Threax.Home.InputModels
     [HalModel]
     public partial class ThermostatSettingInput : IThermostatSetting
     {
-        [UiOrder(0, 12)]
+        [UiOrder(0, 13)]
         public String Label { get; set; }
 
-        [UiOrder(0, 15)]
+        [UiOrder(0, 16)]
         public int Order { get; set; }
 
-        [UiOrder(0, 18)]
+        [UiOrder(0, 19)]
         [ValueProvider(typeof(Threax.Home.ValueProviders.TemperatureProvider))]
         public int CoolTemp { get; set; }
 
-        [UiOrder(0, 22)]
+        [UiOrder(0, 23)]
         [ValueProvider(typeof(Threax.Home.ValueProviders.TemperatureProvider))]
         public int HeatTemp { get; set; }
 
-        [UiOrder(0, 26)]
+        [UiOrder(0, 27)]
         public bool On { get; set; }
 
-        [UiOrder(0, 29)]
+        [Display(Name = "Thermostat")]
+        [UiOrder(0, 30)]
         [ValueProvider(typeof(Threax.Home.ValueProviders.ThermostatProvider))]
         public Guid ThermostatId { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Models;
@@ -28,6 +29,8 @@ namespace Threax.Home.ModelSchemas
 
         [UiOrder]
         [DefineValueProvider(typeof(ThermostatProvider))]
+        [Queryable]
+        [Display(Name = "Thermostat")]
         public Guid ThermostatId { get; set; }
     }
 }

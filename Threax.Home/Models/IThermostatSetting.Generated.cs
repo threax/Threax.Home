@@ -33,6 +33,8 @@ namespace Threax.Home.Models
     public partial interface IThermostatSettingQuery
     {
         Guid? ThermostatSettingId { get; set; }
+        Guid? ThermostatId { get; set; }
+
 
     }
 }
