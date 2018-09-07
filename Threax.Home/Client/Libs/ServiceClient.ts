@@ -1326,6 +1326,33 @@ export class ThermostatResult {
     public hasUpdateDocs(): boolean {
         return this.client.HasLinkDoc("Update");
     }
+
+    public setTemp(data: ThermostatTempInput): Promise<ThermostatResult> {
+        return this.client.LoadLinkWithData("SetTemp", data)
+               .then(r => {
+                    return new ThermostatResult(r);
+                });
+
+    }
+
+    public canSetTemp(): boolean {
+        return this.client.HasLink("SetTemp");
+    }
+
+    public linkForSetTemp(): hal.HalLink {
+        return this.client.GetLink("SetTemp");
+    }
+
+    public getSetTempDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("SetTemp")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasSetTempDocs(): boolean {
+        return this.client.HasLinkDoc("SetTemp");
+    }
 }
 
 export class ThermostatCollectionResult {
@@ -2074,4 +2101,9 @@ export interface ThermostatInput {
     fan?: FanSetting;
     heatTemp?: number;
     coolTemp?: number;
+}
+
+export interface ThermostatTempInput {
+    coolTemp?: number;
+    heatTemp?: number;
 }

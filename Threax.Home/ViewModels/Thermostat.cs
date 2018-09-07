@@ -15,6 +15,7 @@ namespace Threax.Home.ViewModels
     [HalModel]
     [HalSelfActionLink(typeof(ThermostatsController), nameof(ThermostatsController.Get))]
     [HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.Update))]
+    [HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.SetTemp))]
     //[HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.Delete))]
     public partial class Thermostat : ICoreThermostat
     {

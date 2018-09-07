@@ -71,6 +71,25 @@ namespace Threax.Home.Controllers.Api
             return await repo.Update(thermostatId, live);
         }
 
+        [HttpPut("[action]/{ThermostatId}")]
+        [HalRel(nameof(SetTemp))]
+        [AutoValidate("Cannot update thermostat")]
+        public async Task<Thermostat> SetTemp(Guid thermostatId, [FromBody]ThermostatTempInput tempInput, [FromServices] IThermostatSubsystemManager<ThermostatInput, Thermostat> thermostats)
+        {
+            var cached = await repo.Get(thermostatId);
+            var thermostat = new ThermostatInput();
+            thermostat.Bridge = cached.Bridge;
+            thermostat.Subsystem = cached.Subsystem;
+            thermostat.Id = cached.Id;
+            thermostat.HeatTemp = tempInput.HeatTemp;
+            thermostat.CoolTemp = tempInput.CoolTemp;
+            thermostat.Fan = FanSetting.Auto;
+            thermostat.Mode = Mode.Auto;
+            await thermostats.Set(thermostat);
+            var live = await thermostats.Get(cached.Subsystem, cached.Bridge, cached.Id);
+            return await repo.Update(thermostatId, live);
+        }
+
         //[HttpDelete("{ThermostatId}")]
         //[HalRel(CrudRels.Delete)]
         //public async Task Delete(Guid thermostatId)

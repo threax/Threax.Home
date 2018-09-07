@@ -75,8 +75,6 @@ export class ButtonGroupController {
             limit: 10000,
         });
 
-        //var items = new iter.Iterable(buttons.items).select(i => i.data);
-
         mainButtons.setData(buttons.items, this.builder.createOnCallback(ButtonGroup));
     }
 }
