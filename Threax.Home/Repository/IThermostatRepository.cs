@@ -6,6 +6,7 @@ using Threax.Home.ViewModels;
 using Threax.Home.Models;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.Home.Core;
+using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 
 namespace Threax.Home.Repository
 {
@@ -20,5 +21,6 @@ namespace Threax.Home.Repository
         Task<Thermostat> Update(Guid thermostatId, ThermostatInput value);
         Task<Thermostat> Update(Guid thermostatId, Thermostat value);
         Task AddMissing(IEnumerable<Thermostat> items);
+        Task<IEnumerable<ILabelValuePair>> GetLabels();
     }
 }

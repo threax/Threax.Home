@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.Home.Core;
+using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 
 namespace Threax.Home.Repository
 {
@@ -121,6 +122,11 @@ namespace Threax.Home.Repository
 
             var toAdd = items.Where(o => !existing.Any(i => o.Subsystem == i.Subsystem && o.Bridge == i.Bridge && o.Id == i.Id));
             await AddRange(toAdd.Select(i => mapper.Map<ThermostatInput>(i)));
+        }
+
+        public async Task<IEnumerable<ILabelValuePair>> GetLabels()
+        {
+            return await dbContext.Thermostats.Select(i => new LabelValuePair<Guid>(i.Name, i.ThermostatId)).ToListAsync();
         }
     }
 }

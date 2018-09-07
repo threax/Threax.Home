@@ -155,6 +155,7 @@ namespace Threax.Home
 
             services.AddScoped<SwitchValueProvider>();
             services.AddScoped<TemperatureProvider>();
+            services.AddScoped<ThermostatProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
