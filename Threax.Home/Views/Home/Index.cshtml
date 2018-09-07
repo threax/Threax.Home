@@ -2,7 +2,7 @@
     ViewData["Title"] = "Welcome";
 }
 
-<div data-hr-controller="buttons">
+<div data-hr-controller="buttons" class="row">
     <div data-hr-view="mainButtons">
         <template>
             <div class="col-md-4 col-sm-6">
@@ -24,5 +24,52 @@
                 {{/for}}
             </div>
         </template>
+    </div>
+</div>
+
+<div data-hr-controller="thermostats"  class="row">
+    <h1>Thermostat</h1>
+    @*foreach (var preset in Model.ThermostatPresets)
+    {
+    @Html.ThermostatPreset(preset, preset);
+    }*@
+    <div thermostatcontrol style="margin-top:1em;">
+        <div class="row" style="font-size:45px;">
+            <div currenttemp class="col-sm-9"></div>
+        </div>
+        <div data-hr-toggle="off" class="startHidden" style="font-size:45px;">
+            <div class="col-sm-9">Off</div>
+        </div>
+        <div data-hr-toggle="main" class="startHidden" data-hr-style-on="display:block;">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6">
+                            <label>Cool</label>
+                            @*@Html.TempSelect("coolsetting")*@
+                        </div>
+                        <div class="col-xs-6 col-sm-6">
+                            <label>Heat</label>
+                            @*@Html.TempSelect("heatsetting")*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-top:2em;">
+                <div class="col-sm-9">
+                    <button class="btn btn-default" data-hr-on-click="apply">Apply</button>
+                    <img src="~/Images/heaton.png" data-hr-toggle="heatingstatus" class="startHidden" />
+                    <img src="~/Images/coolingon.png" data-hr-toggle="coolingstatus" class="startHidden" />
+                    <img src="~/Images/hvacoff.png" data-hr-toggle="offstatus" class="startHidden" />
+                    <img src="~/Images/fanon.png" data-hr-toggle="fanonstatus" class="startHidden" />
+                    <img src="~/Images/fanoff.png" data-hr-toggle="fanoffstatus" class="startHidden" />
+                </div>
+            </div>
+        </div>
+        <div class="ball-pulse" data-hr-toggle="load" data-hr-style-off="display:none;">
+            <div class="loader">
+                <div class="ball"></div>
+            </div>
+        </div>
     </div>
 </div>
