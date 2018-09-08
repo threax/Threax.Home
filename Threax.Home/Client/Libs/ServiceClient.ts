@@ -2163,9 +2163,6 @@ export interface Switch {
     brightness?: number;
     switchId?: string;
     name?: string;
-    subsystem?: string;
-    bridge?: string;
-    id?: string;
     value?: string;
     hexColor?: string;
     created?: string;
@@ -2440,9 +2437,6 @@ export enum SensorInputUvUnits {
 export interface SwitchInput {
     brightness?: number;
     name: string;
-    subsystem: string;
-    bridge: string;
-    id: string;
     value?: string;
     hexColor?: string;
 }

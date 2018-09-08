@@ -103,7 +103,8 @@ namespace Threax.Home
             var halOptions = new HalcyonConventionOptions()
             {
                 BaseUrl = appConfig.BaseUrl,
-                HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController))
+                HalDocEndpointInfo = new HalDocEndpointInfo(typeof(EndpointDocController)),
+                EnableValueProviders = appConfig.EnableValueProviders,
             };
 
             services.AddConventionalHalcyon(halOptions);

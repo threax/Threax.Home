@@ -40,5 +40,11 @@ namespace Threax.Home
         /// Set this to true to use asset bundles instead of individual client side files.
         /// </summary>
         public bool UseAssetBundles { get; set; } = false;
+
+        /// <summary>
+        /// Set this to false to disable the use of value providers, needed in tools mode when generating
+        /// clients or you will get null reference exceptions.
+        /// </summary>
+        public bool EnableValueProviders { get; set; } = true;
     }
 }
