@@ -11,6 +11,7 @@ using Threax.Home.Models;
 using Microsoft.AspNetCore.Authorization;
 using Threax.Home.Hue.Repository;
 using Threax.Home.Core;
+using Threax.Home.Database;
 
 namespace Threax.Home.Controllers.Api
 {
@@ -35,19 +36,16 @@ namespace Threax.Home.Controllers.Api
 
         [HttpPost("[action]")]
         [HalRel(nameof(AddNewSwitches))]
-        public async Task AddNewSwitches([FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo)
+        public async Task AddNewSwitches()
         {
-            var items = await switchRepo.List();
-            await repo.AddMissing(items);
+            await repo.AddNewSwitches();
         }
 
         [HttpGet("{SwitchId}")]
         [HalRel(CrudRels.Get)]
-        public async Task<Switch> Get(Guid switchId, [FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo)
+        public async Task<Switch> Get(Guid switchId)
         {
-            var cached = await repo.Get(switchId);
-            var live = await switchRepo.Get(cached.Subsystem, cached.Bridge, cached.Id);
-            return await repo.Update(switchId, live);
+            return await repo.Get(switchId);
         }
 
         //[HttpPost]
@@ -60,23 +58,17 @@ namespace Threax.Home.Controllers.Api
 
         [HttpPut("{SwitchId}")]
         [HalRel(CrudRels.Update)]
-        [AutoValidate("Cannot update @switch")]
-        public async Task<Switch> Update(Guid switchId, [FromBody]SwitchInput @switch, [FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo)
+        [AutoValidate("Cannot update switch")]
+        public async Task<Switch> Update(Guid switchId, [FromBody]SwitchInput @switch)
         {
-            var cachedSwitch = await repo.Get(switchId);
-            @switch.Bridge = cachedSwitch.Bridge;
-            @switch.Subsystem = cachedSwitch.Subsystem;
-            @switch.Id = cachedSwitch.Id;
-            await switchRepo.Set(@switch);
-            var liveSwitch = await switchRepo.Get(cachedSwitch.Subsystem, cachedSwitch.Bridge, cachedSwitch.Id);
-            return await repo.Update(switchId, liveSwitch);
+            return await repo.Update(switchId, @switch);
         }
 
-        //[HttpDelete("{SwitchId}")]
-        //[HalRel(CrudRels.Delete)]
-        //public async Task Delete(Guid switchId)
-        //{
-        //    await repo.Delete(switchId);
-        //}
+        [HttpDelete("{SwitchId}")]
+        [HalRel(CrudRels.Delete)]
+        public async Task Delete(Guid switchId)
+        {
+            await repo.Delete(switchId);
+        }
     }
 }

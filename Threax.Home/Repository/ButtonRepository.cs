@@ -85,7 +85,7 @@ namespace Threax.Home.Repository
             await SaveChanges();
         }
 
-        public async Task<Button> Apply(ApplyButtonInput input, ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo)
+        public async Task<Button> Apply(ApplyButtonInput input, ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)
         {
             var buttonstate = await dbContext.ButtonStates.Include(i => i.SwitchSettings).Where(i => i.ButtonStateId == input.ButtonStateId).FirstAsync();
             var switchIds = buttonstate.SwitchSettings.Select(i => i.SwitchId);
@@ -99,16 +99,7 @@ namespace Threax.Home.Repository
                 i.HexColor = setting.HexColor;
                 i.Brightness = (byte?)setting.Brightness; //TODO: Fix this type
 
-                return new SwitchInput()
-                {
-                    Bridge = i.Bridge,
-                    Subsystem = i.Subsystem,
-                    Id = i.Id,
-                    Name = i.Name,
-                    Brightness = (byte?)setting.Brightness, //TODO: Fix this type
-                    HexColor = setting.HexColor,
-                    Value = setting.Value
-                };
+                return i;
             });
 
             foreach(var item in switchInputs)

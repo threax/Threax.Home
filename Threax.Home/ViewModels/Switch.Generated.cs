@@ -19,12 +19,6 @@ namespace Threax.Home.ViewModels
 
         public String Name { get; set; }
 
-        public String Subsystem { get; set; }
-
-        public String Bridge { get; set; }
-
-        public String Id { get; set; }
-
         public String Value { get; set; }
 
         public String HexColor { get; set; }

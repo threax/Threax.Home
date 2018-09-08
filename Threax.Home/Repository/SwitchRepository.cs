@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
+using Threax.Home.Core;
 
 namespace Threax.Home.Repository
 {
@@ -18,11 +19,13 @@ namespace Threax.Home.Repository
     {
         private AppDbContext dbContext;
         private IMapper mapper;
+        private ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo;
 
-        public SwitchRepository(AppDbContext dbContext, IMapper mapper)
+        public SwitchRepository(AppDbContext dbContext, IMapper mapper, ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
+            this.switchRepo = switchRepo;
         }
 
         public async Task<SwitchCollection> List(SwitchQuery query)
@@ -40,16 +43,17 @@ namespace Threax.Home.Repository
         public async Task<Switch> Get(Guid switchId)
         {
             var entity = await this.Entity(switchId);
+            var live = await switchRepo.Get(entity.Subsystem, entity.Bridge, entity.Id);
             return mapper.Map<Switch>(entity);
         }
 
-        public async Task<Switch> Add(SwitchInput @switch)
-        {
-            var entity = mapper.Map<SwitchEntity>(@switch);
-            this.dbContext.Add(entity);
-            await SaveChanges();
-            return mapper.Map<Switch>(entity);
-        }
+        //public async Task<Switch> Add(SwitchInput @switch)
+        //{
+        //    var entity = mapper.Map<SwitchEntity>(@switch);
+        //    this.dbContext.Add(entity);
+        //    await SaveChanges();
+        //    return mapper.Map<Switch>(entity);
+        //}
 
         public async Task<Switch> Update(Guid switchId, SwitchInput @switch)
         {
@@ -57,18 +61,21 @@ namespace Threax.Home.Repository
             if (entity != null)
             {
                 mapper.Map(@switch, entity);
+                await switchRepo.Set(entity);
                 await SaveChanges();
                 return mapper.Map<Switch>(entity);
             }
             throw new KeyNotFoundException($"Cannot find @switch {switchId.ToString()}");
         }
 
-        public async Task AddMissing(IEnumerable<SwitchInput> switches)
+        public async Task AddNewSwitches()
         {
+            var switches = await switchRepo.List();
             var existing = await dbContext.Switches.ToListAsync();
 
             var toAdd = switches.Where(o => !existing.Any(i => o.Subsystem == i.Subsystem && o.Bridge == i.Bridge && o.Id == i.Id));
-            await AddRange(toAdd);
+            dbContext.Switches.AddRange(toAdd);
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task Delete(Guid id)
@@ -86,12 +93,12 @@ namespace Threax.Home.Repository
             return await Entities.CountAsync() > 0;
         }
 
-        public virtual async Task AddRange(IEnumerable<SwitchInput> switches)
-        {
-            var entities = switches.Select(i => mapper.Map<SwitchEntity>(i));
-            this.dbContext.Switches.AddRange(entities);
-            await SaveChanges();
-        }
+        //public virtual async Task AddRange(IEnumerable<SwitchInput> switches)
+        //{
+        //    var entities = switches.Select(i => mapper.Map<SwitchEntity>(i));
+        //    this.dbContext.Switches.AddRange(entities);
+        //    await SaveChanges();
+        //}
 
         public async Task<IEnumerable<ILabelValuePair>> GetSwitchLabels()
         {

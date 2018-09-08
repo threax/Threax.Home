@@ -24,6 +24,8 @@ namespace Threax.Home.ModelSchemas
         /// </summary>
         [Required]
         [MaxLength(450)]
+        [NoInputModel]
+        [NoViewModel]
         public String Subsystem { get; set; }
 
         /// <summary>
@@ -31,6 +33,8 @@ namespace Threax.Home.ModelSchemas
         /// </summary>
         [Required]
         [MaxLength(450)]
+        [NoInputModel]
+        [NoViewModel]
         public String Bridge { get; set; }
 
         /// <summary>
@@ -38,6 +42,8 @@ namespace Threax.Home.ModelSchemas
         /// </summary>
         [Required]
         [MaxLength(450)]
+        [NoInputModel]
+        [NoViewModel]
         public String Id { get; set; }
 
         /// <summary>

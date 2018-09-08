@@ -13,15 +13,27 @@ namespace Threax.Home.Models
     {
         String Name { get; set; }
 
-        String Subsystem { get; set; }
-
-        String Bridge { get; set; }
-
-        String Id { get; set; }
-
         String Value { get; set; }
 
         String HexColor { get; set; }
+
+    }
+
+    public partial interface ISwitch_Subsystem
+    {
+        String Subsystem { get; set; }
+
+    }
+
+    public partial interface ISwitch_Bridge
+    {
+        String Bridge { get; set; }
+
+    }
+
+    public partial interface ISwitch_Id
+    {
+        String Id { get; set; }
 
     }
 

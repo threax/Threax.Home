@@ -11,7 +11,7 @@ using Threax.Home.Models;
 
 namespace Threax.Home.Database 
 {
-    public partial class SwitchEntity : ISwitch, ISwitchId, ICreatedModified
+    public partial class SwitchEntity : ISwitch, ISwitchId, ISwitch_Subsystem, ISwitch_Bridge, ISwitch_Id, ICreatedModified
     {
         [Key]
         public Guid SwitchId { get; set; }

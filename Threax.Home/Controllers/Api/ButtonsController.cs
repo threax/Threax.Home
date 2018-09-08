@@ -10,6 +10,7 @@ using Threax.Home.InputModels;
 using Threax.Home.Models;
 using Microsoft.AspNetCore.Authorization;
 using Threax.Home.Core;
+using Threax.Home.Database;
 
 namespace Threax.Home.Controllers.Api
 {
@@ -64,7 +65,7 @@ namespace Threax.Home.Controllers.Api
 
         [HttpGet("[action]")]
         [HalRel("Apply")]
-        public async Task<Button> Apply([FromQuery] ApplyButtonInput input, [FromServices] ISwitchSubsystemManager<SwitchInput, SwitchInput> switchRepo)
+        public async Task<Button> Apply([FromQuery] ApplyButtonInput input, [FromServices] ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)
         {
             return await repo.Apply(input, switchRepo);
         }
