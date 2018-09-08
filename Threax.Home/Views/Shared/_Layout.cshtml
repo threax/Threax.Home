@@ -22,16 +22,23 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Buttons">Buttons</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Switches">Switches</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Sensors">Sensors</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Thermostats">Thermostats</a></li>
-                    <li><a asp-area="" asp-controller="ApiExplorer" asp-action="Index">Api Explorer</a></li>
-                    @if (User.IsInRole(Threax.AspNetCore.UserBuilder.Entities.AuthorizationAdminRoles.EditRoles))
-                    {
-                        <li><a asp-area="" asp-controller="Admin" asp-action="Users">Edit Users</a></li>
-                    }
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Control Panel</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-area="" asp-controller="Home" asp-action="Buttons">Buttons</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Switches">Switches</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Sensors">Sensors</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Thermostats">Thermostats</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="ThermostatSettings">Thermostat Settings</a></li>
+                            <li><a asp-area="" asp-controller="ApiExplorer" asp-action="Index">Api Explorer</a></li>
+                            @if (User.IsInRole(Threax.AspNetCore.UserBuilder.Entities.AuthorizationAdminRoles.EditRoles))
+                            {
+                                <li><a asp-area="" asp-controller="Admin" asp-action="Users">Edit Users</a></li>
+                            }
+                        </ul>
+                    </li>
+                    
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)

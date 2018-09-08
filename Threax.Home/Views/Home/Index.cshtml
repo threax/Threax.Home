@@ -27,21 +27,23 @@
     </div>
 </div>
 
-<div data-hr-controller="thermostats" class="row">
+<div data-hr-controller="thermostats">
     <div data-hr-view="main">
         <template>
             <h1>Thermostat</h1>
             <div style="margin-top:1em;">
                 <div data-hr-toggle="main" class="startHidden" data-hr-style-on="display:block;">
-                    <div data-hr-view="presets">
-                        <template>
-                            <button class="btn btn-default" data-hr-on-click="apply">{{data.label}}</button> 
-                        </template>
+                    <div class="row">
+                        <div data-hr-view="presets" class="col-md-4 col-sm-6">
+                            <template>
+                                <button class="btn btn-default" data-hr-on-click="apply" style="margin-right:3px;">{{data.label}}</button>
+                            </template>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-9">
                             <div class="row" style="font-size:45px;" data-hr-toggle="currentTemp">
-                                <div currenttemp class="col-sm-9" data-hr-view="currentTemp">
+                                <div class="col-sm-9" data-hr-view="currentTemp">
                                     <template>
                                         {{if isOff}}
                                         Off 
@@ -64,7 +66,7 @@
                                 </div>
                                 <div class="row" style="margin-top:2em;">
                                     <div class="col-sm-9">
-                                        <button class="btn btn-default" data-hr-on-click="apply" value="submit">Apply</button>
+                                        <button class="btn btn-default" data-hr-on-click="apply" value="submit" style="margin-right:5px;">Apply</button>
                                         <img src="~/Images/heaton.png" data-hr-toggle="heating" class="startHidden" data-hr-style-on="display:inline;" />
                                         <img src="~/Images/coolingon.png" data-hr-toggle="cooling" class="startHidden" data-hr-style-on="display:inline;" />
                                         <img src="~/Images/hvacoff.png" data-hr-toggle="off" class="startHidden" data-hr-style-on="display:inline;" />
