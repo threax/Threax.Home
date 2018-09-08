@@ -102,7 +102,7 @@ namespace Threax.Home.Repository
 
         public async Task<IEnumerable<ILabelValuePair>> GetSwitchLabels()
         {
-            return await Entities.Select(i => new LabelValuePair<Guid>(i.Name, i.SwitchId)).ToListAsync();
+            return await Entities.OrderBy(i => i.Name).Select(i => new LabelValuePair<Guid>(i.Name, i.SwitchId)).ToListAsync();
         }
 
         protected virtual async Task SaveChanges()
