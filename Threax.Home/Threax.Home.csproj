@@ -55,6 +55,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\Threax.Home.ZWave\Threax.Home.ZWave.csproj" />
+    <ProjectReference Include="..\Threax.Home.Client\Threax.Home.Client.csproj" />
     <ProjectReference Include="..\Threax.Home.Colortouch\Threax.Home.Colortouch.csproj" />
     <ProjectReference Include="..\Threax.Home.Hue\Threax.Home.Hue.csproj" />
     <ProjectReference Include="..\Threax.Home.Mfi\Threax.Home.Mfi.csproj" />
