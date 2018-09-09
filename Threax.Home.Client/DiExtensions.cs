@@ -27,11 +27,14 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<IHomeClientManager>(s =>
             {
                 var manager = new HomeClientManager();
-                foreach (var client in options.Clients)
+                if (options.Clients != null)
                 {
-                    var clientCredsFactory = new ClientCredentialsAccessTokenFactory<EntryPointInjector>(client.Value.ClientCredentials, new BearerHttpClientFactory<EntryPointInjector>(s.GetRequiredService<IHttpClientFactory>()));
-                    var entryPointInjector = new EntryPointInjector(client.Value.ServiceUrl, clientCredsFactory);
-                    manager.SetClient(client.Key, new HomeClient(entryPointInjector));
+                    foreach (var client in options.Clients)
+                    {
+                        var clientCredsFactory = new ClientCredentialsAccessTokenFactory<EntryPointInjector>(client.Value.ClientCredentials, new BearerHttpClientFactory<EntryPointInjector>(s.GetRequiredService<IHttpClientFactory>()));
+                        var entryPointInjector = new EntryPointInjector(client.Value.ServiceUrl, clientCredsFactory);
+                        manager.SetClient(client.Key, new HomeClient(entryPointInjector));
+                    }
                 }
                 return manager;
             });
