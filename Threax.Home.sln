@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorTouchSharp", "ColorTou
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.Colortouch", "Threax.Home.Colortouch\Threax.Home.Colortouch.csproj", "{88029D02-7DCF-49DB-8B4B-1BE34726E6F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threax.Home.Client", "Threax.Home.Client\Threax.Home.Client.csproj", "{565EEAC9-6052-42D3-98A4-1B93D6E1CBAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{88029D02-7DCF-49DB-8B4B-1BE34726E6F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88029D02-7DCF-49DB-8B4B-1BE34726E6F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88029D02-7DCF-49DB-8B4B-1BE34726E6F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{565EEAC9-6052-42D3-98A4-1B93D6E1CBAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{565EEAC9-6052-42D3-98A4-1B93D6E1CBAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{565EEAC9-6052-42D3-98A4-1B93D6E1CBAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{565EEAC9-6052-42D3-98A4-1B93D6E1CBAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
