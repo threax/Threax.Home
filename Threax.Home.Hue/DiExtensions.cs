@@ -19,9 +19,12 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<IHueClientManager>(s =>
             {
                 var manager = new HueClientManager();
-                foreach (var client in options.Clients)
+                if (options.Clients != null)
                 {
-                    manager.SetClient(client.Key, new SyncedHueClient(client.Value));
+                    foreach (var client in options.Clients)
+                    {
+                        manager.SetClient(client.Key, new SyncedHueClient(client.Value));
+                    }
                 }
                 return manager;
             });

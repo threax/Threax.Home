@@ -19,10 +19,13 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<IPowerStripManager>(s =>
             {
                 var manager = new PowerStripManager();
-                foreach (var client in options.Clients)
+                if (options.Clients != null)
                 {
+                    foreach (var client in options.Clients)
+                    {
 
-                    manager.SetClient(client.Key, new SynchedPowerStrip(new MfiSharp.PowerStrip(client.Value)));
+                        manager.SetClient(client.Key, new SynchedPowerStrip(new MfiSharp.PowerStrip(client.Value)));
+                    }
                 }
                 return manager;
             });
