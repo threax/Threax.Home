@@ -2256,6 +2256,7 @@ export interface SensorCollection {
 }
 
 export interface SwitchQuery {
+    switchIds?: string[];
     switchId?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
@@ -2264,10 +2265,11 @@ export interface SwitchQuery {
 }
 
 export interface SwitchCollection {
+    switchId?: string;
+    switchIds?: string[];
+    total?: number;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
-    switchId?: string;
-    total?: number;
     /** The limit of the number of items to return. */
     limit?: number;
 }

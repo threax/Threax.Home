@@ -3103,6 +3103,9 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class SwitchQuery 
     {
+        [Newtonsoft.Json.JsonProperty("switchIds", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public List<System.Guid> SwitchIds { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("switchId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? SwitchId { get; set; }
     
@@ -3129,15 +3132,18 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class SwitchCollection 
     {
-        /// <summary>The number of pages (item number = Offset * Limit) into the collection to query.</summary>
-        [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Offset { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("switchId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? SwitchId { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("switchIds", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public List<System.Guid> SwitchIds { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Total { get; set; }
+    
+        /// <summary>The number of pages (item number = Offset * Limit) into the collection to query.</summary>
+        [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Offset { get; set; }
     
         /// <summary>The limit of the number of items to return.</summary>
         [Newtonsoft.Json.JsonProperty("limit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

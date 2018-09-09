@@ -14,6 +14,7 @@ namespace Threax.Home.InputModels
     {
         //You can add your own customizations here. These will not be overwritten by the model generator.
         //See SwitchQuery.Generated for the generated code
+        public List<Guid> SwitchIds { get; set; }
 
         /// <summary>
         /// Populate an IQueryable. Does not apply the skip or limit.
@@ -25,6 +26,11 @@ namespace Threax.Home.InputModels
             if(CreateGenerated(ref query))
             {
                 //Customize query further
+                if(SwitchIds != null)
+                {
+                    query = query.Where(i => SwitchIds.Contains(i.SwitchId));
+                }
+
                 query = query.OrderBy(i => i.Name);
             }
 

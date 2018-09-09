@@ -42,7 +42,15 @@ namespace Threax.Home.Client
         public async Task SendCommandAsync(SwitchInput command, IEnumerable<string> lightList = null)
         {
             var entry = await entryPointInjector.Load();
-            //await entry.ListSwitches()
+            var switches = await entry.ListSwitches(new SwitchQuery()
+            {
+                SwitchIds = lightList.Select(i => Guid.Parse(i)).ToList(),
+                Limit = int.MaxValue
+            });
+            foreach(var sw in switches.Items)
+            {
+                await sw.Update(command);
+            }
         }
     }
 }
