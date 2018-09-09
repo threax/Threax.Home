@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
-    <UserSecretsId>aspnet-SpcThreax.Home</UserSecretsId>
+    <UserSecretsId>aspnet-Threax.Home</UserSecretsId>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <MvcRazorCompileOnPublish>true</MvcRazorCompileOnPublish>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
