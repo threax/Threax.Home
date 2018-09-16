@@ -3,19 +3,20 @@ version: '3.4'
 services:
   home:
     image: home
+    container_name: home
     build:
-      context: ..
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Threax.Home/Dockerfile
     networks:
-      - public_proxy
+      - appnet
     volumes:
       - type: bind
-        source: ../../../TrustedRoots
+        source: ../TrustedRoots
         target: /usr/local/share/ca-certificates
       - type: bind
-        source: ../../../DevData/home
+        source: ../DevData/home
         target: /appdata
 
 networks:
-  public_proxy:
+  appnet:
     external: true
