@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   home:
-    image: home
+    image: threax.home
     container_name: home
     build:
       context: .
