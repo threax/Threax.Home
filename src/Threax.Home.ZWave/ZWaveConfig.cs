@@ -18,6 +18,6 @@ namespace Threax.Home.ZWave
         /// <summary>
         /// Set to true (default) to enable the z wave device
         /// </summary>
-        public bool Enabled { get; set; } = true;
+        public bool Enabled { get; set; } = false;
     }
 }
