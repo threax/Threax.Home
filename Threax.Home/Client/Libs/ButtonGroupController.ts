@@ -42,9 +42,9 @@ export class ButtonGroup {
     private setIconState() {
         //Order is important, must set this after the toggle or its overwritten
         var buttonStates = this.data.data.buttonStates;
-        if (buttonStates) {
+        if (buttonStates.length > 0) {
             var switchSettings = buttonStates[0].switchSettings;
-            if (switchSettings) {
+            if (switchSettings.length > 0) {
                 var sw = switchSettings[0].switch;
                 switch (sw.value) {
                     case "on":
