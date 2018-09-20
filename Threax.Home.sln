@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D6C47EF9-F0B9-4870-A2B9-165DC361C700}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F80B8D55-4FC8-4CDE-8083-CB668A2EC779}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.ZWave", "Threax.Home.ZWave\Threax.Home.ZWave.csproj", "{1C35F13D-7480-42A4-81B2-C335CC782712}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.Core", "Threax.Home.Core\Threax.Home.Core.csproj", "{7D722573-97FA-43B4-94D4-8EA636C0315B}"
