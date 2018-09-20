@@ -55,22 +55,22 @@ namespace Threax.Home.ZWave.Repository
             }
 
             var b = (await com.Get()).Value;
-            Switch3SwitchPosition value = Switch3SwitchPosition.Off;
+            Switch3SwitchPosition value = Switch3SwitchPosition.off;
             if (b == 0)
             {
-                value = Switch3SwitchPosition.Off;
+                value = Switch3SwitchPosition.off;
             }
             else if (b < 10)
             {
-                value = Switch3SwitchPosition.Low;
+                value = Switch3SwitchPosition.low;
             }
             else if (b < 60)
             {
-                value = Switch3SwitchPosition.Medium;
+                value = Switch3SwitchPosition.medium;
             }
             else if (b < 100)
             {
-                value = Switch3SwitchPosition.High;
+                value = Switch3SwitchPosition.high;
             }
             return new TOut()
             {
@@ -105,16 +105,16 @@ namespace Threax.Home.ZWave.Repository
 
             switch (Enum.Parse(typeof(Switch3SwitchPosition), setting.Value))
             {
-                case Switch3SwitchPosition.Off:
+                case Switch3SwitchPosition.off:
                     await com.Set(0);
                     break;
-                case Switch3SwitchPosition.Low:
+                case Switch3SwitchPosition.low:
                     await com.Set(1);
                     break;
-                case Switch3SwitchPosition.Medium:
+                case Switch3SwitchPosition.medium:
                     await com.Set(50);
                     break;
-                case Switch3SwitchPosition.High:
+                case Switch3SwitchPosition.high:
                     await com.Set(99);
                     break;
                 default:

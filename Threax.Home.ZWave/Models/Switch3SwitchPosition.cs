@@ -8,11 +8,17 @@ using Threax.Home.Core;
 
 namespace Threax.Home.ZWave.Models
 {
+    /// <summary>
+    /// The switch positions.
+    /// </summary>
+    /// <remarks>
+    /// These are lowercase for consistency.
+    /// </remarks>
     public enum Switch3SwitchPosition
     {
-        Off,
-        Low,
-        Medium,
-        High
+        off,
+        low,
+        medium,
+        high
     }
 }
