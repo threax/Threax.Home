@@ -7,15 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D6C47EF9-F0B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F80B8D55-4FC8-4CDE-8083-CB668A2EC779}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.ZWave", "src\Threax.Home.ZWave\Threax.Home.ZWave.csproj", "{1C35F13D-7480-42A4-81B2-C335CC782712}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.ZWave", "Threax.Home.ZWave\Threax.Home.ZWave.csproj", "{1C35F13D-7480-42A4-81B2-C335CC782712}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.Core", "src\Threax.Home.Core\Threax.Home.Core.csproj", "{7D722573-97FA-43B4-94D4-8EA636C0315B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.Api", "src\Threax.Home.Api\Threax.Home.Api.csproj", "{B65884BF-850F-4C10-8E7A-682571A37251}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.SwitchGroups", "src\Threax.Home.SwitchGroups\Threax.Home.SwitchGroups.csproj", "{B4F2BE77-CC05-45EB-B778-EFE585613585}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.ComputerControl", "src\Threax.Home.ComputerControl\Threax.Home.ComputerControl.csproj", "{1F3C1C73-DC6C-486B-9A78-96DE0EC03A63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.Core", "Threax.Home.Core\Threax.Home.Core.csproj", "{7D722573-97FA-43B4-94D4-8EA636C0315B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home", "Threax.Home\Threax.Home.csproj", "{84D83DE7-0F48-47C5-80A1-20FA5B99ED51}"
 EndProject
@@ -43,18 +37,6 @@ Global
 		{7D722573-97FA-43B4-94D4-8EA636C0315B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D722573-97FA-43B4-94D4-8EA636C0315B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D722573-97FA-43B4-94D4-8EA636C0315B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B65884BF-850F-4C10-8E7A-682571A37251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B65884BF-850F-4C10-8E7A-682571A37251}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B65884BF-850F-4C10-8E7A-682571A37251}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B65884BF-850F-4C10-8E7A-682571A37251}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4F2BE77-CC05-45EB-B778-EFE585613585}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4F2BE77-CC05-45EB-B778-EFE585613585}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4F2BE77-CC05-45EB-B778-EFE585613585}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4F2BE77-CC05-45EB-B778-EFE585613585}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1F3C1C73-DC6C-486B-9A78-96DE0EC03A63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F3C1C73-DC6C-486B-9A78-96DE0EC03A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F3C1C73-DC6C-486B-9A78-96DE0EC03A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F3C1C73-DC6C-486B-9A78-96DE0EC03A63}.Release|Any CPU.Build.0 = Release|Any CPU
 		{84D83DE7-0F48-47C5-80A1-20FA5B99ED51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{84D83DE7-0F48-47C5-80A1-20FA5B99ED51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84D83DE7-0F48-47C5-80A1-20FA5B99ED51}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -82,11 +64,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{B65884BF-850F-4C10-8E7A-682571A37251} = {D6C47EF9-F0B9-4870-A2B9-165DC361C700}
-		{B4F2BE77-CC05-45EB-B778-EFE585613585} = {D6C47EF9-F0B9-4870-A2B9-165DC361C700}
-		{1F3C1C73-DC6C-486B-9A78-96DE0EC03A63} = {D6C47EF9-F0B9-4870-A2B9-165DC361C700}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3FDD7D7-E4AA-4369-AA98-6B8E6F81D851}

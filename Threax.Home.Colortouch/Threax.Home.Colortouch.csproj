@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ColorTouchSharp\ColorTouchSharp.csproj" />
-    <ProjectReference Include="..\src\Threax.Home.Core\Threax.Home.Core.csproj" />
+    <ProjectReference Include="..\Threax.Home.Core\Threax.Home.Core.csproj" />
   </ItemGroup>
 
 </Project>

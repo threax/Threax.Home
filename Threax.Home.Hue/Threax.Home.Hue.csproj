@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Threax.Home.Core\Threax.Home.Core.csproj" />
+    <ProjectReference Include="..\Threax.Home.Core\Threax.Home.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

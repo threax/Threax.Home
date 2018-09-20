@@ -6,6 +6,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\Threax.Home.Core\Threax.Home.Core.csproj" />
+    <ProjectReference Include="..\Threax.Home.Core\Threax.Home.Core.csproj" />
   </ItemGroup>
 </Project>
