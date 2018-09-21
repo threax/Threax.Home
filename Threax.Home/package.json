@@ -23,7 +23,9 @@
     "clean": "threax-npm-tk clean",
     "trash-modules": "threax-npm-tk clean -o node_modules",
     "import-tsconfig": "threax-npm-tk tsconfig",
-    "yarn-upgrade": "yarn upgrade --flat"
+    "yarn-upgrade": "yarn upgrade --flat",
+    "publish": "yarn run build && dotnet publish -o bin/publish",
+    "publish-clean": "threax-npm-tk clean -o bin/publish"
   },
   "resolutions": {
     "bootstrap": "3.3.7"
