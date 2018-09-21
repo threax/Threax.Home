@@ -19,6 +19,14 @@ namespace Threax.Home.Mappers
 
             //Map the entity to the view model.
             MapEntityToView(CreateMap<SwitchEntity, Switch>());
+
+            CreateMap<SetSwitchInput, SwitchEntity>().ForMember(d => d.SwitchId, opt => opt.Ignore())
+                .ForMember(d => d.Subsystem, opt => opt.Ignore())
+                .ForMember(d => d.Bridge, opt => opt.Ignore())
+                .ForMember(d => d.Id, opt => opt.Ignore())
+                .ForMember(d => d.Name, opt => opt.Ignore())
+                .ForMember(d => d.Created, opt => opt.ResolveUsing<ICreatedResolver>())
+                .ForMember(d => d.Modified, opt => opt.ResolveUsing<IModifiedResolver>());
         }
 
         partial void MapInputToEntity(IMappingExpression<SwitchInput, SwitchEntity> mapExpr);

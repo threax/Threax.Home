@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.UserBuilder.Entities.Mvc;
+using Threax.AspNetCore.Models;
 
 namespace Threax.Home
 {
@@ -13,10 +14,15 @@ namespace Threax.Home
     /// </summary>
     public static class Roles
     {
-        /// <summary>
-        /// A default role to edit values, you will probably want to replace this role.
-        /// </summary>
-        public const String EditValues = "EditValues";
+        public const String EditButtons = nameof(EditButtons);
+
+        public const String EditSensors = nameof(EditSensors);
+
+        public const String EditSwitches = nameof(EditSwitches);
+
+        public const String EditThermostats = nameof(EditThermostats);
+
+        public const String EditThermostatSettings = nameof(EditThermostatSettings);
 
         /// <summary>
         /// All roles, any roles added above that you want to add to the database should be defined here.
@@ -24,7 +30,11 @@ namespace Threax.Home
         /// <returns></returns>
         public static IEnumerable<String> DatabaseRoles()
         {
-            yield return EditValues;
+            yield return EditButtons;
+            yield return EditSensors;
+            yield return EditSwitches;
+            yield return EditThermostats;
+            yield return EditThermostatSettings;
         }
     }
 
@@ -34,10 +44,19 @@ namespace Threax.Home
     [HalActionLink(RolesControllerRels.DeleteUser, typeof(RolesController))]
     public class RoleAssignments : ReflectedRoleAssignments
     {
-        /// <summary>
-        /// Also add a property for any roles you define, this way the ui can offer them for editing.
-        /// </summary>
-        [Display(Name = "Edit Values")]
-        public bool EditValues { get; set; }
+        [UiOrder]
+        public bool EditButtons { get; set; }
+
+        [UiOrder]
+        public bool EditSensors { get; set; }
+
+        [UiOrder]
+        public bool EditSwitches { get; set; }
+
+        [UiOrder]
+        public bool EditThermostats { get; set; }
+
+        [UiOrder]
+        public bool EditThermostatSettings { get; set; }
     }
 }

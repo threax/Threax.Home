@@ -1411,6 +1411,60 @@ public class SwitchResult
     public bool HasUpdateDocs() {
         return this.client.HasLinkDoc("Update");
     }
+
+    public async Task<SwitchResult> Set(SetSwitchInput data) 
+    {
+        var result = await this.client.LoadLinkWithData("Set", data);
+        return new SwitchResult(result);
+
+    }
+
+    public bool CanSet 
+    {
+        get 
+        {
+            return this.client.HasLink("Set");
+        }
+    }
+
+    public HalLink LinkForSet 
+    {
+        get 
+        {
+            return this.client.GetLink("Set");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetSetDocs() 
+    {
+        var result = await this.client.LoadLinkDoc("Set");
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasSetDocs() {
+        return this.client.HasLinkDoc("Set");
+    }
+
+    public async Task Delete() 
+    {
+        var result = await this.client.LoadLink("Delete");
+    }
+
+    public bool CanDelete 
+    {
+        get 
+        {
+            return this.client.HasLink("Delete");
+        }
+    }
+
+    public HalLink LinkForDelete 
+    {
+        get 
+        {
+            return this.client.GetLink("Delete");
+        }
+    }
 }
 
 public class SwitchCollectionResult 
@@ -2659,8 +2713,20 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class RoleAssignments 
     {
-        [Newtonsoft.Json.JsonProperty("editValues", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool EditValues { get; set; }
+        [Newtonsoft.Json.JsonProperty("editButtons", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EditButtons { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("editSensors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EditSensors { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("editSwitches", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EditSwitches { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("editThermostats", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EditThermostats { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("editThermostatSettings", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EditThermostatSettings { get; set; }
     
         [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid UserId { get; set; }
@@ -3666,6 +3732,30 @@ namespace Threax.Home.Client
         public static SwitchInput FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<SwitchInput>(data);
+        }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class SetSwitchInput 
+    {
+        [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Value { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("brightness", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public byte? Brightness { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("hexColor", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string HexColor { get; set; }
+    
+        public string ToJson() 
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+        
+        public static SetSwitchInput FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<SetSwitchInput>(data);
         }
     
     }

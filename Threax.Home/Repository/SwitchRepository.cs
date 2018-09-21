@@ -47,15 +47,20 @@ namespace Threax.Home.Repository
             return mapper.Map<Switch>(entity);
         }
 
-        //public async Task<Switch> Add(SwitchInput @switch)
-        //{
-        //    var entity = mapper.Map<SwitchEntity>(@switch);
-        //    this.dbContext.Add(entity);
-        //    await SaveChanges();
-        //    return mapper.Map<Switch>(entity);
-        //}
-
         public async Task<Switch> Update(Guid switchId, SwitchInput @switch)
+        {
+            var entity = await this.Entity(switchId);
+            if (entity != null)
+            {
+                mapper.Map(@switch, entity);
+                await switchRepo.Set(entity);
+                await SaveChanges();
+                return mapper.Map<Switch>(entity);
+            }
+            throw new KeyNotFoundException($"Cannot find @switch {switchId.ToString()}");
+        }
+
+        public async Task<Switch> Set(Guid switchId, SetSwitchInput @switch)
         {
             var entity = await this.Entity(switchId);
             if (entity != null)

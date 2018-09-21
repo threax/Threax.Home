@@ -34,6 +34,7 @@ namespace Threax.Home.Controllers.Api
 
         [HttpPost("[action]")]
         [HalRel(nameof(AddNewThermostats))]
+        [Authorize(Roles = Roles.EditThermostats)]
         public async Task AddNewThermostats([FromServices] IThermostatSubsystemManager<ThermostatInput, Thermostat> thermostats)
         {
             var items = await thermostats.List();
@@ -49,16 +50,9 @@ namespace Threax.Home.Controllers.Api
             return await repo.Update(thermostatId, live);
         }
 
-        //[HttpPost]
-        //[HalRel(CrudRels.Add)]
-        //[AutoValidate("Cannot add new thermostat")]
-        //public async Task<Thermostat> Add([FromBody]ThermostatInput thermostat)
-        //{
-        //    return await repo.Add(thermostat);
-        //}
-
         [HttpPut("{ThermostatId}")]
         [HalRel(CrudRels.Update)]
+        [Authorize(Roles = Roles.EditThermostats)]
         [AutoValidate("Cannot update thermostat")]
         public async Task<Thermostat> Update(Guid thermostatId, [FromBody]ThermostatInput thermostat, [FromServices] IThermostatSubsystemManager<ThermostatInput, Thermostat> thermostats)
         {
@@ -95,7 +89,6 @@ namespace Threax.Home.Controllers.Api
         [AutoValidate("Cannot apply thermostat setting.")]
         public async Task<Thermostat> ApplySetting(Guid thermostatSettingId, [FromServices]IThermostatSettingRepository settingRepository, [FromServices] IThermostatSubsystemManager<ThermostatInput, Thermostat> thermostats)
         {
-            //return await repo.Update(thermostatSettingId, thermostatSetting);
             var setting = await settingRepository.Get(thermostatSettingId);
             var cached = await repo.Get(setting.ThermostatId);
             var thermostat = new ThermostatInput();
@@ -121,11 +114,11 @@ namespace Threax.Home.Controllers.Api
             return await repo.Update(setting.ThermostatId, live);
         }
 
-        //[HttpDelete("{ThermostatId}")]
-        //[HalRel(CrudRels.Delete)]
-        //public async Task Delete(Guid thermostatId)
-        //{
-        //    await repo.Delete(thermostatId);
-        //}
+        [HttpDelete("{ThermostatId}")]
+        [HalRel(CrudRels.Delete)]
+        public async Task Delete(Guid thermostatId)
+        {
+            await repo.Delete(thermostatId);
+        }
     }
 }

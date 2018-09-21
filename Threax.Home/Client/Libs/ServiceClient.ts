@@ -1117,6 +1117,45 @@ export class SwitchResult {
     public hasUpdateDocs(): boolean {
         return this.client.HasLinkDoc("Update");
     }
+
+    public set(data: SetSwitchInput): Promise<SwitchResult> {
+        return this.client.LoadLinkWithData("Set", data)
+               .then(r => {
+                    return new SwitchResult(r);
+                });
+
+    }
+
+    public canSet(): boolean {
+        return this.client.HasLink("Set");
+    }
+
+    public linkForSet(): hal.HalLink {
+        return this.client.GetLink("Set");
+    }
+
+    public getSetDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Set")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasSetDocs(): boolean {
+        return this.client.HasLinkDoc("Set");
+    }
+
+    public delete(): Promise<void> {
+        return this.client.LoadLink("Delete").then(hal.makeVoid);
+    }
+
+    public canDelete(): boolean {
+        return this.client.HasLink("Delete");
+    }
+
+    public linkForDelete(): hal.HalLink {
+        return this.client.GetLink("Delete");
+    }
 }
 
 export class SwitchCollectionResult {
@@ -2132,7 +2171,11 @@ export class UserCollectionResult {
 
 
 export interface RoleAssignments {
-    editValues?: boolean;
+    editButtons?: boolean;
+    editSensors?: boolean;
+    editSwitches?: boolean;
+    editThermostats?: boolean;
+    editThermostatSettings?: boolean;
     userId?: string;
     name?: string;
     editRoles?: boolean;
@@ -2440,6 +2483,12 @@ export interface SwitchInput {
     brightness?: number;
     name: string;
     value?: string;
+    hexColor?: string;
+}
+
+export interface SetSwitchInput {
+    value?: string;
+    brightness?: number;
     hexColor?: string;
 }
 

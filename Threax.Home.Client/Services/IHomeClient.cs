@@ -8,6 +8,6 @@ namespace Threax.Home.Client
     {
         Task<SwitchResult> GetSwitch(string id);
         Task<IEnumerable<SwitchResult>> GetSwitches();
-        Task SendCommandAsync(SwitchInput command, IEnumerable<string> lightList = null);
+        Task SendCommandAsync(SetSwitchInput command, IEnumerable<string> lightList = null);
     }
 }

@@ -63,12 +63,11 @@ namespace Threax.Home.Client.Repository
         /// <returns>void</returns>
         public async Task Set(TIn setting)
         {
-                SwitchInput command = new SwitchInput()
+                SetSwitchInput command = new SetSwitchInput()
                 {
                     Brightness = setting.Brightness,
                     Value = setting.Value,
-                    HexColor = setting.HexColor,
-                    Name = setting.Name
+                    HexColor = setting.HexColor
             };
             await clientManager.GetClient(setting.Bridge).SendCommandAsync(command, new String[] { setting.Id });
         }

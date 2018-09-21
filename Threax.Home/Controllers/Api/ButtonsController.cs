@@ -43,6 +43,7 @@ namespace Threax.Home.Controllers.Api
         [HttpPost]
         [HalRel(CrudRels.Add)]
         [AutoValidate("Cannot add new button")]
+        [Authorize(Roles = Roles.EditButtons)]
         public async Task<Button> Add([FromBody]ButtonInput button)
         {
             return await repo.Add(button);
@@ -51,6 +52,7 @@ namespace Threax.Home.Controllers.Api
         [HttpPut("{ButtonId}")]
         [HalRel(CrudRels.Update)]
         [AutoValidate("Cannot update button")]
+        [Authorize(Roles = Roles.EditButtons)]
         public async Task<Button> Update(Guid buttonId, [FromBody]ButtonInput button)
         {
             return await repo.Update(buttonId, button);
@@ -58,6 +60,7 @@ namespace Threax.Home.Controllers.Api
 
         [HttpDelete("{ButtonId}")]
         [HalRel(CrudRels.Delete)]
+        [Authorize(Roles = Roles.EditButtons)]
         public async Task Delete(Guid buttonId)
         {
             await repo.Delete(buttonId);

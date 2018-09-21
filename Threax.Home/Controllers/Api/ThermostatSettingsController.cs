@@ -53,6 +53,7 @@ namespace Threax.Home.Controllers.Api
         [HttpPost]
         [HalRel(CrudRels.Add)]
         [AutoValidate("Cannot add new thermostatSetting")]
+        [Authorize(Roles = Roles.EditThermostatSettings)]
         public async Task<ThermostatSetting> Add([FromBody]ThermostatSettingInput thermostatSetting)
         {
             return await repo.Add(thermostatSetting);
@@ -61,6 +62,7 @@ namespace Threax.Home.Controllers.Api
         [HttpPut("{ThermostatSettingId}")]
         [HalRel(CrudRels.Update)]
         [AutoValidate("Cannot update thermostatSetting")]
+        [Authorize(Roles = Roles.EditThermostatSettings)]
         public async Task<ThermostatSetting> Update(Guid thermostatSettingId, [FromBody]ThermostatSettingInput thermostatSetting)
         {
             return await repo.Update(thermostatSettingId, thermostatSetting);
@@ -68,6 +70,7 @@ namespace Threax.Home.Controllers.Api
 
         [HttpDelete("{ThermostatSettingId}")]
         [HalRel(CrudRels.Delete)]
+        [Authorize(Roles = Roles.EditThermostatSettings)]
         public async Task Delete(Guid thermostatSettingId)
         {
             await repo.Delete(thermostatSettingId);

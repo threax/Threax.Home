@@ -19,6 +19,7 @@ namespace Threax.Home.Repository
         Task<bool> HasSwitches();
         Task<SwitchCollection> List(SwitchQuery query);
         Task<Switch> Update(Guid switchId, SwitchInput value);
+        Task<Switch> Set(Guid switchId, SetSwitchInput @switch);
         Task AddNewSwitches();
         Task<IEnumerable<ILabelValuePair>> GetSwitchLabels();
     }

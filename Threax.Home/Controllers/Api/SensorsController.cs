@@ -34,6 +34,7 @@ namespace Threax.Home.Controllers.Api
 
         [HttpPost("[action]")]
         [HalRel(nameof(AddNewSensors))]
+        [Authorize(Roles = Roles.EditSensors)]
         public async Task AddNewSensors([FromServices] ISensorSubsystemManager<SensorInput> sensors)
         {
             var items = await sensors.List();
@@ -49,16 +50,9 @@ namespace Threax.Home.Controllers.Api
             return await repo.Update(sensorId, live);
         }
 
-        //[HttpPost]
-        //[HalRel(CrudRels.Add)]
-        //[AutoValidate("Cannot add new sensor")]
-        //public async Task<Sensor> Add([FromBody]SensorInput sensor)
-        //{
-        //    return await repo.Add(sensor);
-        //}
-
         [HttpPut("{SensorId}")]
         [HalRel(CrudRels.Update)]
+        [Authorize(Roles = Roles.EditSensors)]
         [AutoValidate("Cannot update sensor")]
         public async Task<Sensor> Update(Guid sensorId, [FromBody]SensorInput sensor)
         {

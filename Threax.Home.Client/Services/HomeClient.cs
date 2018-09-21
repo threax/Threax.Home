@@ -39,7 +39,7 @@ namespace Threax.Home.Client
             return sw.Items;
         }
 
-        public async Task SendCommandAsync(SwitchInput command, IEnumerable<string> lightList = null)
+        public async Task SendCommandAsync(SetSwitchInput command, IEnumerable<string> lightList = null)
         {
             var entry = await entryPointInjector.Load();
             var switches = await entry.ListSwitches(new SwitchQuery()
@@ -49,7 +49,7 @@ namespace Threax.Home.Client
             });
             foreach(var sw in switches.Items)
             {
-                await sw.Update(command);
+                await sw.Set(command);
             }
         }
     }

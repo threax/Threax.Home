@@ -48,16 +48,17 @@ namespace Threax.Home.Controllers.Api
             return await repo.Get(switchId);
         }
 
-        //[HttpPost]
-        //[HalRel(CrudRels.Add)]
-        //[AutoValidate("Cannot add new @switch")]
-        //public async Task<Switch> Add([FromBody]SwitchInput @switch)
-        //{
-        //    return await repo.Add(@switch);
-        //}
+        [HttpPut("Set/{SwitchId}")]
+        [HalRel(nameof(Set))]
+        [AutoValidate("Cannot update switch")]
+        public async Task<Switch> Set(Guid switchId, [FromBody]SetSwitchInput @switch)
+        {
+            return await repo.Set(switchId, @switch);
+        }
 
         [HttpPut("{SwitchId}")]
         [HalRel(CrudRels.Update)]
+        [Authorize(Roles = Roles.EditSwitches)]
         [AutoValidate("Cannot update switch")]
         public async Task<Switch> Update(Guid switchId, [FromBody]SwitchInput @switch)
         {
@@ -66,6 +67,7 @@ namespace Threax.Home.Controllers.Api
 
         [HttpDelete("{SwitchId}")]
         [HalRel(CrudRels.Delete)]
+        [Authorize(Roles = Roles.EditSwitches)]
         public async Task Delete(Guid switchId)
         {
             await repo.Delete(switchId);
