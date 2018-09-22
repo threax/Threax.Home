@@ -162,17 +162,13 @@ namespace Threax.Home
 
             services.AddThreaxCSP(o =>
             {
-                o.AddDefault()
-                 .AddSelf()
-                 .AddEntries(new String[]{ authConfig.Authority });
-
-                o.AddScript()
-                 .AddSelf()
-                 .AddUnsafeInline();
-
-                o.AddStyle()
-                 .AddSelf()
-                 .AddUnsafeInline();
+                o.AddDefault().AddNone();
+                o.AddImg().AddSelf();
+                o.AddConnect().AddSelf();
+                o.AddFont().AddSelf();
+                o.AddFrame().AddSelf().AddEntries(new String[] { authConfig.Authority });
+                o.AddScript().AddSelf().AddUnsafeInline();
+                o.AddStyle().AddSelf().AddUnsafeInline();
             });
         }
 
