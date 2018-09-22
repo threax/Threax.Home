@@ -159,6 +159,21 @@ namespace Threax.Home
             services.AddScoped<SwitchValueProvider>();
             services.AddScoped<TemperatureProvider>();
             services.AddScoped<ThermostatProvider>();
+
+            services.AddThreaxCSP(o =>
+            {
+                o.AddDefault()
+                 .AddSelf()
+                 .AddEntries(new String[]{ authConfig.Authority });
+
+                o.AddScript()
+                 .AddSelf()
+                 .AddUnsafeInline();
+
+                o.AddStyle()
+                 .AddSelf()
+                 .AddUnsafeInline();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
