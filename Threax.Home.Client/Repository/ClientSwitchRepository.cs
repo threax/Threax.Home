@@ -24,7 +24,6 @@ namespace Threax.Home.Client.Repository
         /// <summary>
         /// Get the positions of all the switches.
         /// </summary>
-        /// <param name="bridge">The bridge.</param>
         /// <returns>The switch position status.</returns>
         public async Task<IEnumerable<TOut>> List()
         {
@@ -57,8 +56,6 @@ namespace Threax.Home.Client.Repository
         /// <summary>
         /// Set the switch position of an individual switch.
         /// </summary>
-        /// <param name="bridge">The bridge to use.</param>
-        /// <param name="id">The id of the light to set.</param>
         /// <param name="setting">The position to apply.</param>
         /// <returns>void</returns>
         public async Task Set(TIn setting)

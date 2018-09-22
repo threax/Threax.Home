@@ -16,7 +16,6 @@ namespace Threax.Home.MFi.Services
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="clients">The clients to manage.</param>
         public PowerStripManager()
         {
             

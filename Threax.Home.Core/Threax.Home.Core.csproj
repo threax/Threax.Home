@@ -3,18 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>Threax.Home.Core</AssemblyName>
-    <PackageId>Threax.Home.Core</PackageId>
+    <NoWarn>1701;1702;1705;1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Threax.AspNetCore.Halcyon.Ext" Version="11.1.0" />
     <PackageReference Include="Threax.AspNetCore.ExceptionFilter" Version="5.0.2" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
 </Project>

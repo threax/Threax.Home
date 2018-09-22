@@ -16,7 +16,6 @@ namespace Threax.Home.Hue.Services
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="clients">The clients to manage.</param>
         public HueClientManager()
         {
             
@@ -47,6 +46,7 @@ namespace Threax.Home.Hue.Services
         /// Get a specific client.
         /// </summary>
         /// <param name="name">The name of the client.</param>
+        /// <param name="client">The client.</param>
         /// <returns>The client</returns>
         public void SetClient(String name, SyncedHueClient client)
         {

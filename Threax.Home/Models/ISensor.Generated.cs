@@ -12,29 +12,7 @@ namespace Threax.Home.Models
 {
     public partial interface ISensor 
     {
-        String Name { get; set; }
-
-        String Subsystem { get; set; }
-
-        String Bridge { get; set; }
-
-        String Id { get; set; }
-
-        double? TempValue { get; set; }
-
-        Units? TempUnits { get; set; }
-
-        double? LightValue { get; set; }
-
-        Units? LightUnits { get; set; }
-
-        double? HumidityValue { get; set; }
-
-        Units? HumidityUnits { get; set; }
-
-        double? UvValue { get; set; }
-
-        Units? UvUnits { get; set; }
+        
 
     }
 
