@@ -185,6 +185,33 @@ export class ButtonResult {
     public hasApplyDocs(): boolean {
         return this.client.HasLinkDoc("Apply");
     }
+
+    public getSwitch(): Promise<SwitchResult> {
+        return this.client.LoadLink("GetSwitch")
+               .then(r => {
+                    return new SwitchResult(r);
+                });
+
+    }
+
+    public canGetSwitch(): boolean {
+        return this.client.HasLink("GetSwitch");
+    }
+
+    public linkForGetSwitch(): hal.HalLink {
+        return this.client.GetLink("GetSwitch");
+    }
+
+    public getGetSwitchDocs(): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("GetSwitch")
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasGetSwitchDocs(): boolean {
+        return this.client.HasLinkDoc("GetSwitch");
+    }
 }
 
 export class ButtonCollectionResult {

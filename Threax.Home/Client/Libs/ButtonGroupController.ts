@@ -1,6 +1,7 @@
 import * as controller from 'hr.controller';
 import * as client from 'clientlibs.ServiceClient';
 import * as lcycle from 'hr.widgets.MainLoadErrorLifecycle';
+import { JsonStorage } from 'htmlrapier/src/storage';
 
 abstract class ButtonIcon {
     public abstract setupIcon(sw: client.Switch): void;
@@ -18,6 +19,7 @@ class LightIcon implements ButtonIcon{
     }
 
     public setupIcon(sw: client.Switch): void {
+        if (!sw) { return; }
         switch (sw.value) {
             case "on":
                 this.bulbcolor.style.setProperty("background-color", "#b9b9b9");
@@ -48,6 +50,7 @@ class FanIcon implements ButtonIcon {
     }
 
     public setupIcon(sw: client.Switch): void {
+        if (!sw) { return; }
         this.fanToggle.applyState(sw.value);
     }
 }
@@ -70,8 +73,21 @@ export class ButtonGroup {
         this.error = bindings.getToggle("error");
         this.lifecycle = new lcycle.MainLoadErrorLifecycle(this.main, this.load, this.error, true);
         this.lifecycle.showMain();
-        this.setIconState();
-        builder.Services.addShared(controller.BindingCollection, s => bindings);
+        this.icon.setupIcon(this.switch);
+        this.setup();
+    }
+
+    private async setup(): Promise<void> {
+        try {
+            this.load.on();
+            var sw = await this.data.getSwitch();
+            this.lifecycle.showMain();
+            this.icon.setupIcon(sw.data);
+        }
+        catch (err) {
+            this.lifecycle.showError(err);
+            console.log("Error refreshing switch: " + JSON.stringify(err));
+        }
     }
 
     public async pressButton(evt: Event): Promise<void> {
@@ -82,7 +98,7 @@ export class ButtonGroup {
                 buttonStateId: (<any>evt.srcElement).value
             });
             this.lifecycle.showMain();
-            this.setIconState();
+            this.icon.setupIcon(this.switch);
         }
         catch (err) {
             this.lifecycle.showError(err);
@@ -90,16 +106,16 @@ export class ButtonGroup {
         }
     }
 
-    private setIconState() {
+    private get switch(): client.Switch {
         //Order is important, must set this after the toggle or its overwritten
         var buttonStates = this.data.data.buttonStates;
         if (buttonStates.length > 0) {
             var switchSettings = buttonStates[0].switchSettings;
             if (switchSettings.length > 0) {
-                var sw = switchSettings[0].switch;
-                this.icon.setupIcon(sw);
+                return switchSettings[0].switch;
             }
         }
+        return null;
     }
 }
 

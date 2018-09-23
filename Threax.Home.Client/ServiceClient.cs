@@ -257,6 +257,39 @@ public class ButtonResult
     public bool HasApplyDocs() {
         return this.client.HasLinkDoc("Apply");
     }
+
+    public async Task<SwitchResult> GetSwitch() 
+    {
+        var result = await this.client.LoadLink("GetSwitch");
+        return new SwitchResult(result);
+
+    }
+
+    public bool CanGetSwitch 
+    {
+        get 
+        {
+            return this.client.HasLink("GetSwitch");
+        }
+    }
+
+    public HalLink LinkForGetSwitch 
+    {
+        get 
+        {
+            return this.client.GetLink("GetSwitch");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetGetSwitchDocs() 
+    {
+        var result = await this.client.LoadLinkDoc("GetSwitch");
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasGetSwitchDocs() {
+        return this.client.HasLinkDoc("GetSwitch");
+    }
 }
 
 public class ButtonCollectionResult 

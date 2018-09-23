@@ -44,6 +44,8 @@ namespace Threax.Home.Repository
         {
             var entity = await this.Entity(switchId);
             var live = await switchRepo.Get(entity.Subsystem, entity.Bridge, entity.Id);
+            mapper.Map(live, entity);
+            await dbContext.SaveChangesAsync();
             return mapper.Map<Switch>(entity);
         }
 
