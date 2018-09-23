@@ -46,5 +46,10 @@ namespace Threax.Home
         /// clients or you will get null reference exceptions.
         /// </summary>
         public bool EnableValueProviders { get; set; } = true;
+
+        /// <summary>
+        /// Set the clock skew for identity tokens. The default is 5 seconds.
+        /// </summary>
+        public int IdClockSkewSeconds { get; set; } = 5;
     }
 }

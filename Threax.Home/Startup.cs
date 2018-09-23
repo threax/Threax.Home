@@ -96,6 +96,7 @@ namespace Threax.Home
                 {
                     jwtOpt.Audience = "Threax.IdServer";
                 };
+                o.ClockSkew = TimeSpan.FromSeconds(appConfig.IdClockSkewSeconds);
             });
 
             services.AddAppDatabase(appConfig.ConnectionString);
