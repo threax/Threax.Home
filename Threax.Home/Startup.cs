@@ -193,7 +193,24 @@ namespace Threax.Home
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseStaticFiles();
+            //This is crude, but should provide a cache
+            var cachePeriod = "600";
+            HashSet<String> cacheFiles = new HashSet<string>()
+            {
+                "/bundle.min.css",
+                "/bundle.min.js"
+            };
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    //This might not work from a subfolder
+                    if (cacheFiles.Contains(ctx.Context.Request.Path))
+                    {
+                        ctx.Context.Response.Headers.Add("Cache-Control", $"public, max-age={cachePeriod}");
+                    }
+                }
+            });
 
             app.UseCorsManager(corsOptions, loggerFactory);
 
