@@ -1,0 +1,16 @@
+{
+  "name": "Home",
+  "short_name": "Home",
+  "description": "Control the house.",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#222222",
+  "background_color": "#222222"
+}

@@ -165,6 +165,7 @@ namespace Threax.Home
                 o.AddDefault().AddNone();
                 o.AddImg().AddSelf();
                 o.AddConnect().AddSelf();
+                o.AddManifest().AddSelf();
                 o.AddFont().AddSelf();
                 o.AddFrame().AddSelf().AddEntries(new String[] { authConfig.Authority });
                 o.AddScript().AddSelf().AddUnsafeInline();

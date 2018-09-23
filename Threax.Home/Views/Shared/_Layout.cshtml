@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Home</title>
     <asset-bundle src="~/bundle.min.css"></asset-bundle>
     @RenderSection("css", required: false)
+    <link rel="manifest" href="@Url.Content("~/webmanifest.json")">
 </head>
 <body>
     <relogin></relogin>
