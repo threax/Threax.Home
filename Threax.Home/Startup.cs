@@ -194,7 +194,7 @@ namespace Threax.Home
             loggerFactory.AddDebug();
 
             //This is crude, but should provide a cache
-            var cachePeriod = "600";
+            var cachePeriod = "604800";
             HashSet<String> cacheFiles = new HashSet<string>()
             {
                 "/bundle.min.css",
