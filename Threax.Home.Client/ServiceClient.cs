@@ -2861,6 +2861,17 @@ namespace Threax.Home.Client
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ButtonType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = "Light")]
+        Light = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = "Fan")]
+        Fan = 1,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class Button 
     {
         [Newtonsoft.Json.JsonProperty("buttonStates", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -2874,6 +2885,10 @@ namespace Threax.Home.Client
     
         [Newtonsoft.Json.JsonProperty("order", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Order { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("buttonType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ButtonType ButtonType { get; set; }
     
         [Newtonsoft.Json.JsonProperty("created", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime Created { get; set; }
@@ -2956,6 +2971,10 @@ namespace Threax.Home.Client
         [Newtonsoft.Json.JsonProperty("order", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Order { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("buttonType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ButtonType ButtonType { get; set; }
+    
         public string ToJson() 
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -2993,6 +3012,7 @@ namespace Threax.Home.Client
         [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Offset { get; set; }
     
+        /// <summary>Lookup a button by id.</summary>
         [Newtonsoft.Json.JsonProperty("buttonId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ButtonId { get; set; }
     
@@ -3018,6 +3038,7 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class ButtonQuery 
     {
+        /// <summary>Lookup a button by id.</summary>
         [Newtonsoft.Json.JsonProperty("buttonId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ButtonId { get; set; }
     
@@ -3114,6 +3135,7 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class SensorQuery 
     {
+        /// <summary>Lookup a sensor by id.</summary>
         [Newtonsoft.Json.JsonProperty("sensorId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? SensorId { get; set; }
     
@@ -3144,6 +3166,7 @@ namespace Threax.Home.Client
         [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Offset { get; set; }
     
+        /// <summary>Lookup a sensor by id.</summary>
         [Newtonsoft.Json.JsonProperty("sensorId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? SensorId { get; set; }
     
@@ -3172,6 +3195,7 @@ namespace Threax.Home.Client
         [Newtonsoft.Json.JsonProperty("switchIds", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public List<System.Guid> SwitchIds { get; set; }
     
+        /// <summary>Lookup a @switch by id.</summary>
         [Newtonsoft.Json.JsonProperty("switchId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? SwitchId { get; set; }
     
@@ -3198,6 +3222,7 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class SwitchCollection 
     {
+        /// <summary>Lookup a @switch by id.</summary>
         [Newtonsoft.Json.JsonProperty("switchId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? SwitchId { get; set; }
     
@@ -3230,6 +3255,7 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class ThermostatQuery 
     {
+        /// <summary>Lookup a thermostat by id.</summary>
         [Newtonsoft.Json.JsonProperty("thermostatId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ThermostatId { get; set; }
     
@@ -3260,6 +3286,7 @@ namespace Threax.Home.Client
         [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Offset { get; set; }
     
+        /// <summary>Lookup a thermostat by id.</summary>
         [Newtonsoft.Json.JsonProperty("thermostatId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ThermostatId { get; set; }
     
@@ -3285,6 +3312,7 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class ThermostatSettingQuery 
     {
+        /// <summary>Lookup a thermostatSetting by id.</summary>
         [Newtonsoft.Json.JsonProperty("thermostatSettingId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ThermostatSettingId { get; set; }
     
@@ -3317,6 +3345,7 @@ namespace Threax.Home.Client
         [Newtonsoft.Json.JsonProperty("thermostatId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ThermostatId { get; set; }
     
+        /// <summary>Lookup a thermostatSetting by id.</summary>
         [Newtonsoft.Json.JsonProperty("thermostatSettingId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ThermostatSettingId { get; set; }
     

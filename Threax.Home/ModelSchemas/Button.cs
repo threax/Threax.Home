@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Models;
+using Threax.Home.Models;
 
 namespace Threax.Home.ModelSchemas
 {
@@ -13,6 +14,9 @@ namespace Threax.Home.ModelSchemas
 
         [UiOrder]
         public int Order { get; set; }
+
+        [UiOrder]
+        public ButtonType ButtonType { get; set; }
 
         [UiOrder]
         [NoInputModel]

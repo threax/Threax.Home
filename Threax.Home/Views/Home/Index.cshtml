@@ -14,7 +14,18 @@
                             <div class="ball"></div>
                         </div>
                     </div>
-                    <img src="~/Images/bulb.png" data-hr-toggle="main" class="bulbShadow load-inner startHidden" data-hr-style-on="display:block;" data-hr-handle="bulbcolor"/>
+                    {{if data.buttonType == "Light"}}
+                    <img src="~/Images/bulb.png" data-hr-toggle="main" class="bulbShadow load-inner startHidden" data-hr-style-on="display:block;" data-hr-handle="bulbcolor" />
+                    {{else if data.buttonType == "Fan"}}
+                    <div data-hr-toggle="main" class="startHidden" style="position:absolute;left:8px;top:38px;" data-hr-style-on="display:block;">
+                        <div class="fan" data-hr-toggle="fan" 
+                                         data-hr-class-off="fan-off" 
+                                         data-hr-class-low="fan-low" 
+                                         data-hr-class-medium="fan-med" 
+                                         data-hr-class-high="fan-high"
+                        ></div>
+                    </div>
+                    {{/if}}
                 </div>
 
                 <div class="startHidden" data-hr-toggle="error">An error occured.</div>

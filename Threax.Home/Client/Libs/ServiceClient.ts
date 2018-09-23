@@ -2212,11 +2212,17 @@ export interface Switch {
     modified?: string;
 }
 
+export enum ButtonType {
+    Light = <any>"Light", 
+    Fan = <any>"Fan", 
+}
+
 export interface Button {
     buttonStates?: ButtonState[];
     buttonId?: string;
     label?: string;
     order?: number;
+    buttonType?: ButtonType;
     created?: string;
     modified?: string;
 }
@@ -2238,6 +2244,7 @@ export interface ButtonInput {
     buttonStates?: ButtonStateInput[];
     label?: string;
     order?: number;
+    buttonType?: ButtonType;
 }
 
 export interface ApplyButtonInput {
@@ -2247,6 +2254,7 @@ export interface ApplyButtonInput {
 export interface ButtonCollection {
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
+    /** Lookup a button by id. */
     buttonId?: string;
     total?: number;
     /** The limit of the number of items to return. */
@@ -2254,6 +2262,7 @@ export interface ButtonCollection {
 }
 
 export interface ButtonQuery {
+    /** Lookup a button by id. */
     buttonId?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
@@ -2282,6 +2291,7 @@ export interface UserCollection {
 }
 
 export interface SensorQuery {
+    /** Lookup a sensor by id. */
     sensorId?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
@@ -2292,6 +2302,7 @@ export interface SensorQuery {
 export interface SensorCollection {
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
+    /** Lookup a sensor by id. */
     sensorId?: string;
     total?: number;
     /** The limit of the number of items to return. */
@@ -2300,6 +2311,7 @@ export interface SensorCollection {
 
 export interface SwitchQuery {
     switchIds?: string[];
+    /** Lookup a @switch by id. */
     switchId?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
@@ -2308,6 +2320,7 @@ export interface SwitchQuery {
 }
 
 export interface SwitchCollection {
+    /** Lookup a @switch by id. */
     switchId?: string;
     switchIds?: string[];
     total?: number;
@@ -2318,6 +2331,7 @@ export interface SwitchCollection {
 }
 
 export interface ThermostatQuery {
+    /** Lookup a thermostat by id. */
     thermostatId?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
@@ -2328,6 +2342,7 @@ export interface ThermostatQuery {
 export interface ThermostatCollection {
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
+    /** Lookup a thermostat by id. */
     thermostatId?: string;
     total?: number;
     /** The limit of the number of items to return. */
@@ -2335,6 +2350,7 @@ export interface ThermostatCollection {
 }
 
 export interface ThermostatSettingQuery {
+    /** Lookup a thermostatSetting by id. */
     thermostatSettingId?: string;
     thermostatId?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
@@ -2345,6 +2361,7 @@ export interface ThermostatSettingQuery {
 
 export interface ThermostatSettingCollection {
     thermostatId?: string;
+    /** Lookup a thermostatSetting by id. */
     thermostatSettingId?: string;
     total?: number;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */

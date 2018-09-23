@@ -20,6 +20,8 @@ namespace Threax.Home.Database
 
         public int Order { get; set; }
 
+        public ButtonType ButtonType { get; set; }
+
         public List<ButtonStateEntity> ButtonStates { get; set; }
 
         public DateTime Created { get; set; }

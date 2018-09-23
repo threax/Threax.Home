@@ -2,25 +2,76 @@ import * as controller from 'hr.controller';
 import * as client from 'clientlibs.ServiceClient';
 import * as lcycle from 'hr.widgets.MainLoadErrorLifecycle';
 
+abstract class ButtonIcon {
+    public abstract setupIcon(sw: client.Switch): void;
+}
+
+class LightIcon implements ButtonIcon{
+    public static get InjectorArgs(): controller.DiFunction<any>[] {
+        return [controller.BindingCollection];
+    }
+
+    private bulbcolor: HTMLElement;
+
+    constructor(bindings: controller.BindingCollection) {
+        this.bulbcolor = bindings.getHandle("bulbcolor");
+    }
+
+    public setupIcon(sw: client.Switch): void {
+        switch (sw.value) {
+            case "on":
+                this.bulbcolor.style.setProperty("background-color", "#b9b9b9");
+                break;
+            case "off":
+                this.bulbcolor.style.setProperty("background-color", "transparent");
+                break;
+        }
+    }
+}
+
+class FanToggle extends controller.TypedToggle {
+    public getPossibleStates(): string[] {
+        return ["off", "low", "medium", "high"];
+    }
+}
+
+class FanIcon implements ButtonIcon {
+    public static get InjectorArgs(): controller.DiFunction<any>[] {
+        return [controller.BindingCollection];
+    }
+
+    private fanToggle: FanToggle;
+
+    constructor(bindings: controller.BindingCollection) {
+        this.fanToggle = new FanToggle();
+        bindings.getCustomToggle("fan", this.fanToggle);
+    }
+
+    public setupIcon(sw: client.Switch): void {
+        this.fanToggle.applyState(sw.value);
+    }
+}
+
 export class ButtonGroup {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
-        return [controller.BindingCollection, controller.InjectControllerData];
+        return [controller.BindingCollection, controller.InjectControllerData, controller.InjectedControllerBuilder];
     }
 
     private load: controller.OnOffToggle;
     private main: controller.OnOffToggle;
     private error: controller.OnOffToggle;
     private lifecycle: lcycle.MainLoadErrorLifecycle;
-    private bulbcolor: HTMLElement;
+    private icon: ButtonIcon;
 
-    constructor(bindings: controller.BindingCollection, private data: client.ButtonResult) {
+    constructor(bindings: controller.BindingCollection, private data: client.ButtonResult, builder: controller.InjectedControllerBuilder) {
+        this.icon = builder.createUnboundId(data.data.buttonType, ButtonIcon);
         this.load = bindings.getToggle("load");
         this.main = bindings.getToggle("main");
         this.error = bindings.getToggle("error");
         this.lifecycle = new lcycle.MainLoadErrorLifecycle(this.main, this.load, this.error, true);
-        this.bulbcolor = bindings.getHandle("bulbcolor");
         this.lifecycle.showMain();
         this.setIconState();
+        builder.Services.addShared(controller.BindingCollection, s => bindings);
     }
 
     public async pressButton(evt: Event): Promise<void> {
@@ -46,14 +97,7 @@ export class ButtonGroup {
             var switchSettings = buttonStates[0].switchSettings;
             if (switchSettings.length > 0) {
                 var sw = switchSettings[0].switch;
-                switch (sw.value) {
-                    case "on":
-                        this.bulbcolor.style.setProperty("background-color", "#b9b9b9");
-                        break;
-                    case "off":
-                        this.bulbcolor.style.setProperty("background-color", "transparent");
-                        break;
-                }
+                this.icon.setupIcon(sw);
             }
         }
     }
@@ -82,6 +126,8 @@ export class ButtonGroupController {
 export function addServices(builder: controller.InjectedControllerBuilder) {
     builder.Services.addTransient(ButtonGroup, ButtonGroup);
     builder.Services.addShared(ButtonGroupController, ButtonGroupController);
+    builder.Services.addTransientId(client.ButtonType.Light, ButtonIcon, LightIcon);
+    builder.Services.addTransientId(client.ButtonType.Fan, ButtonIcon, FanIcon);
 }
 
 export interface IControllerOptions {

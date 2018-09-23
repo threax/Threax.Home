@@ -15,6 +15,8 @@ namespace Threax.Home.Models
 
         int Order { get; set; }
 
+        ButtonType ButtonType { get; set; }
+
     }
 
     public partial interface IButtonId
