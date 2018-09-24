@@ -40,7 +40,7 @@
 </div>
 
 <div data-hr-controller="thermostats">
-    <div data-hr-view="main">
+    <div data-hr-view="main" style="min-height:331px;">
         <template>
             <h1>Thermostat</h1>
             <div style="margin-top:1em;">
@@ -89,11 +89,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="ball-pulse fillLoader" data-hr-toggle="load" data-hr-style-off="display:none;">
-                        <div class="loader">
-                            <div class="ball"></div>
-                        </div>
-                    </div>
+                    <load class="fillLoader" visible="true"></load>
                 </div>
             </div>
         </template>
