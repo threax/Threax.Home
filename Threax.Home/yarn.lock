@@ -55,8 +55,8 @@ htmlrapier.halcyon@>=6.0.0, htmlrapier.halcyon@>=7.0.0, htmlrapier.halcyon@^7.0.
     htmlrapier ">=10.0.2"
 
 htmlrapier.relogin@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/htmlrapier.relogin/-/htmlrapier.relogin-1.0.4.tgz#5ee770018da5dee2215773835ddf2b6120f55c54"
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/htmlrapier.relogin/-/htmlrapier.relogin-1.0.5.tgz#49f0bd2263fc6778db2ce4d62189a0100c133db3"
   dependencies:
     htmlrapier ">=14.0.0"
 
