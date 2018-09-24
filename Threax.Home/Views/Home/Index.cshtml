@@ -44,7 +44,7 @@
         <template>
             <h1>Thermostat</h1>
             <div style="margin-top:1em;">
-                <div data-hr-toggle="main" class="startHidden" data-hr-style-on="display:block;">
+                <div class="fillLoaderParent">
                     <div class="row">
                         <div data-hr-view="presets" class="col-md-4 col-sm-6">
                             <template>
@@ -58,7 +58,7 @@
                                 <div class="col-sm-9" data-hr-view="currentTemp">
                                     <template>
                                         {{if isOff}}
-                                        Off 
+                                        Off
                                         {{/if}}
                                         {{spaceTemp}}&deg; {{humidity}}%
                                     </template>
@@ -89,10 +89,10 @@
                             </form>
                         </div>
                     </div>
-                </div>
-                <div class="ball-pulse" data-hr-toggle="load" data-hr-style-off="display:none;" style="height:14em;">
-                    <div class="loader">
-                        <div class="ball"></div>
+                    <div class="ball-pulse fillLoader" data-hr-toggle="load" data-hr-style-off="display:none;">
+                        <div class="loader">
+                            <div class="ball"></div>
+                        </div>
                     </div>
                 </div>
             </div>
