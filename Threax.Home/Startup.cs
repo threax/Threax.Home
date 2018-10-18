@@ -130,6 +130,11 @@ namespace Threax.Home
             })
             .AddConventionalIdServerMvc();
 
+            services.ConfigureHtmlRapierTagHelpers(o =>
+            {
+                o.FrontEndLibrary = HtmlRapier.TagHelpers.FrontEndLibrary.Bootstrap3;
+            });
+
             services.AddScoped<IToolRunner>(s =>
             {
                 return new ToolRunner()
