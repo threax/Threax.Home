@@ -51,9 +51,9 @@ public class RoleAssignmentsResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetRefreshDocs() 
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("self");
+        var result = await this.client.LoadLinkDoc("self", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -84,9 +84,9 @@ public class RoleAssignmentsResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetSetUserDocs() 
+    public async Task<HalEndpointDoc> GetSetUserDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("SetUser");
+        var result = await this.client.LoadLinkDoc("SetUser", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -161,9 +161,9 @@ public class ButtonResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetRefreshDocs() 
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("self");
+        var result = await this.client.LoadLinkDoc("self", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -194,9 +194,9 @@ public class ButtonResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetUpdateDocs() 
+    public async Task<HalEndpointDoc> GetUpdateDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Update");
+        var result = await this.client.LoadLinkDoc("Update", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -248,9 +248,9 @@ public class ButtonResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetApplyDocs() 
+    public async Task<HalEndpointDoc> GetApplyDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Apply");
+        var result = await this.client.LoadLinkDoc("Apply", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -281,9 +281,9 @@ public class ButtonResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetGetSwitchDocs() 
+    public async Task<HalEndpointDoc> GetGetSwitchDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("GetSwitch");
+        var result = await this.client.LoadLinkDoc("GetSwitch", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -352,9 +352,9 @@ public class ButtonCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetRefreshDocs() 
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("self");
+        var result = await this.client.LoadLinkDoc("self", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -362,9 +362,9 @@ public class ButtonCollectionResult
         return this.client.HasLinkDoc("self");
     }
 
-    public async Task<HalEndpointDoc> GetGetDocs() 
+    public async Task<HalEndpointDoc> GetGetDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Get");
+        var result = await this.client.LoadLinkDoc("Get", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -372,9 +372,9 @@ public class ButtonCollectionResult
         return this.client.HasLinkDoc("Get");
     }
 
-    public async Task<HalEndpointDoc> GetListDocs() 
+    public async Task<HalEndpointDoc> GetListDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("List");
+        var result = await this.client.LoadLinkDoc("List", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -382,9 +382,9 @@ public class ButtonCollectionResult
         return this.client.HasLinkDoc("List");
     }
 
-    public async Task<HalEndpointDoc> GetUpdateDocs() 
+    public async Task<HalEndpointDoc> GetUpdateDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Update");
+        var result = await this.client.LoadLinkDoc("Update", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -415,9 +415,9 @@ public class ButtonCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetAddDocs() 
+    public async Task<HalEndpointDoc> GetAddDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Add");
+        var result = await this.client.LoadLinkDoc("Add", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -448,9 +448,9 @@ public class ButtonCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetNextDocs() 
+    public async Task<HalEndpointDoc> GetNextDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("next");
+        var result = await this.client.LoadLinkDoc("next", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -481,9 +481,9 @@ public class ButtonCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetPreviousDocs() 
+    public async Task<HalEndpointDoc> GetPreviousDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("previous");
+        var result = await this.client.LoadLinkDoc("previous", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -514,9 +514,9 @@ public class ButtonCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetFirstDocs() 
+    public async Task<HalEndpointDoc> GetFirstDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("first");
+        var result = await this.client.LoadLinkDoc("first", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -547,9 +547,9 @@ public class ButtonCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetLastDocs() 
+    public async Task<HalEndpointDoc> GetLastDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("last");
+        var result = await this.client.LoadLinkDoc("last", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -562,7 +562,7 @@ public class EntryPointInjector
 {
     private string url;
     private IHttpClientFactory fetcher;
-    private EntryPointResult instance = default(EntryPointResult);
+    private Task<EntryPointResult> instanceTask = default(Task<EntryPointResult>);
 
     public EntryPointInjector(string url, IHttpClientFactory fetcher)
     {
@@ -570,13 +570,13 @@ public class EntryPointInjector
         this.fetcher = fetcher;
     }
 
-    public async Task<EntryPointResult> Load()
+    public Task<EntryPointResult> Load()
     {
-        if (this.instance == default(EntryPointResult))
+        if (this.instanceTask == default(Task<EntryPointResult>))
         {
-            this.instance = await EntryPointResult.Load(this.url, this.fetcher);
+            this.instanceTask = EntryPointResult.Load(this.url, this.fetcher);
         }
-        return this.instance;
+        return this.instanceTask;
     }
 }
 
@@ -631,9 +631,9 @@ public class EntryPointResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetListButtonsDocs() 
+    public async Task<HalEndpointDoc> GetListButtonsDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("ListButtons");
+        var result = await this.client.LoadLinkDoc("ListButtons", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -664,9 +664,9 @@ public class EntryPointResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetAddButtonDocs() 
+    public async Task<HalEndpointDoc> GetAddButtonDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("AddButton");
+        var result = await this.client.LoadLinkDoc("AddButton", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -697,9 +697,9 @@ public class EntryPointResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetRefreshDocs() 
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("self");
+        var result = await this.client.LoadLinkDoc("self", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -730,9 +730,9 @@ public class EntryPointResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetGetUserDocs() 
+    public async Task<HalEndpointDoc> GetGetUserDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("GetUser");
+        var result = await this.client.LoadLinkDoc("GetUser", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -763,9 +763,9 @@ public class EntryPointResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetListUsersDocs() 
+    public async Task<HalEndpointDoc> GetListUsersDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("ListUsers");
+        var result = await this.client.LoadLinkDoc("ListUsers", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -796,9 +796,9 @@ public class EntryPointResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetSetUserDocs() 
+    public async Task<HalEndpointDoc> GetSetUserDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("SetUser");
+        var result = await this.client.LoadLinkDoc("SetUser", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -892,9 +892,9 @@ public class EntryPointResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetListSensorsDocs() 
+    public async Task<HalEndpointDoc> GetListSensorsDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("ListSensors");
+        var result = await this.client.LoadLinkDoc("ListSensors", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -925,9 +925,9 @@ public class EntryPointResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetListSwitchesDocs() 
+    public async Task<HalEndpointDoc> GetListSwitchesDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("ListSwitches");
+        var result = await this.client.LoadLinkDoc("ListSwitches", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -958,9 +958,9 @@ public class EntryPointResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetListThermostatsDocs() 
+    public async Task<HalEndpointDoc> GetListThermostatsDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("ListThermostats");
+        var result = await this.client.LoadLinkDoc("ListThermostats", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -991,9 +991,9 @@ public class EntryPointResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetListThermostatSettingsDocs() 
+    public async Task<HalEndpointDoc> GetListThermostatSettingsDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("ListThermostatSettings");
+        var result = await this.client.LoadLinkDoc("ListThermostatSettings", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1024,9 +1024,9 @@ public class EntryPointResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetAddThermostatSettingDocs() 
+    public async Task<HalEndpointDoc> GetAddThermostatSettingDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("AddThermostatSetting");
+        var result = await this.client.LoadLinkDoc("AddThermostatSetting", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1080,9 +1080,9 @@ public class SensorResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetRefreshDocs() 
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("self");
+        var result = await this.client.LoadLinkDoc("self", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1113,9 +1113,9 @@ public class SensorResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetUpdateDocs() 
+    public async Task<HalEndpointDoc> GetUpdateDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Update");
+        var result = await this.client.LoadLinkDoc("Update", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1184,9 +1184,9 @@ public class SensorCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetRefreshDocs() 
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("self");
+        var result = await this.client.LoadLinkDoc("self", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1194,9 +1194,9 @@ public class SensorCollectionResult
         return this.client.HasLinkDoc("self");
     }
 
-    public async Task<HalEndpointDoc> GetGetDocs() 
+    public async Task<HalEndpointDoc> GetGetDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Get");
+        var result = await this.client.LoadLinkDoc("Get", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1204,9 +1204,9 @@ public class SensorCollectionResult
         return this.client.HasLinkDoc("Get");
     }
 
-    public async Task<HalEndpointDoc> GetListDocs() 
+    public async Task<HalEndpointDoc> GetListDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("List");
+        var result = await this.client.LoadLinkDoc("List", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1214,9 +1214,9 @@ public class SensorCollectionResult
         return this.client.HasLinkDoc("List");
     }
 
-    public async Task<HalEndpointDoc> GetUpdateDocs() 
+    public async Task<HalEndpointDoc> GetUpdateDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Update");
+        var result = await this.client.LoadLinkDoc("Update", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1247,9 +1247,9 @@ public class SensorCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetNextDocs() 
+    public async Task<HalEndpointDoc> GetNextDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("next");
+        var result = await this.client.LoadLinkDoc("next", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1280,9 +1280,9 @@ public class SensorCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetPreviousDocs() 
+    public async Task<HalEndpointDoc> GetPreviousDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("previous");
+        var result = await this.client.LoadLinkDoc("previous", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1313,9 +1313,9 @@ public class SensorCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetFirstDocs() 
+    public async Task<HalEndpointDoc> GetFirstDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("first");
+        var result = await this.client.LoadLinkDoc("first", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1346,9 +1346,9 @@ public class SensorCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetLastDocs() 
+    public async Task<HalEndpointDoc> GetLastDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("last");
+        var result = await this.client.LoadLinkDoc("last", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1402,9 +1402,9 @@ public class SwitchResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetRefreshDocs() 
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("self");
+        var result = await this.client.LoadLinkDoc("self", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1435,9 +1435,9 @@ public class SwitchResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetUpdateDocs() 
+    public async Task<HalEndpointDoc> GetUpdateDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Update");
+        var result = await this.client.LoadLinkDoc("Update", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1468,9 +1468,9 @@ public class SwitchResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetSetDocs() 
+    public async Task<HalEndpointDoc> GetSetDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Set");
+        var result = await this.client.LoadLinkDoc("Set", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1560,9 +1560,9 @@ public class SwitchCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetRefreshDocs() 
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("self");
+        var result = await this.client.LoadLinkDoc("self", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1570,9 +1570,9 @@ public class SwitchCollectionResult
         return this.client.HasLinkDoc("self");
     }
 
-    public async Task<HalEndpointDoc> GetGetDocs() 
+    public async Task<HalEndpointDoc> GetGetDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Get");
+        var result = await this.client.LoadLinkDoc("Get", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1580,9 +1580,9 @@ public class SwitchCollectionResult
         return this.client.HasLinkDoc("Get");
     }
 
-    public async Task<HalEndpointDoc> GetListDocs() 
+    public async Task<HalEndpointDoc> GetListDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("List");
+        var result = await this.client.LoadLinkDoc("List", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1590,9 +1590,9 @@ public class SwitchCollectionResult
         return this.client.HasLinkDoc("List");
     }
 
-    public async Task<HalEndpointDoc> GetUpdateDocs() 
+    public async Task<HalEndpointDoc> GetUpdateDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Update");
+        var result = await this.client.LoadLinkDoc("Update", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1623,9 +1623,9 @@ public class SwitchCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetNextDocs() 
+    public async Task<HalEndpointDoc> GetNextDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("next");
+        var result = await this.client.LoadLinkDoc("next", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1656,9 +1656,9 @@ public class SwitchCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetPreviousDocs() 
+    public async Task<HalEndpointDoc> GetPreviousDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("previous");
+        var result = await this.client.LoadLinkDoc("previous", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1689,9 +1689,9 @@ public class SwitchCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetFirstDocs() 
+    public async Task<HalEndpointDoc> GetFirstDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("first");
+        var result = await this.client.LoadLinkDoc("first", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1722,9 +1722,9 @@ public class SwitchCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetLastDocs() 
+    public async Task<HalEndpointDoc> GetLastDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("last");
+        var result = await this.client.LoadLinkDoc("last", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1778,9 +1778,9 @@ public class ThermostatResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetRefreshDocs() 
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("self");
+        var result = await this.client.LoadLinkDoc("self", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1811,9 +1811,9 @@ public class ThermostatResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetUpdateDocs() 
+    public async Task<HalEndpointDoc> GetUpdateDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Update");
+        var result = await this.client.LoadLinkDoc("Update", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1844,9 +1844,9 @@ public class ThermostatResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetSetTempDocs() 
+    public async Task<HalEndpointDoc> GetSetTempDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("SetTemp");
+        var result = await this.client.LoadLinkDoc("SetTemp", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1877,9 +1877,9 @@ public class ThermostatResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetGetSettingsDocs() 
+    public async Task<HalEndpointDoc> GetGetSettingsDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("GetSettings");
+        var result = await this.client.LoadLinkDoc("GetSettings", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1948,9 +1948,9 @@ public class ThermostatCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetRefreshDocs() 
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("self");
+        var result = await this.client.LoadLinkDoc("self", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1958,9 +1958,9 @@ public class ThermostatCollectionResult
         return this.client.HasLinkDoc("self");
     }
 
-    public async Task<HalEndpointDoc> GetGetDocs() 
+    public async Task<HalEndpointDoc> GetGetDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Get");
+        var result = await this.client.LoadLinkDoc("Get", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1968,9 +1968,9 @@ public class ThermostatCollectionResult
         return this.client.HasLinkDoc("Get");
     }
 
-    public async Task<HalEndpointDoc> GetListDocs() 
+    public async Task<HalEndpointDoc> GetListDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("List");
+        var result = await this.client.LoadLinkDoc("List", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -1978,9 +1978,9 @@ public class ThermostatCollectionResult
         return this.client.HasLinkDoc("List");
     }
 
-    public async Task<HalEndpointDoc> GetUpdateDocs() 
+    public async Task<HalEndpointDoc> GetUpdateDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Update");
+        var result = await this.client.LoadLinkDoc("Update", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2011,9 +2011,9 @@ public class ThermostatCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetNextDocs() 
+    public async Task<HalEndpointDoc> GetNextDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("next");
+        var result = await this.client.LoadLinkDoc("next", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2044,9 +2044,9 @@ public class ThermostatCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetPreviousDocs() 
+    public async Task<HalEndpointDoc> GetPreviousDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("previous");
+        var result = await this.client.LoadLinkDoc("previous", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2077,9 +2077,9 @@ public class ThermostatCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetFirstDocs() 
+    public async Task<HalEndpointDoc> GetFirstDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("first");
+        var result = await this.client.LoadLinkDoc("first", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2110,9 +2110,9 @@ public class ThermostatCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetLastDocs() 
+    public async Task<HalEndpointDoc> GetLastDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("last");
+        var result = await this.client.LoadLinkDoc("last", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2166,9 +2166,9 @@ public class ThermostatSettingResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetRefreshDocs() 
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("self");
+        var result = await this.client.LoadLinkDoc("self", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2199,9 +2199,9 @@ public class ThermostatSettingResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetUpdateDocs() 
+    public async Task<HalEndpointDoc> GetUpdateDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Update");
+        var result = await this.client.LoadLinkDoc("Update", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2253,9 +2253,9 @@ public class ThermostatSettingResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetApplySettingDocs() 
+    public async Task<HalEndpointDoc> GetApplySettingDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("ApplySetting");
+        var result = await this.client.LoadLinkDoc("ApplySetting", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2324,9 +2324,9 @@ public class ThermostatSettingCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetRefreshDocs() 
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("self");
+        var result = await this.client.LoadLinkDoc("self", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2334,9 +2334,9 @@ public class ThermostatSettingCollectionResult
         return this.client.HasLinkDoc("self");
     }
 
-    public async Task<HalEndpointDoc> GetGetDocs() 
+    public async Task<HalEndpointDoc> GetGetDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Get");
+        var result = await this.client.LoadLinkDoc("Get", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2344,9 +2344,9 @@ public class ThermostatSettingCollectionResult
         return this.client.HasLinkDoc("Get");
     }
 
-    public async Task<HalEndpointDoc> GetListDocs() 
+    public async Task<HalEndpointDoc> GetListDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("List");
+        var result = await this.client.LoadLinkDoc("List", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2354,9 +2354,9 @@ public class ThermostatSettingCollectionResult
         return this.client.HasLinkDoc("List");
     }
 
-    public async Task<HalEndpointDoc> GetUpdateDocs() 
+    public async Task<HalEndpointDoc> GetUpdateDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Update");
+        var result = await this.client.LoadLinkDoc("Update", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2387,9 +2387,9 @@ public class ThermostatSettingCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetAddDocs() 
+    public async Task<HalEndpointDoc> GetAddDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("Add");
+        var result = await this.client.LoadLinkDoc("Add", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2420,9 +2420,9 @@ public class ThermostatSettingCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetNextDocs() 
+    public async Task<HalEndpointDoc> GetNextDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("next");
+        var result = await this.client.LoadLinkDoc("next", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2453,9 +2453,9 @@ public class ThermostatSettingCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetPreviousDocs() 
+    public async Task<HalEndpointDoc> GetPreviousDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("previous");
+        var result = await this.client.LoadLinkDoc("previous", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2486,9 +2486,9 @@ public class ThermostatSettingCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetFirstDocs() 
+    public async Task<HalEndpointDoc> GetFirstDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("first");
+        var result = await this.client.LoadLinkDoc("first", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2519,9 +2519,9 @@ public class ThermostatSettingCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetLastDocs() 
+    public async Task<HalEndpointDoc> GetLastDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("last");
+        var result = await this.client.LoadLinkDoc("last", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2590,9 +2590,9 @@ public class UserCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetRefreshDocs() 
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("self");
+        var result = await this.client.LoadLinkDoc("self", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2623,9 +2623,9 @@ public class UserCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetNextDocs() 
+    public async Task<HalEndpointDoc> GetNextDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("next");
+        var result = await this.client.LoadLinkDoc("next", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2656,9 +2656,9 @@ public class UserCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetPreviousDocs() 
+    public async Task<HalEndpointDoc> GetPreviousDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("previous");
+        var result = await this.client.LoadLinkDoc("previous", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2689,9 +2689,9 @@ public class UserCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetFirstDocs() 
+    public async Task<HalEndpointDoc> GetFirstDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("first");
+        var result = await this.client.LoadLinkDoc("first", query);
         return result.GetData<HalEndpointDoc>();
     }
 
@@ -2722,9 +2722,9 @@ public class UserCollectionResult
         }
     }
 
-    public async Task<HalEndpointDoc> GetLastDocs() 
+    public async Task<HalEndpointDoc> GetLastDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("last");
+        var result = await this.client.LoadLinkDoc("last", query);
         return result.GetData<HalEndpointDoc>();
     }
 
