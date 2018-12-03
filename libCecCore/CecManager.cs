@@ -16,12 +16,22 @@ namespace libCecCore
             
         }
 
+        void Start()
+        {
+
+        }
+
+        void Stop()
+        {
+
+        }
+
         /// <summary>
         /// Scan the CEC bus and display device info.
         /// </summary>
-        public void Scan()
+        public IEnumerable<DeviceInfo> Scan()
         {
-
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -42,7 +52,7 @@ namespace libCecCore
         /// <summary>
         /// Set the device with the given address to on.
         /// </summary>
-        public IEnumerable<DeviceInfo> SetOn(int address)
+        public void SetOn(int address)
         {
             throw new NotImplementedException();
         }
