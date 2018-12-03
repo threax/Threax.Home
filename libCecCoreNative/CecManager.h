@@ -1,6 +1,8 @@
 #pragma once
 #include "stdafx.h"
 
+using namespace CEC;
+
 class DeviceInfo
 {
 public:
@@ -27,16 +29,16 @@ public:
 	/// <summary>
 	/// Scan the CEC bus and display device info.
 	/// </summary>
-	DeviceInfo[] Scan();
+	//void Scan();
 
 	/// <summary>
 	/// Get the power status of the specified device.
 	/// </summary>
 	/// <param name="address"></param>
 	/// <returns></returns>
-	bool GetPower(int address);
+	cec_power_status GetPower(int address);
 
-	String GetName(int address);
+	//String GetName(int address);
 
 	/// <summary>
 	/// Set the device with the given address to on.
@@ -52,10 +54,16 @@ public:
 	/// Set the hdmi port number of the cec adapter.
 	/// </summary>
 	/// <param name="port"></param>
-	void SetHdmiPort(int device, int port);
+	void SetHdmiPort(int device, uint8_t port);
 
 	/// <summary>
 	/// Reconnect to the CEC adapter.
 	/// </summary>
 	void Reconnect();
+
+private:
+	ICECAdapter* g_parser;
+	ICECCallbacks         g_callbacks;
+	libcec_configuration  g_config;
+	std::string g_strPort;
 };
