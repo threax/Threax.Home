@@ -27,12 +27,12 @@ namespace libCecCore
             }
         }
 
-        void Start()
+        public void Start()
         {
             CecManager_Start(ptr);
         }
 
-        void Stop()
+        public void Stop()
         {
             CecManager_Stop(ptr);
         }
