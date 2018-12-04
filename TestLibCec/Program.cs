@@ -10,20 +10,13 @@ namespace TestLibCec
             using(var cecManager = new CecManager())
             {
                 cecManager.Start();
-                var power = cecManager.GetPower(0);
-                Console.WriteLine(power);
-                Console.ReadKey();
-                power = cecManager.GetPower(0);
-                Console.WriteLine(power);
-                Console.ReadKey();
-                power = cecManager.GetPower(0);
-                Console.WriteLine(power);
-                Console.ReadKey();
-                power = cecManager.GetPower(0);
-                Console.WriteLine(power);
-                Console.ReadKey();
-                power = cecManager.GetPower(0);
-                Console.WriteLine(power);
+
+                foreach(var device in cecManager.Scan())
+                {
+                    Console.WriteLine($"Device {device}");
+                    Console.WriteLine($"Name: {cecManager.GetVendor(device)}");
+                    Console.WriteLine($"Power: {cecManager.GetPower(device)}");
+                }
                 Console.ReadKey();
             }
         }

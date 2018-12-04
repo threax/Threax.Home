@@ -3,17 +3,9 @@
 
 using namespace CEC;
 
-class DeviceInfo
-{
-public:
-	String Address;
-	bool ActiveSource;
-	String Vendor;
-	String OsdString;
-	String CecVersion;
-	bool PowerStatus;
-	String Language;
-};
+typedef void(*ScanCallback)(cec_logical_address address);
+
+typedef void(*StringRetrieverCallback)(String value);
 
 class CecManager
 {
@@ -29,37 +21,39 @@ public:
 	/// <summary>
 	/// Scan the CEC bus and display device info.
 	/// </summary>
-	//void Scan();
+	void Scan(ScanCallback cb);
 
 	/// <summary>
 	/// Get the power status of the specified device.
 	/// </summary>
 	/// <param name="address"></param>
 	/// <returns></returns>
-	cec_power_status GetPower(int address);
+	cec_power_status GetPower(cec_logical_address address);
 
-	//String GetName(int address);
+	void GetName(StringRetrieverCallback cb, cec_logical_address address);
 
 	/// <summary>
 	/// Set the device with the given address to on.
 	/// </summary>
-	void SetOn(int address);
+	void SetOn(cec_logical_address address);
 
 	/// <summary>
 	/// Set the device with the given address to standby or off.
 	/// </summary>
-	void SetStandby(int address);
+	void SetStandby(cec_logical_address address);
 
 	/// <summary>
 	/// Set the hdmi port number of the cec adapter.
 	/// </summary>
 	/// <param name="port"></param>
-	void SetHdmiPort(int device, uint8_t port);
+	void SetHdmiPort(cec_logical_address device, uint8_t port);
 
 	/// <summary>
 	/// Reconnect to the CEC adapter.
 	/// </summary>
 	void Reconnect();
+
+	cec_vendor_id GetVendor(cec_logical_address address);
 
 private:
 	ICECAdapter* g_parser;
