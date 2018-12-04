@@ -36,7 +36,7 @@ namespace libCecCore
         {
             var winName = "WinLirc";
             var otherWindow = FindWindow(null, winName);
-            if (otherWindow == null)
+            if (otherWindow == IntPtr.Zero)
             {
                 throw new InvalidOperationException($"Cannot find {winName}");
             }

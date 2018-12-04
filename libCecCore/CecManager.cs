@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace libCecCore
 {
-    public class CecManager : IDisposable
+    public class CecManager : ICecManager
     {
         private IntPtr ptr;
 

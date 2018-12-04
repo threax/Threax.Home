@@ -24,9 +24,9 @@ namespace TestLibCec
                 //cecManager.SetStandby(CecLogicalAddress.TV);
                 //Console.ReadKey();
                 //cecManager.SetOn(CecLogicalAddress.TV);
-
-                Console.ReadKey();
             }
+
+            Console.ReadKey();
         }
     }
 }
