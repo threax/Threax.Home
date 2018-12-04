@@ -25,15 +25,15 @@ namespace Microsoft.Extensions.DependencyInjection
                     cecManager.Start();
                     return cecManager;
                 });
+                services.TryAddSingleton<ICecManagerService, CecManagerService>();
+
+                services.TryAddScoped(typeof(ICecSwitchRepository<,>), typeof(CecSwitchRepository<,>));
+
+                services.AdditionalSwitchConfiguration(o =>
+                {
+                    o.AddSwitch(typeof(ICecSwitchRepository<,>));
+                });
             }
-            services.TryAddSingleton<ICecManagerService, CecManagerService>();
-
-            services.TryAddScoped(typeof(ICecSwitchRepository<,>), typeof(CecSwitchRepository<,>));
-
-            services.AdditionalSwitchConfiguration(o =>
-            {
-                o.AddSwitch(typeof(ICecSwitchRepository<,>));
-            });
 
             return services;
         }
