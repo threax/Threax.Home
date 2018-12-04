@@ -12,7 +12,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class DiExtensions
     {
-        public static IServiceCollection AddMfi(this IServiceCollection services, Action<LibCecConfig> configure)
+        public static IServiceCollection AddLibCec(this IServiceCollection services, Action<LibCecConfig> configure)
         {
             var options = new LibCecConfig();
             configure?.Invoke(options);

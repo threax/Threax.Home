@@ -45,11 +45,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Threax.Home.LibCec\Threax.Home.LibCec.csproj" />
     <ProjectReference Include="..\Threax.Home.ZWave\Threax.Home.ZWave.csproj" />
     <ProjectReference Include="..\Threax.Home.Client\Threax.Home.Client.csproj" />
     <ProjectReference Include="..\Threax.Home.Colortouch\Threax.Home.Colortouch.csproj" />
     <ProjectReference Include="..\Threax.Home.Hue\Threax.Home.Hue.csproj" />
     <ProjectReference Include="..\Threax.Home.Mfi\Threax.Home.Mfi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\libcec\build\amd64\cec.dll" Link="cec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\x64\Debug\libCecCoreNative.dll" Link="libCecCoreNative.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

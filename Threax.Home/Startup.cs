@@ -62,6 +62,7 @@ namespace Threax.Home
             services.AddZWave(o => Configuration.Bind("ZWave", o));
             services.AddColorTouch(o => Configuration.Bind("ColorTouch", o));
             services.AddHomeClient(o => Configuration.Bind("HomeClient", o));
+            services.AddLibCec(o => Configuration.Bind("LibCec", o));
 
             //Add the client side configuration object
             services.AddClientConfig(clientConfig, o =>
