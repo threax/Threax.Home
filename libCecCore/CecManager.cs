@@ -59,11 +59,11 @@ namespace libCecCore
         }
 
         /// <summary>
-        /// Get the name of a port.
+        /// Get the name of a port. Does not work.
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        public String GetName(cec_logical_address address)
+        internal String GetName(cec_logical_address address)
         {
             throw new InvalidOperationException("This does not work");
             String result = null;
