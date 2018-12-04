@@ -14,7 +14,8 @@ namespace TestLibCec
                 foreach(var device in cecManager.Scan())
                 {
                     Console.WriteLine($"Device {device}");
-                    Console.WriteLine($"Name: {cecManager.GetVendor(device)}");
+                    //Console.WriteLine($"Name: {cecManager.GetName(device)}");
+                    Console.WriteLine($"Vendor: {cecManager.GetVendor(device)}");
                     Console.WriteLine($"Power: {cecManager.GetPower(device)}");
                 }
                 //cecManager.SetStandby(CecLogicalAddress.TV);

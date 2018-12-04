@@ -63,9 +63,9 @@ namespace libCecCore
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        internal String GetName(CecLogicalAddress address)
+        public String GetName(CecLogicalAddress address)
         {
-            throw new InvalidOperationException("This does not work");
+            //throw new InvalidOperationException("This does not work");
             String result = null;
             StringRetrieverCallback callback = n => result = n;
             CecManager_GetName(ptr, callback, address);
