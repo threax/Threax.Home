@@ -4,25 +4,25 @@ using System.Text;
 
 namespace libCecCore
 {
-    public enum cec_logical_address
+    public enum CecLogicalAddress
     {
-        CECDEVICE_UNKNOWN = -1, //not a valid logical address
-        CECDEVICE_TV = 0,
-        CECDEVICE_RECORDINGDEVICE1 = 1,
-        CECDEVICE_RECORDINGDEVICE2 = 2,
-        CECDEVICE_TUNER1 = 3,
-        CECDEVICE_PLAYBACKDEVICE1 = 4,
-        CECDEVICE_AUDIOSYSTEM = 5,
-        CECDEVICE_TUNER2 = 6,
-        CECDEVICE_TUNER3 = 7,
-        CECDEVICE_PLAYBACKDEVICE2 = 8,
-        CECDEVICE_RECORDINGDEVICE3 = 9,
-        CECDEVICE_TUNER4 = 10,
-        CECDEVICE_PLAYBACKDEVICE3 = 11,
-        CECDEVICE_RESERVED1 = 12,
-        CECDEVICE_RESERVED2 = 13,
-        CECDEVICE_FREEUSE = 14,
-        CECDEVICE_UNREGISTERED = 15,
-        CECDEVICE_BROADCAST = 15
+        Unknown = -1, //not a valid logical address
+        TV = 0,
+        RecordingDevice1 = 1,
+        RecordingDevice2 = 2,
+        Tuner1 = 3,
+        PlaybackDevice1 = 4,
+        AudioSystem = 5,
+        Tuner2 = 6,
+        Tuner3 = 7,
+        PlaybackDevice2 = 8,
+        RecordingDevice3 = 9,
+        Tuner4 = 10,
+        PlaybackDevice3 = 11,
+        Reserved1 = 12,
+        Reserved2 = 13,
+        FreeUse = 14,
+        Unregistered = 15,
+        Broadcast = 15
     }
 }

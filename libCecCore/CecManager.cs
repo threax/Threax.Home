@@ -40,9 +40,9 @@ namespace libCecCore
         /// <summary>
         /// Scan the CEC bus and get active devices.
         /// </summary>
-        public List<cec_logical_address> Scan()
+        public List<CecLogicalAddress> Scan()
         {
-            List<cec_logical_address> devices = new List<cec_logical_address>(10);
+            List<CecLogicalAddress> devices = new List<CecLogicalAddress>(10);
             ScanCallback cb = i => devices.Add(i);
             CecManager_Scan(ptr, cb);
             return devices;
@@ -53,7 +53,7 @@ namespace libCecCore
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        public cec_power_status GetPower(cec_logical_address address)
+        public CecPowerStatus GetPower(CecLogicalAddress address)
         {
             return CecManager_GetPower(ptr, address);
         }
@@ -63,7 +63,7 @@ namespace libCecCore
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        internal String GetName(cec_logical_address address)
+        internal String GetName(CecLogicalAddress address)
         {
             throw new InvalidOperationException("This does not work");
             String result = null;
@@ -75,7 +75,7 @@ namespace libCecCore
         /// <summary>
         /// Set the device with the given address to on.
         /// </summary>
-        public void SetOn(cec_logical_address address)
+        public void SetOn(CecLogicalAddress address)
         {
             CecManager_SetOn(ptr, address);
         }
@@ -83,7 +83,7 @@ namespace libCecCore
         /// <summary>
         /// Set the device with the given address to standby or off.
         /// </summary>
-        public void SetStandby(cec_logical_address address)
+        public void SetStandby(CecLogicalAddress address)
         {
             CecManager_SetStandby(ptr, address);
         }
@@ -92,7 +92,7 @@ namespace libCecCore
         /// Set the hdmi port number of the cec adapter.
         /// </summary>
         /// <param name="port"></param>
-        public void SetHdmiPort(cec_logical_address device, byte port)
+        public void SetHdmiPort(CecLogicalAddress device, byte port)
         {
             CecManager_SetHdmiPort(ptr, device, port);
         }
@@ -105,7 +105,7 @@ namespace libCecCore
             CecManager_Reconnect(ptr);
         }
 
-        public cec_vendor_id GetVendor(cec_logical_address address)
+        public CecVendorId GetVendor(CecLogicalAddress address)
         {
             return CecManager_GetVendor(ptr, address);
         }
@@ -116,7 +116,7 @@ namespace libCecCore
         public delegate void StringRetrieverCallback(String value);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void ScanCallback(cec_logical_address address);
+        private delegate void ScanCallback(CecLogicalAddress address);
 
         [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr CecManager_Create();
@@ -134,25 +134,25 @@ namespace libCecCore
         private static extern void CecManager_Scan(IntPtr ptr, ScanCallback cb);
 
         [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
-        private static extern cec_power_status CecManager_GetPower(IntPtr ptr, cec_logical_address address);
+        private static extern CecPowerStatus CecManager_GetPower(IntPtr ptr, CecLogicalAddress address);
 
         [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
-        private static extern void CecManager_GetName(IntPtr ptr, StringRetrieverCallback cb, cec_logical_address address);
+        private static extern void CecManager_GetName(IntPtr ptr, StringRetrieverCallback cb, CecLogicalAddress address);
 
         [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
-        private static extern void CecManager_SetOn(IntPtr ptr, cec_logical_address address);
+        private static extern void CecManager_SetOn(IntPtr ptr, CecLogicalAddress address);
 
         [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
-        private static extern void CecManager_SetStandby(IntPtr ptr, cec_logical_address address);
+        private static extern void CecManager_SetStandby(IntPtr ptr, CecLogicalAddress address);
 
         [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
-        private static extern void CecManager_SetHdmiPort(IntPtr ptr, cec_logical_address device, byte port);
+        private static extern void CecManager_SetHdmiPort(IntPtr ptr, CecLogicalAddress device, byte port);
 
         [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
         private static extern void CecManager_Reconnect(IntPtr ptr);
 
         [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
-        private static extern cec_vendor_id CecManager_GetVendor(IntPtr ptr, cec_logical_address address);
+        private static extern CecVendorId CecManager_GetVendor(IntPtr ptr, CecLogicalAddress address);
 
         #endregion
     }
