@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLibCec", "TestLibCec\Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threax.Home.LibCec", "Threax.Home.LibCec\Threax.Home.LibCec.csproj", "{40C23EBE-BBCD-4815-8A63-65CD7F6B8B22}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threax.Home.WinLirc", "Threax.Home.WinLirc\Threax.Home.WinLirc.csproj", "{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -182,6 +184,18 @@ Global
 		{40C23EBE-BBCD-4815-8A63-65CD7F6B8B22}.Release|x64.Build.0 = Release|Any CPU
 		{40C23EBE-BBCD-4815-8A63-65CD7F6B8B22}.Release|x86.ActiveCfg = Release|Any CPU
 		{40C23EBE-BBCD-4815-8A63-65CD7F6B8B22}.Release|x86.Build.0 = Release|Any CPU
+		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Debug|x64.Build.0 = Debug|Any CPU
+		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Debug|x86.Build.0 = Debug|Any CPU
+		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Release|x64.ActiveCfg = Release|Any CPU
+		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Release|x64.Build.0 = Release|Any CPU
+		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Release|x86.ActiveCfg = Release|Any CPU
+		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

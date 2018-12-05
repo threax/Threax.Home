@@ -3,33 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace libCecCore
+namespace Threax.Home.WinLirc
 {
-    [StructLayout(LayoutKind.Sequential)]
-    struct COPYDATASTRUCT
-    {
-        public IntPtr dwData;    // Any value the sender chooses.  Perhaps its main window handle?
-        public int cbData;       // The count of bytes in the message.
-        public IntPtr lpData;    // The address of the message.
-    }
-
-    class HGlobalHelper : IDisposable
-    {
-        private IntPtr hGlobal;
-
-        public HGlobalHelper(IntPtr hGlobal)
-        {
-            this.hGlobal = hGlobal;
-        }
-
-        public void Dispose()
-        {
-            Marshal.FreeHGlobal(this.hGlobal);
-        }
-
-        public IntPtr Ptr { get => hGlobal; }
-    }
-
     public class WinLirc
     {
         public unsafe void SendMessage(String message)
@@ -50,7 +25,7 @@ namespace libCecCore
                 using (var pObj = new HGlobalHelper(Marshal.AllocHGlobal(sizeof(COPYDATASTRUCT))))
                 {
                     Marshal.StructureToPtr(cpd, pObj.Ptr, true);
-                    var copyDataResult = SendMessageA(otherWindow, WM_COPYDATA, /*(WPARAM)hInstance*/IntPtr.Zero, pObj.Ptr);
+                    var copyDataResult = SendMessageA(otherWindow, WM_COPYDATA, IntPtr.Zero, pObj.Ptr);
                 }
             }
         }
