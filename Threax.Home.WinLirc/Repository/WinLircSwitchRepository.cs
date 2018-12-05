@@ -31,7 +31,6 @@ namespace Threax.Home.WinLirc.Repository
         {
             if (config.Devices.ContainsKey(id))
             {
-                var intId = int.Parse(id);
                 return Task.FromResult(new TOut()
                 {
                     Id = id,
@@ -46,8 +45,7 @@ namespace Threax.Home.WinLirc.Repository
 
         public async Task<IEnumerable<TOut>> List()
         {
-            var clients = new List<TOut>();
-            clients.AddRange(config.Devices.Keys.Select(i =>
+            var clients = new List<TOut>(config.Devices.Keys.Select(i =>
                 new TOut()
                 {
                     Id = i,

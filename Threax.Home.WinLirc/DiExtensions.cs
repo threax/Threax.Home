@@ -13,13 +13,17 @@ namespace Microsoft.Extensions.DependencyInjection
             var options = new WinLircConfig();
             configure?.Invoke(options);
 
-            services.TryAddSingleton<IWinLircManager, WinLircManager>();
-            services.TryAddScoped(typeof(IWinLircSwitchRepository<,>), typeof(WinLircSwitchRepository<,>));
-
-            services.AdditionalSwitchConfiguration(o =>
+            if (options.Enabled)
             {
-                o.AddSwitch(typeof(IWinLircSwitchRepository<,>));
-            });
+                services.TryAddSingleton<WinLircConfig>(options);
+                services.TryAddSingleton<IWinLircManager, WinLircManager>();
+                services.TryAddScoped(typeof(IWinLircSwitchRepository<,>), typeof(WinLircSwitchRepository<,>));
+
+                services.AdditionalSwitchConfiguration(o =>
+                {
+                    o.AddSwitch(typeof(IWinLircSwitchRepository<,>));
+                });
+            }
 
             return services;
         }

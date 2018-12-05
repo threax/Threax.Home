@@ -46,6 +46,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Threax.Home.LibCec\Threax.Home.LibCec.csproj" />
+    <ProjectReference Include="..\Threax.Home.WinLirc\Threax.Home.WinLirc.csproj" />
     <ProjectReference Include="..\Threax.Home.ZWave\Threax.Home.ZWave.csproj" />
     <ProjectReference Include="..\Threax.Home.Client\Threax.Home.Client.csproj" />
     <ProjectReference Include="..\Threax.Home.Colortouch\Threax.Home.Colortouch.csproj" />
