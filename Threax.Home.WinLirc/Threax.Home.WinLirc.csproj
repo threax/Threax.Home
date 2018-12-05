@@ -7,4 +7,8 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Threax.Home.Core\Threax.Home.Core.csproj" />
+  </ItemGroup>
+
 </Project>

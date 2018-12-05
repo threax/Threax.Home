@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Threax.Home.WinLirc
 {
-    public class WinLirc
+    static class WinLirc
     {
-        public unsafe void SendMessage(String message)
+        public static unsafe void SendMessage(String message)
         {
             var winName = "WinLirc";
             var otherWindow = FindWindow(null, winName);
@@ -33,8 +33,8 @@ namespace Threax.Home.WinLirc
         const int WM_COPYDATA = 0x004A;
 
         [DllImport("user32.dll")]
-        public static extern IntPtr FindWindow(string lpClassName, String lpWindowName);
+        private static extern IntPtr FindWindow(string lpClassName, String lpWindowName);
         [DllImport("user32.dll")]
-        public static extern int SendMessageA(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        private static extern int SendMessageA(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
     }
 }
