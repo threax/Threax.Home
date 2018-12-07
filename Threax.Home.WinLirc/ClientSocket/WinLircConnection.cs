@@ -5,28 +5,45 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Threax.Home.Core;
 
 namespace Threax.Home.WinLirc.ClientSocket
 {
-    static class WinLircConnection
+    public class WinLircConnection : IWinLircConnection, IDisposable
     {
+        private SemaphoreSlimLock readLock = new SemaphoreSlimLock();
+        private TcpClient tcpClient;
+        private NetworkStream tcpStream;
+
+        public WinLircConnection(WinLircConfig config)
+        {
+            tcpClient = new TcpClient();
+            tcpClient.Connect(config.Host, config.Port);
+            tcpStream = tcpClient.GetStream();
+        }
+
+        public void Dispose()
+        {
+            tcpStream.Dispose();
+            tcpClient.Dispose();
+            readLock.Dispose();
+        }
+
         //Uses the lirc interface
         //http://lirc.org/html/lircd.html
 
-        public static async Task<String> SendMessage(String device, String button)
+        public async Task<String> SendMessage(String device, String button)
         {
-            using (var tcpClient = await ConnectTcpClient("localhost", 8765))
+            return await readLock.Run(async () =>
             {
-                using (var tcpStream = tcpClient.GetStream())
-                {
-                    //var message = ASCIIEncoding.ASCII.GetBytes("LIST\n");
-                    var message = ASCIIEncoding.ASCII.GetBytes($"SEND_ONCE {device} {button}\n");
-                    await tcpStream.WriteAsync(message, 0, message.Length);
-                    return await GetResult(tcpClient, tcpStream);
-                }
-            }
+                var message = ASCIIEncoding.ASCII.GetBytes($"SEND_ONCE {device} {button}\n");
+                await tcpStream.WriteAsync(message, 0, message.Length);
+                return await GetResult(tcpClient, tcpStream);
+            });
         }
 
+        //Basically from the ms docs
+        //https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.tcpclient.getstream?view=netframework-4.7.2
         private static async Task<string> GetResult(TcpClient tcpClient, NetworkStream tcpStream)
         {
             var bytes = new byte[tcpClient.ReceiveBufferSize];
@@ -45,13 +62,6 @@ namespace Threax.Home.WinLirc.ClientSocket
             }
 
             return returndata.Substring(0, lastEndline);
-        }
-
-        private static async Task<TcpClient> ConnectTcpClient(String host, int port)
-        {
-            var client = new TcpClient();
-            await client.ConnectAsync(host, port);
-            return client;
         }
     }
 }

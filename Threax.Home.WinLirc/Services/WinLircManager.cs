@@ -11,27 +11,19 @@ namespace Threax.Home.WinLirc.Services
 {
     public class WinLircManager : IWinLircManager
     {
-        private SemaphoreSlimLock readLock = new SemaphoreSlimLock();
-
+        private IWinLircConnection connection;
         private ILogger<WinLircManager> logger;
 
-        public WinLircManager(ILogger<WinLircManager> logger)
+        public WinLircManager(ILogger<WinLircManager> logger, IWinLircConnection connection)
         {
             this.logger = logger;
-        }
-
-        public void Dispose()
-        {
-            readLock.Dispose();
+            this.connection = connection;
         }
 
         public async Task PushButton(String device, String button)
         {
-            await readLock.Run(async () =>
-            {
-                var result = await WinLircConnection.SendMessage(device, button);
-                logger.LogInformation("WinLirc result: " + result);
-            });
+            var result = await connection.SendMessage(device, button);
+            logger.LogInformation("WinLirc result: " + result);
         }
     }
 }
