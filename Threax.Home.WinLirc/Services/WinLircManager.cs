@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +13,11 @@ namespace Threax.Home.WinLirc.Services
     {
         private SemaphoreSlimLock readLock = new SemaphoreSlimLock();
 
-        public WinLircManager()
-        {
+        private ILogger<WinLircManager> logger;
 
+        public WinLircManager(ILogger<WinLircManager> logger)
+        {
+            this.logger = logger;
         }
 
         public void Dispose()
@@ -23,10 +27,10 @@ namespace Threax.Home.WinLirc.Services
 
         public async Task PushButton(String device, String button)
         {
-            await readLock.Run(() =>
+            await readLock.Run(async () =>
             {
-                //WinLirc.SendMessage($"{device} {button}");
-                WinLircConnection.SendMessage(device, button);
+                var result = await WinLircConnection.SendMessage(device, button);
+                logger.LogInformation("WinLirc result: " + result);
             });
         }
     }

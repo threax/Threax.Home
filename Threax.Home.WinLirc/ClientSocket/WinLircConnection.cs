@@ -4,51 +4,54 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Threax.Home.WinLirc.ClientSocket
 {
     static class WinLircConnection
     {
-        public static void SendMessage(String device, String button)
+        //Uses the lirc interface
+        //http://lirc.org/html/lircd.html
+
+        public static async Task<String> SendMessage(String device, String button)
         {
-            using (Socket s = ConnectSocket("localhost", 8765))
+            using (var tcpClient = await ConnectTcpClient("localhost", 8765))
             {
-                var result = s.Send(ASCIIEncoding.ASCII.GetBytes($"{device} {button} 1\n"));
+                using (var tcpStream = tcpClient.GetStream())
+                {
+                    //var message = ASCIIEncoding.ASCII.GetBytes("LIST\n");
+                    var message = ASCIIEncoding.ASCII.GetBytes($"SEND_ONCE {device} {button}\n");
+                    await tcpStream.WriteAsync(message, 0, message.Length);
+                    return await GetResult(tcpClient, tcpStream);
+                }
             }
         }
 
-        //https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket?view=netframework-4.7.2
-        private static Socket ConnectSocket(string server, int port)
+        private static async Task<string> GetResult(TcpClient tcpClient, NetworkStream tcpStream)
         {
-            Socket s = null;
-            IPHostEntry hostEntry = null;
+            var bytes = new byte[tcpClient.ReceiveBufferSize];
 
-            // Get host related information.
-            hostEntry = Dns.GetHostEntry(server);
+            // Read can return anything from 0 to numBytesToRead. 
+            // This method blocks until at least one byte is read.
+            await tcpStream.ReadAsync(bytes, 0, (int)tcpClient.ReceiveBufferSize);
 
-            // Loop through the AddressList to obtain the supported AddressFamily. This is to avoid
-            // an exception that occurs when the host IP Address is not compatible with the address family
-            // (typical in the IPv6 case).
-            // In this case we know we are only looking for 127.0.0.1
-            foreach (IPAddress address in hostEntry.AddressList.Where(i => i.ToString() == "127.0.0.1"))
+            // Returns the data received from the host to the console.
+            string returndata = Encoding.ASCII.GetString(bytes);
+
+            var lastEndline = returndata.LastIndexOf("\n");
+            if (lastEndline == -1)
             {
-                IPEndPoint ipe = new IPEndPoint(address, port);
-                Socket tempSocket =
-                    new Socket(ipe.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-                tempSocket.Connect(ipe);
-
-                if (tempSocket.Connected)
-                {
-                    s = tempSocket;
-                    break;
-                }
-                else
-                {
-                    continue;
-                }
+                throw new InvalidOperationException("Return string from WinLirc did not have a trailing newline.");
             }
-            return s;
+
+            return returndata.Substring(0, lastEndline);
+        }
+
+        private static async Task<TcpClient> ConnectTcpClient(String host, int port)
+        {
+            var client = new TcpClient();
+            await client.ConnectAsync(host, port);
+            return client;
         }
     }
 }
