@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Threax.Home.Core;
+using Threax.Home.WinLirc.ClientSocket;
 
 namespace Threax.Home.WinLirc.Services
 {
@@ -24,7 +25,8 @@ namespace Threax.Home.WinLirc.Services
         {
             await readLock.Run(() =>
             {
-                WinLirc.SendMessage($"{device} {button}");
+                //WinLirc.SendMessage($"{device} {button}");
+                WinLircConnection.SendMessage(device, button);
             });
         }
     }
