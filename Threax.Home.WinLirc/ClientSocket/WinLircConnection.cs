@@ -13,8 +13,7 @@ namespace Threax.Home.WinLirc.ClientSocket
         {
             using (Socket s = ConnectSocket("localhost", 8765))
             {
-                var result = s.Send(ASCIIEncoding.ASCII.GetBytes($"{device} {button}"));
-                //Dunno what the result codes are, is 11 success?
+                var result = s.Send(ASCIIEncoding.ASCII.GetBytes($"{device} {button} 1\n"));
             }
         }
 
