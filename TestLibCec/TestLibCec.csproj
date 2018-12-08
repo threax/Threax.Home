@@ -6,10 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\libcec\build\amd64\cec.dll" Link="cec.dll">
+    <None Include="..\libcec-build\amd64\cec.dll" Link="cec.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\x64\Debug\libCecCoreNative.dll" Link="libCecCoreNative.dll">
+    <None Include="..\x64\Release\libCecCoreNative.dll" Link="libCecCoreNative.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
