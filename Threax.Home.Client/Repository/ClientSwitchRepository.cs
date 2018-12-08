@@ -39,7 +39,7 @@ namespace Threax.Home.Client.Repository
                         Value = light.Data.Value,
                         HexColor = light.Data.HexColor,
                         Id = light.Data.SwitchId.ToString(),
-                        Name = light.Data.Name,
+                        Name = $"{bridge} - {light.Data.Name}",
                         Bridge = bridge,
                         Subsystem = SubsystemName
                     };
