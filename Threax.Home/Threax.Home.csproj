@@ -54,7 +54,8 @@
     <ProjectReference Include="..\Threax.Home.Mfi\Threax.Home.Mfi.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!--This will only include the native libs if they exist.-->
+  <ItemGroup Condition="Exists('..\x64\Release\libCecCoreNative.dll')">
     <None Include="..\libcec-build\amd64\cec.dll" Link="cec.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
