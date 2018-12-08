@@ -24,7 +24,8 @@ namespace Threax.Home.Client
             var sw = await entry.ListSwitches(new SwitchQuery()
             {
                 Limit = 10,
-                SwitchId = Guid.Parse(id)
+                SwitchId = Guid.Parse(id),
+                GetStatus = true
             });
             return sw.Items.First();
         }
