@@ -43,7 +43,9 @@ namespace Threax.Home.Repository
                 foreach (var result in dbQuery)
                 {
                     var currentStatus = await switchRepo.Get(result.Subsystem, result.Bridge, result.Id);
-                    currentStatusResults.Add(mapper.Map<Switch>(currentStatus));
+                    var item = mapper.Map<Switch>(result);
+                    item.Value = currentStatus.Value;
+                    currentStatusResults.Add(item);
                 }
                 results = currentStatusResults;
             }
