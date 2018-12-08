@@ -54,13 +54,6 @@
     <ProjectReference Include="..\Threax.Home.Mfi\Threax.Home.Mfi.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\..\libcec\build\amd64\cec.dll" Link="cec.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\x64\Debug\libCecCoreNative.dll" Link="libCecCoreNative.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+
 
 </Project>
