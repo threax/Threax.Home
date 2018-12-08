@@ -3228,6 +3228,11 @@ namespace Threax.Home.Client
         [Newtonsoft.Json.JsonProperty("switchIds", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public List<System.Guid> SwitchIds { get; set; }
     
+        /// <summary>Get the current status of the switches in the query results. 
+        /// Will take longer while the switch info is loaded.</summary>
+        [Newtonsoft.Json.JsonProperty("getStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool GetStatus { get; set; }
+    
         /// <summary>Lookup a @switch by id.</summary>
         [Newtonsoft.Json.JsonProperty("switchId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? SwitchId { get; set; }
@@ -3255,15 +3260,20 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class SwitchCollection 
     {
-        /// <summary>Lookup a @switch by id.</summary>
-        [Newtonsoft.Json.JsonProperty("switchId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? SwitchId { get; set; }
+        /// <summary>Get the current status of the switches in the query results. 
+        /// Will take longer while the switch info is loaded.</summary>
+        [Newtonsoft.Json.JsonProperty("getStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool GetStatus { get; set; }
     
         [Newtonsoft.Json.JsonProperty("switchIds", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public List<System.Guid> SwitchIds { get; set; }
     
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Total { get; set; }
+    
+        /// <summary>Lookup a @switch by id.</summary>
+        [Newtonsoft.Json.JsonProperty("switchId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? SwitchId { get; set; }
     
         /// <summary>The number of pages (item number = Offset * Limit) into the collection to query.</summary>
         [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

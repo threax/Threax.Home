@@ -34,8 +34,25 @@ namespace Threax.Home.Repository
 
             var total = await dbQuery.CountAsync();
             dbQuery = dbQuery.Skip(query.SkipTo(total)).Take(query.Limit);
-            var resultQuery = dbQuery.Select(i => mapper.Map<Switch>(i));
-            var results = await resultQuery.ToListAsync();
+
+            //This is not as good as it could be
+            IEnumerable<Switch> results;
+            if (query.GetStatus)
+            {
+                var currentStatusResults = new List<Switch>();
+                foreach (var result in dbQuery)
+                {
+                    var currentStatus = await switchRepo.Get(result.Subsystem, result.Bridge, result.Id);
+                    currentStatusResults.Add(mapper.Map<Switch>(currentStatus));
+                }
+                results = currentStatusResults;
+            }
+            else
+            {
+                var resultQuery = dbQuery.Select(i => mapper.Map<Switch>(i));
+                results = await resultQuery.ToListAsync();
+            }
+
 
             return new SwitchCollection(query, total, results);
         }

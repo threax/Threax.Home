@@ -2335,6 +2335,9 @@ export interface SensorCollection {
 
 export interface SwitchQuery {
     switchIds?: string[];
+    /** Get the current status of the switches in the query results. 
+Will take longer while the switch info is loaded. */
+    getStatus?: boolean;
     /** Lookup a @switch by id. */
     switchId?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
@@ -2344,10 +2347,13 @@ export interface SwitchQuery {
 }
 
 export interface SwitchCollection {
-    /** Lookup a @switch by id. */
-    switchId?: string;
+    /** Get the current status of the switches in the query results. 
+Will take longer while the switch info is loaded. */
+    getStatus?: boolean;
     switchIds?: string[];
     total?: number;
+    /** Lookup a @switch by id. */
+    switchId?: string;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
     /** The limit of the number of items to return. */

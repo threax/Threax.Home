@@ -17,6 +17,12 @@ namespace Threax.Home.InputModels
         public List<Guid> SwitchIds { get; set; }
 
         /// <summary>
+        /// Get the current status of the switches in the query results. 
+        /// Will take longer while the switch info is loaded.
+        /// </summary>
+        public bool GetStatus { get; set; } = false;
+
+        /// <summary>
         /// Populate an IQueryable. Does not apply the skip or limit.
         /// </summary>
         /// <param name="query">The query to populate.</param>
