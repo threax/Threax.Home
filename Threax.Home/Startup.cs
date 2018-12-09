@@ -61,7 +61,7 @@ namespace Threax.Home
             services.AddMfi(o => Configuration.Bind("Mfi", o));
             services.AddZWave(o => Configuration.Bind("ZWave", o));
             services.AddColorTouch(o => Configuration.Bind("ColorTouch", o));
-            services.AddHomeClient(o => Configuration.Bind("HomeClient", o));
+            services.AddHomeClientRepository(o => Configuration.Bind("HomeClient", o));
             services.AddLibCec(o => Configuration.Bind("LibCec", o));
             services.AddWinLirc(o => Configuration.Bind("WinLirc", o));
 

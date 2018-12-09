@@ -12,12 +12,32 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class DiExtensions
     {
         /// <summary>
-        /// Add the AppTemplate setup to use client credentials to connect to the service.
+        /// Add a EntryPointInjector from the home library.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configure"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddHomeClient(this IServiceCollection services, Action<HomeClientConfig> configure)
+        {
+            var client = new HomeClientConfig();
+            configure.Invoke(client);
+
+            services.TryAddScoped<EntryPointInjector>(s =>
+            {
+                var clientCredsFactory = new ClientCredentialsAccessTokenFactory<EntryPointInjector>(client.ClientCredentials, new BearerHttpClientFactory<EntryPointInjector>(s.GetRequiredService<IHttpClientFactory>()));
+                return new EntryPointInjector(client.ServiceUrl, clientCredsFactory);
+            });
+
+            return services;
+        }
+
+        /// <summary>
+        /// Add the home client set as a repository.
         /// </summary>
         /// <param name="services">The service collection.</param>
         /// <param name="configure">The configure callback.</param>
         /// <returns></returns>
-        public static IServiceCollection AddHomeClient(this IServiceCollection services, Action<HomeClientOptions> configure)
+        public static IServiceCollection AddHomeClientRepository(this IServiceCollection services, Action<HomeClientOptions> configure)
         {
             var options = new HomeClientOptions();
             configure?.Invoke(options);
