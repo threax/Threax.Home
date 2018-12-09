@@ -22,6 +22,8 @@ namespace Microsoft.Extensions.DependencyInjection
             var client = new HomeClientConfig();
             configure.Invoke(client);
 
+            services.TryAddSingleton<IHttpClientFactory, DefaultHttpClientFactory>();
+
             services.TryAddScoped<EntryPointInjector>(s =>
             {
                 var clientCredsFactory = new ClientCredentialsAccessTokenFactory<EntryPointInjector>(client.ClientCredentials, new BearerHttpClientFactory<EntryPointInjector>(s.GetRequiredService<IHttpClientFactory>()));
