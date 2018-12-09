@@ -23,7 +23,7 @@ namespace Threax.Home.LibCec.Repository
         }
 
         public async Task<TOut> Get(string bridge, string id)
-        { 
+        {
             var address = ParseId(id);
             var power = await this.manager.GetPower(address);
             var name = $"{await this.manager.GetVendor(address)} {address}";
@@ -40,7 +40,7 @@ namespace Threax.Home.LibCec.Repository
         public async Task<IEnumerable<TOut>> List()
         {
             var results = new List<TOut>();
-            foreach(var address in await manager.Scan())
+            foreach (var address in await manager.Scan())
             {
                 var power = await this.manager.GetPower(address);
                 var name = $"{await this.manager.GetVendor(address)} {address}";
@@ -58,15 +58,28 @@ namespace Threax.Home.LibCec.Repository
 
         public async Task Set(TIn setting)
         {
-            var id = ParseId(setting.Id);
-            switch (setting.Value)
+            bool on = setting.Value == "on";
+            var address = ParseId(setting.Id);
+            if (setting.Value == "toggle")
             {
-                case "on":
-                    await manager.SetOn(id);
-                    break;
-                case "off":
-                    await manager.SetStandby(id);
-                    break;
+                var power = await this.manager.GetPower(address);
+                switch (power)
+                {
+                    case CecPowerStatus.On | CecPowerStatus.TransitionStandbyToOn:
+                        on = false;
+                        break;
+                    default:
+                        on = true;
+                        break;
+                }
+            }
+            if (on)
+            {
+                await manager.SetOn(address);
+            }
+            else
+            {
+                await manager.SetStandby(address);
             }
         }
 
