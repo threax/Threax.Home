@@ -89,16 +89,24 @@ namespace Threax.Home.Hue.Repository
         /// <returns>void</returns>
         public async Task Set(TIn setting)
         {
+            bool on = setting.Value == "on";
+            var bridge = clientManager.GetClient(setting.Bridge);
+            if (setting.Value == "toggle")
+            {
+                var light = await bridge.GetLightAsync(setting.Id);
+                on = !light.State.On;
+            }
+
             LightCommand command = new LightCommand()
             {
                 Brightness = setting.Brightness,
-                On = setting.Value == "on"
+                On = on
             };
             if (setting.HexColor != null)
             {
                 command.SetColor(new RGBColor(setting.HexColor));
             }
-            await clientManager.GetClient(setting.Bridge).SendCommandAsync(command, new String[] { setting.Id });
+            await bridge.SendCommandAsync(command, new String[] { setting.Id });
         }
 
         /// <summary>
