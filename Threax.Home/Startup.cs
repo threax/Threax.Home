@@ -180,6 +180,13 @@ namespace Threax.Home
                 o.AddStyle().AddSelf().AddUnsafeInline();
                 o.AddFrameAncestors().AddSelf();
             });
+
+            services.AddLogging(o =>
+            {
+                o.AddConfiguration(Configuration.GetSection("Logging"))
+                    .AddConsole()
+                    .AddDebug();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -197,9 +204,6 @@ namespace Threax.Home
             {
                 o.CorrectPathBase = appConfig.PathBase;
             });
-
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
 
             //This is crude, but should provide a cache
             var cachePeriod = "604800";
