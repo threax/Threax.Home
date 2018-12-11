@@ -21,6 +21,8 @@ using Threax.Extensions.Configuration.SchemaBinder;
 using Threax.AspNetCore.UserBuilder;
 using Microsoft.AspNetCore.HttpOverrides;
 using Threax.Home.ValueProviders;
+using Microsoft.AspNetCore.Mvc;
+using Threax.AspNetCore.UserLookup.Mvc.Controllers;
 
 namespace Threax.Home
 {
@@ -32,7 +34,7 @@ namespace Threax.Home
             Scope = "Threax.Home", //The name of the scope for api access
             DisplayName = "Threax.Home", //Change this to a pretty name for the client/resource
             ClientId = "Threax.Home", //Change this to a unique client id
-            AdditionalScopes = new List<String>{ /*Additional scopes here "ScopeName", "Scope2Name", "etc"*/ },
+            AdditionalScopes = new List<String> { /*Additional scopes here "ScopeName", "Scope2Name", "etc"*/ },
             ClientCredentialsScopes = new List<string> { "RemoteHome" }
         };
         //End user replace
@@ -82,7 +84,11 @@ namespace Threax.Home
 
             services.AddHalClientGen(new HalClientGenOptions()
             {
-                SourceAssemblies = new Assembly[] { this.GetType().GetTypeInfo().Assembly },
+                SourceAssemblies = new Assembly[]
+                {
+                    this.GetType().GetTypeInfo().Assembly,
+                    typeof(UserSearchController).Assembly
+                },
                 CSharp = new CSharpOptions()
                 {
                     Namespace = "Threax.Home.Client"
@@ -119,6 +125,12 @@ namespace Threax.Home
                 DetailedErrors = appConfig.DetailedErrors
             });
 
+            services.AddThreaxIdServerClient(o =>
+            {
+                o.GetSharedClientCredentials = s => Configuration.Bind("SharedClientCredentials", s);
+                Configuration.Bind("IdServerClient", o);
+            });
+
             // Add framework services.
             services.AddMvc(o =>
             {
@@ -130,7 +142,12 @@ namespace Threax.Home
                 o.SerializerSettings.SetToHalcyonDefault();
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             })
-            .AddConventionalIdServerMvc();
+            .AddConventionalIdServerMvc()
+            .AddThreaxUserLookup(o =>
+            {
+                o.UseIdServer();
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.ConfigureHtmlRapierTagHelpers(o =>
             {

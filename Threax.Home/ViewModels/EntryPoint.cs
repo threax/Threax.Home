@@ -2,6 +2,7 @@
 using Threax.Home.Controllers.Api;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.UserBuilder.Entities.Mvc;
+using Threax.AspNetCore.UserLookup.Mvc.Controllers;
 
 namespace Threax.Home.ViewModels
 {
@@ -16,6 +17,7 @@ namespace Threax.Home.ViewModels
     [HalActionLink(typeof(SwitchesController), nameof(SwitchesController.AddNewSwitches))]
     [HalActionLink(typeof(SensorsController), nameof(SensorsController.AddNewSensors))]
     [HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.AddNewThermostats))]
+    [HalActionLink(typeof(UserSearchController), nameof(UserSearchController.List), "ListAppUsers")]
     public partial class EntryPoint
     {
     }
