@@ -75,11 +75,11 @@ namespace Threax.Home.LibCec.Repository
             }
             if (on)
             {
-                await manager.SetOn(address);
+                await manager.SetStandby(address);
             }
             else
             {
-                await manager.SetStandby(address);
+                await manager.SetOn(address);
             }
         }
 
