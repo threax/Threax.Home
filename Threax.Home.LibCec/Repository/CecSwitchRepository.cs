@@ -65,7 +65,8 @@ namespace Threax.Home.LibCec.Repository
                 var power = await this.manager.GetPower(address);
                 switch (power)
                 {
-                    case CecPowerStatus.On | CecPowerStatus.TransitionStandbyToOn:
+                    case CecPowerStatus.TransitionStandbyToOn:
+                    case CecPowerStatus.On:
                         on = false;
                         break;
                     default:
