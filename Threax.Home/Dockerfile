@@ -1,22 +1,21 @@
-FROM microsoft/dotnet:2.2.0-aspnetcore-runtime AS base
+FROM microsoft/dotnet:2.2.1-aspnetcore-runtime AS base
 WORKDIR /app
-EXPOSE 80
 
 FROM threax/build AS build
 WORKDIR /src
-COPY Threax.Home/Threax.Home.csproj Threax.Home/
-RUN dotnet restore Threax.Home/Threax.Home.csproj
 COPY . .
 WORKDIR /src/Threax.Home
 RUN yarn run yarn-install
+RUN dotnet restore Threax.Home.csproj
+RUN dotnet build Threax.Home.csproj -c Release -o /app
 RUN yarn run clean
 RUN yarn run build
-RUN dotnet build Threax.Home.csproj -c Release -o /app
 
 FROM build AS publish
 RUN dotnet publish Threax.Home.csproj -c Release -o /app
 
 FROM base AS final
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 WORKDIR /app
 COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "Threax.Home.dll"]
