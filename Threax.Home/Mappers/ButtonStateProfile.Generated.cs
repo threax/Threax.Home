@@ -15,8 +15,8 @@ namespace Threax.Home.Mappers
         partial void MapInputToEntity(IMappingExpression<ButtonStateInput, ButtonStateEntity> mapExpr)
         {
             mapExpr.ForMember(d => d.ButtonStateId, opt => opt.Ignore())
-                .ForMember(d => d.Created, opt => opt.ResolveUsing<ICreatedResolver>())
-                .ForMember(d => d.Modified, opt => opt.ResolveUsing<IModifiedResolver>());
+                .ForMember(d => d.Created, opt => opt.MapFrom<ICreatedResolver>())
+                .ForMember(d => d.Modified, opt => opt.MapFrom<IModifiedResolver>());
         }
 
         partial void MapEntityToView(IMappingExpression<ButtonStateEntity, ButtonState> mapExpr)

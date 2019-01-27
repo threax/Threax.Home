@@ -18,8 +18,8 @@ namespace Threax.Home.Mappers
                 .ForMember(d => d.Subsystem, opt => opt.Ignore())
                 .ForMember(d => d.Bridge, opt => opt.Ignore())
                 .ForMember(d => d.Id, opt => opt.Ignore())
-                .ForMember(d => d.Created, opt => opt.ResolveUsing<ICreatedResolver>())
-                .ForMember(d => d.Modified, opt => opt.ResolveUsing<IModifiedResolver>());
+                .ForMember(d => d.Created, opt => opt.MapFrom<ICreatedResolver>())
+                .ForMember(d => d.Modified, opt => opt.MapFrom<IModifiedResolver>());
         }
 
         partial void MapEntityToView(IMappingExpression<SwitchEntity, Switch> mapExpr)

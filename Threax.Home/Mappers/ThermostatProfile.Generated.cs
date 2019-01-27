@@ -34,8 +34,8 @@ namespace Threax.Home.Mappers
                 .ForMember(d => d.SetPointDelta, opt => opt.Ignore())
                 .ForMember(d => d.Humidity, opt => opt.Ignore())
                 .ForMember(d => d.AvailableModes, opt => opt.Ignore())
-                .ForMember(d => d.Created, opt => opt.ResolveUsing<ICreatedResolver>())
-                .ForMember(d => d.Modified, opt => opt.ResolveUsing<IModifiedResolver>());
+                .ForMember(d => d.Created, opt => opt.MapFrom<ICreatedResolver>())
+                .ForMember(d => d.Modified, opt => opt.MapFrom<IModifiedResolver>());
         }
 
         partial void MapEntityToView(IMappingExpression<ThermostatEntity, Thermostat> mapExpr)

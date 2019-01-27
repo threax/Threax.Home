@@ -23,8 +23,8 @@ namespace Threax.Home.Mappers
 
             CreateMap<Thermostat, ThermostatEntity>()
                 .ForMember(d => d.ThermostatId, opt => opt.Ignore())
-                .ForMember(d => d.Created, opt => opt.ResolveUsing<ICreatedResolver>())
-                .ForMember(d => d.Modified, opt => opt.ResolveUsing<IModifiedResolver>());
+                .ForMember(d => d.Created, opt => opt.MapFrom<ICreatedResolver>())
+                .ForMember(d => d.Modified, opt => opt.MapFrom<IModifiedResolver>());
         }
 
         partial void MapInputToEntity(IMappingExpression<ThermostatInput, ThermostatEntity> mapExpr);

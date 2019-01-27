@@ -16,8 +16,8 @@ namespace Threax.Home.Mappers
         partial void MapInputToEntity(IMappingExpression<SensorInput, SensorEntity> mapExpr)
         {
             mapExpr.ForMember(d => d.SensorId, opt => opt.Ignore())
-                .ForMember(d => d.Created, opt => opt.ResolveUsing<ICreatedResolver>())
-                .ForMember(d => d.Modified, opt => opt.ResolveUsing<IModifiedResolver>());
+                .ForMember(d => d.Created, opt => opt.MapFrom<ICreatedResolver>())
+                .ForMember(d => d.Modified, opt => opt.MapFrom<IModifiedResolver>());
         }
 
         partial void MapEntityToView(IMappingExpression<SensorEntity, Sensor> mapExpr)

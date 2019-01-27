@@ -15,8 +15,8 @@ namespace Threax.Home.Mappers
         partial void MapInputToEntity(IMappingExpression<SwitchSettingInput, SwitchSettingEntity> mapExpr)
         {
             mapExpr.ForMember(d => d.SwitchSettingId, opt => opt.Ignore())
-                .ForMember(d => d.Created, opt => opt.ResolveUsing<ICreatedResolver>())
-                .ForMember(d => d.Modified, opt => opt.ResolveUsing<IModifiedResolver>());
+                .ForMember(d => d.Created, opt => opt.MapFrom<ICreatedResolver>())
+                .ForMember(d => d.Modified, opt => opt.MapFrom<IModifiedResolver>());
         }
 
         partial void MapEntityToView(IMappingExpression<SwitchSettingEntity, SwitchSetting> mapExpr)
