@@ -8,14 +8,26 @@ using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Models;
 using Threax.Home.Models;
 using Threax.Home.Controllers.Api;
+using Threax.AspNetCore.Tracking;
 
 namespace Threax.Home.ViewModels
 {
     [HalModel]
-    public partial class ButtonState
+    public partial class ButtonState : IButtonState, IButtonStateId, ICreatedModified
     {
-        //You can add your own customizations here. These will not be overwritten by the model generator.
-        //See ButtonState.Generated for the generated code
+        public Guid ButtonStateId { get; set; }
+
+        [UiOrder(0, 15)]
+        public String Label { get; set; }
+
+        [UiOrder(0, 18)]
+        public int Order { get; set; }
+
+        [UiOrder(0, 2147483646)]
+        public DateTime Created { get; set; }
+
+        [UiOrder(0, 2147483647)]
+        public DateTime Modified { get; set; }
 
         public List<SwitchSetting> SwitchSettings { get; set; }
     }

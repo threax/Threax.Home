@@ -8,13 +8,38 @@ using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Models;
 using Threax.Home.Core;
+using Threax.Home.Models;
 
 namespace Threax.Home.InputModels
 {
-    public partial class ThermostatQuery
+    [HalModel]
+    public partial class ThermostatQuery : PagedCollectionQuery, IThermostatQuery
     {
-        //You can add your own customizations here. These will not be overwritten by the model generator.
-        //See ThermostatQuery.Generated for the generated code
+        /// <summary>
+        /// Lookup a thermostat by id.
+        /// </summary>
+        public Guid? ThermostatId { get; set; }
+
+
+        /// <summary>
+        /// Populate an IQueryable for thermostats. Does not apply the skip or limit. Will return
+        /// true if the query should be modified or false if the entire query was built and should
+        /// be left alone.
+        /// </summary>
+        /// <param name="query">The query to populate.</param>
+        /// <returns>True if the query should continue to be built, false if it should be left alone.</returns>
+        protected bool CreateGenerated(ref IQueryable<ThermostatEntity> query)
+        {
+            if (ThermostatId != null)
+            {
+                query = query.Where(i => i.ThermostatId == ThermostatId);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
         /// <summary>
         /// Populate an IQueryable. Does not apply the skip or limit.

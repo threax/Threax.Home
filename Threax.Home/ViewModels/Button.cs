@@ -9,6 +9,7 @@ using Threax.AspNetCore.Models;
 using Threax.Home.Models;
 using Threax.Home.Controllers.Api;
 using Newtonsoft.Json;
+using Threax.AspNetCore.Tracking;
 
 namespace Threax.Home.ViewModels
 {
@@ -18,10 +19,24 @@ namespace Threax.Home.ViewModels
     [HalActionLink(typeof(ButtonsController), nameof(ButtonsController.Delete))]
     [HalActionLink(typeof(ButtonsController), nameof(ButtonsController.Apply))]
     [DeclareHalLink(typeof(SwitchesController), nameof(SwitchesController.Get), "GetSwitch")]
-    public partial class Button : IHalLinkProvider
+    public partial class Button : IButton, IButtonId, ICreatedModified, IHalLinkProvider
     {
-        //You can add your own customizations here. These will not be overwritten by the model generator.
-        //See Button.Generated for the generated code
+        public Guid ButtonId { get; set; }
+
+        [UiOrder(0, 12)]
+        public String Label { get; set; }
+
+        [UiOrder(0, 15)]
+        public int Order { get; set; }
+
+        [UiOrder(0, 18)]
+        public ButtonType ButtonType { get; set; }
+
+        [UiOrder(0, 2147483646)]
+        public DateTime Created { get; set; }
+
+        [UiOrder(0, 2147483647)]
+        public DateTime Modified { get; set; }
 
         public List<ButtonState> ButtonStates { get; set; }
 

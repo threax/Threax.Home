@@ -20,7 +20,7 @@ namespace Threax.Home.ViewModels
     [DeclareHalLink(typeof(SwitchesController), nameof(SwitchesController.List), PagedCollectionView<Object>.Rels.Previous, ResponseOnly = true)]
     [DeclareHalLink(typeof(SwitchesController), nameof(SwitchesController.List), PagedCollectionView<Object>.Rels.First, ResponseOnly = true)]
     [DeclareHalLink(typeof(SwitchesController), nameof(SwitchesController.List), PagedCollectionView<Object>.Rels.Last, ResponseOnly = true)]
-    public partial class SwitchCollection
+    public partial class SwitchCollection : PagedCollectionViewWithQuery<Switch, SwitchQuery>
     {
         public SwitchCollection(SwitchQuery query, int total, IEnumerable<Switch> items) : base(query, total, items)
         {

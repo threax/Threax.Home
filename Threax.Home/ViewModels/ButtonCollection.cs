@@ -20,7 +20,7 @@ namespace Threax.Home.ViewModels
     [DeclareHalLink(typeof(ButtonsController), nameof(ButtonsController.List), PagedCollectionView<Object>.Rels.Previous, ResponseOnly = true)]
     [DeclareHalLink(typeof(ButtonsController), nameof(ButtonsController.List), PagedCollectionView<Object>.Rels.First, ResponseOnly = true)]
     [DeclareHalLink(typeof(ButtonsController), nameof(ButtonsController.List), PagedCollectionView<Object>.Rels.Last, ResponseOnly = true)]
-    public partial class ButtonCollection
+    public partial class ButtonCollection : PagedCollectionViewWithQuery<Button, ButtonQuery>
     {
         public ButtonCollection(ButtonQuery query, int total, IEnumerable<Button> items) : base(query, total, items)
         {

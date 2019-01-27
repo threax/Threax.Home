@@ -11,16 +11,24 @@ namespace Threax.Home.Models
 {
     public partial interface ISwitchSetting
     {
-        //Customize main interface here, see SwitchSetting.Generated for generated code
-    }  
+        Guid SwitchId { get; set; }
+
+        String Value { get; set; }
+
+        int? Brightness { get; set; }
+
+        String HexColor { get; set; }
+
+    }
 
     public partial interface ISwitchSettingId
     {
-        //Customize id interface here, see SwitchSetting.Generated for generated code
-    }    
+        Guid SwitchSettingId { get; set; }
+    }
 
     public partial interface ISwitchSettingQuery
     {
-        //Customize query interface here, see SwitchSetting.Generated for generated code
+        Guid? SwitchSettingId { get; set; }
+
     }
 }

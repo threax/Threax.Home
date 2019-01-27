@@ -12,16 +12,18 @@ namespace Threax.Home.Models
 {
     public partial interface ISensor : ICoreSensor
     {
-        //Customize main interface here, see Sensor.Generated for generated code
-    }  
+
+
+    }
 
     public partial interface ISensorId
     {
-        //Customize id interface here, see Sensor.Generated for generated code
-    }    
+        Guid SensorId { get; set; }
+    }
 
     public partial interface ISensorQuery
     {
-        //Customize query interface here, see Sensor.Generated for generated code
+        Guid? SensorId { get; set; }
+
     }
 }

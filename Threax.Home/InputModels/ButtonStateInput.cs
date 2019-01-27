@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Models;
+using Threax.Home.Models;
 
 namespace Threax.Home.InputModels
 {
-    public partial class ButtonStateInput
+    [HalModel]
+    public partial class ButtonStateInput : IButtonState
     {
-        //You can add your own customizations here. These will not be overwritten by the model generator.
-        //See ButtonStateInput.Generated for the generated code
+        [UiOrder(0, 15)]
+        public String Label { get; set; }
+
+        [UiOrder(0, 18)]
+        public int Order { get; set; }
 
         public List<SwitchSettingInput> SwitchSettings { get; set; }
     }

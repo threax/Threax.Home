@@ -11,16 +11,22 @@ namespace Threax.Home.Models
 {
     public partial interface IButton
     {
-        //Customize main interface here, see Button.Generated for generated code
-    }  
+        String Label { get; set; }
+
+        int Order { get; set; }
+
+        ButtonType ButtonType { get; set; }
+
+    }
 
     public partial interface IButtonId
     {
-        //Customize id interface here, see Button.Generated for generated code
-    }    
+        Guid ButtonId { get; set; }
+    }
 
     public partial interface IButtonQuery
     {
-        //Customize query interface here, see Button.Generated for generated code
+        Guid? ButtonId { get; set; }
+
     }
 }

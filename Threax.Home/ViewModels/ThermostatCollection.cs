@@ -21,7 +21,7 @@ namespace Threax.Home.ViewModels
     [DeclareHalLink(typeof(ThermostatsController), nameof(ThermostatsController.List), PagedCollectionView<Object>.Rels.Previous, ResponseOnly = true)]
     [DeclareHalLink(typeof(ThermostatsController), nameof(ThermostatsController.List), PagedCollectionView<Object>.Rels.First, ResponseOnly = true)]
     [DeclareHalLink(typeof(ThermostatsController), nameof(ThermostatsController.List), PagedCollectionView<Object>.Rels.Last, ResponseOnly = true)]
-    public partial class ThermostatCollection
+    public partial class ThermostatCollection : PagedCollectionViewWithQuery<Thermostat, ThermostatQuery>
     {
         public ThermostatCollection(ThermostatQuery query, int total, IEnumerable<Thermostat> items) : base(query, total, items)
         {

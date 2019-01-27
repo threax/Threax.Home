@@ -21,7 +21,7 @@ namespace Threax.Home.ViewModels
     [DeclareHalLink(typeof(SensorsController), nameof(SensorsController.List), PagedCollectionView<Object>.Rels.Previous, ResponseOnly = true)]
     [DeclareHalLink(typeof(SensorsController), nameof(SensorsController.List), PagedCollectionView<Object>.Rels.First, ResponseOnly = true)]
     [DeclareHalLink(typeof(SensorsController), nameof(SensorsController.List), PagedCollectionView<Object>.Rels.Last, ResponseOnly = true)]
-    public partial class SensorCollection
+    public partial class SensorCollection : PagedCollectionViewWithQuery<Sensor, SensorQuery>
     {
         public SensorCollection(SensorQuery query, int total, IEnumerable<Sensor> items) : base(query, total, items)
         {

@@ -6,13 +6,21 @@ using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Models;
+using Threax.Home.Models;
 
 namespace Threax.Home.InputModels
 {
-    public partial class ButtonInput
+    [HalModel]
+    public partial class ButtonInput : IButton
     {
-        //You can add your own customizations here. These will not be overwritten by the model generator.
-        //See ButtonInput.Generated for the generated code
+        [UiOrder(0, 12)]
+        public String Label { get; set; }
+
+        [UiOrder(0, 15)]
+        public int Order { get; set; }
+
+        [UiOrder(0, 18)]
+        public ButtonType ButtonType { get; set; }
 
         public List<ButtonStateInput> ButtonStates { get; set; }
     }

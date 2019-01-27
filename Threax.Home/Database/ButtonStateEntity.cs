@@ -6,12 +6,28 @@ using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Models;
+using Threax.AspNetCore.Tracking;
+using Threax.Home.Models;
 
 namespace Threax.Home.Database
 {
-    public partial class ButtonStateEntity
+    public partial class ButtonStateEntity : IButtonState, IButtonStateId, ICreatedModified
     {
-        //You can add your own customizations here. These will not be overwritten by the model generator.
-        //See ButtonStateEntity.Generated for the generated code
+        [Key]
+        public Guid ButtonStateId { get; set; }
+
+        public String Label { get; set; }
+
+        public int Order { get; set; }
+
+        public List<SwitchSettingEntity> SwitchSettings { get; set; }
+
+        public Guid ButtonId { get; set; }
+
+        public ButtonEntity Button { get; set; }
+
+        public DateTime Created { get; set; }
+
+        public DateTime Modified { get; set; }
     }
 }

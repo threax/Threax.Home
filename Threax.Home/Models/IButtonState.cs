@@ -11,16 +11,20 @@ namespace Threax.Home.Models
 {
     public partial interface IButtonState
     {
-        //Customize main interface here, see ButtonState.Generated for generated code
-    }  
+        String Label { get; set; }
+
+        int Order { get; set; }
+
+    }
 
     public partial interface IButtonStateId
     {
-        //Customize id interface here, see ButtonState.Generated for generated code
-    }    
+        Guid ButtonStateId { get; set; }
+    }
 
     public partial interface IButtonStateQuery
     {
-        //Customize query interface here, see ButtonState.Generated for generated code
+        Guid? ButtonStateId { get; set; }
+
     }
 }

@@ -6,13 +6,22 @@ using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Models;
+using Threax.Home.Models;
 
 namespace Threax.Home.InputModels
 {
-    public partial class SwitchInput
+    [HalModel]
+    public partial class SwitchInput : ISwitch
     {
-        //You can add your own customizations here. These will not be overwritten by the model generator.
-        //See SwitchInput.Generated for the generated code
+        [Required(ErrorMessage = "Name must have a value.")]
+        [MaxLength(450, ErrorMessage = "Name must be less than 450 characters.")]
+        public String Name { get; set; }
+
+        [MaxLength(450, ErrorMessage = "Value must be less than 450 characters.")]
+        public String Value { get; set; }
+
+        [MaxLength(450, ErrorMessage = "Hex Color must be less than 450 characters.")]
+        public String HexColor { get; set; }
 
         public byte? Brightness { get; set; }
     }

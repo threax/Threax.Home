@@ -11,16 +11,30 @@ namespace Threax.Home.Models
 {
     public partial interface IThermostatSetting
     {
-        //Customize main interface here, see ThermostatSetting.Generated for generated code
-    }  
+        String Label { get; set; }
+
+        int Order { get; set; }
+
+        int CoolTemp { get; set; }
+
+        int HeatTemp { get; set; }
+
+        bool On { get; set; }
+
+        Guid ThermostatId { get; set; }
+
+    }
 
     public partial interface IThermostatSettingId
     {
-        //Customize id interface here, see ThermostatSetting.Generated for generated code
-    }    
+        Guid ThermostatSettingId { get; set; }
+    }
 
     public partial interface IThermostatSettingQuery
     {
-        //Customize query interface here, see ThermostatSetting.Generated for generated code
+        Guid? ThermostatSettingId { get; set; }
+        Guid? ThermostatId { get; set; }
+
+
     }
 }
