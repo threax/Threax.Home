@@ -85,36 +85,6 @@ namespace Threax.Home.Repository
             await SaveChanges();
         }
 
-        public async Task<Button> Apply(Guid buttonStateId, ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)
-        {
-            var buttonstate = await dbContext.ButtonStates.Include(i => i.SwitchSettings).Where(i => i.ButtonStateId == buttonStateId).FirstAsync();
-            var switchIds = buttonstate.SwitchSettings.Select(i => i.SwitchId);
-            var switches = await dbContext.Switches.Where(i => switchIds.Contains(i.SwitchId)).ToListAsync();
-            var switchInputs = switches.Select(i =>
-            {
-                var setting = buttonstate.SwitchSettings.Where(j => j.SwitchId == i.SwitchId).First();
-
-                //Update the switch status on the entity
-                i.Value = setting.Value;
-                i.HexColor = setting.HexColor;
-                i.Brightness = (byte?)setting.Brightness; //TODO: Fix this type
-
-                return i;
-            });
-
-            foreach (var item in switchInputs)
-            {
-                await switchRepo.Set(item);
-            }
-
-            //Save switch status updates
-            await dbContext.SaveChangesAsync();
-
-            //Reload button info
-            var buttonState = await dbContext.ButtonStates.Include(i => i.Button).Where(i => i.ButtonStateId == buttonStateId).FirstAsync();
-            return mapper.MapButton(buttonState.Button, new Button());
-        }
-
         protected virtual async Task SaveChanges()
         {
             await this.dbContext.SaveChangesAsync();

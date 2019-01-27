@@ -19,6 +19,5 @@ namespace Threax.Home.Repository
         Task<bool> HasButtons();
         Task<ButtonCollection> List(ButtonQuery query);
         Task<Button> Update(Guid buttonId, ButtonInput value);
-        Task<Button> Apply(Guid buttonStateId, ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo);
     }
 }
