@@ -613,37 +613,37 @@ public class ButtonStateResult
         }
     }
 
-    public async Task<ButtonResult> ApplyButtonState() 
+    public async Task<ButtonResult> Apply() 
     {
-        var result = await this.client.LoadLink("ApplyButtonState");
+        var result = await this.client.LoadLink("Apply");
         return new ButtonResult(result);
 
     }
 
-    public bool CanApplyButtonState 
+    public bool CanApply 
     {
         get 
         {
-            return this.client.HasLink("ApplyButtonState");
+            return this.client.HasLink("Apply");
         }
     }
 
-    public HalLink LinkForApplyButtonState 
+    public HalLink LinkForApply 
     {
         get 
         {
-            return this.client.GetLink("ApplyButtonState");
+            return this.client.GetLink("Apply");
         }
     }
 
-    public async Task<HalEndpointDoc> GetApplyButtonStateDocs(HalEndpointDocQuery query = null) 
+    public async Task<HalEndpointDoc> GetApplyDocs(HalEndpointDocQuery query = null) 
     {
-        var result = await this.client.LoadLinkDoc("ApplyButtonState", query);
+        var result = await this.client.LoadLinkDoc("Apply", query);
         return result.GetData<HalEndpointDoc>();
     }
 
-    public bool HasApplyButtonStateDocs() {
-        return this.client.HasLinkDoc("ApplyButtonState");
+    public bool HasApplyDocs() {
+        return this.client.HasLinkDoc("Apply");
     }
 }
 

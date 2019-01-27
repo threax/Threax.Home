@@ -85,11 +85,6 @@ namespace Threax.Home.Repository
             await SaveChanges();
         }
 
-        public Task<Button> Apply(ApplyButtonInput input, ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)
-        {
-            return Apply(input.ButtonStateId, switchRepo);
-        }
-
         public async Task<Button> Apply(Guid buttonStateId, ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)
         {
             var buttonstate = await dbContext.ButtonStates.Include(i => i.SwitchSettings).Where(i => i.ButtonStateId == buttonStateId).FirstAsync();

@@ -476,31 +476,31 @@ export class ButtonStateResult {
         return this.strongData;
     }
 
-    public applyButtonState(): Promise<ButtonResult> {
-        return this.client.LoadLink("ApplyButtonState")
+    public apply(): Promise<ButtonResult> {
+        return this.client.LoadLink("Apply")
                .then(r => {
                     return new ButtonResult(r);
                 });
 
     }
 
-    public canApplyButtonState(): boolean {
-        return this.client.HasLink("ApplyButtonState");
+    public canApply(): boolean {
+        return this.client.HasLink("Apply");
     }
 
-    public linkForApplyButtonState(): hal.HalLink {
-        return this.client.GetLink("ApplyButtonState");
+    public linkForApply(): hal.HalLink {
+        return this.client.GetLink("Apply");
     }
 
-    public getApplyButtonStateDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
-        return this.client.LoadLinkDoc("ApplyButtonState", query)
+    public getApplyDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("Apply", query)
             .then(r => {
                 return r.GetData<hal.HalEndpointDoc>();
             });
     }
 
-    public hasApplyButtonStateDocs(): boolean {
-        return this.client.HasLinkDoc("ApplyButtonState");
+    public hasApplyDocs(): boolean {
+        return this.client.HasLinkDoc("Apply");
     }
 }
 
