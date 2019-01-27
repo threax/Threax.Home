@@ -38,9 +38,8 @@
     <PackageReference Include="Threax.AspNetCore.UserLookup.IdServer" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
-    <DotNetCliToolReference Include="Threax.ModelGen" Version="8.0.0" />
-    <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.6.362" />
+    <DotNetCliToolReference Include="Threax.ModelGen" Version="10.0.3" />
+    <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.8.391" />
   </ItemGroup>
 
   <ItemGroup>
