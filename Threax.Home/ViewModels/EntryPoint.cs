@@ -19,6 +19,7 @@ namespace Threax.Home.ViewModels
     [HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.AddNewThermostats))]
     [HalActionLink(typeof(UserSearchController), nameof(UserSearchController.List), "ListAppUsers")]
     [HalActionLink(typeof(ButtonStatesController), nameof(ButtonStatesController.List), "ListButtonStates")]
+    [HalActionLink(typeof(AppCommandsController), nameof(AppCommandsController.List), "ListAppCommands")]
     public partial class EntryPoint
     {
     }
