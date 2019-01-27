@@ -13,6 +13,7 @@ using Threax.AspNetCore.Tracking;
 namespace Threax.Home.ViewModels
 {
     [HalModel]
+    [HalActionLink(typeof(ButtonsController), nameof(ButtonsController.ApplyButtonState))]
     public partial class ButtonState : IButtonState, IButtonStateId, ICreatedModified
     {
         public Guid ButtonStateId { get; set; }

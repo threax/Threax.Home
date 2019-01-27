@@ -85,9 +85,14 @@ namespace Threax.Home.Repository
             await SaveChanges();
         }
 
-        public async Task<Button> Apply(ApplyButtonInput input, ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)
+        public Task<Button> Apply(ApplyButtonInput input, ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)
         {
-            var buttonstate = await dbContext.ButtonStates.Include(i => i.SwitchSettings).Where(i => i.ButtonStateId == input.ButtonStateId).FirstAsync();
+            return Apply(input.ButtonStateId, switchRepo);
+        }
+
+        public async Task<Button> Apply(Guid buttonStateId, ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)
+        {
+            var buttonstate = await dbContext.ButtonStates.Include(i => i.SwitchSettings).Where(i => i.ButtonStateId == buttonStateId).FirstAsync();
             var switchIds = buttonstate.SwitchSettings.Select(i => i.SwitchId);
             var switches = await dbContext.Switches.Where(i => switchIds.Contains(i.SwitchId)).ToListAsync();
             var switchInputs = switches.Select(i =>
@@ -102,7 +107,7 @@ namespace Threax.Home.Repository
                 return i;
             });
 
-            foreach(var item in switchInputs)
+            foreach (var item in switchInputs)
             {
                 await switchRepo.Set(item);
             }
@@ -111,7 +116,7 @@ namespace Threax.Home.Repository
             await dbContext.SaveChangesAsync();
 
             //Reload button info
-            var buttonState = await dbContext.ButtonStates.Include(i => i.Button).Where(i => i.ButtonStateId == input.ButtonStateId).FirstAsync();
+            var buttonState = await dbContext.ButtonStates.Include(i => i.Button).Where(i => i.ButtonStateId == buttonStateId).FirstAsync();
             return mapper.MapButton(buttonState.Button, new Button());
         }
 

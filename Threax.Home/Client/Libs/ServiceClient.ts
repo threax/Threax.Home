@@ -254,17 +254,17 @@ export class ButtonCollectionResult {
         return this.strongData;
     }
 
-    private strongItems: ButtonResult[];
+    private itemsStrong: ButtonResult[];
     public get items(): ButtonResult[] {
-        if (this.strongItems === undefined) {
+        if (this.itemsStrong === undefined) {
             var embeds = this.client.GetEmbed("values");
             var clients = embeds.GetAllClients();
-            this.strongItems = [];
+            this.itemsStrong = [];
             for (var i = 0; i < clients.length; ++i) {
-                this.strongItems.push(new ButtonResult(clients[i]));
+                this.itemsStrong.push(new ButtonResult(clients[i]));
             }
         }
-        return this.strongItems;
+        return this.itemsStrong;
     }
 
     public refresh(): Promise<ButtonCollectionResult> {
@@ -460,6 +460,47 @@ export class ButtonCollectionResult {
 
     public hasLastDocs(): boolean {
         return this.client.HasLinkDoc("last");
+    }
+}
+
+export class ButtonStateResult {
+    private client: hal.HalEndpointClient;
+
+    constructor(client: hal.HalEndpointClient) {
+        this.client = client;
+    }
+
+    private strongData: ButtonState = undefined;
+    public get data(): ButtonState {
+        this.strongData = this.strongData || this.client.GetData<ButtonState>();
+        return this.strongData;
+    }
+
+    public applyButtonState(): Promise<ButtonResult> {
+        return this.client.LoadLink("ApplyButtonState")
+               .then(r => {
+                    return new ButtonResult(r);
+                });
+
+    }
+
+    public canApplyButtonState(): boolean {
+        return this.client.HasLink("ApplyButtonState");
+    }
+
+    public linkForApplyButtonState(): hal.HalLink {
+        return this.client.GetLink("ApplyButtonState");
+    }
+
+    public getApplyButtonStateDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("ApplyButtonState", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasApplyButtonStateDocs(): boolean {
+        return this.client.HasLinkDoc("ApplyButtonState");
     }
 }
 
@@ -947,17 +988,17 @@ export class SensorCollectionResult {
         return this.strongData;
     }
 
-    private strongItems: SensorResult[];
+    private itemsStrong: SensorResult[];
     public get items(): SensorResult[] {
-        if (this.strongItems === undefined) {
+        if (this.itemsStrong === undefined) {
             var embeds = this.client.GetEmbed("values");
             var clients = embeds.GetAllClients();
-            this.strongItems = [];
+            this.itemsStrong = [];
             for (var i = 0; i < clients.length; ++i) {
-                this.strongItems.push(new SensorResult(clients[i]));
+                this.itemsStrong.push(new SensorResult(clients[i]));
             }
         }
-        return this.strongItems;
+        return this.itemsStrong;
     }
 
     public refresh(): Promise<SensorCollectionResult> {
@@ -1249,17 +1290,17 @@ export class SwitchCollectionResult {
         return this.strongData;
     }
 
-    private strongItems: SwitchResult[];
+    private itemsStrong: SwitchResult[];
     public get items(): SwitchResult[] {
-        if (this.strongItems === undefined) {
+        if (this.itemsStrong === undefined) {
             var embeds = this.client.GetEmbed("values");
             var clients = embeds.GetAllClients();
-            this.strongItems = [];
+            this.itemsStrong = [];
             for (var i = 0; i < clients.length; ++i) {
-                this.strongItems.push(new SwitchResult(clients[i]));
+                this.itemsStrong.push(new SwitchResult(clients[i]));
             }
         }
-        return this.strongItems;
+        return this.itemsStrong;
     }
 
     public refresh(): Promise<SwitchCollectionResult> {
@@ -1566,17 +1607,17 @@ export class ThermostatCollectionResult {
         return this.strongData;
     }
 
-    private strongItems: ThermostatResult[];
+    private itemsStrong: ThermostatResult[];
     public get items(): ThermostatResult[] {
-        if (this.strongItems === undefined) {
+        if (this.itemsStrong === undefined) {
             var embeds = this.client.GetEmbed("values");
             var clients = embeds.GetAllClients();
-            this.strongItems = [];
+            this.itemsStrong = [];
             for (var i = 0; i < clients.length; ++i) {
-                this.strongItems.push(new ThermostatResult(clients[i]));
+                this.itemsStrong.push(new ThermostatResult(clients[i]));
             }
         }
-        return this.strongItems;
+        return this.itemsStrong;
     }
 
     public refresh(): Promise<ThermostatCollectionResult> {
@@ -1868,17 +1909,17 @@ export class ThermostatSettingCollectionResult {
         return this.strongData;
     }
 
-    private strongItems: ThermostatSettingResult[];
+    private itemsStrong: ThermostatSettingResult[];
     public get items(): ThermostatSettingResult[] {
-        if (this.strongItems === undefined) {
+        if (this.itemsStrong === undefined) {
             var embeds = this.client.GetEmbed("values");
             var clients = embeds.GetAllClients();
-            this.strongItems = [];
+            this.itemsStrong = [];
             for (var i = 0; i < clients.length; ++i) {
-                this.strongItems.push(new ThermostatSettingResult(clients[i]));
+                this.itemsStrong.push(new ThermostatSettingResult(clients[i]));
             }
         }
-        return this.strongItems;
+        return this.itemsStrong;
     }
 
     public refresh(): Promise<ThermostatSettingCollectionResult> {
@@ -2090,17 +2131,17 @@ export class UserCollectionResult {
         return this.strongData;
     }
 
-    private strongItems: RoleAssignmentsResult[];
+    private itemsStrong: RoleAssignmentsResult[];
     public get items(): RoleAssignmentsResult[] {
-        if (this.strongItems === undefined) {
+        if (this.itemsStrong === undefined) {
             var embeds = this.client.GetEmbed("values");
             var clients = embeds.GetAllClients();
-            this.strongItems = [];
+            this.itemsStrong = [];
             for (var i = 0; i < clients.length; ++i) {
-                this.strongItems.push(new RoleAssignmentsResult(clients[i]));
+                this.itemsStrong.push(new RoleAssignmentsResult(clients[i]));
             }
         }
-        return this.strongItems;
+        return this.itemsStrong;
     }
 
     public refresh(): Promise<UserCollectionResult> {
@@ -2353,17 +2394,17 @@ export class UserSearchCollectionResult {
         return this.strongData;
     }
 
-    private strongItems: UserSearchResult[];
+    private itemsStrong: UserSearchResult[];
     public get items(): UserSearchResult[] {
-        if (this.strongItems === undefined) {
+        if (this.itemsStrong === undefined) {
             var embeds = this.client.GetEmbed("values");
             var clients = embeds.GetAllClients();
-            this.strongItems = [];
+            this.itemsStrong = [];
             for (var i = 0; i < clients.length; ++i) {
-                this.strongItems.push(new UserSearchResult(clients[i]));
+                this.itemsStrong.push(new UserSearchResult(clients[i]));
             }
         }
-        return this.strongItems;
+        return this.itemsStrong;
     }
 
     public refresh(): Promise<UserSearchCollectionResult> {
@@ -2545,17 +2586,21 @@ export interface RoleAssignments {
     superAdmin?: boolean;
 }
 
+export enum ButtonType {
+    Light = <any>"Light", 
+    Fan = <any>"Fan", 
+}
+
 export interface ButtonState {
-    switchSettings?: SwitchSetting[];
     buttonStateId?: string;
     label?: string;
     order?: number;
     created?: string;
     modified?: string;
+    switchSettings?: SwitchSetting[];
 }
 
 export interface SwitchSetting {
-    switch?: Switch;
     switchSettingId?: string;
     switchId?: string;
     value?: string;
@@ -2563,37 +2608,33 @@ export interface SwitchSetting {
     hexColor?: string;
     created?: string;
     modified?: string;
+    switch?: Switch;
 }
 
 export interface Switch {
-    brightness?: number;
     switchId?: string;
     name?: string;
     value?: string;
     hexColor?: string;
     created?: string;
     modified?: string;
-}
-
-export enum ButtonType {
-    Light = <any>"Light", 
-    Fan = <any>"Fan", 
+    brightness?: number;
 }
 
 export interface Button {
-    buttonStates?: ButtonState[];
     buttonId?: string;
     label?: string;
     order?: number;
     buttonType?: ButtonType;
     created?: string;
     modified?: string;
+    buttonStates?: ButtonState[];
 }
 
 export interface ButtonStateInput {
-    switchSettings?: SwitchSettingInput[];
     label?: string;
     order?: number;
+    switchSettings?: SwitchSettingInput[];
 }
 
 export interface SwitchSettingInput {
@@ -2604,10 +2645,10 @@ export interface SwitchSettingInput {
 }
 
 export interface ButtonInput {
-    buttonStates?: ButtonStateInput[];
     label?: string;
     order?: number;
     buttonType?: ButtonType;
+    buttonStates?: ButtonStateInput[];
 }
 
 export interface ApplyButtonInput {
@@ -2615,11 +2656,12 @@ export interface ApplyButtonInput {
 }
 
 export interface ButtonCollection {
-    /** The number of pages (item number = Offset * Limit) into the collection to query. */
-    offset?: number;
+    includeButler?: boolean;
     /** Lookup a button by id. */
     buttonId?: string;
     total?: number;
+    /** The number of pages (item number = Offset * Limit) into the collection to query. */
+    offset?: number;
     /** The limit of the number of items to return. */
     limit?: number;
 }
@@ -2627,6 +2669,7 @@ export interface ButtonCollection {
 export interface ButtonQuery {
     /** Lookup a button by id. */
     buttonId?: string;
+    includeButler?: boolean;
     /** The number of pages (item number = Offset * Limit) into the collection to query. */
     offset?: number;
     /** The limit of the number of items to return. */
@@ -2885,10 +2928,10 @@ export enum SensorInputUvUnits {
 }
 
 export interface SwitchInput {
-    brightness?: number;
     name: string;
     value?: string;
     hexColor?: string;
+    brightness?: number;
 }
 
 export interface SetSwitchInput {

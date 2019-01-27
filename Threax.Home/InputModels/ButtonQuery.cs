@@ -26,6 +26,14 @@ namespace Threax.Home.InputModels
         {
             if(CreateGenerated(ref query))
             {
+                if (!IncludeButler)
+                {
+                    //TODO: Improve this once localdb can handle adding
+                    //foreign keys. Can add categories then.
+                    //This requires no db changes, just adds a special name
+                    query = query.Where(i => i.Label != "_Butler");
+                }
+
                 //Customize query further
                 query = query.OrderBy(i => i.Order);
             }
@@ -37,6 +45,8 @@ namespace Threax.Home.InputModels
         /// Lookup a button by id.
         /// </summary>
         public Guid? ButtonId { get; set; }
+
+        public bool IncludeButler { get; set; } = false;
 
 
         /// <summary>

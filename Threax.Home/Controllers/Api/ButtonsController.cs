@@ -66,6 +66,13 @@ namespace Threax.Home.Controllers.Api
             await repo.Delete(buttonId);
         }
 
+        [HttpPut("[action]/{ButtonStateId}")]
+        [HalRel(nameof(ApplyButtonState))]
+        public async Task<Button> ApplyButtonState(Guid buttonStateId, [FromServices] ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)
+        {
+            return await repo.Apply(buttonStateId, switchRepo);
+        }
+
         [HttpPut("[action]")]
         [HalRel(nameof(Apply))]
         public async Task<Button> Apply([FromBody] ApplyButtonInput input, [FromServices] ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)

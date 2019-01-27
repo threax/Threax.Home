@@ -347,18 +347,18 @@ public class ButtonCollectionResult
         }
     }
 
-    private List<ButtonResult> strongItems = null;
+    private List<ButtonResult> itemsStrong = null;
     public List<ButtonResult> Items
     {
         get
         {
-            if (this.strongItems == null) 
+            if (this.itemsStrong == null) 
             {
                 var embeds = this.client.GetEmbed("values");
                 var clients = embeds.GetAllClients();
-                this.strongItems = new List<ButtonResult>(clients.Select(i => new ButtonResult(i)));
+                this.itemsStrong = new List<ButtonResult>(clients.Select(i => new ButtonResult(i)));
             }
-            return this.strongItems;
+            return this.itemsStrong;
         }
     }
 
@@ -588,6 +588,62 @@ public class ButtonCollectionResult
 
     public bool HasLastDocs() {
         return this.client.HasLinkDoc("last");
+    }
+}
+
+public class ButtonStateResult 
+{
+    private HalEndpointClient client;
+
+    public ButtonStateResult(HalEndpointClient client) 
+    {
+        this.client = client;
+    }
+
+    private ButtonState strongData = default(ButtonState);
+    public ButtonState Data 
+    {
+        get
+        {
+            if(this.strongData == default(ButtonState))
+            {
+                this.strongData = this.client.GetData<ButtonState>();  
+            }
+            return this.strongData;
+        }
+    }
+
+    public async Task<ButtonResult> ApplyButtonState() 
+    {
+        var result = await this.client.LoadLink("ApplyButtonState");
+        return new ButtonResult(result);
+
+    }
+
+    public bool CanApplyButtonState 
+    {
+        get 
+        {
+            return this.client.HasLink("ApplyButtonState");
+        }
+    }
+
+    public HalLink LinkForApplyButtonState 
+    {
+        get 
+        {
+            return this.client.GetLink("ApplyButtonState");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetApplyButtonStateDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("ApplyButtonState", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasApplyButtonStateDocs() {
+        return this.client.HasLinkDoc("ApplyButtonState");
     }
 }
 
@@ -1212,18 +1268,18 @@ public class SensorCollectionResult
         }
     }
 
-    private List<SensorResult> strongItems = null;
+    private List<SensorResult> itemsStrong = null;
     public List<SensorResult> Items
     {
         get
         {
-            if (this.strongItems == null) 
+            if (this.itemsStrong == null) 
             {
                 var embeds = this.client.GetEmbed("values");
                 var clients = embeds.GetAllClients();
-                this.strongItems = new List<SensorResult>(clients.Select(i => new SensorResult(i)));
+                this.itemsStrong = new List<SensorResult>(clients.Select(i => new SensorResult(i)));
             }
-            return this.strongItems;
+            return this.itemsStrong;
         }
     }
 
@@ -1588,18 +1644,18 @@ public class SwitchCollectionResult
         }
     }
 
-    private List<SwitchResult> strongItems = null;
+    private List<SwitchResult> itemsStrong = null;
     public List<SwitchResult> Items
     {
         get
         {
-            if (this.strongItems == null) 
+            if (this.itemsStrong == null) 
             {
                 var embeds = this.client.GetEmbed("values");
                 var clients = embeds.GetAllClients();
-                this.strongItems = new List<SwitchResult>(clients.Select(i => new SwitchResult(i)));
+                this.itemsStrong = new List<SwitchResult>(clients.Select(i => new SwitchResult(i)));
             }
-            return this.strongItems;
+            return this.itemsStrong;
         }
     }
 
@@ -1976,18 +2032,18 @@ public class ThermostatCollectionResult
         }
     }
 
-    private List<ThermostatResult> strongItems = null;
+    private List<ThermostatResult> itemsStrong = null;
     public List<ThermostatResult> Items
     {
         get
         {
-            if (this.strongItems == null) 
+            if (this.itemsStrong == null) 
             {
                 var embeds = this.client.GetEmbed("values");
                 var clients = embeds.GetAllClients();
-                this.strongItems = new List<ThermostatResult>(clients.Select(i => new ThermostatResult(i)));
+                this.itemsStrong = new List<ThermostatResult>(clients.Select(i => new ThermostatResult(i)));
             }
-            return this.strongItems;
+            return this.itemsStrong;
         }
     }
 
@@ -2352,18 +2408,18 @@ public class ThermostatSettingCollectionResult
         }
     }
 
-    private List<ThermostatSettingResult> strongItems = null;
+    private List<ThermostatSettingResult> itemsStrong = null;
     public List<ThermostatSettingResult> Items
     {
         get
         {
-            if (this.strongItems == null) 
+            if (this.itemsStrong == null) 
             {
                 var embeds = this.client.GetEmbed("values");
                 var clients = embeds.GetAllClients();
-                this.strongItems = new List<ThermostatSettingResult>(clients.Select(i => new ThermostatSettingResult(i)));
+                this.itemsStrong = new List<ThermostatSettingResult>(clients.Select(i => new ThermostatSettingResult(i)));
             }
-            return this.strongItems;
+            return this.itemsStrong;
         }
     }
 
@@ -2618,18 +2674,18 @@ public class UserCollectionResult
         }
     }
 
-    private List<RoleAssignmentsResult> strongItems = null;
+    private List<RoleAssignmentsResult> itemsStrong = null;
     public List<RoleAssignmentsResult> Items
     {
         get
         {
-            if (this.strongItems == null) 
+            if (this.itemsStrong == null) 
             {
                 var embeds = this.client.GetEmbed("values");
                 var clients = embeds.GetAllClients();
-                this.strongItems = new List<RoleAssignmentsResult>(clients.Select(i => new RoleAssignmentsResult(i)));
+                this.itemsStrong = new List<RoleAssignmentsResult>(clients.Select(i => new RoleAssignmentsResult(i)));
             }
-            return this.strongItems;
+            return this.itemsStrong;
         }
     }
 
@@ -2940,18 +2996,18 @@ public class UserSearchCollectionResult
         }
     }
 
-    private List<UserSearchResult> strongItems = null;
+    private List<UserSearchResult> itemsStrong = null;
     public List<UserSearchResult> Items
     {
         get
         {
-            if (this.strongItems == null) 
+            if (this.itemsStrong == null) 
             {
                 var embeds = this.client.GetEmbed("values");
                 var clients = embeds.GetAllClients();
-                this.strongItems = new List<UserSearchResult>(clients.Select(i => new UserSearchResult(i)));
+                this.itemsStrong = new List<UserSearchResult>(clients.Select(i => new UserSearchResult(i)));
             }
-            return this.strongItems;
+            return this.itemsStrong;
         }
     }
 
@@ -3194,11 +3250,19 @@ namespace Threax.Home.Client
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ButtonType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = "Light")]
+        Light = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = "Fan")]
+        Fan = 1,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class ButtonState 
     {
-        [Newtonsoft.Json.JsonProperty("switchSettings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public List<SwitchSetting> SwitchSettings { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("buttonStateId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid ButtonStateId { get; set; }
     
@@ -3213,6 +3277,9 @@ namespace Threax.Home.Client
     
         [Newtonsoft.Json.JsonProperty("modified", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime Modified { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("switchSettings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public List<SwitchSetting> SwitchSettings { get; set; }
     
         public string ToJson() 
         {
@@ -3229,9 +3296,6 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class SwitchSetting 
     {
-        [Newtonsoft.Json.JsonProperty("switch", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Switch Switch { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("switchSettingId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid SwitchSettingId { get; set; }
     
@@ -3253,6 +3317,9 @@ namespace Threax.Home.Client
         [Newtonsoft.Json.JsonProperty("modified", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime Modified { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("switch", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Switch Switch { get; set; }
+    
         public string ToJson() 
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -3268,9 +3335,6 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class Switch 
     {
-        [Newtonsoft.Json.JsonProperty("brightness", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte? Brightness { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("switchId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid SwitchId { get; set; }
     
@@ -3289,6 +3353,9 @@ namespace Threax.Home.Client
         [Newtonsoft.Json.JsonProperty("modified", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime Modified { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("brightness", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public byte? Brightness { get; set; }
+    
         public string ToJson() 
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -3302,22 +3369,8 @@ namespace Threax.Home.Client
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ButtonType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "Light")]
-        Light = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "Fan")]
-        Fan = 1,
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class Button 
     {
-        [Newtonsoft.Json.JsonProperty("buttonStates", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public List<ButtonState> ButtonStates { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("buttonId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid ButtonId { get; set; }
     
@@ -3337,6 +3390,9 @@ namespace Threax.Home.Client
         [Newtonsoft.Json.JsonProperty("modified", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime Modified { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("buttonStates", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public List<ButtonState> ButtonStates { get; set; }
+    
         public string ToJson() 
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -3352,14 +3408,14 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class ButtonStateInput 
     {
-        [Newtonsoft.Json.JsonProperty("switchSettings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public List<SwitchSettingInput> SwitchSettings { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("label", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Label { get; set; }
     
         [Newtonsoft.Json.JsonProperty("order", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Order { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("switchSettings", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public List<SwitchSettingInput> SwitchSettings { get; set; }
     
         public string ToJson() 
         {
@@ -3403,9 +3459,6 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class ButtonInput 
     {
-        [Newtonsoft.Json.JsonProperty("buttonStates", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public List<ButtonStateInput> ButtonStates { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("label", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Label { get; set; }
     
@@ -3415,6 +3468,9 @@ namespace Threax.Home.Client
         [Newtonsoft.Json.JsonProperty("buttonType", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ButtonType ButtonType { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("buttonStates", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public List<ButtonStateInput> ButtonStates { get; set; }
     
         public string ToJson() 
         {
@@ -3449,9 +3505,8 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class ButtonCollection 
     {
-        /// <summary>The number of pages (item number = Offset * Limit) into the collection to query.</summary>
-        [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Offset { get; set; }
+        [Newtonsoft.Json.JsonProperty("includeButler", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IncludeButler { get; set; }
     
         /// <summary>Lookup a button by id.</summary>
         [Newtonsoft.Json.JsonProperty("buttonId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3459,6 +3514,10 @@ namespace Threax.Home.Client
     
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Total { get; set; }
+    
+        /// <summary>The number of pages (item number = Offset * Limit) into the collection to query.</summary>
+        [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Offset { get; set; }
     
         /// <summary>The limit of the number of items to return.</summary>
         [Newtonsoft.Json.JsonProperty("limit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3482,6 +3541,9 @@ namespace Threax.Home.Client
         /// <summary>Lookup a button by id.</summary>
         [Newtonsoft.Json.JsonProperty("buttonId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ButtonId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("includeButler", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool IncludeButler { get; set; }
     
         /// <summary>The number of pages (item number = Offset * Limit) into the collection to query.</summary>
         [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4253,9 +4315,6 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class SwitchInput 
     {
-        [Newtonsoft.Json.JsonProperty("brightness", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte? Brightness { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
     
@@ -4264,6 +4323,9 @@ namespace Threax.Home.Client
     
         [Newtonsoft.Json.JsonProperty("hexColor", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string HexColor { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("brightness", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public byte? Brightness { get; set; }
     
         public string ToJson() 
         {
