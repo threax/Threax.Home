@@ -1,4 +1,5 @@
 ﻿using Halcyon.HAL.Attributes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,19 @@ namespace Threax.Home.ViewModels
 {
     [HalModel]
     [DeclareHalLink(HalSelfActionLinkAttribute.SelfRelName)]
-    [DeclareHalLink(AppCommand.Execute)]
+    [DeclareHalLink(AppCommand.Rels.Execute)]
     public class AppCommand : IHalLinkProvider
     {
-        public const String Execute = nameof(Execute);
+        public static class Rels
+        {
+            public const String Execute = nameof(Execute);
+        }
+
+        public Guid AppCommandId => ButtonStateId ?? throw new InvalidOperationException("No AppCommandId Given");
 
         public String Name { get; set; }
 
+        [JsonIgnore]
         public Guid? ButtonStateId { get; set; }
 
         public IEnumerable<HalLinkAttribute> CreateHalLinks(ILinkProviderContext context)
@@ -24,7 +31,7 @@ namespace Threax.Home.ViewModels
             if(ButtonStateId != null)
             {
                 yield return new HalActionLinkAttribute(typeof(ButtonStatesController), nameof(ButtonStatesController.Get), HalSelfActionLinkAttribute.SelfRelName);
-                yield return new HalActionLinkAttribute(typeof(ButtonStatesController), nameof(ButtonStatesController.Apply), Execute);
+                yield return new HalActionLinkAttribute(typeof(ButtonStatesController), nameof(ButtonStatesController.Apply), Rels.Execute);
             }
         }
     }

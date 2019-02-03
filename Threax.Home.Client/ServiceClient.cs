@@ -149,6 +149,294 @@ public class RoleAssignmentsResult
     }
 }
 
+public class AppCommandResult 
+{
+    private HalEndpointClient client;
+
+    public AppCommandResult(HalEndpointClient client) 
+    {
+        this.client = client;
+    }
+
+    private AppCommand strongData = default(AppCommand);
+    public AppCommand Data 
+    {
+        get
+        {
+            if(this.strongData == default(AppCommand))
+            {
+                this.strongData = this.client.GetData<AppCommand>();  
+            }
+            return this.strongData;
+        }
+    }
+
+    public async Task Refresh() 
+    {
+        var result = await this.client.LoadLink("self");
+    }
+
+    public bool CanRefresh 
+    {
+        get 
+        {
+            return this.client.HasLink("self");
+        }
+    }
+
+    public HalLink LinkForRefresh 
+    {
+        get 
+        {
+            return this.client.GetLink("self");
+        }
+    }
+
+    public async Task Execute() 
+    {
+        var result = await this.client.LoadLink("Execute");
+    }
+
+    public bool CanExecute 
+    {
+        get 
+        {
+            return this.client.HasLink("Execute");
+        }
+    }
+
+    public HalLink LinkForExecute 
+    {
+        get 
+        {
+            return this.client.GetLink("Execute");
+        }
+    }
+}
+
+public class AppCommandCollectionResult 
+{
+    private HalEndpointClient client;
+
+    public AppCommandCollectionResult(HalEndpointClient client) 
+    {
+        this.client = client;
+    }
+
+    private AppCommandCollection strongData = default(AppCommandCollection);
+    public AppCommandCollection Data 
+    {
+        get
+        {
+            if(this.strongData == default(AppCommandCollection))
+            {
+                this.strongData = this.client.GetData<AppCommandCollection>();  
+            }
+            return this.strongData;
+        }
+    }
+
+    private List<AppCommandResult> itemsStrong = null;
+    public List<AppCommandResult> Items
+    {
+        get
+        {
+            if (this.itemsStrong == null) 
+            {
+                var embeds = this.client.GetEmbed("values");
+                var clients = embeds.GetAllClients();
+                this.itemsStrong = new List<AppCommandResult>(clients.Select(i => new AppCommandResult(i)));
+            }
+            return this.itemsStrong;
+        }
+    }
+
+    public async Task<AppCommandCollectionResult> Refresh() 
+    {
+        var result = await this.client.LoadLink("self");
+        return new AppCommandCollectionResult(result);
+
+    }
+
+    public bool CanRefresh 
+    {
+        get 
+        {
+            return this.client.HasLink("self");
+        }
+    }
+
+    public HalLink LinkForRefresh 
+    {
+        get 
+        {
+            return this.client.GetLink("self");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("self", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasRefreshDocs() {
+        return this.client.HasLinkDoc("self");
+    }
+
+    public async Task<HalEndpointDoc> GetGetDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("Get", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasGetDocs() {
+        return this.client.HasLinkDoc("Get");
+    }
+
+    public async Task<HalEndpointDoc> GetListDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("List", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasListDocs() {
+        return this.client.HasLinkDoc("List");
+    }
+
+    public async Task<AppCommandCollectionResult> Next() 
+    {
+        var result = await this.client.LoadLink("next");
+        return new AppCommandCollectionResult(result);
+
+    }
+
+    public bool CanNext 
+    {
+        get 
+        {
+            return this.client.HasLink("next");
+        }
+    }
+
+    public HalLink LinkForNext 
+    {
+        get 
+        {
+            return this.client.GetLink("next");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetNextDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("next", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasNextDocs() {
+        return this.client.HasLinkDoc("next");
+    }
+
+    public async Task<AppCommandCollectionResult> Previous() 
+    {
+        var result = await this.client.LoadLink("previous");
+        return new AppCommandCollectionResult(result);
+
+    }
+
+    public bool CanPrevious 
+    {
+        get 
+        {
+            return this.client.HasLink("previous");
+        }
+    }
+
+    public HalLink LinkForPrevious 
+    {
+        get 
+        {
+            return this.client.GetLink("previous");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetPreviousDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("previous", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasPreviousDocs() {
+        return this.client.HasLinkDoc("previous");
+    }
+
+    public async Task<AppCommandCollectionResult> First() 
+    {
+        var result = await this.client.LoadLink("first");
+        return new AppCommandCollectionResult(result);
+
+    }
+
+    public bool CanFirst 
+    {
+        get 
+        {
+            return this.client.HasLink("first");
+        }
+    }
+
+    public HalLink LinkForFirst 
+    {
+        get 
+        {
+            return this.client.GetLink("first");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetFirstDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("first", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasFirstDocs() {
+        return this.client.HasLinkDoc("first");
+    }
+
+    public async Task<AppCommandCollectionResult> Last() 
+    {
+        var result = await this.client.LoadLink("last");
+        return new AppCommandCollectionResult(result);
+
+    }
+
+    public bool CanLast 
+    {
+        get 
+        {
+            return this.client.HasLink("last");
+        }
+    }
+
+    public HalLink LinkForLast 
+    {
+        get 
+        {
+            return this.client.GetLink("last");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetLastDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("last", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasLastDocs() {
+        return this.client.HasLinkDoc("last");
+    }
+}
+
 public class ButtonResult 
 {
     private HalEndpointClient client;
@@ -613,6 +901,39 @@ public class ButtonStateResult
         }
     }
 
+    public async Task<ButtonStateResult> Refresh() 
+    {
+        var result = await this.client.LoadLink("self");
+        return new ButtonStateResult(result);
+
+    }
+
+    public bool CanRefresh 
+    {
+        get 
+        {
+            return this.client.HasLink("self");
+        }
+    }
+
+    public HalLink LinkForRefresh 
+    {
+        get 
+        {
+            return this.client.GetLink("self");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("self", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasRefreshDocs() {
+        return this.client.HasLinkDoc("self");
+    }
+
     public async Task<ButtonResult> Apply() 
     {
         var result = await this.client.LoadLink("Apply");
@@ -644,6 +965,229 @@ public class ButtonStateResult
 
     public bool HasApplyDocs() {
         return this.client.HasLinkDoc("Apply");
+    }
+}
+
+public class ButtonStateCollectionResult 
+{
+    private HalEndpointClient client;
+
+    public ButtonStateCollectionResult(HalEndpointClient client) 
+    {
+        this.client = client;
+    }
+
+    private ButtonStateCollection strongData = default(ButtonStateCollection);
+    public ButtonStateCollection Data 
+    {
+        get
+        {
+            if(this.strongData == default(ButtonStateCollection))
+            {
+                this.strongData = this.client.GetData<ButtonStateCollection>();  
+            }
+            return this.strongData;
+        }
+    }
+
+    private List<ButtonStateResult> itemsStrong = null;
+    public List<ButtonStateResult> Items
+    {
+        get
+        {
+            if (this.itemsStrong == null) 
+            {
+                var embeds = this.client.GetEmbed("values");
+                var clients = embeds.GetAllClients();
+                this.itemsStrong = new List<ButtonStateResult>(clients.Select(i => new ButtonStateResult(i)));
+            }
+            return this.itemsStrong;
+        }
+    }
+
+    public async Task<ButtonCollectionResult> Refresh() 
+    {
+        var result = await this.client.LoadLink("self");
+        return new ButtonCollectionResult(result);
+
+    }
+
+    public bool CanRefresh 
+    {
+        get 
+        {
+            return this.client.HasLink("self");
+        }
+    }
+
+    public HalLink LinkForRefresh 
+    {
+        get 
+        {
+            return this.client.GetLink("self");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetRefreshDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("self", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasRefreshDocs() {
+        return this.client.HasLinkDoc("self");
+    }
+
+    public async Task<HalEndpointDoc> GetGetDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("Get", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasGetDocs() {
+        return this.client.HasLinkDoc("Get");
+    }
+
+    public async Task<HalEndpointDoc> GetListDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("List", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasListDocs() {
+        return this.client.HasLinkDoc("List");
+    }
+
+    public async Task<ButtonCollectionResult> Next() 
+    {
+        var result = await this.client.LoadLink("next");
+        return new ButtonCollectionResult(result);
+
+    }
+
+    public bool CanNext 
+    {
+        get 
+        {
+            return this.client.HasLink("next");
+        }
+    }
+
+    public HalLink LinkForNext 
+    {
+        get 
+        {
+            return this.client.GetLink("next");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetNextDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("next", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasNextDocs() {
+        return this.client.HasLinkDoc("next");
+    }
+
+    public async Task<ButtonCollectionResult> Previous() 
+    {
+        var result = await this.client.LoadLink("previous");
+        return new ButtonCollectionResult(result);
+
+    }
+
+    public bool CanPrevious 
+    {
+        get 
+        {
+            return this.client.HasLink("previous");
+        }
+    }
+
+    public HalLink LinkForPrevious 
+    {
+        get 
+        {
+            return this.client.GetLink("previous");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetPreviousDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("previous", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasPreviousDocs() {
+        return this.client.HasLinkDoc("previous");
+    }
+
+    public async Task<ButtonCollectionResult> First() 
+    {
+        var result = await this.client.LoadLink("first");
+        return new ButtonCollectionResult(result);
+
+    }
+
+    public bool CanFirst 
+    {
+        get 
+        {
+            return this.client.HasLink("first");
+        }
+    }
+
+    public HalLink LinkForFirst 
+    {
+        get 
+        {
+            return this.client.GetLink("first");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetFirstDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("first", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasFirstDocs() {
+        return this.client.HasLinkDoc("first");
+    }
+
+    public async Task<ButtonCollectionResult> Last() 
+    {
+        var result = await this.client.LoadLink("last");
+        return new ButtonCollectionResult(result);
+
+    }
+
+    public bool CanLast 
+    {
+        get 
+        {
+            return this.client.HasLink("last");
+        }
+    }
+
+    public HalLink LinkForLast 
+    {
+        get 
+        {
+            return this.client.GetLink("last");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetLastDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("last", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasLastDocs() {
+        return this.client.HasLinkDoc("last");
     }
 }
 
@@ -989,6 +1533,72 @@ public class EntryPointResult
 
     public bool HasListAppUsersDocs() {
         return this.client.HasLinkDoc("ListAppUsers");
+    }
+
+    public async Task<ButtonStateCollectionResult> ListButtonStates(ButtonStateQuery data) 
+    {
+        var result = await this.client.LoadLinkWithData("ListButtonStates", data);
+        return new ButtonStateCollectionResult(result);
+
+    }
+
+    public bool CanListButtonStates 
+    {
+        get 
+        {
+            return this.client.HasLink("ListButtonStates");
+        }
+    }
+
+    public HalLink LinkForListButtonStates 
+    {
+        get 
+        {
+            return this.client.GetLink("ListButtonStates");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetListButtonStatesDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("ListButtonStates", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasListButtonStatesDocs() {
+        return this.client.HasLinkDoc("ListButtonStates");
+    }
+
+    public async Task<AppCommandCollectionResult> ListAppCommands(AppCommandQuery data) 
+    {
+        var result = await this.client.LoadLinkWithData("ListAppCommands", data);
+        return new AppCommandCollectionResult(result);
+
+    }
+
+    public bool CanListAppCommands 
+    {
+        get 
+        {
+            return this.client.HasLink("ListAppCommands");
+        }
+    }
+
+    public HalLink LinkForListAppCommands 
+    {
+        get 
+        {
+            return this.client.GetLink("ListAppCommands");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetListAppCommandsDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("ListAppCommands", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasListAppCommandsDocs() {
+        return this.client.HasLinkDoc("ListAppCommands");
     }
 
     public async Task<SensorCollectionResult> ListSensors(SensorQuery data) 
@@ -3250,6 +3860,84 @@ namespace Threax.Home.Client
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class AppCommand 
+    {
+        [Newtonsoft.Json.JsonProperty("appCommandId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid AppCommandId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        public string ToJson() 
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+        
+        public static AppCommand FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<AppCommand>(data);
+        }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class AppCommandCollection 
+    {
+        /// <summary>The number of pages (item number = Offset * Limit) into the collection to query.</summary>
+        [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Offset { get; set; }
+    
+        /// <summary>Lookup a buttonState by id.</summary>
+        [Newtonsoft.Json.JsonProperty("appCommandId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? AppCommandId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Total { get; set; }
+    
+        /// <summary>The limit of the number of items to return.</summary>
+        [Newtonsoft.Json.JsonProperty("limit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Limit { get; set; }
+    
+        public string ToJson() 
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+        
+        public static AppCommandCollection FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<AppCommandCollection>(data);
+        }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class AppCommandQuery 
+    {
+        /// <summary>Lookup a buttonState by id.</summary>
+        [Newtonsoft.Json.JsonProperty("appCommandId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? AppCommandId { get; set; }
+    
+        /// <summary>The number of pages (item number = Offset * Limit) into the collection to query.</summary>
+        [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Offset { get; set; }
+    
+        /// <summary>The limit of the number of items to return.</summary>
+        [Newtonsoft.Json.JsonProperty("limit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Limit { get; set; }
+    
+        public string ToJson() 
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+        
+        public static AppCommandQuery FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<AppCommandQuery>(data);
+        }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public enum ButtonType
     {
         [System.Runtime.Serialization.EnumMember(Value = "Light")]
@@ -3566,6 +4254,36 @@ namespace Threax.Home.Client
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class ButtonStateCollection 
+    {
+        /// <summary>The number of pages (item number = Offset * Limit) into the collection to query.</summary>
+        [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Offset { get; set; }
+    
+        /// <summary>Lookup a buttonState by id.</summary>
+        [Newtonsoft.Json.JsonProperty("buttonStateId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? ButtonStateId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Total { get; set; }
+    
+        /// <summary>The limit of the number of items to return.</summary>
+        [Newtonsoft.Json.JsonProperty("limit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Limit { get; set; }
+    
+        public string ToJson() 
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+        
+        public static ButtonStateCollection FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<ButtonStateCollection>(data);
+        }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class EntryPoint 
     {
         public string ToJson() 
@@ -3692,6 +4410,33 @@ namespace Threax.Home.Client
         public static UserSearchCollection FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<UserSearchCollection>(data);
+        }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.49.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class ButtonStateQuery 
+    {
+        /// <summary>Lookup a buttonState by id.</summary>
+        [Newtonsoft.Json.JsonProperty("buttonStateId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? ButtonStateId { get; set; }
+    
+        /// <summary>The number of pages (item number = Offset * Limit) into the collection to query.</summary>
+        [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Offset { get; set; }
+    
+        /// <summary>The limit of the number of items to return.</summary>
+        [Newtonsoft.Json.JsonProperty("limit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Limit { get; set; }
+    
+        public string ToJson() 
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+        
+        public static ButtonStateQuery FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<ButtonStateQuery>(data);
         }
     
     }
