@@ -11,8 +11,11 @@ export class ButtonCrudInjector extends hyperCrud.AbstractHypermediaPageInjector
         super();
     }
 
-    async list(query: any): Promise<hyperCrud.HypermediaCrudCollection> {
+    async list(query: client.ButtonQuery): Promise<hyperCrud.HypermediaCrudCollection> {
         var entry = await this.injector.load();
+        if (query.includeButler === undefined) {
+            query.includeButler = true;
+        }
         return entry.listButtons(query);
     }
 
