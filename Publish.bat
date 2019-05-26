@@ -11,7 +11,7 @@ powershell -Command "Get-ChildItem .\* -exclude .git | Remove-Item -Recurse" || 
 popd || exit /b
 
 pushd "%APP_FOLDER%" || exit /b
-call npm run yarn-install || exit /b
+call npm install || exit /b
 call npm run clean || exit /b
 call npm run build || exit /b
 
