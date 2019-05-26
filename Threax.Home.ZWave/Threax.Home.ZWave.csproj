@@ -22,7 +22,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
     <PackageReference Include="Threax.AspNetCore.ExceptionFilter" Version="5.0.3" />
-    <PackageReference Include="Threax.ZWave.Net" Version="1.0.0" />
+    <PackageReference Include="ZWave4Net" Version="1.0.0.183" />
   </ItemGroup>
 
 </Project>
