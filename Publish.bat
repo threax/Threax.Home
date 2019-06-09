@@ -10,8 +10,14 @@ git pull || exit /b
 powershell -Command "Get-ChildItem .\* -exclude .git | Remove-Item -Recurse" || exit /b
 popd || exit /b
 
+REM Build Native Libraries
+pushd %~dp0libCecCoreNative
+msbuild /property:Configuration=Release;Platform=x64
+popd
+
 pushd "%APP_FOLDER%" || exit /b
 call npm install || exit /b
+dotnet restore Threax.Home.csproj || exit /b
 call npm run clean || exit /b
 call npm run build || exit /b
 
