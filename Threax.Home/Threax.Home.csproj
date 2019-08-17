@@ -21,9 +21,9 @@
     <PackageReference Include="Threax.AspNetCore.UserBuilder" Version="3.2.0" />
     <PackageReference Include="Threax.AspNetCore.UserBuilder.Entities" Version="4.0.1" />
     <PackageReference Include="Threax.AspNetCore.UserBuilder.Entities.Mvc" Version="5.2.0" />
-    <PackageReference Include="Threax.AspNetCore.BuiltInTools" Version="5.2.0" />
+    <PackageReference Include="Threax.AspNetCore.BuiltInTools" Version="5.3.0" />
     <PackageReference Include="Threax.AspNetCore.CorsManager" Version="3.1.0" />
-    <PackageReference Include="Threax.AspNetCore.ExceptionFilter" Version="5.0.3" />
+    <PackageReference Include="Threax.AspNetCore.ExceptionFilter" Version="5.0.4" />
     <PackageReference Include="Threax.AspNetCore.Halcyon.Client" Version="7.1.0" />
     <PackageReference Include="Threax.AspNetCore.Halcyon.ClientGen.Tools" Version="5.1.0" />
     <PackageReference Include="Threax.AspNetCore.Halcyon.Ext" Version="12.7.1" />

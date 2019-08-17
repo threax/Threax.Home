@@ -7,7 +7,6 @@ namespace Threax.Home.LibCec.Services
 {
     public interface ICecManagerService : IDisposable
     {
-        void Dispose();
         Task<string> GetName(CecLogicalAddress address);
         Task<CecPowerStatus> GetPower(CecLogicalAddress address);
         Task<CecVendorId> GetVendor(CecLogicalAddress address);
