@@ -276,3 +276,5 @@ __pycache__/
 
 GitPublish
 Publish.zip
+/logs
+/nuget
