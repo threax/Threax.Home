@@ -23,6 +23,8 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Threax.Home.ValueProviders;
 using Microsoft.AspNetCore.Mvc;
 using Threax.AspNetCore.UserLookup.Mvc.Controllers;
+using System.Threading.Tasks;
+using Threax.Sqlite.Ext.EfCore3;
 
 namespace Threax.Home
 {
@@ -135,7 +137,7 @@ namespace Threax.Home
                 o.UseExceptionErrorFilters();
                 o.UseConventionalHalcyon(halOptions);
             })
-            .AddJsonOptions(o =>
+            .AddNewtonsoftJson(o =>
             {
                 o.SerializerSettings.SetToHalcyonDefault();
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -144,8 +146,7 @@ namespace Threax.Home
             .AddThreaxUserLookup(o =>
             {
                 o.UseIdServer();
-            })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            });
 
             services.ConfigureHtmlRapierTagHelpers(o =>
             {
@@ -158,6 +159,7 @@ namespace Threax.Home
                 .AddTool("migrate", new ToolCommand("Migrate database to newest version. Run anytime new migrations have been added.", async a =>
                 {
                     await a.Migrate();
+                    a.Scope.ServiceProvider.GetRequiredService<AppDbContext>().ConvertToEfCore3();
                 }))
                 .AddTool("seed", new ToolCommand("Seed database data. Only needed for an empty database.", async a =>
                 {
@@ -205,7 +207,7 @@ namespace Threax.Home
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
@@ -241,18 +243,20 @@ namespace Threax.Home
 
             app.UseCorsManager(corsOptions, loggerFactory);
 
+            app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "root",
-                    template: "{action=Index}/{*inPagePath}",
+                    pattern: "{action=Index}/{*inPagePath}",
                     defaults: new { controller = "Home" });
 
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{*inPagePath}");
+                    pattern: "{controller=Home}/{action=Index}/{*inPagePath}");
             });
         }
     }
