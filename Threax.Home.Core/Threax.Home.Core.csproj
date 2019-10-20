@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Threax.AspNetCore.Halcyon.Ext" Version="12.7.1" />
+    <PackageReference Include="Threax.AspNetCore.Halcyon.Ext" Version="12.8.0-pre02" />
     <PackageReference Include="Threax.AspNetCore.ExceptionFilter" Version="5.0.4" />
   </ItemGroup>
 
