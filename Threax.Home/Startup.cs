@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Mvc;
 using Threax.AspNetCore.UserLookup.Mvc.Controllers;
 using System.Threading.Tasks;
 using Threax.Sqlite.Ext.EfCore3;
+using Microsoft.IdentityModel.Logging;
 
 namespace Threax.Home
 {
@@ -204,6 +205,8 @@ namespace Threax.Home
                     .AddConsole()
                     .AddDebug();
             });
+
+            IdentityModelEventSource.ShowPII = appConfig.ShowPII;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

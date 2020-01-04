@@ -51,5 +51,10 @@ namespace Threax.Home
         /// Set the clock skew for identity tokens. The default is 5 seconds.
         /// </summary>
         public int IdClockSkewSeconds { get; set; } = 5;
+
+        /// <summary>
+        /// Set this to true to show pii that is hidden in the logs. Default: false.
+        /// </summary>
+        public bool ShowPII { get; set; } = false;
     }
 }
