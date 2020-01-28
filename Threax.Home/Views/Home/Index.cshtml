@@ -2,10 +2,10 @@
     ViewData["Title"] = "Welcome";
 }
 
-<div data-hr-controller="buttons" class="row">
-    <div data-hr-view="mainButtons">
+<div data-hr-controller="buttons" class="container">
+    <div data-hr-view="mainButtons" class="row">
         <template>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-xl-4 col-md-6 col-sm-12">
                 <h2>{{data.label}}</h2>
 
                 <div class="load-outer">
@@ -29,10 +29,11 @@
                 </div>
 
                 <div class="startHidden" data-hr-toggle="error">An error occured.</div>
-
-                {{for i in data.buttonStates}}
-                <button value="{{i.buttonStateId}}" data-hr-on-click="pressButton" class="btn btn-default">{{i.label}}</button>
-                {{/for}}
+                <div >
+                    {{for i in data.buttonStates}}
+                    <button value="{{i.buttonStateId}}" data-hr-on-click="pressButton" class="btn btn-default">{{i.label}}</button>
+                    {{/for}}
+                </div>
             </div>
         </template>
         <load style="height:60em;" visible="true"></load>
