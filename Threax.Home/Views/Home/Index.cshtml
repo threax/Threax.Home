@@ -5,8 +5,8 @@
 <div data-hr-controller="buttons" class="container">
     <div data-hr-view="mainButtons" class="row">
         <template>
-            <div class="col-xl-4 col-md-6 col-sm-12">
-                <h2>{{data.label}}</h2>
+            <div class="col-xl-4 col-lg-6 col-sm-12">
+                <h3 class="itemHeader">{{data.label}}</h3>
 
                 <div class="load-outer">
                     <div class="ball-pulse load-inner" data-hr-toggle="load" data-hr-style-off="display:none;">
@@ -31,7 +31,7 @@
                 <div class="startHidden" data-hr-toggle="error">An error occured.</div>
                 <div >
                     {{for i in data.buttonStates}}
-                    <button value="{{i.buttonStateId}}" data-hr-on-click="pressButton" class="btn btn-default">{{i.label}}</button>
+                    <button value="{{i.buttonStateId}}" data-hr-on-click="pressButton" class="btn btn-lg btn-control btn-default">{{i.label}}</button>
                     {{/for}}
                 </div>
             </div>
@@ -43,13 +43,13 @@
 <div data-hr-controller="thermostats">
     <div data-hr-view="main" style="min-height:331px;">
         <template>
-            <h1>Thermostat</h1>
+            <h2 class="itemHeader">Thermostat</h2>
             <div style="margin-top:1em;">
                 <div class="fillLoaderParent">
                     <div class="row">
-                        <div data-hr-view="presets" class="col-md-4 col-sm-6">
+                        <div data-hr-view="presets" class="col-sm">
                             <template>
-                                <button class="btn btn-default" data-hr-on-click="apply" style="margin-right:3px;">{{data.label}}</button>
+                                <button class="btn btn-lg btn-control btn-default" data-hr-on-click="apply" style="margin-right:3px;">{{data.label}}</button>
                             </template>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="row" style="margin-top:2em;">
                                     <div class="col-sm-9">
-                                        <button class="btn btn-default" data-hr-on-click="apply" value="submit" style="margin-right:5px;">Apply</button>
+                                        <button class="btn btn-lg btn-control btn-default" data-hr-on-click="apply" value="submit" style="margin-right:5px;">Apply</button>
                                         <img src="~/Images/heaton.png" data-hr-toggle="heating" class="startHidden" data-hr-style-on="display:inline;" />
                                         <img src="~/Images/coolingon.png" data-hr-toggle="cooling" class="startHidden" data-hr-style-on="display:inline;" />
                                         <img src="~/Images/hvacoff.png" data-hr-toggle="off" class="startHidden" data-hr-style-on="display:inline;" />
