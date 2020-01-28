@@ -190,7 +190,7 @@ namespace Threax.Home
             services.AddThreaxCSP(o =>
             {
                 o.AddDefault().AddNone();
-                o.AddImg().AddSelf();
+                o.AddImg().AddSelf().AddData();
                 o.AddConnect().AddSelf();
                 o.AddManifest().AddSelf();
                 o.AddFont().AddSelf();
