@@ -10,7 +10,7 @@ typedef void(*StringRetrieverCallback)(String value);
 class CecManager
 {
 public:
-	CecManager();
+	CecManager(const char* port);
 
 	~CecManager();
 

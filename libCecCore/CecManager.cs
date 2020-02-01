@@ -9,9 +9,9 @@ namespace libCecCore
     {
         private IntPtr ptr;
 
-        public CecManager()
+        public CecManager(String port)
         {
-            ptr = CecManager_Create();
+            ptr = CecManager_Create(port);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace libCecCore
         private delegate void ScanCallback(CecLogicalAddress address);
 
         [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
-        private static extern IntPtr CecManager_Create();
+        private static extern IntPtr CecManager_Create(String port);
 
         [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
         private static extern void CecManager_Delete(IntPtr ptr);
