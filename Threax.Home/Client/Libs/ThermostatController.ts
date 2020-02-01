@@ -2,6 +2,7 @@ import * as controller from 'hr.controller';
 import * as client from 'clientlibs.ServiceClient';
 import * as lcycle from 'hr.widgets.MainLoadErrorLifecycle';
 import * as toggles from 'hr.toggles';
+import * as event from 'hr.eventdispatcher';
 
 export class PresetButton {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
@@ -27,7 +28,7 @@ export class PresetButton {
 
 export class ThermostatController {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
-        return [controller.BindingCollection, controller.InjectControllerData, controller.InjectedControllerBuilder];
+        return [controller.BindingCollection, controller.InjectControllerData, controller.InjectedControllerBuilder, ThermostatGroupController];
     }
 
     private currentTempView: controller.IView<client.ThermostatResult>;
@@ -48,7 +49,7 @@ export class ThermostatController {
     private presets: controller.IView<client.ThermostatSettingResult>;
     private builder: controller.InjectedControllerBuilder;
 
-    constructor(bindings: controller.BindingCollection, private data: client.ThermostatResult, builder: controller.InjectedControllerBuilder) {
+    constructor(bindings: controller.BindingCollection, private data: client.ThermostatResult, builder: controller.InjectedControllerBuilder, private group: ThermostatGroupController) {
         this.currentTempView = bindings.getView("currentTemp");
         this.currentTempToggle = bindings.getToggle("currentTemp");
 
@@ -71,6 +72,8 @@ export class ThermostatController {
         this.builder.Services.addShared(ThermostatController, s => this);
 
         this.setup();
+
+        this.group.onRefresh.add(c => this.refresh());
     }
 
     private async setup(): Promise<void> {
@@ -155,6 +158,8 @@ export class ThermostatController {
 }
 
 export class ThermostatGroupController {
+    private onRefreshEvt: event.PromiseEventDispatcher<void, ThermostatGroupController> = new event.PromiseEventDispatcher<void, ThermostatGroupController>();
+
     public static get InjectorArgs(): controller.DiFunction<any>[] {
         return [controller.BindingCollection, client.EntryPointInjector, controller.InjectedControllerBuilder];
     }
@@ -171,6 +176,14 @@ export class ThermostatGroupController {
         });
 
         thermostats.setData(thermos.items, this.builder.createOnCallback(ThermostatController));
+    }
+
+    public async refresh(): Promise<void> {
+        await this.onRefreshEvt.fire(this);
+    }
+
+    public get onRefresh() {
+        return this.onRefreshEvt.modifier;
     }
 }
 

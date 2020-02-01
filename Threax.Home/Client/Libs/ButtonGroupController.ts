@@ -2,6 +2,7 @@ import * as controller from 'hr.controller';
 import * as client from 'clientlibs.ServiceClient';
 import * as lcycle from 'hr.widgets.MainLoadErrorLifecycle';
 import { JsonStorage } from 'htmlrapier/src/storage';
+import * as event from 'hr.eventdispatcher';
 
 abstract class ButtonIcon {
     public abstract setupIcon(sw: client.Switch): void;
@@ -57,7 +58,7 @@ class FanIcon implements ButtonIcon {
 
 export class ButtonGroup {
     public static get InjectorArgs(): controller.DiFunction<any>[] {
-        return [controller.BindingCollection, controller.InjectControllerData, controller.InjectedControllerBuilder];
+        return [controller.BindingCollection, controller.InjectControllerData, controller.InjectedControllerBuilder, ButtonGroupController];
     }
 
     private load: controller.OnOffToggle;
@@ -66,7 +67,7 @@ export class ButtonGroup {
     private lifecycle: lcycle.MainLoadErrorLifecycle;
     private icon: ButtonIcon;
 
-    constructor(bindings: controller.BindingCollection, private data: client.ButtonResult, builder: controller.InjectedControllerBuilder) {
+    constructor(bindings: controller.BindingCollection, private data: client.ButtonResult, builder: controller.InjectedControllerBuilder, private buttonGroupController: ButtonGroupController) {
         this.icon = builder.createUnboundId(data.data.buttonType, ButtonIcon);
         this.load = bindings.getToggle("load");
         this.main = bindings.getToggle("main");
@@ -74,10 +75,11 @@ export class ButtonGroup {
         this.lifecycle = new lcycle.MainLoadErrorLifecycle(this.main, this.load, this.error, true);
         this.lifecycle.showMain();
         this.icon.setupIcon(this.switch);
-        this.setup();
+        this.refresh();
+        this.buttonGroupController.onRefresh.add(c => this.refresh());
     }
 
-    private async setup(): Promise<void> {
+    public async refresh(): Promise<void> {
         try {
             this.load.on();
             var sw = await this.data.getSwitch();
@@ -124,6 +126,9 @@ export class ButtonGroupController {
         return [controller.BindingCollection, client.EntryPointInjector, controller.InjectedControllerBuilder];
     }
 
+    private buttons: ButtonGroup[];
+    private onRefreshEvt: event.PromiseEventDispatcher<void, ButtonGroupController> = new event.PromiseEventDispatcher<void, ButtonGroupController>();
+
     constructor(bindings: controller.BindingCollection, private entryPointInjector: client.EntryPointInjector, private builder: controller.InjectedControllerBuilder) {
         var mainButtons = bindings.getView<client.ButtonResult>("mainButtons");
         this.setup(mainButtons);
@@ -136,6 +141,14 @@ export class ButtonGroupController {
         });
 
         mainButtons.setData(buttons.items, this.builder.createOnCallback(ButtonGroup));
+    }
+
+    public async refresh(): Promise<void> {
+        await this.onRefreshEvt.fire(this);
+    }
+
+    public get onRefresh() {
+        return this.onRefreshEvt.modifier;
     }
 }
 
