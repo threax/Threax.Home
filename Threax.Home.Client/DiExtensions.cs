@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AppTemplateClient;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using AppTemplateClient;
 using System;
 using Threax.AspNetCore.Halcyon.Client;
 using Threax.Home.Client;
-using Threax.AspNetCore.AuthCore;
 using Threax.Home.Client.Repository;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -17,58 +15,17 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services"></param>
         /// <param name="configure"></param>
         /// <returns></returns>
-        public static IServiceCollection AddHomeClient(this IServiceCollection services, Action<HomeClientConfig> configure)
+        public static IHalcyonClientSetup<EntryPointInjector> AddHomeClient(this IServiceCollection services, Action<HomeClientConfig> configure)
         {
             var client = new HomeClientConfig();
             configure.Invoke(client);
 
-            services.TryAddSingleton<IHttpClientFactory, DefaultHttpClientFactory>();
-
             services.TryAddScoped<EntryPointInjector>(s =>
             {
-                var clientCredsFactory = new ClientCredentialsAccessTokenFactory<EntryPointInjector>(client.ClientCredentials, new BearerHttpClientFactory<EntryPointInjector>(s.GetRequiredService<IHttpClientFactory>()));
-                return new EntryPointInjector(client.ServiceUrl, clientCredsFactory);
+                return new EntryPointInjector(client.ServiceUrl, s.GetRequiredService<IHttpClientFactory<EntryPointInjector>>());
             });
 
-            return services;
-        }
-
-        /// <summary>
-        /// Add the home client set as a repository.
-        /// </summary>
-        /// <param name="services">The service collection.</param>
-        /// <param name="configure">The configure callback.</param>
-        /// <returns></returns>
-        public static IServiceCollection AddHomeClientRepository(this IServiceCollection services, Action<HomeClientOptions> configure)
-        {
-            var options = new HomeClientOptions();
-            configure?.Invoke(options);
-
-            services.TryAddSingleton<IHttpClientFactory, DefaultHttpClientFactory>();
-
-            services.TryAddSingleton<IHomeClientManager>(s =>
-            {
-                var manager = new HomeClientManager();
-                if (options.Clients != null)
-                {
-                    foreach (var client in options.Clients)
-                    {
-                        var clientCredsFactory = new ClientCredentialsAccessTokenFactory<EntryPointInjector>(client.Value.ClientCredentials, new BearerHttpClientFactory<EntryPointInjector>(s.GetRequiredService<IHttpClientFactory>()));
-                        var entryPointInjector = new EntryPointInjector(client.Value.ServiceUrl, clientCredsFactory);
-                        manager.SetClient(client.Key, new HomeClient(entryPointInjector));
-                    }
-                }
-                return manager;
-            });
-
-            services.TryAddScoped(typeof(IClientSwitchRepository<,>), typeof(ClientSwitchRepository<,>));
-
-            services.AdditionalSwitchConfiguration(o =>
-            {
-                o.AddSwitch(typeof(IClientSwitchRepository<,>));
-            });
-
-            return services;
+            return new HalcyonClientSetup<EntryPointInjector>(services);
         }
     }
 }
