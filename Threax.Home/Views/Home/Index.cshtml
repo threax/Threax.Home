@@ -17,7 +17,7 @@
                     {{if data.buttonType == "Light"}}
                     <img src="~/Images/bulb.png" data-hr-toggle="main" class="bulbShadow load-inner startHidden" data-hr-style-on="display:block;" data-hr-handle="bulbcolor" />
                     {{else if data.buttonType == "Fan"}}
-                    <div data-hr-toggle="main" class="startHidden" style="position:absolute;left:8px;" data-hr-style-on="display:block;">
+                    <div data-hr-toggle="main" class="startHidden fan-block" data-hr-style-on="display:block;">
                         <div class="fan" data-hr-toggle="fan" 
                                          data-hr-class-off="fan-off" 
                                          data-hr-class-low="fan-low" 
@@ -36,26 +36,26 @@
                 </div>
             </div>
         </template>
-        <load style="height:60em;" visible="true"></load>
+        <load visible="true"></load>
     </div>
 </div>
 
 <div data-hr-controller="thermostats">
-    <div data-hr-view="main" style="min-height:331px;">
+    <div data-hr-view="main" class="thermostat-main">
         <template>
             <h2 class="itemHeader">Thermostat</h2>
-            <div style="margin-top:1em;">
+            <div class="mt-1">
                 <div class="fillLoaderParent">
                     <div class="row">
                         <div data-hr-view="presets" class="col-sm">
                             <template>
-                                <button class="btn btn-lg btn-control btn-default" data-hr-on-click="apply" style="margin-right:3px;">{{data.label}}</button>
+                                <button class="btn btn-lg btn-control btn-default thermostat-preset-button" data-hr-on-click="apply">{{data.label}}</button>
                             </template>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-9">
-                            <div class="row" style="font-size:45px;" data-hr-toggle="currentTemp">
+                            <div class="row thermostat-text" data-hr-toggle="currentTemp">
                                 <div class="col-sm-9" data-hr-view="currentTemp">
                                     <template>
                                         {{if isOff}}
@@ -77,9 +77,9 @@
                                         <select class="form-control" name="heatTemp"></select>
                                     </div>
                                 </div>
-                                <div class="row" style="margin-top:2em;">
+                                <div class="row mt-2">
                                     <div class="col-sm-9">
-                                        <button class="btn btn-lg btn-control btn-default" data-hr-on-click="apply" value="submit" style="margin-right:5px;">Apply</button>
+                                        <button class="btn btn-lg btn-control btn-default thermostat-apply-button" data-hr-on-click="apply" value="submit">Apply</button>
                                         <img src="~/Images/heaton.png" data-hr-toggle="heating" class="startHidden" data-hr-style-on="display:inline;" />
                                         <img src="~/Images/coolingon.png" data-hr-toggle="cooling" class="startHidden" data-hr-style-on="display:inline;" />
                                         <img src="~/Images/hvacoff.png" data-hr-toggle="off" class="startHidden" data-hr-style-on="display:inline;" />
