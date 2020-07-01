@@ -1,7 +1,6 @@
 import * as controller from 'hr.controller';
 import * as client from 'clientlibs.ServiceClient';
 import * as lcycle from 'hr.widgets.MainLoadErrorLifecycle';
-import { JsonStorage } from 'htmlrapier/src/storage';
 import * as event from 'hr.eventdispatcher';
 
 abstract class ButtonIcon {
