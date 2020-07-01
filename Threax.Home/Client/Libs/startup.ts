@@ -1,7 +1,7 @@
-﻿import * as hr from 'htmlrapier/main';
-import * as datetime from 'htmlrapier.bootstrap.datetime/main';
-import * as bootstrap from 'htmlrapier.bootstrap/main';
-import * as bootstrap4form from 'htmlrapier.form.bootstrap4/main';
+﻿import * as hr from 'hr.main';
+import * as datetime from 'hr.bootstrap.datetime.main';
+import * as bootstrap from 'hr.bootstrap.main';
+import * as bootstrap4form from 'hr.form.bootstrap4.main';
 import * as controller from 'htmlrapier/src/controller';
 import * as WindowFetch from 'htmlrapier/src/windowfetch';
 import * as AccessTokens from 'htmlrapier/src/accesstokens';
