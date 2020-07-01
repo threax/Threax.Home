@@ -18,6 +18,9 @@
       "ES2015"
     ],
     "paths": {
+      "clientlibs.*": [
+        "Client\\Libs\\*"
+      ],
       "hr.bootstrap.datetime.*": [
         "node_modules\\htmlrapier.bootstrap.datetime\\src\\*"
       ],
