@@ -1,8 +1,8 @@
-import * as controller from 'htmlrapier/src/controller';
-import * as client from 'Client/Libs/ServiceClient';
-import * as lcycle from 'htmlrapier.widgets/src/MainLoadErrorLifecycle';
-import * as toggles from 'htmlrapier/src/toggles';
-import * as event from 'htmlrapier/src/eventdispatcher';
+import * as controller from 'hr.controller';
+import * as client from 'clientlibs.ServiceClient';
+import * as lcycle from 'hr.widgets.MainLoadErrorLifecycle';
+import * as toggles from 'hr.toggles';
+import * as event from 'hr.eventdispatcher';
 
 export class PresetButton {
     public static get InjectorArgs(): controller.DiFunction<any>[] {

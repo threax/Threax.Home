@@ -1,8 +1,8 @@
-﻿import * as startup from 'Client/Libs/startup';
-import * as controller from 'htmlrapier/src/controller';
-import * as crudService from 'htmlrapier.roleclient/src/UserCrudService';
-import * as deepLink from 'htmlrapier/src/deeplink';
-import * as userSearch from 'htmlrapier.roleclient/src/UserSearchController';
+﻿import * as startup from 'clientlibs.startup';
+import * as controller from 'hr.controller';
+import * as crudService from 'hr.roleclient.UserCrudService';
+import * as deepLink from 'hr.deeplink';
+import * as userSearch from 'hr.roleclient.UserSearchController';
 
 var builder = startup.createBuilder();
 deepLink.addServices(builder.Services);

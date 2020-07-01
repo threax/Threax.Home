@@ -1,4 +1,4 @@
-import * as hal from 'htmlrapier.halcyon/src/EndpointClient';
+import * as hal from 'hr.halcyon.EndpointClient';
 
 export class RoleAssignmentsResult {
     private client: hal.HalEndpointClient;

@@ -1,7 +1,7 @@
-import * as startup from 'Client/Libs/startup';
-import * as buttonGroupController from 'Client/Libs/ButtonGroupController';
-import * as thermostatController from 'Client/Libs/ThermostatController';
-import * as refresh from 'Client/Libs/RefreshButton';
+import * as startup from 'clientlibs.startup';
+import * as buttonGroupController from 'clientlibs.ButtonGroupController';
+import * as thermostatController from 'clientlibs.ThermostatController';
+import * as refresh from 'clientlibs.RefreshButton';
 
 var builder = startup.createBuilder();
 buttonGroupController.addServices(builder);

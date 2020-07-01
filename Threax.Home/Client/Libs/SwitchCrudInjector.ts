@@ -1,6 +1,6 @@
-import * as client from 'Client/Libs/ServiceClient';
-import * as hyperCrud from 'htmlrapier.widgets/src/HypermediaCrudService';
-import * as di from 'htmlrapier/src/di';
+import * as client from 'clientlibs.ServiceClient';
+import * as hyperCrud from 'hr.widgets.HypermediaCrudService';
+import * as di from 'hr.di';
 
 export class SwitchCrudInjector extends hyperCrud.AbstractHypermediaPageInjector {
     public static get InjectorArgs(): di.DiFunction<any>[] {
