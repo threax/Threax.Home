@@ -2,17 +2,17 @@
 import * as datetime from 'hr.bootstrap.datetime.main';
 import * as bootstrap from 'hr.bootstrap.main';
 import * as bootstrap4form from 'hr.form.bootstrap4.main';
-import * as controller from 'htmlrapier/src/controller';
-import * as WindowFetch from 'htmlrapier/src/windowfetch';
-import * as AccessTokens from 'htmlrapier/src/accesstokens';
-import * as whitelist from 'htmlrapier/src/whitelist';
-import * as fetcher from 'htmlrapier/src/fetcher';
-import * as client from './ServiceClient';
-import * as userSearch from './UserSearchClientEntryPointInjector';
-import * as loginPopup from 'htmlrapier.relogin/src/LoginPopup';
-import * as deepLink from 'htmlrapier/src/deeplink';
-import * as xsrf from 'htmlrapier/src/xsrftoken';
-import * as pageConfig from 'htmlrapier/src/pageconfig';
+import * as controller from 'hr.controller';
+import * as WindowFetch from 'hr.windowfetch';
+import * as AccessTokens from 'hr.accesstokens';
+import * as whitelist from 'hr.whitelist';
+import * as fetcher from 'hr.fetcher';
+import * as client from 'clientlibs.ServiceClient';
+import * as userSearch from 'clientlibs.UserSearchClientEntryPointInjector';
+import * as loginPopup from 'hr.relogin.LoginPopup';
+import * as deepLink from 'hr.deeplink';
+import * as xsrf from 'hr.xsrftoken';
+import * as pageConfig from 'hr.pageconfig';
 
 hr.setup();
 datetime.setup();
