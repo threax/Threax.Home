@@ -9,9 +9,9 @@ namespace Threax.Home.Controllers
 {
     public partial class HomeController
     {
-        public IActionResult Thermostats()
+        public Task<IActionResult> Thermostats()
         {
-            return View();
+            return CacheUiView();
         }
     }
 }
