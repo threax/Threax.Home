@@ -1,4 +1,5 @@
-﻿@{
+﻿@inject IFileVersionProvider fileVersionProvider;
+@{
     ViewData["Title"] = "Welcome";
 }
 
@@ -15,7 +16,7 @@
                         </div>
                     </div>
                     {{if data.buttonType == "Light"}}
-                    <img src="~/Images/bulb.png" data-hr-toggle="main" class="bulbShadow load-inner startHidden" data-hr-style-on="display:block;" data-hr-handle="bulbcolor" />
+                    <img src="@fileVersionProvider.AddFileVersionToPath("", Url.Content("~/Images/bulb.png"))" data-hr-toggle="main" class="bulbShadow load-inner startHidden" data-hr-style-on="display:block;" data-hr-handle="bulbcolor" />
                     {{else if data.buttonType == "Fan"}}
                     <div data-hr-toggle="main" class="startHidden fan-block" data-hr-style-on="display:block;">
                         <div class="fan" data-hr-toggle="fan" 
@@ -80,11 +81,11 @@
                                 <div class="row mt-2">
                                     <div class="col-sm-9">
                                         <button class="btn btn-lg btn-control btn-default thermostat-apply-button" data-hr-on-click="apply" value="submit">Apply</button>
-                                        <img src="~/Images/heaton.png" data-hr-toggle="heating" class="startHidden" data-hr-style-on="display:inline;" />
-                                        <img src="~/Images/coolingon.png" data-hr-toggle="cooling" class="startHidden" data-hr-style-on="display:inline;" />
-                                        <img src="~/Images/hvacoff.png" data-hr-toggle="off" class="startHidden" data-hr-style-on="display:inline;" />
-                                        <img src="~/Images/fanon.png" data-hr-toggle="fanon" class="startHidden" data-hr-style-on="display:inline;" />
-                                        <img src="~/Images/fanoff.png" data-hr-toggle="fanoff" class="startHidden" data-hr-style-on="display:inline;" />
+                                        <img src="@fileVersionProvider.AddFileVersionToPath("", Url.Content("~/Images/heaton.png"))" data-hr-toggle="heating" class="startHidden" data-hr-style-on="display:inline;" />
+                                        <img src="@fileVersionProvider.AddFileVersionToPath("", Url.Content("~/Images/coolingon.png"))" data-hr-toggle="cooling" class="startHidden" data-hr-style-on="display:inline;" />
+                                        <img src="@fileVersionProvider.AddFileVersionToPath("", Url.Content("~/Images/hvacoff.png"))" data-hr-toggle="off" class="startHidden" data-hr-style-on="display:inline;" />
+                                        <img src="@fileVersionProvider.AddFileVersionToPath("", Url.Content("~/Images/fanon.png"))" data-hr-toggle="fanon" class="startHidden" data-hr-style-on="display:inline;" />
+                                        <img src="@fileVersionProvider.AddFileVersionToPath("", Url.Content("~/Images/fanoff.png"))" data-hr-toggle="fanoff" class="startHidden" data-hr-style-on="display:inline;" />
                                     </div>
                                 </div>
                             </form>
