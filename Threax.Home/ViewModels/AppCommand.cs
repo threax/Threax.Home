@@ -10,6 +10,7 @@ using Threax.Home.Controllers.Api;
 namespace Threax.Home.ViewModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     [DeclareHalLink(HalSelfActionLinkAttribute.SelfRelName)]
     [DeclareHalLink(AppCommand.Rels.Execute)]
     public class AppCommand : IHalLinkProvider

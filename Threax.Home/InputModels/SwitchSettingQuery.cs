@@ -12,6 +12,7 @@ using Threax.Home.Models;
 namespace Threax.Home.InputModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     public partial class SwitchSettingQuery : PagedCollectionQuery, ISwitchSettingQuery
     {
         /// <summary>

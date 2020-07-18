@@ -12,6 +12,7 @@ using Threax.Home.Models;
 namespace Threax.Home.InputModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     public partial class ThermostatInput : IThermostat, ICoreThermostatSetting
     {
         [UiOrder(0, 15)]

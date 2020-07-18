@@ -12,6 +12,7 @@ using Threax.Home.Core;
 namespace Threax.Home.ViewModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     [HalSelfActionLink(typeof(ThermostatsController), nameof(ThermostatsController.List))]
     [HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.Get), DocsOnly = true)] //This provides access to docs for showing items
     [HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.List), DocsOnly = true)] //This provides docs for searching the list

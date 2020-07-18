@@ -12,6 +12,7 @@ using Threax.Home.Models;
 namespace Threax.Home.InputModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     public partial class ButtonQuery : PagedCollectionQuery, IButtonQuery
     {
         //You can add your own customizations here. These will not be overwritten by the model generator.

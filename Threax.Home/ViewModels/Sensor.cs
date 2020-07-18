@@ -14,6 +14,7 @@ using Threax.AspNetCore.Tracking;
 namespace Threax.Home.ViewModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     [HalSelfActionLink(typeof(SensorsController), nameof(SensorsController.Get))]
     [HalActionLink(typeof(SensorsController), nameof(SensorsController.Update))]
     //[HalActionLink(typeof(SensorsController), nameof(SensorsController.Delete))]

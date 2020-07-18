@@ -13,6 +13,7 @@ using Threax.Home.Models;
 namespace Threax.Home.InputModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     public partial class ThermostatQuery : PagedCollectionQuery, IThermostatQuery
     {
         /// <summary>

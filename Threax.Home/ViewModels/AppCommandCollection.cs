@@ -11,6 +11,7 @@ using Threax.AspNetCore.Halcyon.Ext;
 namespace Threax.Home.ViewModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     [HalSelfActionLink(typeof(AppCommandsController), nameof(AppCommandsController.List))]
     [HalActionLink(typeof(AppCommandsController), nameof(AppCommandsController.Get), DocsOnly = true)] //This provides access to docs for showing items
     [HalActionLink(typeof(AppCommandsController), nameof(AppCommandsController.List), DocsOnly = true)] //This provides docs for searching the list

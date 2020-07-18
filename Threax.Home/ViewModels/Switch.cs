@@ -13,6 +13,7 @@ using Threax.AspNetCore.Tracking;
 namespace Threax.Home.ViewModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     [HalSelfActionLink(typeof(SwitchesController), nameof(SwitchesController.Get))]
     [HalActionLink(typeof(SwitchesController), nameof(SwitchesController.Update))]
     [HalActionLink(typeof(SwitchesController), nameof(SwitchesController.Set))]

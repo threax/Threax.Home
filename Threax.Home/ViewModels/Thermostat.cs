@@ -14,6 +14,7 @@ using Threax.AspNetCore.Tracking;
 namespace Threax.Home.ViewModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     [HalSelfActionLink(typeof(ThermostatsController), nameof(ThermostatsController.Get))]
     [HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.Update))]
     [HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.SetTemp))]

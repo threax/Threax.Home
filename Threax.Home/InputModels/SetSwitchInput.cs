@@ -10,6 +10,7 @@ using Threax.AspNetCore.Models;
 namespace Threax.Home.InputModels
 {
     [HalModel]
+    [CacheEndpointDoc]
     public class SetSwitchInput
     {
         [MaxLength(450, ErrorMessage = "Value must be less than 450 characters.")]
