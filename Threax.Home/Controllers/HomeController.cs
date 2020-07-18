@@ -4,25 +4,36 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Threax.AspNetCore.Mvc.CacheUi;
 
 namespace Threax.Home.Controllers
 {
     [Authorize(AuthenticationSchemes = AuthCoreSchemes.Cookies)]
-    public partial class HomeController : Controller
+    public partial class HomeController : CacheUiController
     {
-        public IActionResult Index()
+        public HomeController(ICacheUiBuilder builder)
+            : base(builder)
         {
-            return View();
+
+        }
+
+        public Task<IActionResult> Index()
+        {
+            return CacheUiView();
+        }
+
+        public Task<IActionResult> Header()
+        {
+            return CacheUiView();
+        }
+
+        public Task<IActionResult> Footer()
+        {
+            return CacheUiView();
         }
 
         [AllowAnonymous]
         public IActionResult AppStart()
-        {
-            return View();
-        }
-
-        [AllowAnonymous]
-        public IActionResult Gate()
         {
             return View();
         }
