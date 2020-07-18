@@ -24,11 +24,11 @@
 }
 
 .bulbShadow {
-    background-image: url('/Images/bulb_shadow.png');
+    background-image: url('/Images/bulb_shadow.png?v=1');
 }
 
 .fan {
-    background-image: url('/Images/fanoff.png');
+    background-image: url('/Images/fanoff.png?v=1');
     width: 64px;
     height: 64px;
     /* The animation part: */
@@ -52,18 +52,18 @@
 
 .fan-med {
     animation-duration: 10000ms;
-    background-image: url('/Images/fanmed.png');
+    background-image: url('/Images/fanmed.png?v=1');
 }
 
 .fan-high {
     animation-duration: 8000ms;
-    background-image: url('/Images/fanon.png');
+    background-image: url('/Images/fanon.png?v=1');
 }
 
 .fan-load {
     width: 64px;
     height: 64px;
-    background-image: url('/Images/loading.gif');
+    background-image: url('/Images/loading.gif?v=1');
     /* The animation part: */
     animation-name: initial;
     animation-duration: initial;
