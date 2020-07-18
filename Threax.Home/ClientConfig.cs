@@ -1,4 +1,5 @@
 ﻿using HtmlRapier.TagHelpers;
+using System;
 
 namespace Threax.Home
 {
@@ -12,9 +13,12 @@ namespace Threax.Home
         /// </summary>
         public string ServiceUrl { get; set; }
 
+        [ExpandHostPath]
+        public string AccessTokenPath { get; set; } = "~/Account/AccessToken";
+
         /// <summary>
-        /// The url of the user directory.
+        /// The path to the bearer cookie. Move this somewhere else
         /// </summary>
-        public string UserDirectoryUrl { get; set; }
+        public String BearerCookieName { get; set; }
     }
 }

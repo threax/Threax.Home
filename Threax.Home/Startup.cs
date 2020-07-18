@@ -53,6 +53,8 @@ namespace Threax.Home
             Configuration.Bind("AppConfig", appConfig);
             Configuration.Bind("ClientConfig", clientConfig);
             Configuration.Bind("Cors", corsOptions);
+
+            clientConfig.BearerCookieName = $"{authConfig.ClientId}.BearerToken";
         }
 
         public SchemaConfigurationBinder Configuration { get; }
@@ -106,6 +108,10 @@ namespace Threax.Home
                     jwtOpt.Audience = "Threax.IdServer";
                 };
                 o.ClockSkew = TimeSpan.FromSeconds(appConfig.IdClockSkewSeconds);
+                o.CustomizeCookies = cookOpt =>
+                {
+                    cookOpt.BearerHttpOnly = false;
+                };
             });
 
             services.AddAppDatabase(appConfig.ConnectionString);
