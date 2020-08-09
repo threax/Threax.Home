@@ -24,6 +24,9 @@ namespace Microsoft.Extensions.DependencyInjection
             var options = new HomeClientOptions();
             configure?.Invoke(options);
 
+            var sharedCredentials = new SharedClientCredentials();
+            options.GetSharedClientCredentials?.Invoke(sharedCredentials);
+
             services.TryAddSingleton<IHttpClientFactory, DefaultHttpClientFactory>();
 
             services.TryAddSingleton<IHomeClientManager>(s =>
@@ -33,7 +36,9 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                     foreach (var client in options.Clients)
                     {
-                        var clientCredsFactory = new ClientCredentialsAccessTokenFactory<EntryPointInjector>(client.Value.ClientCredentials, new BearerHttpClientFactory<EntryPointInjector>(s.GetRequiredService<IHttpClientFactory>()));
+                        var creds = client.Value.ClientCredentials;
+                        sharedCredentials.MergeWith(creds);
+                        var clientCredsFactory = new ClientCredentialsAccessTokenFactory<EntryPointInjector>(creds, new BearerHttpClientFactory<EntryPointInjector>(s.GetRequiredService<IHttpClientFactory>()));
                         var entryPointInjector = new EntryPointInjector(client.Value.ServiceUrl, clientCredsFactory);
                         manager.SetClient(client.Key, new HomeClient(entryPointInjector));
                     }
