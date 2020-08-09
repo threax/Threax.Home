@@ -38,7 +38,7 @@ namespace Threax.Home
             DisplayName = "Threax.Home", //Change this to a pretty name for the client/resource
             ClientId = "Threax.Home", //Change this to a unique client id
             AdditionalScopes = new List<String> { /*Additional scopes here "ScopeName", "Scope2Name", "etc"*/ },
-            ClientCredentialsScopes = new List<string> { "RemoteHome" }
+            ClientCredentialsScopes = new List<string> { "Threax.IdServer" }
         };
         //End user replace
 
