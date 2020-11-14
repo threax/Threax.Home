@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,10 +13,12 @@ namespace Threax.Home.Core
     {
         private Dictionary<String, ISwitchRepository<TIn, TOut>> switchRepos = new Dictionary<string, ISwitchRepository<TIn, TOut>>();
         private IHttpContextAccessor httpContextAccessor;
+        private readonly ILogger<SwitchSubsystemManager<TIn, TOut>> logger;
 
-        public SwitchSubsystemManager(HomeConfig config, IHttpContextAccessor httpContextAccessor)
+        public SwitchSubsystemManager(HomeConfig config, IHttpContextAccessor httpContextAccessor, ILogger<SwitchSubsystemManager<TIn, TOut>> logger)
         {
             this.httpContextAccessor = httpContextAccessor;
+            this.logger = logger;
             config.SetupConfigs(this);
         }
 
@@ -41,7 +44,14 @@ namespace Threax.Home.Core
 
             foreach (var subsystem in switchRepos.Values)
             {
-                result.AddRange(await subsystem.List());
+                try
+                {
+                    result.AddRange(await subsystem.List());
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, $"'{ex.GetType().FullName}' occured with the loading switches. The subsystem '{subsystem.SubsystemName}' was skipped.{Environment.NewLine}Full Exception:");
+                }
             }
 
             return result;
