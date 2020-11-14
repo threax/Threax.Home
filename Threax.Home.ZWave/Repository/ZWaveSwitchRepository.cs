@@ -44,6 +44,8 @@ namespace Threax.Home.ZWave.Repository
             {
                 case 2:
                     return await GetSwitch3Switch(bridge, 2);
+                case 4:
+                    return await GetSwitch2Switch(bridge, 4);
                 default:
                     throw new FileNotFoundException();
             }
@@ -55,6 +57,9 @@ namespace Threax.Home.ZWave.Repository
             {
                 case 2:
                     await SetSwitch3Switch(setting);
+                    break;
+                case 4:
+                    await SetSwitch2Switch(setting);
                     break;
                 default:
                     throw new FileNotFoundException();
@@ -94,7 +99,8 @@ namespace Threax.Home.ZWave.Repository
 
         private async Task SetSwitch3Switch(TIn setting)
         {
-            var com = await GetBasicCommand(2);
+            var byteId = byte.Parse(setting.Id);
+            var com = await GetBasicCommand(byteId);
             switch (Enum.Parse(typeof(Switch3SwitchPosition), setting.Value))
             {
                 case Switch3SwitchPosition.off:
@@ -116,7 +122,7 @@ namespace Threax.Home.ZWave.Repository
 
         private async Task<TOut> GetSwitch3Switch(String bridge, byte id)
         {
-            var com = await GetBasicCommand(2);
+            var com = await GetBasicCommand(id);
             var b = (await com.Get()).Value;
             Switch3SwitchPosition value = Switch3SwitchPosition.off;
             if (b == 0)
@@ -134,6 +140,47 @@ namespace Threax.Home.ZWave.Repository
             else if (b < 100)
             {
                 value = Switch3SwitchPosition.high;
+            }
+
+            return new TOut()
+            {
+                Id = id.ToString(),
+                Value = value.ToString(),
+                Bridge = bridge,
+                Subsystem = SubsystemName,
+                Name = $"{SubsystemName} Node {com.Node.NodeID}"
+            };
+        }
+
+        private async Task SetSwitch2Switch(TIn setting)
+        {
+            var byteId = byte.Parse(setting.Id);
+            var com = await GetBasicCommand(byteId);
+            switch (Enum.Parse(typeof(Switch2SwitchPosition), setting.Value))
+            {
+                case Switch2SwitchPosition.off:
+                    await com.Set(0);
+                    break;
+                case Switch2SwitchPosition.on:
+                    await com.Set(255);
+                    break;
+                default:
+                    throw new ErrorResultException($"{setting.Value} is not a valid position for {setting.Id}");
+            }
+        }
+
+        private async Task<TOut> GetSwitch2Switch(String bridge, byte id)
+        {
+            var com = await GetBasicCommand(id);
+            var b = (await com.Get()).Value;
+            var value = Switch2SwitchPosition.off;
+            if (b == 0)
+            {
+                value = Switch2SwitchPosition.off;
+            }
+            else if (b > 0)
+            {
+                value = Switch2SwitchPosition.on;
             }
 
             return new TOut()
