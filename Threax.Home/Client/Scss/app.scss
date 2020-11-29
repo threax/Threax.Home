@@ -27,6 +27,14 @@
     background-image: url('/Images/bulb_shadow.png?v=1');
 }
 
+.bulb-on {
+    background-color: #b9b9b9;
+}
+
+.bulb-off {
+    background-color: transparent;
+}
+
 .fan {
     background-image: url('/Images/fanoff.png?v=1');
     width: 64px;

@@ -16,21 +16,27 @@
                         </div>
                     </div>
                     {{if data.buttonType == "Light"}}
-                    <img src="@fileVersionProvider.AddFileVersionToPath("", Url.Content("~/Images/bulb.png"))" data-hr-toggle="main" class="bulbShadow load-inner startHidden" data-hr-style-on="display:block;" data-hr-handle="bulbcolor" />
+                    <div data-hr-toggle="main" class="startHidden" data-hr-style-on="display:block;">
+                        <img src="@fileVersionProvider.AddFileVersionToPath("", Url.Content("~/Images/bulb.png"))"
+                             class="bulbShadow load-inner"
+                             data-hr-toggle="icon"
+                             data-hr-class-BulbOff="bulb-off"
+                             data-hr-class-BulbOn="bulb-on" />
+                    </div>
                     {{else if data.buttonType == "Fan"}}
                     <div data-hr-toggle="main" class="startHidden fan-block" data-hr-style-on="display:block;">
-                        <div class="fan" data-hr-toggle="fan" 
-                                         data-hr-class-off="fan-off" 
-                                         data-hr-class-low="fan-low" 
-                                         data-hr-class-medium="fan-med" 
-                                         data-hr-class-high="fan-high"
-                        ></div>
+                        <div class="fan" 
+                             data-hr-toggle="icon"
+                             data-hr-class-FanOff="fan-off"
+                             data-hr-class-FanLow="fan-low"
+                             data-hr-class-FanMedium="fan-med"
+                             data-hr-class-FanHigh="fan-high"></div>
                     </div>
                     {{/if}}
                 </div>
 
                 <div class="startHidden" data-hr-toggle="error">An error occured.</div>
-                <div >
+                <div>
                     {{for i in data.buttonStates}}
                     <button value="{{i.buttonStateId}}" data-hr-on-click="pressButton" class="btn btn-lg btn-control btn-default">{{i.label}}</button>
                     {{/for}}

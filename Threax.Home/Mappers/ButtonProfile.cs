@@ -21,6 +21,7 @@ namespace Threax.Home.Mappers
         {
             var mapped = mapper.Map(src, dest);
             mapped.ButtonStates?.Sort((i, j) => i.Order - j.Order);
+            mapped.SetCurrentIcon();
             return mapped;
         }
     }

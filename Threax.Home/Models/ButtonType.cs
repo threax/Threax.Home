@@ -7,7 +7,7 @@ namespace Threax.Home.Models
 {
     public enum ButtonType
     {
-        Light,
-        Fan
+        Light = 0,
+        Fan = 1
     }
 }

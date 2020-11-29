@@ -16,6 +16,9 @@ namespace Threax.Home.InputModels
         [UiOrder(0, 15)]
         public String Label { get; set; }
 
+        [UiOrder(0, 16)]
+        public ButtonStateIcon Icon { get; set; }
+
         [UiOrder(0, 18)]
         public int Order { get; set; }
 

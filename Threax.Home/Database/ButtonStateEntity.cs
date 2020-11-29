@@ -18,6 +18,8 @@ namespace Threax.Home.Database
 
         public String Label { get; set; }
 
+        public ButtonStateIcon Icon { get; set; }
+
         public int Order { get; set; }
 
         public List<SwitchSettingEntity> SwitchSettings { get; set; }

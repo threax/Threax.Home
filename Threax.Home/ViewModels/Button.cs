@@ -10,6 +10,7 @@ using Threax.Home.Models;
 using Threax.Home.Controllers.Api;
 using Newtonsoft.Json;
 using Threax.AspNetCore.Tracking;
+using System.ComponentModel;
 
 namespace Threax.Home.ViewModels
 {
@@ -23,8 +24,16 @@ namespace Threax.Home.ViewModels
     {
         public Guid ButtonId { get; set; }
 
-        [UiOrder(0, 12)]
+        [UiOrder(0, 11)]
         public String Label { get; set; }
+
+        [UiOrder(0, 12)]
+        [ReadOnly(true)]
+        public String CurrentValue { get; set; }
+
+        [UiOrder(0, 14)]
+        [ReadOnly(true)]
+        public ButtonStateIcon CurrentIcon { get; set; } = ButtonStateIcon.Unknown;
 
         [UiOrder(0, 15)]
         public int Order { get; set; }
@@ -42,6 +51,33 @@ namespace Threax.Home.ViewModels
 
         [JsonIgnore]
         public Guid? SwitchId { get => ButtonStates.FirstOrDefault()?.SwitchSettings.FirstOrDefault()?.SwitchId; }
+
+        public void SetCurrentIcon()
+        {
+            if(ButtonStates == null)
+            {
+                return;
+            }
+
+            //The switch settings has the switch, which has the current value
+            var firstState = ButtonStates.FirstOrDefault();
+            CurrentValue = firstState.SwitchSettings.FirstOrDefault()?.Switch.Value;
+
+            foreach (var state in ButtonStates)
+            {
+                var switchSettings = state.SwitchSettings.FirstOrDefault();
+                if(switchSettings == null)
+                {
+                    continue;
+                }
+
+                if (switchSettings.Value == CurrentValue)
+                {
+                    CurrentIcon = state.Icon;
+                    return;
+                }
+            }
+        }
 
         public IEnumerable<HalLinkAttribute> CreateHalLinks(ILinkProviderContext context)
         {
