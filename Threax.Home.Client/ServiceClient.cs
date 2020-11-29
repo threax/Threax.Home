@@ -3939,23 +3939,23 @@ namespace Threax.Home.Client
         [System.Runtime.Serialization.EnumMember(Value = "Unknown")]
         Unknown = 0,
     
-        [System.Runtime.Serialization.EnumMember(Value = "FanOff")]
-        FanOff = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "FanLow")]
-        FanLow = 2,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "FanMedium")]
-        FanMedium = 3,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "FanHigh")]
-        FanHigh = 4,
-    
         [System.Runtime.Serialization.EnumMember(Value = "BulbOff")]
-        BulbOff = 5,
+        BulbOff = 1,
     
         [System.Runtime.Serialization.EnumMember(Value = "BulbOn")]
-        BulbOn = 6,
+        BulbOn = 2,
+    
+        [System.Runtime.Serialization.EnumMember(Value = "FanOff")]
+        FanOff = 3,
+    
+        [System.Runtime.Serialization.EnumMember(Value = "FanLow")]
+        FanLow = 4,
+    
+        [System.Runtime.Serialization.EnumMember(Value = "FanMedium")]
+        FanMedium = 5,
+    
+        [System.Runtime.Serialization.EnumMember(Value = "FanHigh")]
+        FanHigh = 6,
     
     }
     

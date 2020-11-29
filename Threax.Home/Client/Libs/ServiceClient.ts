@@ -3095,12 +3095,12 @@ export interface AppCommandQuery {
 
 export enum ButtonStateIcon {
     Unknown = <any>"Unknown", 
+    BulbOff = <any>"BulbOff", 
+    BulbOn = <any>"BulbOn", 
     FanOff = <any>"FanOff", 
     FanLow = <any>"FanLow", 
     FanMedium = <any>"FanMedium", 
     FanHigh = <any>"FanHigh", 
-    BulbOff = <any>"BulbOff", 
-    BulbOn = <any>"BulbOn", 
 }
 
 export enum ButtonType {
