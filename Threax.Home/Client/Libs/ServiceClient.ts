@@ -3142,23 +3142,12 @@ export interface Switch {
 export interface Button {
     buttonId?: string;
     label?: string;
-    currentValue?: string;
-    currentIcon?: ButtonCurrentIcon;
+    currentIcon?: ButtonStateIcon;
     order?: number;
     buttonType?: ButtonType;
     created?: string;
     modified?: string;
     buttonStates?: ButtonState[];
-}
-
-export enum ButtonCurrentIcon {
-    Unknown = <any>"Unknown", 
-    FanOff = <any>"FanOff", 
-    FanLow = <any>"FanLow", 
-    FanMedium = <any>"FanMedium", 
-    FanHigh = <any>"FanHigh", 
-    BulbOff = <any>"BulbOff", 
-    BulbOn = <any>"BulbOn", 
 }
 
 export interface ButtonStateInput {

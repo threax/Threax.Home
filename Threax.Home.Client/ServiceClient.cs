@@ -4091,11 +4091,9 @@ namespace Threax.Home.Client
         [Newtonsoft.Json.JsonProperty("label", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Label { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("currentValue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CurrentValue { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("currentIcon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ButtonCurrentIcon CurrentIcon { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ButtonStateIcon CurrentIcon { get; set; }
     
         [Newtonsoft.Json.JsonProperty("order", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Order { get; set; }
@@ -4122,32 +4120,6 @@ namespace Threax.Home.Client
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Button>(data);
         }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "1.0.1.0 (Newtonsoft.Json v12.0.0.0)")]
-    public enum ButtonCurrentIcon
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "Unknown")]
-        Unknown = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "FanOff")]
-        FanOff = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "FanLow")]
-        FanLow = 2,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "FanMedium")]
-        FanMedium = 3,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "FanHigh")]
-        FanHigh = 4,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "BulbOff")]
-        BulbOff = 5,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "BulbOn")]
-        BulbOn = 6,
     
     }
     
