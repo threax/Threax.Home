@@ -492,6 +492,39 @@ public class ButtonResult
         return this.client.HasLinkDoc("self");
     }
 
+    public async Task<ButtonResult> GetLive() 
+    {
+        var result = await this.client.LoadLink("GetLive");
+        return new ButtonResult(result);
+
+    }
+
+    public bool CanGetLive 
+    {
+        get 
+        {
+            return this.client.HasLink("GetLive");
+        }
+    }
+
+    public HalLink LinkForGetLive 
+    {
+        get 
+        {
+            return this.client.GetLink("GetLive");
+        }
+    }
+
+    public async Task<HalEndpointDoc> GetGetLiveDocs(HalEndpointDocQuery query = null) 
+    {
+        var result = await this.client.LoadLinkDoc("GetLive", query);
+        return result.GetData<HalEndpointDoc>();
+    }
+
+    public bool HasGetLiveDocs() {
+        return this.client.HasLinkDoc("GetLive");
+    }
+
     public async Task<ButtonResult> Update(ButtonInput data) 
     {
         var result = await this.client.LoadLinkWithData("Update", data);

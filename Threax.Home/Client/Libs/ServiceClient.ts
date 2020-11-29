@@ -370,6 +370,33 @@ export class ButtonResult {
         return this.client.HasLinkDoc("self");
     }
 
+    public getLive(): Promise<ButtonResult> {
+        return this.client.LoadLink("GetLive")
+               .then(r => {
+                    return new ButtonResult(r);
+                });
+
+    }
+
+    public canGetLive(): boolean {
+        return this.client.HasLink("GetLive");
+    }
+
+    public linkForGetLive(): hal.HalLink {
+        return this.client.GetLink("GetLive");
+    }
+
+    public getGetLiveDocs(query?: HalEndpointDocQuery): Promise<hal.HalEndpointDoc> {
+        return this.client.LoadLinkDoc("GetLive", query)
+            .then(r => {
+                return r.GetData<hal.HalEndpointDoc>();
+            });
+    }
+
+    public hasGetLiveDocs(): boolean {
+        return this.client.HasLinkDoc("GetLive");
+    }
+
     public update(data: ButtonInput): Promise<ButtonResult> {
         return this.client.LoadLinkWithData("Update", data)
                .then(r => {

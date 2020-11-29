@@ -15,7 +15,7 @@ namespace Threax.Home.Repository
         Task<Button> Add(ButtonInput value);
         Task AddRange(IEnumerable<ButtonInput> values);
         Task Delete(Guid id);
-        Task<Button> Get(Guid buttonId);
+        Task<Button> Get(Guid buttonId, bool getLive = false);
         Task<bool> HasButtons();
         Task<ButtonCollection> List(ButtonQuery query);
         Task<Button> Update(Guid buttonId, ButtonInput value);

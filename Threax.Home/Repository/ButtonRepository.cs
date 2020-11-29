@@ -19,11 +19,13 @@ namespace Threax.Home.Repository
     {
         private AppDbContext dbContext;
         private AppMapper mapper;
+        private ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo;
 
-        public ButtonRepository(AppDbContext dbContext, AppMapper mapper)
+        public ButtonRepository(AppDbContext dbContext, AppMapper mapper, ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
+            this.switchRepo = switchRepo;
         }
 
         public async Task<ButtonCollection> List(ButtonQuery query)
@@ -37,10 +39,20 @@ namespace Threax.Home.Repository
             return new ButtonCollection(query, total, results.Select(i => mapper.MapButton(i, new Button())));
         }
 
-        public async Task<Button> Get(Guid buttonId)
+        public async Task<Button> Get(Guid buttonId, bool getLive = false)
         {
+            SwitchEntity liveSwitch = null;
             var entity = await this.Entity(buttonId);
-            return mapper.MapButton(entity, new Button());
+            if (getLive)
+            {
+                var switchEntity = entity.ButtonStates.FirstOrDefault()?.SwitchSettings.FirstOrDefault()?.Switch;
+                if(switchEntity != null)
+                {
+                    liveSwitch = await switchRepo.Get(switchEntity.Subsystem, switchEntity.Bridge, switchEntity.Id);
+                }
+            }
+
+            return mapper.MapButton(entity, liveSwitch, new Button());
         }
 
         public async Task<Button> Add(ButtonInput button)

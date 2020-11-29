@@ -15,6 +15,7 @@ namespace Threax.Home.ViewModels
 {
     [HalModel]
     [HalSelfActionLink(typeof(ButtonsController), nameof(ButtonsController.Get))]
+    [HalActionLink(typeof(ButtonsController), nameof(ButtonsController.GetLive))]
     [HalActionLink(typeof(ButtonsController), nameof(ButtonsController.Update))]
     [HalActionLink(typeof(ButtonsController), nameof(ButtonsController.Delete))]
     [HalActionLink(typeof(ButtonsController), nameof(ButtonsController.Apply))]
@@ -45,33 +46,6 @@ namespace Threax.Home.ViewModels
 
         [JsonIgnore]
         public Guid? SwitchId { get => ButtonStates.FirstOrDefault()?.SwitchSettings.FirstOrDefault()?.SwitchId; }
-
-        public void SetCurrentIcon()
-        {
-            if(ButtonStates == null)
-            {
-                return;
-            }
-
-            //The switch settings has the switch, which has the current value
-            var firstState = ButtonStates.FirstOrDefault();
-            var currentValue = firstState.SwitchSettings.FirstOrDefault()?.Switch.Value;
-
-            foreach (var state in ButtonStates)
-            {
-                var switchSettings = state.SwitchSettings.FirstOrDefault();
-                if(switchSettings == null)
-                {
-                    continue;
-                }
-
-                if (switchSettings.Value == currentValue)
-                {
-                    CurrentIcon = state.Icon;
-                    return;
-                }
-            }
-        }
 
         public IEnumerable<HalLinkAttribute> CreateHalLinks(ILinkProviderContext context)
         {

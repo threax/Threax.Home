@@ -40,6 +40,13 @@ namespace Threax.Home.Controllers.Api
             return await repo.Get(buttonId);
         }
 
+        [HttpGet("{ButtonId}/Live")]
+        [HalRel(nameof(GetLive))]
+        public async Task<Button> GetLive(Guid buttonId)
+        {
+            return await repo.Get(buttonId, true);
+        }
+
         [HttpPost]
         [HalRel(CrudRels.Add)]
         [AutoValidate("Cannot add new button")]
