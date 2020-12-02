@@ -1,15 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.4
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.ZWave", "Threax.Home.ZWave\Threax.Home.ZWave.csproj", "{1C35F13D-7480-42A4-81B2-C335CC782712}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.Core", "Threax.Home.Core\Threax.Home.Core.csproj", "{7D722573-97FA-43B4-94D4-8EA636C0315B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home", "Threax.Home\Threax.Home.csproj", "{84D83DE7-0F48-47C5-80A1-20FA5B99ED51}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.Mfi", "Threax.Home.Mfi\Threax.Home.Mfi.csproj", "{4776C5BF-894E-44F9-9F14-307E013843A4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.Hue", "Threax.Home.Hue\Threax.Home.Hue.csproj", "{BD59347C-B030-4194-A614-409372F06761}"
 EndProject
@@ -78,18 +76,6 @@ Global
 		{84D83DE7-0F48-47C5-80A1-20FA5B99ED51}.Release|x64.Build.0 = Release|Any CPU
 		{84D83DE7-0F48-47C5-80A1-20FA5B99ED51}.Release|x86.ActiveCfg = Release|Any CPU
 		{84D83DE7-0F48-47C5-80A1-20FA5B99ED51}.Release|x86.Build.0 = Release|Any CPU
-		{4776C5BF-894E-44F9-9F14-307E013843A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4776C5BF-894E-44F9-9F14-307E013843A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4776C5BF-894E-44F9-9F14-307E013843A4}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{4776C5BF-894E-44F9-9F14-307E013843A4}.Debug|x64.Build.0 = Debug|Any CPU
-		{4776C5BF-894E-44F9-9F14-307E013843A4}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4776C5BF-894E-44F9-9F14-307E013843A4}.Debug|x86.Build.0 = Debug|Any CPU
-		{4776C5BF-894E-44F9-9F14-307E013843A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4776C5BF-894E-44F9-9F14-307E013843A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4776C5BF-894E-44F9-9F14-307E013843A4}.Release|x64.ActiveCfg = Release|Any CPU
-		{4776C5BF-894E-44F9-9F14-307E013843A4}.Release|x64.Build.0 = Release|Any CPU
-		{4776C5BF-894E-44F9-9F14-307E013843A4}.Release|x86.ActiveCfg = Release|Any CPU
-		{4776C5BF-894E-44F9-9F14-307E013843A4}.Release|x86.Build.0 = Release|Any CPU
 		{BD59347C-B030-4194-A614-409372F06761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BD59347C-B030-4194-A614-409372F06761}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD59347C-B030-4194-A614-409372F06761}.Debug|x64.ActiveCfg = Debug|Any CPU
