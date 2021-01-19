@@ -5,10 +5,20 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto" data-hr-view="menuItems">
-                <template>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Content("~/"){{href}}">{{text}}</a></li>
-                </template>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Buttons">Buttons</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Switches">Switches</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Sensors">Sensors</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Thermostats">Thermostats</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="ThermostatSettings">Thermostat Settings</a></li>
+                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="ApiExplorer">Api Explorer</a></li>
+
+                <li class="nav-item dropdown startHidden" data-hr-toggle="admin" data-hr-class-on="d-block">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="adminMenu">Admin <span class="caret"></span></a>
+                    <div class="dropdown-menu" aria-labelledby="adminMenu">
+                        <a class="dropdown-item startHidden" data-hr-class-on="d-block" data-hr-toggle="users" asp-area="" asp-controller="Admin" asp-action="Users">Users</a>
+                    </div>
+                </li>
             </ul>
             <ul class="navbar-nav startHidden" data-hr-toggle="loggedInArea" data-hr-class-on="d-block">
                 <li class="nav-item dropdown">
