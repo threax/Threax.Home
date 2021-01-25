@@ -30,7 +30,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.LibCec", "Threa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.WinLirc", "Threax.Home.WinLirc\Threax.Home.WinLirc.csproj", "{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threax.Home.ZWaveInspect", "Threax.Home.ZWaveInspect\Threax.Home.ZWaveInspect.csproj", "{835142BD-95EC-49B6-A306-B5F5F683F790}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZWave.core3.0", "..\ZWave4Net\ZWave.core3.0\ZWave.core3.0.csproj", "{D6035E6E-8D32-4327-8399-F3163AC5198D}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\ZWave4Net\ZWave\ZWave.projitems*{d6035e6e-8d32-4327-8399-f3163ac5198d}*SharedItemsImports = 5
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
@@ -184,6 +191,30 @@ Global
 		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Release|x64.Build.0 = Release|Any CPU
 		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Release|x86.ActiveCfg = Release|Any CPU
 		{7A9F2D8D-2E7F-4B36-8A88-2B4F83BA1B54}.Release|x86.Build.0 = Release|Any CPU
+		{835142BD-95EC-49B6-A306-B5F5F683F790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{835142BD-95EC-49B6-A306-B5F5F683F790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{835142BD-95EC-49B6-A306-B5F5F683F790}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{835142BD-95EC-49B6-A306-B5F5F683F790}.Debug|x64.Build.0 = Debug|Any CPU
+		{835142BD-95EC-49B6-A306-B5F5F683F790}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{835142BD-95EC-49B6-A306-B5F5F683F790}.Debug|x86.Build.0 = Debug|Any CPU
+		{835142BD-95EC-49B6-A306-B5F5F683F790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{835142BD-95EC-49B6-A306-B5F5F683F790}.Release|Any CPU.Build.0 = Release|Any CPU
+		{835142BD-95EC-49B6-A306-B5F5F683F790}.Release|x64.ActiveCfg = Release|Any CPU
+		{835142BD-95EC-49B6-A306-B5F5F683F790}.Release|x64.Build.0 = Release|Any CPU
+		{835142BD-95EC-49B6-A306-B5F5F683F790}.Release|x86.ActiveCfg = Release|Any CPU
+		{835142BD-95EC-49B6-A306-B5F5F683F790}.Release|x86.Build.0 = Release|Any CPU
+		{D6035E6E-8D32-4327-8399-F3163AC5198D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6035E6E-8D32-4327-8399-F3163AC5198D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6035E6E-8D32-4327-8399-F3163AC5198D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D6035E6E-8D32-4327-8399-F3163AC5198D}.Debug|x64.Build.0 = Debug|Any CPU
+		{D6035E6E-8D32-4327-8399-F3163AC5198D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D6035E6E-8D32-4327-8399-F3163AC5198D}.Debug|x86.Build.0 = Debug|Any CPU
+		{D6035E6E-8D32-4327-8399-F3163AC5198D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6035E6E-8D32-4327-8399-F3163AC5198D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6035E6E-8D32-4327-8399-F3163AC5198D}.Release|x64.ActiveCfg = Release|Any CPU
+		{D6035E6E-8D32-4327-8399-F3163AC5198D}.Release|x64.Build.0 = Release|Any CPU
+		{D6035E6E-8D32-4327-8399-F3163AC5198D}.Release|x86.ActiveCfg = Release|Any CPU
+		{D6035E6E-8D32-4327-8399-F3163AC5198D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

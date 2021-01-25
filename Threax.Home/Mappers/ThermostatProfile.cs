@@ -25,6 +25,8 @@ namespace Threax.Home.Mappers
                 .ForMember(d => d.ThermostatId, opt => opt.Ignore())
                 .ForMember(d => d.Created, opt => opt.MapFrom<ICreatedResolver>())
                 .ForMember(d => d.Modified, opt => opt.MapFrom<IModifiedResolver>());
+
+            CreateMap<Thermostat, ThermostatInput>();
         }
 
         partial void MapInputToEntity(IMappingExpression<ThermostatInput, ThermostatEntity> mapExpr);

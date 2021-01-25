@@ -67,7 +67,8 @@ namespace Threax.Home.Core
         Off = 0,
         Heat = 1,
         Cool = 2,
-        Auto = 3
+        Auto = 3,
+        Unknown = 4,
     }
 
     public enum State
@@ -76,7 +77,8 @@ namespace Threax.Home.Core
         Heating = 1,
         Cooling = 2,
         Lockout = 3,
-        Error = 4
+        Error = 4,
+        Unknown = 5,
     }
 
     public enum FanSetting

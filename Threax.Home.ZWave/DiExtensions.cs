@@ -23,11 +23,13 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 services.TryAddScoped(typeof(IZWaveSwitchRepository<,>), typeof(ZWaveSwitchRepository<,>));
                 services.TryAddScoped(typeof(IZWaveSensorRepository<>), typeof(ZWaveSensorRepository<>));
+                services.TryAddScoped(typeof(IZWaveThermostatRepository<,>), typeof(ZWaveThermostatRepository<,>));
 
                 services.AdditionalSwitchConfiguration(o =>
                 {
                     o.AddSwitch(typeof(IZWaveSwitchRepository<,>));
                     o.AddSensor(typeof(IZWaveSensorRepository<>));
+                    o.AddThermostat(typeof(IZWaveThermostatRepository<,>));
                 });
             }
 
