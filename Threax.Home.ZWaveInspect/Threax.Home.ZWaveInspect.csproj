@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ZWave4Net\ZWave.core3.0\ZWave.core3.0.csproj" />
+    <PackageReference Include="ZWave4Net" Version="1.0.6" />
   </ItemGroup>
 
 </Project>

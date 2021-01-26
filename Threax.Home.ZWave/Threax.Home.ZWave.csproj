@@ -7,12 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ZWave4Net\ZWave.core3.0\ZWave.core3.0.csproj" />
     <ProjectReference Include="..\Threax.Home.Core\Threax.Home.Core.csproj" />
   </ItemGroup>
 
-  <!--<ItemGroup>
-    <PackageReference Include="ZWave4Net" Version="1.0.5" />
-  </ItemGroup>-->
+  <ItemGroup>
+    <PackageReference Include="ZWave4Net" Version="1.0.6" />
+  </ItemGroup>
 
 </Project>
