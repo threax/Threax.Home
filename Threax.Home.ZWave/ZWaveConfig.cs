@@ -16,7 +16,7 @@ namespace Threax.Home.ZWave
         public String ComPort { get; set; }
 
         /// <summary>
-        /// Set to true (default) to enable the z wave device
+        /// Set to true (default false) to enable the z wave device
         /// </summary>
         public bool Enabled { get; set; } = false;
     }

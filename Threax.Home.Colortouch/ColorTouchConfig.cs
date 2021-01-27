@@ -20,8 +20,8 @@ namespace Threax.Home.Colortouch
         public Dictionary<String, ColorTouchClientConfig> Clients { get; set; }
 
         /// <summary>
-        /// Set this to true (default) to enable the color touch library.
+        /// Set this to true (default false) to enable the color touch library.
         /// </summary>
-        public bool Enabled { get; set; } = true;
+        public bool Enabled { get; set; } = false;
     }
 }
