@@ -1,13 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Threax.AspNetCore.ExceptionFilter;
-using Threax.AspNetCore.Halcyon.Ext;
 using Threax.Home.Core;
-using Threax.Home.ZWave.Models;
 using ZWave;
 using ZWave.CommandClasses;
 

@@ -14,10 +14,6 @@ namespace Threax.Home.Client.Repository
         private IHomeClientManager clientManager;
         private readonly ILogger<ClientSwitchRepository<TIn, TOut>> logger;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="clientManager"></param>
         public ClientSwitchRepository(IHomeClientManager clientManager, ILogger<ClientSwitchRepository<TIn, TOut>> logger)
         {
             this.clientManager = clientManager;

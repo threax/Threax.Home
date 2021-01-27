@@ -1,7 +1,6 @@
 using Threax.AspNetCore.Halcyon.Client;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Linq;
 
 namespace Threax.Home.Client {
