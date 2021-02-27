@@ -9,5 +9,7 @@ namespace Threax.Home.Client
         Task<SwitchResult> GetSwitch(string id);
         Task<IEnumerable<SwitchResult>> GetSwitches();
         Task SendCommandAsync(SetSwitchInput command, IEnumerable<string> lightList = null);
+        Task<ThermostatResult> GetThermostat(string id);
+        Task<IEnumerable<ThermostatResult>> GetThermostats();
     }
 }

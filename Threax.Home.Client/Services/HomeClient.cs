@@ -53,5 +53,40 @@ namespace Threax.Home.Client
                 await sw.Set(command);
             }
         }
+
+        public async Task<ThermostatResult> GetThermostat(string id)
+        {
+            var entry = await entryPointInjector.Load();
+            var sw = await entry.ListThermostats(new ThermostatQuery()
+            {
+                Limit = 10,
+                ThermostatId = Guid.Parse(id)
+            });
+            return sw.Items.First();
+        }
+
+        public async Task<IEnumerable<ThermostatResult>> GetThermostats()
+        {
+            var entry = await entryPointInjector.Load();
+            var sw = await entry.ListThermostats(new ThermostatQuery()
+            {
+                Limit = int.MaxValue,
+            });
+            return sw.Items;
+        }
+
+        public async Task SetThermostatAsync(String id, ThermostatTempInput command)
+        {
+            var entry = await entryPointInjector.Load();
+            var switches = await entry.ListThermostats(new ThermostatQuery()
+            {
+                ThermostatId = Guid.Parse(id),
+                Limit = int.MaxValue
+            });
+            foreach (var sw in switches.Items)
+            {
+                await sw.SetTemp(command);
+            }
+        }
     }
 }

@@ -47,10 +47,12 @@ namespace Microsoft.Extensions.DependencyInjection
             });
 
             services.TryAddScoped(typeof(IClientSwitchRepository<,>), typeof(ClientSwitchRepository<,>));
+            services.TryAddScoped(typeof(IClientThermostatRepository<,>), typeof(ClientThermostatRepository<,>));
 
             services.AdditionalSwitchConfiguration(o =>
             {
                 o.AddSwitch(typeof(IClientSwitchRepository<,>));
+                o.AddThermostat(typeof(IClientThermostatRepository<,>));
             });
 
             return services;
