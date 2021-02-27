@@ -1,6 +1,7 @@
 using Threax.AspNetCore.Halcyon.Client;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Linq;
 
 namespace Threax.Home.Client {
@@ -2650,6 +2651,27 @@ public class ThermostatResult
     public bool HasGetSettingsDocs() {
         return this.client.HasLinkDoc("GetSettings");
     }
+
+    public async Task Delete() 
+    {
+        var result = await this.client.LoadLink("Delete");
+    }
+
+    public bool CanDelete 
+    {
+        get 
+        {
+            return this.client.HasLink("Delete");
+        }
+    }
+
+    public HalLink LinkForDelete 
+    {
+        get 
+        {
+            return this.client.GetLink("Delete");
+        }
+    }
 }
 
 public class ThermostatCollectionResult 
@@ -5175,6 +5197,9 @@ namespace Threax.Home.Client
         [System.Runtime.Serialization.EnumMember(Value = "Auto")]
         Auto = 3,
     
+        [System.Runtime.Serialization.EnumMember(Value = "Unknown")]
+        Unknown = 4,
+    
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "1.0.1.0 (Newtonsoft.Json v12.0.0.0)")]
@@ -5205,6 +5230,9 @@ namespace Threax.Home.Client
     
         [System.Runtime.Serialization.EnumMember(Value = "Error")]
         Error = 4,
+    
+        [System.Runtime.Serialization.EnumMember(Value = "Unknown")]
+        Unknown = 5,
     
     }
     

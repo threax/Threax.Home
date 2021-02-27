@@ -2106,6 +2106,18 @@ export class ThermostatResult {
     public hasGetSettingsDocs(): boolean {
         return this.client.HasLinkDoc("GetSettings");
     }
+
+    public delete(): Promise<void> {
+        return this.client.LoadLink("Delete").then(hal.makeVoid);
+    }
+
+    public canDelete(): boolean {
+        return this.client.HasLink("Delete");
+    }
+
+    public linkForDelete(): hal.HalLink {
+        return this.client.GetLink("Delete");
+    }
 }
 
 export class ThermostatCollectionResult {
@@ -3485,6 +3497,7 @@ export enum Mode {
     Heat = <any>"Heat", 
     Cool = <any>"Cool", 
     Auto = <any>"Auto", 
+    Unknown = <any>"Unknown", 
 }
 
 export enum FanSetting {
@@ -3498,6 +3511,7 @@ export enum State {
     Cooling = <any>"Cooling", 
     Lockout = <any>"Lockout", 
     Error = <any>"Error", 
+    Unknown = <any>"Unknown", 
 }
 
 export enum FanState {
