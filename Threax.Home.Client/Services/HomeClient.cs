@@ -60,8 +60,7 @@ namespace Threax.Home.Client
             var sw = await entry.ListThermostats(new ThermostatQuery()
             {
                 Limit = 10,
-                ThermostatId = Guid.Parse(id),
-                GetStatus = true
+                ThermostatId = Guid.Parse(id)
             });
             return sw.Items.First();
         }

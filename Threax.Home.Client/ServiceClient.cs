@@ -4660,11 +4660,6 @@ namespace Threax.Home.Client
         [Newtonsoft.Json.JsonProperty("thermostatId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ThermostatId { get; set; }
     
-        /// <summary>Get the current status of the thermostas in the query results. 
-        /// Will take longer while the thermostat info is loaded.</summary>
-        [Newtonsoft.Json.JsonProperty("getStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool GetStatus { get; set; }
-    
         [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Offset { get; set; }
     
@@ -4686,10 +4681,8 @@ namespace Threax.Home.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "1.0.1.0 (Newtonsoft.Json v12.0.0.0)")]
     public partial class ThermostatCollection 
     {
-        /// <summary>Get the current status of the thermostas in the query results. 
-        /// Will take longer while the thermostat info is loaded.</summary>
-        [Newtonsoft.Json.JsonProperty("getStatus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool GetStatus { get; set; }
+        [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Offset { get; set; }
     
         /// <summary>Lookup a thermostat by id.</summary>
         [Newtonsoft.Json.JsonProperty("thermostatId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4697,9 +4690,6 @@ namespace Threax.Home.Client
     
         [Newtonsoft.Json.JsonProperty("total", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Total { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("offset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Offset { get; set; }
     
         [Newtonsoft.Json.JsonProperty("limit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int Limit { get; set; }

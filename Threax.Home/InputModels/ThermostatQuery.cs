@@ -21,12 +21,6 @@ namespace Threax.Home.InputModels
         /// </summary>
         public Guid? ThermostatId { get; set; }
 
-        /// <summary>
-        /// Get the current status of the thermostas in the query results. 
-        /// Will take longer while the thermostat info is loaded.
-        /// </summary>
-        public bool GetStatus { get; set; } = false;
-
 
         /// <summary>
         /// Populate an IQueryable for thermostats. Does not apply the skip or limit. Will return
