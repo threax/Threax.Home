@@ -59,6 +59,9 @@ namespace Threax.Home.Repository
         public async Task<Thermostat> Get(Guid thermostatId)
         {
             var entity = await this.Entity(thermostatId);
+            var live = await thermostatSubsystem.Get(entity.Subsystem, entity.Bridge, entity.Id);
+            mapper.Map(live, entity);
+            await dbContext.SaveChangesAsync();
             return mapper.Map<Thermostat>(entity);
         }
 
