@@ -3324,15 +3324,21 @@ Will take longer while the switch info is loaded. */
 export interface ThermostatQuery {
     /** Lookup a thermostat by id. */
     thermostatId?: string;
+    /** Get the current status of the thermostas in the query results. 
+Will take longer while the thermostat info is loaded. */
+    getStatus?: boolean;
     offset?: number;
     limit?: number;
 }
 
 export interface ThermostatCollection {
-    offset?: number;
+    /** Get the current status of the thermostas in the query results. 
+Will take longer while the thermostat info is loaded. */
+    getStatus?: boolean;
     /** Lookup a thermostat by id. */
     thermostatId?: string;
     total?: number;
+    offset?: number;
     limit?: number;
 }
 

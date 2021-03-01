@@ -19,11 +19,13 @@ namespace Threax.Home.Repository
     {
         private AppDbContext dbContext;
         private IMapper mapper;
+        private readonly IThermostatSubsystemManager<ThermostatEntity, ThermostatEntity> thermostatSubsystem;
 
-        public ThermostatRepository(AppDbContext dbContext, IMapper mapper)
+        public ThermostatRepository(AppDbContext dbContext, IMapper mapper, IThermostatSubsystemManager<ThermostatEntity, ThermostatEntity> thermostatSubsystem)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
+            this.thermostatSubsystem = thermostatSubsystem;
         }
 
         public async Task<ThermostatCollection> List(ThermostatQuery query)
@@ -32,8 +34,24 @@ namespace Threax.Home.Repository
 
             var total = await dbQuery.CountAsync();
             dbQuery = dbQuery.Skip(query.SkipTo(total)).Take(query.Limit);
-            var resultQuery = dbQuery.Select(i => mapper.Map<Thermostat>(i));
-            var results = await resultQuery.ToListAsync();
+
+            IEnumerable<Thermostat> results;
+            if (query.GetStatus)
+            {
+                var currentStatusResults = new List<Thermostat>();
+                foreach (var result in dbQuery)
+                {
+                    var currentStatus = await thermostatSubsystem.Get(result.Subsystem, result.Bridge, result.Id);
+                    var item = mapper.Map<Thermostat>(result);
+                    currentStatusResults.Add(item);
+                }
+                results = currentStatusResults;
+            }
+            else
+            {
+                var resultQuery = dbQuery.Select(i => mapper.Map<Thermostat>(i));
+                results = await resultQuery.ToListAsync();
+            }
 
             return new ThermostatCollection(query, total, results);
         }
