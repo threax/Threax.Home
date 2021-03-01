@@ -27,9 +27,23 @@ namespace Threax.Home.Controllers.Api
 
         [HttpGet]
         [HalRel(CrudRels.List)]
-        public async Task<ThermostatCollection> List([FromQuery] ThermostatQuery query)
+        public async Task<ThermostatCollection> List([FromQuery] ThermostatQuery query, [FromServices] IThermostatSubsystemManager<ThermostatInput, Thermostat> thermostats)
         {
-            return await repo.List(query);
+            var result = await repo.List(query);
+
+            if(query.UpdateStatus && query.ThermostatId != null)
+            {
+                //Allow status update for 1 item
+                var cached = result.Items.FirstOrDefault();
+                if (cached != null)
+                {
+                    var live = await thermostats.Get(cached.Subsystem, cached.Bridge, cached.Id);
+                    var item = await repo.Update(cached.ThermostatId, live);
+                    return new ThermostatCollection(query, 1, new Thermostat[] { item });
+                }
+            }
+
+            return result;
         }
 
         [HttpPost("[action]")]

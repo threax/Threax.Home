@@ -21,6 +21,11 @@ namespace Threax.Home.InputModels
         /// </summary>
         public Guid? ThermostatId { get; set; }
 
+        /// <summary>
+        /// Update the status of the requested thermostat. Only works if ThermostatId is set.
+        /// </summary>
+        public bool UpdateStatus { get; set; }
+
 
         /// <summary>
         /// Populate an IQueryable for thermostats. Does not apply the skip or limit. Will return
