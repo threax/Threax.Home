@@ -32,6 +32,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.WinLirc", "Thre
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.Home.ZWaveInspect", "Threax.Home.ZWaveInspect\Threax.Home.ZWaveInspect.csproj", "{835142BD-95EC-49B6-A306-B5F5F683F790}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{A82DD24C-D57B-4881-A540-329DF9A1EC60}"
+	ProjectSection(SolutionItems) = preProject
+		Todo.md = Todo.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
