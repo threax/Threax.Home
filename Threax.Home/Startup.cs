@@ -115,10 +115,6 @@ namespace Threax.Home
                 o.AccessDeniedPath = "/Account/AccessDenied";
                 o.EnableIdServerMetadata = appConfig.EnableIdServerMetadata;
                 o.ClockSkew = TimeSpan.FromSeconds(appConfig.IdClockSkewSeconds);
-                o.CustomizeCookies = cookOpt =>
-                {
-                    cookOpt.BearerHttpOnly = false;
-                };
             });
 
             services.AddAppDatabase(appConfig.ConnectionString);
