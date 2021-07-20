@@ -109,7 +109,8 @@ namespace Threax.Home.LibCec.Repository
 
         private bool IsOn(CecPowerStatus status)
         {
-            return status == CecPowerStatus.On || status == CecPowerStatus.TransitionStandbyToOn;
+            //Including the transition messes things up.
+            return status == CecPowerStatus.On;// || status == CecPowerStatus.TransitionStandbyToOn;
         }
 
         public String SubsystemName => "libCec";
