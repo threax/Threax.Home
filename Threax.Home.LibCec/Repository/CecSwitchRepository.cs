@@ -30,7 +30,7 @@ namespace Threax.Home.LibCec.Repository
             return new TOut()
             {
                 Id = id,
-                Value = power == CecPowerStatus.On ? "on" : "off",
+                Value = IsOn(power) ? "on" : "off",
                 Subsystem = SubsystemName,
                 Bridge = bridge,
                 Name = name
@@ -47,7 +47,7 @@ namespace Threax.Home.LibCec.Repository
                 results.Add(new TOut()
                 {
                     Id = address.ToString(),
-                    Value = power == CecPowerStatus.On ? "on" : "off",
+                    Value = IsOn(power) ? "on" : "off",
                     Subsystem = SubsystemName,
                     Bridge = "cec",
                     Name = name
@@ -58,35 +58,43 @@ namespace Threax.Home.LibCec.Repository
 
         public async Task Set(TIn setting)
         {
-            bool on = setting.Value == "on";
             var address = ParseId(setting.Id);
-            if (setting.Value == "toggle")
+            switch (setting.Value?.ToLowerInvariant())
             {
-                var power = await this.manager.GetPower(address);
-                switch (power)
-                {
-                    case CecPowerStatus.TransitionStandbyToOn:
-                    case CecPowerStatus.On:
-                        on = false;
-                        break;
-                    default:
-                        on = true;
-                        break;
-                }
-            }
-            if (on)
-            {
-                await manager.SetOn(address);
-            }
-            else
-            {
-                await manager.SetStandby(address);
+                case "on":
+                    await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_POWER_ON_FUNCTION, true);
+                    break;
+                case "toggle":
+                    var power = await this.manager.GetPower(address);
+                    switch (power)
+                    {
+                        case CecPowerStatus.TransitionStandbyToOn:
+                        case CecPowerStatus.On:
+                            await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_POWER_OFF_FUNCTION, true);
+                            break;
+                        default:
+                            await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_POWER_ON_FUNCTION, true);
+                            break;
+                    }
+                    break;
+                case "off":
+                case "standby":
+                    await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_POWER_OFF_FUNCTION, true);
+                    break;
+                case "input":
+                    await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_SELECT_AV_INPUT_FUNCTION, true);
+                    break;
             }
         }
 
         private CecLogicalAddress ParseId(String id)
         {
             return (CecLogicalAddress)(Enum.Parse(typeof(CecLogicalAddress), id));
+        }
+
+        private bool IsOn(CecPowerStatus status)
+        {
+            return status == CecPowerStatus.On || status == CecPowerStatus.TransitionStandbyToOn;
         }
 
         public String SubsystemName => "libCec";

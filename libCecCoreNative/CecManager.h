@@ -53,6 +53,23 @@ public:
 	/// </summary>
 	void Reconnect();
 
+	/*!
+	 * @brief Send a keypress to a device on the CEC bus.
+	 * @param iDestination The logical address of the device to send the message to.
+	 * @param key The key to send.
+	 * @param bWait True to wait for a response, false otherwise.
+	 * @return True when the keypress was acked, false otherwise.
+	 */
+	bool SendKeypress(cec_logical_address iDestination, cec_user_control_code key, bool bWait);
+
+	/*!
+	 * @brief Send a key release to a device on the CEC bus.
+	 * @param iDestination The logical address of the device to send the message to.
+	 * @param bWait True to wait for a response, false otherwise.
+	 * @return True when the key release was acked, false otherwise.
+	 */
+	bool SendKeyRelease(cec_logical_address iDestination, bool bWait);
+
 	cec_vendor_id GetVendor(cec_logical_address address);
 
 private:

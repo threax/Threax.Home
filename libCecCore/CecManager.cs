@@ -110,6 +110,16 @@ namespace libCecCore
             return CecManager_GetVendor(ptr, address);
         }
 
+        public bool SendKeypress(CecLogicalAddress iDestination, CecControlCode key, bool bWait)
+        {
+            return CecManager_SendKeypress(ptr, iDestination, key, bWait);
+        }
+
+        public bool SendKeyRelease(CecLogicalAddress iDestination, bool bWait)
+        {
+            return CecManager_SendKeyRelease(ptr, iDestination, bWait);
+        }
+
         #region PInvoke
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -153,6 +163,14 @@ namespace libCecCore
 
         [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
         private static extern CecVendorId CecManager_GetVendor(IntPtr ptr, CecLogicalAddress address);
+
+        [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
+        [return: MarshalAs(UnmanagedType.I1)]
+        private static extern bool CecManager_SendKeypress(IntPtr ptr, CecLogicalAddress iDestination, CecControlCode key, [MarshalAs(UnmanagedType.I1)] bool bWait);
+
+        [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
+        [return: MarshalAs(UnmanagedType.I1)]
+        private static extern bool CecManager_SendKeyRelease(IntPtr ptr, CecLogicalAddress iDestination, [MarshalAs(UnmanagedType.I1)] bool bWait);
 
         #endregion
     }

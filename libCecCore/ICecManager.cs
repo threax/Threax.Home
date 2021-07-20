@@ -15,5 +15,9 @@ namespace libCecCore
         void SetStandby(CecLogicalAddress address);
         void Start();
         void Stop();
+
+        bool SendKeypress(CecLogicalAddress iDestination, CecControlCode key, bool bWait);
+
+        bool SendKeyRelease(CecLogicalAddress iDestination, bool bWait);
     }
 }

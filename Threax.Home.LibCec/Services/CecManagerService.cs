@@ -73,5 +73,15 @@ namespace Threax.Home.LibCec.Services
             await readLock.Run(() => cecManager.Stop());
         }
 
+        public async Task<bool> SendKeypress(CecLogicalAddress iDestination, CecControlCode key, bool bWait)
+        {
+            return await readLock.Run(() => cecManager.SendKeypress(iDestination, key, bWait));
+        }
+
+        public async Task<bool> SendKeyRelease(CecLogicalAddress iDestination, bool bWait)
+        {
+            return await readLock.Run(() => cecManager.SendKeyRelease(iDestination, bWait));
+        }
+
     }
 }

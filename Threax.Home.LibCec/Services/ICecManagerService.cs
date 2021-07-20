@@ -17,5 +17,7 @@ namespace Threax.Home.LibCec.Services
         Task SetStandby(CecLogicalAddress address);
         Task Start();
         Task Stop();
+        Task<bool> SendKeypress(CecLogicalAddress iDestination, CecControlCode key, bool bWait);
+        Task<bool> SendKeyRelease(CecLogicalAddress iDestination, bool bWait);
     }
 }
