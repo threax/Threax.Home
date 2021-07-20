@@ -21,7 +21,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 services.TryAddSingleton<ICecManager>(s =>
                 {
-                    var cecManager = new CecManager(options.Port);
+                    var cecManager = new CecManager(options.HdmiPort, options.Port);
                     cecManager.Start();
                     return cecManager;
                 });

@@ -99,6 +99,18 @@ namespace Threax.Home.LibCec.Repository
                 case "voldown":
                     await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_VOLUME_DOWN, true);
                     break;
+                case "hdmi1":
+                    await manager.SetHdmiPort(CecLogicalAddress.RecordingDevice1, 1); //This might be a bit hardcoded to device 1
+                    break;
+                case "hdmi2":
+                    await manager.SetHdmiPort(CecLogicalAddress.RecordingDevice1, 2); //This might be a bit hardcoded to device 1
+                    break;
+                case "hdmi3":
+                    await manager.SetHdmiPort(CecLogicalAddress.RecordingDevice1, 3); //This might be a bit hardcoded to device 1
+                    break;
+                case "hdmi4":
+                    await manager.SetHdmiPort(CecLogicalAddress.RecordingDevice1, 4); //This might be a bit hardcoded to device 1
+                    break;
             }
         }
 

@@ -15,5 +15,10 @@ namespace Threax.Home.LibCec
         /// The com port of the CEC Adapter. Default: "com3"
         /// </summary>
         public String Port { get; set; } = "com3";
+
+        /// <summary>
+        /// The hdmi port the cec usb device is connected to. Does not have to physically match the plugged in location.
+        /// </summary>
+        public int HdmiPort { get; set; } = 2;
     }
 }
