@@ -61,28 +61,43 @@ namespace Threax.Home.LibCec.Repository
             var address = ParseId(setting.Id);
             switch (setting.Value?.ToLowerInvariant())
             {
-                case "on":
-                    await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_POWER_ON_FUNCTION, true);
-                    break;
                 case "toggle":
                     var power = await this.manager.GetPower(address);
                     switch (power)
                     {
                         case CecPowerStatus.TransitionStandbyToOn:
                         case CecPowerStatus.On:
-                            await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_POWER_OFF_FUNCTION, true);
+                            await manager.SetStandby(address);
                             break;
                         default:
-                            await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_POWER_ON_FUNCTION, true);
+                            await manager.SetOn(address);
                             break;
                     }
                     break;
                 case "off":
                 case "standby":
+                    await manager.SetStandby(address);
+                    break;
+                case "powoff": //powoff sends the power button off not standby
                     await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_POWER_OFF_FUNCTION, true);
                     break;
+                case "on":
+                    await manager.SetOn(address);
+                    break;
+                case "powon": //powon sends the power button on not the on command
+                    await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_POWER_ON_FUNCTION, true);
+                    break;
                 case "input":
+                    await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_INPUT_SELECT, true);
+                    break;
+                case "avinput":
                     await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_SELECT_AV_INPUT_FUNCTION, true);
+                    break;
+                case "volup":
+                    await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_VOLUME_UP, true);
+                    break;
+                case "voldown":
+                    await manager.SendKeypress(address, CecControlCode.CEC_USER_CONTROL_CODE_VOLUME_DOWN, true);
                     break;
             }
         }
