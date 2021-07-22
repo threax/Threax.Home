@@ -1,6 +1,6 @@
-﻿import * as controller from "hr.controller";
-import * as buttonGroupController from 'clientlibs.ButtonGroupController';
-import * as ThermostatController from 'clientlibs.ThermostatController';
+﻿import * as controller from 'htmlrapier/src/controller';
+import * as buttonGroupController from 'Client/Libs/ButtonGroupController';
+import * as ThermostatController from 'Client/Libs/ThermostatController';
 
 
 export class RefreshButton {

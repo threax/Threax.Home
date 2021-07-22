@@ -1,7 +1,7 @@
-import * as standardCrudPage from 'hr.widgets.StandardCrudPage';
-import * as startup from 'clientlibs.startup';
-import * as deepLink from 'hr.deeplink';
-import { SwitchCrudInjector } from 'clientlibs.SwitchCrudInjector';
+import * as standardCrudPage from 'htmlrapier.widgets/src/StandardCrudPage';
+import * as startup from 'Client/Libs/startup';
+import * as deepLink from 'htmlrapier/src/deeplink';
+import { SwitchCrudInjector } from 'Client/Libs/SwitchCrudInjector';
 
 var injector = SwitchCrudInjector;
 
