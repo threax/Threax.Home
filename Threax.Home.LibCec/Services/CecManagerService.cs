@@ -53,6 +53,11 @@ namespace Threax.Home.LibCec.Services
             await readLock.Run(() => cecManager.SetHdmiPort(device, port));
         }
 
+        public async Task SendHdmiPortChanged(byte port)
+        {
+            await readLock.Run(() => cecManager.SendHdmiPortChanged(port));
+        }
+
         public async Task SetOn(CecLogicalAddress address)
         {
             await readLock.Run(() => cecManager.SetOn(address));

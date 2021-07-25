@@ -10,7 +10,7 @@ namespace TestLibCec
             //var lirc = new WinLirc();
             //lirc.SendMessage("LG_TV Power");
 
-            using (var cecManager = new CecManager(1, "com3"))
+            using (var cecManager = new CecManager(-1, "com3"))
             {
                 cecManager.Start();
 

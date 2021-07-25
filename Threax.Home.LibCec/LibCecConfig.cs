@@ -17,8 +17,8 @@ namespace Threax.Home.LibCec
         public String Port { get; set; } = "com3";
 
         /// <summary>
-        /// The hdmi port the cec usb device is connected to. Does not have to physically match the plugged in location.
+        /// The hdmi port the cec usb device is connected to. Does not have to physically match the plugged in location. Default: -1, do not set value.
         /// </summary>
-        public int HdmiPort { get; set; } = 2;
+        public int HdmiPort { get; set; } = -1;
     }
 }

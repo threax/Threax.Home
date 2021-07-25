@@ -13,6 +13,7 @@ namespace Threax.Home.LibCec.Services
         Task Reconnect();
         Task<List<CecLogicalAddress>> Scan();
         Task SetHdmiPort(CecLogicalAddress device, byte port);
+        Task SendHdmiPortChanged(byte port);
         Task SetOn(CecLogicalAddress address);
         Task SetStandby(CecLogicalAddress address);
         Task Start();

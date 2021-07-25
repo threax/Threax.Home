@@ -11,6 +11,7 @@ namespace libCecCore
         void Reconnect();
         List<CecLogicalAddress> Scan();
         void SetHdmiPort(CecLogicalAddress device, byte port);
+        void SendHdmiPortChanged(byte port);
         void SetOn(CecLogicalAddress address);
         void SetStandby(CecLogicalAddress address);
         void Start();

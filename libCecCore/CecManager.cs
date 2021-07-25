@@ -98,6 +98,15 @@ namespace libCecCore
         }
 
         /// <summary>
+        /// Send a broadcast event that the active hdmi port has changed.
+        /// </summary>
+        /// <param name="port"></param>
+        public void SendHdmiPortChanged(byte port)
+        {
+            CecManager_SendHdmiPortChanged(ptr, port);
+        }
+
+        /// <summary>
         /// Reconnect to the CEC adapter.
         /// </summary>
         public void Reconnect()
@@ -157,6 +166,9 @@ namespace libCecCore
 
         [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
         private static extern void CecManager_SetHdmiPort(IntPtr ptr, CecLogicalAddress device, byte port);
+
+        [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
+        private static extern void CecManager_SendHdmiPortChanged(IntPtr ptr, byte port);
 
         [DllImport(LibraryInfo.Name, CallingConvention = CallingConvention.Cdecl)]
         private static extern void CecManager_Reconnect(IntPtr ptr);

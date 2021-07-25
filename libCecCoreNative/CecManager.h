@@ -49,6 +49,12 @@ public:
 	void SetHdmiPort(cec_logical_address device, uint8_t port);
 
 	/// <summary>
+	/// Broadcast a message that the hdmi port changed.
+	/// </summary>
+	/// <param name="port"></param>
+	void SendHdmiPortChanged(uint8_t port);
+
+	/// <summary>
 	/// Reconnect to the CEC adapter.
 	/// </summary>
 	void Reconnect();
