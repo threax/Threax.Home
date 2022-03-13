@@ -24,7 +24,6 @@ using Threax.Home.ValueProviders;
 using Microsoft.AspNetCore.Mvc;
 using Threax.AspNetCore.UserLookup.Mvc.Controllers;
 using System.Threading.Tasks;
-using Threax.Sqlite.Ext.EfCore3;
 using Microsoft.IdentityModel.Logging;
 
 namespace Threax.Home
@@ -179,7 +178,6 @@ namespace Threax.Home
                 .AddTool("migrate", new ToolCommand("Migrate database to newest version. Run anytime new migrations have been added.", async a =>
                 {
                     await a.Migrate();
-                    a.Scope.ServiceProvider.GetRequiredService<AppDbContext>().ConvertToEfCore3();
                 }))
                 .AddTool("seed", new ToolCommand("Seed database data. Only needed for an empty database.", async a =>
                 {

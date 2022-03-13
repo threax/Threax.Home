@@ -14,19 +14,10 @@ namespace Threax.Home.Mappers
     {
         public AppCommand MapButtonState(ButtonStateEntity src, AppCommand dest)
         {
-            return mapper.Map(src, dest);
-        }
-    }
+            dest.Name = src.Button.Label + " - " + src.Label;
+            dest.ButtonStateId = src.ButtonStateId;
 
-    public partial class AppCommandProfile : Profile
-    {
-        public AppCommandProfile()
-        {
-            //Map the entity to the view model.
-            CreateMap<ButtonStateEntity, AppCommand>()
-                .ForMember(d => d.Name, o => o.MapFrom(s => s.Button.Label + " - " + s.Label))
-                .ForMember(d => d.ButtonStateId, o => o.MapFrom(s => s.ButtonStateId))
-                .ForAllOtherMembers(o => o.Ignore());
+            return dest;
         }
     }
 }
