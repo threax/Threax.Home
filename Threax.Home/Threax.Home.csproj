@@ -66,8 +66,6 @@
     <ProjectReference Include="..\Threax.Home.WinLirc\Threax.Home.WinLirc.csproj" />
     <ProjectReference Include="..\Threax.Home.ZWave\Threax.Home.ZWave.csproj" />
     <ProjectReference Include="..\Threax.Home.Client\Threax.Home.Client.csproj" />
-    <ProjectReference Include="..\Threax.Home.Colortouch\Threax.Home.Colortouch.csproj" />
-    <ProjectReference Include="..\Threax.Home.Hue\Threax.Home.Hue.csproj" />
   </ItemGroup>
 
   <!--This will only include the native libs if they exist.-->

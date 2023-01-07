@@ -1,17 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Threax.Home.Repository;
-using Threax.AspNetCore.Halcyon.Ext;
-using Threax.Home.ViewModels;
-using Threax.Home.InputModels;
-using Threax.Home.Models;
 using Microsoft.AspNetCore.Authorization;
-using Threax.Home.Hue.Repository;
-using Threax.Home.Core;
-using Threax.Home.Database;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
+using Threax.AspNetCore.Halcyon.Ext;
+using Threax.Home.InputModels;
+using Threax.Home.ViewModels;
 
 namespace Threax.Home.Controllers.Api
 {
