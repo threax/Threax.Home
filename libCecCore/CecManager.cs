@@ -91,7 +91,6 @@ namespace libCecCore
         /// <summary>
         /// Set the hdmi port number of the cec adapter.
         /// </summary>
-        /// <param name="port"></param>
         public void SetHdmiPort(CecLogicalAddress device, byte port)
         {
             CecManager_SetHdmiPort(ptr, device, port);
