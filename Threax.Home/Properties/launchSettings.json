@@ -11,9 +11,11 @@
     "SetupDb": {
       "commandName": "Project",
       "commandLineArgs": "tools migrate seed",
+      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "http://localhost:64199/"
     },
     "UpdateClient": {
       "commandName": "Project",
