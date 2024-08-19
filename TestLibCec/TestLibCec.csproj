@@ -6,15 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\libcec-build\amd64\cec.dll" Link="cec.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\x64\Release\libCecCoreNative.dll" Link="libCecCoreNative.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\libCecCore\libCecCore.csproj" />
   </ItemGroup>
 

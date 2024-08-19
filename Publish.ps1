@@ -26,6 +26,19 @@ try{
     }
 
     try{
+        # Build libCecCoreNative
+        cmake -G "Visual Studio 17" -A x64 -S "libCecCoreNative" -B "libCecCoreNative/build"
+        if ($LastExitCode -ne 0)
+        {
+            throw "Cmake error";
+        }
+        msbuild.exe /m "./libCecCoreNative/build/libCecCoreNative.sln" "/property:Configuration=Release;Platform=x64"
+        if ($LastExitCode -ne 0)
+        {
+            throw "msbuild error";
+        }
+
+        # Build Threax.Home
         Push-Location $appFolder -ErrorAction Stop
         npm install; Test-Error "Could not run npm install."
         dotnet restore $csproj; Test-Error "Could not dotnet restore $csproj."

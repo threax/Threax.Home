@@ -68,14 +68,4 @@
     <ProjectReference Include="..\Threax.Home.Client\Threax.Home.Client.csproj" />
   </ItemGroup>
 
-  <!--This will only include the native libs if they exist.-->
-  <ItemGroup Condition="Exists('..\x64\Release\libCecCoreNative.dll')">
-    <None Include="..\libcec-build\amd64\cec.dll" Link="cec.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="..\x64\Release\libCecCoreNative.dll" Link="libCecCoreNative.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
