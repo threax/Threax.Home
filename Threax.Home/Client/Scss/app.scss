@@ -123,10 +123,20 @@
     margin-bottom: 0px;
 }
 
-.icon-outer {
+.load-outer {
     width: 64px;
     height: 64px;
     float: left;
+    position: relative;
+}
+
+.load-inner {
+    position: absolute;
+    left: 0px;
+}
+
+div.load-inner {
+    left: -18px;
 }
 
 .thermostat-main {
@@ -147,5 +157,5 @@
 
 .fan-block {
     position: absolute;
-    left: 8px;
+    left: 0px;
 }

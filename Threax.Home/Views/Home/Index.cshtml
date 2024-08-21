@@ -9,8 +9,8 @@
             <div class="col-xl-4 col-lg-6 col-sm-12">
                 <h3 class="itemHeader">{{data.label}}</h3>
 
-                <div class="icon-outer">
-                    <div class="ball-pulse" data-hr-toggle="load" data-hr-style-off="display:none;">
+                <div class="load-outer">
+                    <div class="ball-pulse load-inner" data-hr-toggle="load" data-hr-style-off="display:none;">
                         <div class="loader">
                             <div class="ball"></div>
                         </div>
@@ -18,7 +18,7 @@
                     {{if data.buttonType == "Light"}}
                     <div data-hr-toggle="main" class="startHidden" data-hr-style-on="display:block;">
                         <img src="@fileVersionProvider.AddFileVersionToPath("", Url.Content("~/Images/bulb.png"))"
-                             class="bulbShadow"
+                             class="bulbShadow load-inner"
                              data-hr-toggle="icon"
                              data-hr-class-BulbOff="bulb-off"
                              data-hr-class-BulbOn="bulb-on" />
