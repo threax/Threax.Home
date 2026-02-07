@@ -27,7 +27,7 @@ try{
 
     try{
         # Build libCecCoreNative
-        cmake -G "Visual Studio 17" -A x64 -S "libCecCoreNative" -B "libCecCoreNative/build"
+        cmake -G "Visual Studio 18" -A x64 -S "libCecCoreNative" -B "libCecCoreNative/build"
         if ($LastExitCode -ne 0)
         {
             throw "Cmake error";
