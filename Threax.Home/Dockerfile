@@ -1,7 +1,7 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 WORKDIR /app
 
-FROM threax/build-dotnet:8.0 AS build
+FROM threax/build-dotnet:10.0 AS build
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 WORKDIR /src
 COPY . .
