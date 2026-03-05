@@ -144,7 +144,7 @@ namespace Threax.Home
             });
 
             // Add framework services.
-            services.AddMvc(o =>
+            var mvcBuilder = services.AddMvc(o =>
             {
                 o.UseExceptionErrorFilters();
                 o.UseConventionalHalcyon(halOptions);
@@ -154,7 +154,6 @@ namespace Threax.Home
                 o.SerializerSettings.SetToHalcyonDefault();
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             })
-            .AddRazorRuntimeCompilation()
             .AddConventionalIdServerMvc()
             .AddThreaxUserLookup(o =>
             {
@@ -164,6 +163,11 @@ namespace Threax.Home
             {
                 o.CacheControlHeader = appConfig.CacheControlHeaderString;
             });
+
+            if (appConfig.UseRazorRuntimeCompilation)
+            {
+                mvcBuilder.AddRazorRuntimeCompilation();
+            }
 
             services.ConfigureHtmlRapierTagHelpers(o =>
             {
