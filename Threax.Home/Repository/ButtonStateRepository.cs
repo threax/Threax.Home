@@ -81,7 +81,11 @@ namespace Threax.Home.Repository
             await dbContext.SaveChangesAsync();
 
             //Reload button info
-            var buttonState = await dbContext.ButtonStates.Include(i => i.Button).Where(i => i.ButtonStateId == buttonStateId).FirstAsync();
+            var buttonState = await dbContext.ButtonStates
+                .Include(i => i.Button)
+                .ThenInclude(i => i.ButtonStates)
+                .ThenInclude(i => i.SwitchSettings)
+                .Where(i => i.ButtonStateId == buttonStateId).FirstAsync();
             return mapper.MapButton(buttonState.Button, new Button());
         }
 
