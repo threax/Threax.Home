@@ -85,6 +85,7 @@ namespace Threax.Home.Repository
                 .Include(i => i.Button)
                 .ThenInclude(i => i.ButtonStates)
                 .ThenInclude(i => i.SwitchSettings)
+                .ThenInclude(i => i.Switch)
                 .Where(i => i.ButtonStateId == buttonStateId).FirstAsync();
             return mapper.MapButton(buttonState.Button, new Button());
         }
