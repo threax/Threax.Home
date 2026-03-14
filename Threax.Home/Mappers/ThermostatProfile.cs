@@ -65,7 +65,7 @@ namespace Threax.Home.Mappers
 
         public ThermostatEntity MapThermostat(Thermostat src, ThermostatEntity dest)
         {
-            dest.ThermostatId = src.ThermostatId;
+            //dest.ThermostatId ignored
             dest.Name = src.Name;
             dest.Subsystem = src.Subsystem;
             dest.Bridge = src.Bridge;
