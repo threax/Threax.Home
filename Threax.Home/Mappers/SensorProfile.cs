@@ -1,29 +1,51 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
-using Threax.AspNetCore.Models;
-using Threax.AspNetCore.Tracking;
-using Threax.Home.InputModels;
 using Threax.Home.Database;
+using Threax.Home.InputModels;
 using Threax.Home.ViewModels;
-using Threax.Home.Core;
 
 namespace Threax.Home.Mappers
 {
-    public partial class SensorProfile : Profile
+    public partial class AppMapper
     {
-        public SensorProfile()
+        public SensorEntity MapSensor(SensorInput src, SensorEntity dest)
         {
-            //Map the input model to the entity
-            MapInputToEntity(CreateMap<SensorInput, SensorEntity>());
+            //dest.SensorId ignored
+            dest.Name = src.Name;
+            dest.Subsystem = src.Subsystem;
+            dest.Bridge = src.Bridge;
+            dest.Id = src.Id;
+            dest.TempValue = src.TempValue;
+            dest.TempUnits = src.TempUnits;
+            dest.LightValue = src.LightValue;
+            dest.LightUnits = src.LightUnits;
+            dest.HumidityValue = src.HumidityValue;
+            dest.HumidityUnits = src.HumidityUnits;
+            dest.UvValue = src.UvValue;
+            dest.UvUnits = src.UvUnits;
+            dest.Created = GetCreated(dest.Created);
+            dest.Modified = DateTime.UtcNow;
 
-            //Map the entity to the view model.
-            MapEntityToView(CreateMap<SensorEntity, Sensor>());
+            return dest;
         }
+        public Sensor MapSensor(SensorEntity src, Sensor dest)
+        {
+            dest.SensorId = src.SensorId;
+            dest.Name = src.Name;
+            dest.Subsystem = src.Subsystem;
+            dest.Bridge = src.Bridge;
+            dest.Id = src.Id;
+            dest.TempValue = src.TempValue;
+            dest.TempUnits = src.TempUnits;
+            dest.LightValue = src.LightValue;
+            dest.LightUnits = src.LightUnits;
+            dest.HumidityValue = src.HumidityValue;
+            dest.HumidityUnits = src.HumidityUnits;
+            dest.UvValue = src.UvValue;
+            dest.UvUnits = src.UvUnits;
+            dest.Created = src.Created;
+            dest.Modified = src.Modified;
 
-        partial void MapInputToEntity(IMappingExpression<SensorInput, SensorEntity> mapExpr);
-
-        partial void MapEntityToView(IMappingExpression<SensorEntity, Sensor> mapExpr);
+            return dest;
+        }
     }
 }

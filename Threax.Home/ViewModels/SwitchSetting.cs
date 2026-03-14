@@ -1,20 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
-using Threax.AspNetCore.Halcyon.Ext;
+using System;
+using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 using Threax.AspNetCore.Models;
 using Threax.Home.Models;
-using Threax.Home.Controllers.Api;
-using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
-using Threax.AspNetCore.Tracking;
 
 namespace Threax.Home.ViewModels
 {
     [HalModel]
-    public partial class SwitchSetting : ISwitchSetting, ISwitchSettingId, ICreatedModified
+    public partial class SwitchSetting : ISwitchSetting, ISwitchSettingId
     {
         public Guid SwitchSettingId { get; set; }
 

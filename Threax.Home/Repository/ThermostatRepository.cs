@@ -1,26 +1,23 @@
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Threax.Home.Database;
-using Threax.Home.InputModels;
-using Threax.Home.ViewModels;
-using Threax.Home.Models;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
-using Threax.Home.Core;
 using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
+using Threax.Home.Database;
+using Threax.Home.InputModels;
+using Threax.Home.Mappers;
+using Threax.Home.ViewModels;
 
 namespace Threax.Home.Repository
 {
     public partial class ThermostatRepository : IThermostatRepository
     {
         private AppDbContext dbContext;
-        private IMapper mapper;
+        private AppMapper mapper;
 
-        public ThermostatRepository(AppDbContext dbContext, IMapper mapper)
+        public ThermostatRepository(AppDbContext dbContext, AppMapper mapper)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
@@ -32,7 +29,7 @@ namespace Threax.Home.Repository
 
             var total = await dbQuery.CountAsync();
             dbQuery = dbQuery.Skip(query.SkipTo(total)).Take(query.Limit);
-            var resultQuery = dbQuery.Select(i => mapper.Map<Thermostat>(i));
+            var resultQuery = dbQuery.Select(i => mapper.MapThermostat(i, new Thermostat()));
             var results = await resultQuery.ToListAsync();
 
             return new ThermostatCollection(query, total, results);
@@ -41,15 +38,15 @@ namespace Threax.Home.Repository
         public async Task<Thermostat> Get(Guid thermostatId)
         {
             var entity = await this.Entity(thermostatId);
-            return mapper.Map<Thermostat>(entity);
+            return mapper.MapThermostat(entity, new Thermostat());
         }
 
         public async Task<Thermostat> Add(ThermostatInput thermostat)
         {
-            var entity = mapper.Map<ThermostatEntity>(thermostat);
+            var entity = mapper.MapThermostat(thermostat, new ThermostatEntity());
             this.dbContext.Add(entity);
             await SaveChanges();
-            return mapper.Map<Thermostat>(entity);
+            return mapper.MapThermostat(entity, new Thermostat());
         }
 
         public async Task<Thermostat> Update(Guid thermostatId, ThermostatInput thermostat)
@@ -57,9 +54,9 @@ namespace Threax.Home.Repository
             var entity = await this.Entity(thermostatId);
             if (entity != null)
             {
-                mapper.Map(thermostat, entity);
+                mapper.MapThermostat(thermostat, entity);
                 await SaveChanges();
-                return mapper.Map<Thermostat>(entity);
+                return mapper.MapThermostat(entity, new Thermostat());
             }
             throw new KeyNotFoundException($"Cannot find thermostat {thermostatId.ToString()}");
         }
@@ -69,9 +66,9 @@ namespace Threax.Home.Repository
             var entity = await this.Entity(thermostatId);
             if (entity != null)
             {
-                mapper.Map(thermostat, entity);
+                mapper.MapThermostat(thermostat, entity);
                 await SaveChanges();
-                return mapper.Map<Thermostat>(entity);
+                return mapper.MapThermostat(entity, new Thermostat());
             }
             throw new KeyNotFoundException($"Cannot find thermostat {thermostatId.ToString()}");
         }
@@ -93,7 +90,7 @@ namespace Threax.Home.Repository
 
         public virtual async Task AddRange(IEnumerable<ThermostatInput> thermostats)
         {
-            var entities = thermostats.Select(i => mapper.Map<ThermostatEntity>(i));
+            var entities = thermostats.Select(i => mapper.MapThermostat(i, new ThermostatEntity()));
             this.dbContext.Thermostats.AddRange(entities);
             await SaveChanges();
         }
@@ -121,7 +118,7 @@ namespace Threax.Home.Repository
             var existing = await dbContext.Thermostats.ToListAsync();
 
             var toAdd = items.Where(o => !existing.Any(i => o.Subsystem == i.Subsystem && o.Bridge == i.Bridge && o.Id == i.Id));
-            await AddRange(toAdd.Select(i => mapper.Map<ThermostatInput>(i)));
+            await AddRange(toAdd.Select(i => mapper.MapThermostat(i, new ThermostatInput())));
         }
 
         public async Task<IEnumerable<ILabelValuePair>> GetLabels()

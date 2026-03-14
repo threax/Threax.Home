@@ -1,24 +1,22 @@
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Threax.Home.Database;
-using Threax.Home.InputModels;
-using Threax.Home.ViewModels;
-using Threax.Home.Models;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
+using Threax.Home.Database;
+using Threax.Home.InputModels;
+using Threax.Home.Mappers;
+using Threax.Home.ViewModels;
 
 namespace Threax.Home.Repository
 {
     public partial class SensorRepository : ISensorRepository
     {
         private AppDbContext dbContext;
-        private IMapper mapper;
+        private AppMapper mapper;
 
-        public SensorRepository(AppDbContext dbContext, IMapper mapper)
+        public SensorRepository(AppDbContext dbContext, AppMapper mapper)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
@@ -30,7 +28,7 @@ namespace Threax.Home.Repository
 
             var total = await dbQuery.CountAsync();
             dbQuery = dbQuery.Skip(query.SkipTo(total)).Take(query.Limit);
-            var resultQuery = dbQuery.Select(i => mapper.Map<Sensor>(i));
+            var resultQuery = dbQuery.Select(i => mapper.MapSensor(i, new Sensor()));
             var results = await resultQuery.ToListAsync();
 
             return new SensorCollection(query, total, results);
@@ -39,15 +37,15 @@ namespace Threax.Home.Repository
         public async Task<Sensor> Get(Guid sensorId)
         {
             var entity = await this.Entity(sensorId);
-            return mapper.Map<Sensor>(entity);
+            return mapper.MapSensor(entity, new Sensor());
         }
 
         public async Task<Sensor> Add(SensorInput sensor)
         {
-            var entity = mapper.Map<SensorEntity>(sensor);
+            var entity = mapper.MapSensor(sensor, new SensorEntity());
             this.dbContext.Add(entity);
             await SaveChanges();
-            return mapper.Map<Sensor>(entity);
+            return mapper.MapSensor(entity, new Sensor());
         }
 
         public async Task AddMissing(IEnumerable<SensorInput> sensors)
@@ -64,10 +62,10 @@ namespace Threax.Home.Repository
             if (entity != null)
             {
                 var oldName = entity.Name;
-                mapper.Map(sensor, entity);
+                mapper.MapSensor(sensor, entity);
                 entity.Name = oldName;
                 await SaveChanges();
-                return mapper.Map<Sensor>(entity);
+                return mapper.MapSensor(entity, new Sensor());
             }
             throw new KeyNotFoundException($"Cannot find sensor {sensorId.ToString()}");
         }
@@ -89,7 +87,7 @@ namespace Threax.Home.Repository
 
         public virtual async Task AddRange(IEnumerable<SensorInput> sensors)
         {
-            var entities = sensors.Select(i => mapper.Map<SensorEntity>(i));
+            var entities = sensors.Select(i => mapper.MapSensor(i, new SensorEntity()));
             this.dbContext.Sensors.AddRange(entities);
             await SaveChanges();
         }

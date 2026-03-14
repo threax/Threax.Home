@@ -1,18 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Halcyon.HAL.Attributes;
-using Threax.AspNetCore.Halcyon.Ext;
-using Threax.AspNetCore.Models;
-using Threax.AspNetCore.Tracking;
 using Threax.Home.Core;
 using Threax.Home.Models;
 
 namespace Threax.Home.Database
 {
-    public partial class SwitchEntity : ISwitch, ISwitchId, ISwitch_Subsystem, ISwitch_Bridge, ISwitch_Id, ICreatedModified, ICoreSwitch
+    public partial class SwitchEntity : ISwitch, ISwitchId, ISwitch_Subsystem, ISwitch_Bridge, ISwitch_Id, ICoreSwitch
     {
         [Key]
         public Guid SwitchId { get; set; }

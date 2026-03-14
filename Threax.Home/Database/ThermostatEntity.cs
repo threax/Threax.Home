@@ -1,18 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Halcyon.HAL.Attributes;
-using Threax.AspNetCore.Halcyon.Ext;
-using Threax.AspNetCore.Models;
-using Threax.AspNetCore.Tracking;
 using Threax.Home.Core;
 using Threax.Home.Models;
 
 namespace Threax.Home.Database
 {
-    public partial class ThermostatEntity : IThermostat, IThermostatId, IThermostat_State, IThermostat_FanState, IThermostat_TempUnits, IThermostat_Schedule, IThermostat_SchedulePart, IThermostat_Away, IThermostat_Holidy, IThermostat_Override, IThermostat_OverrideTime, IThermostat_ForceUnocc, IThermostat_SpaceTemp, IThermostat_CoolTempMin, IThermostat_CoolTempMax, IThermostat_HeatTempMin, IThermostat_HeatTempMax, IThermostat_SetPointDelta, IThermostat_Humidity, IThermostat_AvailableModes, ICreatedModified, ICoreThermostat
+    public partial class ThermostatEntity : IThermostat, IThermostatId, IThermostat_State, IThermostat_FanState, IThermostat_TempUnits, IThermostat_Schedule, IThermostat_SchedulePart, IThermostat_Away, IThermostat_Holidy, IThermostat_Override, IThermostat_OverrideTime, IThermostat_ForceUnocc, IThermostat_SpaceTemp, IThermostat_CoolTempMin, IThermostat_CoolTempMax, IThermostat_HeatTempMin, IThermostat_HeatTempMax, IThermostat_SetPointDelta, IThermostat_Humidity, IThermostat_AvailableModes, ICoreThermostat
     {
         [Key]
         public Guid ThermostatId { get; set; }

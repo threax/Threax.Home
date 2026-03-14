@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 using Threax.AspNetCore.Halcyon.Ext;
-using Threax.AspNetCore.Models;
-using Threax.Home.Models;
-using Threax.Home.Controllers.Api;
 using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
-using Threax.AspNetCore.Tracking;
+using Threax.AspNetCore.Models;
+using Threax.Home.Controllers.Api;
+using Threax.Home.Models;
 
 namespace Threax.Home.ViewModels
 {
@@ -18,7 +14,7 @@ namespace Threax.Home.ViewModels
     [HalActionLink(typeof(ThermostatSettingsController), nameof(ThermostatSettingsController.Update))]
     [HalActionLink(typeof(ThermostatSettingsController), nameof(ThermostatSettingsController.Delete))]
     [HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.ApplySetting))]
-    public partial class ThermostatSetting : IThermostatSetting, IThermostatSettingId, ICreatedModified
+    public partial class ThermostatSetting : IThermostatSetting, IThermostatSettingId
     {
         public Guid ThermostatSettingId { get; set; }
 

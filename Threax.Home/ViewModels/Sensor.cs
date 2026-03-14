@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
+using System;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Models;
-using Threax.Home.Models;
 using Threax.Home.Controllers.Api;
 using Threax.Home.Core;
-using Threax.AspNetCore.Tracking;
+using Threax.Home.Models;
 
 namespace Threax.Home.ViewModels
 {
@@ -18,7 +13,7 @@ namespace Threax.Home.ViewModels
     [HalSelfActionLink(typeof(SensorsController), nameof(SensorsController.Get))]
     [HalActionLink(typeof(SensorsController), nameof(SensorsController.Update))]
     //[HalActionLink(typeof(SensorsController), nameof(SensorsController.Delete))]
-    public partial class Sensor : ISensor, ISensorId, ICreatedModified
+    public partial class Sensor : ISensor, ISensorId
     {
         public Guid SensorId { get; set; }
 

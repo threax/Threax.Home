@@ -1,15 +1,12 @@
+using Halcyon.HAL.Attributes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
-using Halcyon.HAL.Attributes;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Models;
-using Threax.Home.Models;
 using Threax.Home.Controllers.Api;
-using Newtonsoft.Json;
-using Threax.AspNetCore.Tracking;
+using Threax.Home.Models;
 
 namespace Threax.Home.ViewModels
 {
@@ -20,7 +17,7 @@ namespace Threax.Home.ViewModels
     [HalActionLink(typeof(ButtonsController), nameof(ButtonsController.Delete))]
     [HalActionLink(typeof(ButtonsController), nameof(ButtonsController.Apply))]
     [DeclareHalLink(typeof(SwitchesController), nameof(SwitchesController.Get), "GetSwitch")]
-    public partial class Button : IButton, IButtonId, ICreatedModified, IHalLinkProvider
+    public partial class Button : IButton, IButtonId, IHalLinkProvider
     {
         public Guid ButtonId { get; set; }
 

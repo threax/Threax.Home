@@ -1,17 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Halcyon.HAL.Attributes;
-using Threax.AspNetCore.Halcyon.Ext;
-using Threax.AspNetCore.Models;
-using Threax.AspNetCore.Tracking;
 using Threax.Home.Models;
 
 namespace Threax.Home.Database
 {
-    public partial class ButtonEntity : IButton, IButtonId, ICreatedModified
+    public partial class ButtonEntity : IButton, IButtonId
     {
         [Key]
         public Guid ButtonId { get; set; }

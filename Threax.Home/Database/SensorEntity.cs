@@ -1,18 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Halcyon.HAL.Attributes;
-using Threax.AspNetCore.Halcyon.Ext;
-using Threax.AspNetCore.Models;
-using Threax.AspNetCore.Tracking;
 using Threax.Home.Core;
 using Threax.Home.Models;
 
 namespace Threax.Home.Database
 {
-    public partial class SensorEntity : ISensor, ISensorId, ICreatedModified
+    public partial class SensorEntity : ISensor, ISensorId
     {
         [Key]
         public Guid SensorId { get; set; }

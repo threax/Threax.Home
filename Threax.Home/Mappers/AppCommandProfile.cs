@@ -1,10 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
-using Threax.AspNetCore.Models;
-using Threax.AspNetCore.Tracking;
-using Threax.Home.InputModels;
 using Threax.Home.Database;
 using Threax.Home.ViewModels;
 

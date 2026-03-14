@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AutoMapper;
 using Threax.AspNetCore.Models;
-using Threax.AspNetCore.Tracking;
 using Threax.Home.InputModels;
 using Threax.Home.Database;
 using Threax.Home.ViewModels;
@@ -14,28 +12,32 @@ namespace Threax.Home.Mappers
     {
         public ThermostatSettingEntity MapThermostatSetting(ThermostatSettingInput src, ThermostatSettingEntity dest)
         {
-            return mapper.Map(src, dest);
+            //dest.ThermostatSettingId ignored
+            dest.Label = src.Label;
+            dest.Order = src.Order;
+            dest.CoolTemp = src.CoolTemp;
+            dest.HeatTemp = src.HeatTemp;
+            dest.On = src.On;
+            dest.ThermostatId = src.ThermostatId;
+            dest.Created = GetCreated(dest.Created);
+            dest.Modified = DateTime.UtcNow;
+
+            return dest;
         }
 
         public ThermostatSetting MapThermostatSetting(ThermostatSettingEntity src, ThermostatSetting dest)
         {
-            return mapper.Map(src, dest);
+            dest.ThermostatSettingId = src.ThermostatSettingId;
+            dest.Label = src.Label;
+            dest.Order = src.Order;
+            dest.CoolTemp = src.CoolTemp;
+            dest.HeatTemp = src.HeatTemp;
+            dest.On = src.On;
+            dest.ThermostatId = src.ThermostatId;
+            dest.Created = src.Created;
+            dest.Modified = src.Modified;
+
+            return dest;
         }
-    }
-
-    public partial class ThermostatSettingProfile : Profile
-    {
-        public ThermostatSettingProfile()
-        {
-            //Map the input model to the entity
-            MapInputToEntity(CreateMap<ThermostatSettingInput, ThermostatSettingEntity>());
-
-            //Map the entity to the view model.
-            MapEntityToView(CreateMap<ThermostatSettingEntity, ThermostatSetting>());
-        }
-
-        partial void MapInputToEntity(IMappingExpression<ThermostatSettingInput, ThermostatSettingEntity> mapExpr);
-
-        partial void MapEntityToView(IMappingExpression<ThermostatSettingEntity, ThermostatSetting> mapExpr);
     }
 }

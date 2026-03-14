@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using Halcyon.HAL.Attributes;
+using System;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Models;
-using Threax.Home.Models;
 using Threax.Home.Controllers.Api;
 using Threax.Home.Core;
-using Threax.AspNetCore.Tracking;
+using Threax.Home.Models;
 
 namespace Threax.Home.ViewModels
 {
@@ -20,7 +15,7 @@ namespace Threax.Home.ViewModels
     [HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.SetTemp))]
     [HalActionLink(typeof(ThermostatSettingsController), nameof(ThermostatSettingsController.GetForThermostat), "GetSettings")]
     [HalActionLink(typeof(ThermostatsController), nameof(ThermostatsController.Delete))]
-    public partial class Thermostat : IThermostat, IThermostatId, IThermostat_State, IThermostat_FanState, IThermostat_TempUnits, IThermostat_Schedule, IThermostat_SchedulePart, IThermostat_Away, IThermostat_Holidy, IThermostat_Override, IThermostat_OverrideTime, IThermostat_ForceUnocc, IThermostat_SpaceTemp, IThermostat_CoolTempMin, IThermostat_CoolTempMax, IThermostat_HeatTempMin, IThermostat_HeatTempMax, IThermostat_SetPointDelta, IThermostat_Humidity, IThermostat_AvailableModes, ICreatedModified, ICoreThermostat
+    public partial class Thermostat : IThermostat, IThermostatId, IThermostat_State, IThermostat_FanState, IThermostat_TempUnits, IThermostat_Schedule, IThermostat_SchedulePart, IThermostat_Away, IThermostat_Holidy, IThermostat_Override, IThermostat_OverrideTime, IThermostat_ForceUnocc, IThermostat_SpaceTemp, IThermostat_CoolTempMin, IThermostat_CoolTempMax, IThermostat_HeatTempMin, IThermostat_HeatTempMax, IThermostat_SetPointDelta, IThermostat_Humidity, IThermostat_AvailableModes, ICoreThermostat
     {
         public Guid ThermostatId { get; set; }
 

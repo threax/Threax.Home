@@ -1,27 +1,25 @@
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Threax.Home.Database;
-using Threax.Home.InputModels;
-using Threax.Home.ViewModels;
-using Threax.Home.Models;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
 using Threax.AspNetCore.Halcyon.Ext.ValueProviders;
 using Threax.Home.Core;
+using Threax.Home.Database;
+using Threax.Home.InputModels;
+using Threax.Home.Mappers;
+using Threax.Home.ViewModels;
 
 namespace Threax.Home.Repository
 {
     public partial class SwitchRepository : ISwitchRepository
     {
         private AppDbContext dbContext;
-        private IMapper mapper;
+        private AppMapper mapper;
         private ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo;
 
-        public SwitchRepository(AppDbContext dbContext, IMapper mapper, ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)
+        public SwitchRepository(AppDbContext dbContext, AppMapper mapper, ISwitchSubsystemManager<SwitchEntity, SwitchEntity> switchRepo)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
@@ -43,7 +41,7 @@ namespace Threax.Home.Repository
                 foreach (var result in dbQuery)
                 {
                     var currentStatus = await switchRepo.Get(result.Subsystem, result.Bridge, result.Id);
-                    var item = mapper.Map<Switch>(result);
+                    var item = mapper.MapSwitch(result, new Switch());
                     item.Value = currentStatus.Value;
                     currentStatusResults.Add(item);
                 }
@@ -51,7 +49,7 @@ namespace Threax.Home.Repository
             }
             else
             {
-                var resultQuery = dbQuery.Select(i => mapper.Map<Switch>(i));
+                var resultQuery = dbQuery.Select(i => mapper.MapSwitch(i, new Switch()));
                 results = await resultQuery.ToListAsync();
             }
 
@@ -63,9 +61,9 @@ namespace Threax.Home.Repository
         {
             var entity = await this.Entity(switchId);
             var live = await switchRepo.Get(entity.Subsystem, entity.Bridge, entity.Id);
-            mapper.Map(live, entity);
+            mapper.MapSwitch(live, entity);
             await dbContext.SaveChangesAsync();
-            return mapper.Map<Switch>(entity);
+            return mapper.MapSwitch(entity, new Switch());
         }
 
         public async Task<Switch> Update(Guid switchId, SwitchInput @switch)
@@ -73,10 +71,10 @@ namespace Threax.Home.Repository
             var entity = await this.Entity(switchId);
             if (entity != null)
             {
-                mapper.Map(@switch, entity);
+                mapper.MapSwitch(@switch, entity);
                 await switchRepo.Set(entity);
                 await SaveChanges();
-                return mapper.Map<Switch>(entity);
+                return mapper.MapSwitch(entity, new Switch());
             }
             throw new KeyNotFoundException($"Cannot find @switch {switchId.ToString()}");
         }
@@ -86,10 +84,10 @@ namespace Threax.Home.Repository
             var entity = await this.Entity(switchId);
             if (entity != null)
             {
-                mapper.Map(@switch, entity);
+                mapper.MapSwitch(@switch, entity);
                 await switchRepo.Set(entity);
                 await SaveChanges();
-                return mapper.Map<Switch>(entity);
+                return mapper.MapSwitch(entity, new Switch());
             }
             throw new KeyNotFoundException($"Cannot find @switch {switchId.ToString()}");
         }

@@ -1,17 +1,12 @@
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Threax.Home.Database;
-using Threax.Home.InputModels;
-using Threax.Home.ViewModels;
-using Threax.Home.Models;
-using Threax.Home.Mappers;
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Threax.AspNetCore.Halcyon.Ext;
-using Threax.Home.Core;
+using Threax.Home.Database;
+using Threax.Home.InputModels;
+using Threax.Home.Mappers;
+using Threax.Home.ViewModels;
 
 namespace Threax.Home.Repository
 {
