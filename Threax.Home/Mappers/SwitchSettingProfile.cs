@@ -27,6 +27,7 @@ namespace Threax.Home.Mappers
         {
             dest.SwitchSettingId = src.SwitchId;
             dest.SwitchId = src.SwitchId;
+            dest.Switch = MapSwitch(src.Switch, new Switch());
             dest.Value = src.Value;
             dest.Brightness = src.Brightness;
             dest.HexColor = src.HexColor;
